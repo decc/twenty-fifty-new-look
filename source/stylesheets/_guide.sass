@@ -1,0 +1,17 @@
+.guide
+  section
+    /** Alternate image side */
+    &:nth-of-type(2n)
+      .col
+        float: right
+
+  article
+    .col
+      @include col(50%)
+
+.skip-guide
+  @extend .button
+  position: fixed
+  bottom: 1em
+  left: 1em
+

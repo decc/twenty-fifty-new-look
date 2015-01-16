@@ -1,0 +1,17 @@
+nav.main-nav
+
+  .top-level
+    = image_tag "/images/logo.png"
+
+    ul
+      li= link_to I18n.t('calculator.menu.mine')
+      li= link_to I18n.t('calculator.menu.examples.link')
+      li= link_to I18n.t('calculator.menu.help')
+
+    = link_to I18n.t('calculator.menu.exit')
+
+  .secondary
+    = I18n.t('calculator.menu.examples.blurb')
+
+    | itterate example categories
+

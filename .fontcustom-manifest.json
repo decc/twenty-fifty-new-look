@@ -1,0 +1,109 @@
+{
+  "checksum": {
+    "previous": "29a06d0abd441a578a3f82971353c7c471e325d43b60dc4a7da71626d04204ba",
+    "current": "29a06d0abd441a578a3f82971353c7c471e325d43b60dc4a7da71626d04204ba"
+  },
+  "fonts": [
+    "source/fonts/icons_29a06d0abd441a578a3f82971353c7c4.ttf",
+    "source/fonts/icons_29a06d0abd441a578a3f82971353c7c4.svg",
+    "source/fonts/icons_29a06d0abd441a578a3f82971353c7c4.woff",
+    "source/fonts/icons_29a06d0abd441a578a3f82971353c7c4.eot"
+  ],
+  "glyphs": {
+    "air": {
+      "codepoint": 61696,
+      "source": "source/icons/air.svg"
+    },
+    "alert": {
+      "codepoint": 61697,
+      "source": "source/icons/alert.svg"
+    },
+    "arrow-left": {
+      "codepoint": 61698,
+      "source": "source/icons/arrow-left.svg"
+    },
+    "arrow-right": {
+      "codepoint": 61699,
+      "source": "source/icons/arrow-right.svg"
+    },
+    "chevron": {
+      "codepoint": 61700,
+      "source": "source/icons/chevron.svg"
+    },
+    "close": {
+      "codepoint": 61701,
+      "source": "source/icons/close.svg"
+    },
+    "costs": {
+      "codepoint": 61702,
+      "source": "source/icons/costs.svg"
+    },
+    "electricity": {
+      "codepoint": 61703,
+      "source": "source/icons/electricity.svg"
+    },
+    "emissions": {
+      "codepoint": 61704,
+      "source": "source/icons/emissions.svg"
+    },
+    "energy": {
+      "codepoint": 61705,
+      "source": "source/icons/energy.svg"
+    },
+    "energysecurity": {
+      "codepoint": 61706,
+      "source": "source/icons/energysecurity.svg"
+    },
+    "flows": {
+      "codepoint": 61707,
+      "source": "source/icons/flows.svg"
+    },
+    "info": {
+      "codepoint": 61708,
+      "source": "source/icons/info.svg"
+    },
+    "map": {
+      "codepoint": 61709,
+      "source": "source/icons/map.svg"
+    },
+    "menu": {
+      "codepoint": 61710,
+      "source": "source/icons/menu.svg"
+    },
+    "overview": {
+      "codepoint": 61711,
+      "source": "source/icons/overview.svg"
+    }
+  },
+  "options": {
+    "autowidth": false,
+    "config": "fontcustom.yml",
+    "css_selector": ".icon-{{glyph}}",
+    "debug": false,
+    "font_ascent": 448,
+    "font_descent": 64,
+    "font_design_size": 16,
+    "font_em": 512,
+    "font_name": "icons",
+    "force": false,
+    "input": {
+      "templates": "source/icons",
+      "vectors": "source/icons"
+    },
+    "no_hash": false,
+    "output": {
+      "_icons.sass": "source/stylesheets",
+      "css": "source/fonts",
+      "fonts": "source/fonts",
+      "preview": "source/fonts"
+    },
+    "preprocessor_path": "",
+    "quiet": false,
+    "templates": [
+      "_icons.sass"
+    ]
+  },
+  "templates": [
+    "source/stylesheets/_icons.sass"
+  ]
+}

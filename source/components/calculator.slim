@@ -1,0 +1,35 @@
+.viewport
+
+  .wrapper data-bind="css: { 'with-nav': mainNavVisible }"
+    main-nav
+
+
+    .content-wrapper
+      calculator-header params="mainNavVisible: mainNavVisible"
+
+      .content
+
+        .bit
+          header.cityscape cityscoop
+          | charts
+
+        aside.controls-sidebar
+
+          nav.tab-nav
+
+          .tabs
+            .tab
+              input type="range"
+            .tab
+              input type="range"
+              input type="range"
+            .tab
+              input type="range"
+              input type="range"
+              input type="range"
+
+          button.show-overview data-bind="click: toggleOverview"= I18n.t('calculator.all.show')
+
+        section.overview data-bind="css: { active: overviewVisible }"
+          button.hide-overview data-bind="click: toggleOverview"= I18n.t('calculator.all.hide')
+

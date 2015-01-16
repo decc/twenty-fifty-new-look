@@ -1,0 +1,34 @@
+// THIS FILE IS GENERATED. SEE /source/icons/_icons.sass
+
+@include font-face(<%= font_name %>, '/fonts/<%= @font_path_alt %>', normal, normal, false, eot woff ttf svg)
+
+%icon
+  font-family: "<%= font_name %>" !important
+  font-style: normal !important
+  font-weight: normal !important
+  font-variant: normal !important
+  text-transform: none !important
+  speak: none
+  line-height: 1
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+<% @glyphs.each do |name, value|%>
+
+<%
+  name = name.to_s
+%>
+
+%icon-content-<%= name %>
+  @extend %icon
+  content: '\<%= value[:codepoint].to_s(16) %>'
+
+%icon-<%= name.to_s %>-after
+  &:after
+    @extend %icon-content-<%= name %>
+
+%icon-<%= name.to_s %>-before
+  &:before
+    @extend %icon-content-<%= name %>
+<% end %>
+

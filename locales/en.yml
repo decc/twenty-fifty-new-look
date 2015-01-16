@@ -1,0 +1,64 @@
+---
+en:
+  splash:
+    title: "2050 Energy calculator"
+    body: "By the year 2050 we need to dramatically change the way we produce and consume energy.<br>Government targets require us to reduce emmissions to 20% of 1990 levels."
+    button: "Start"
+  guide:
+    welcome:
+      title: "Welcome"
+      body: "lalala"
+    done:
+      title: "You're all set to go..."
+      body: 'lorem'
+      button: 'Start'
+    button: "Skip guide"
+
+  calculator:
+    header:
+      menu: "Menu"
+      reduction: "C02 Reduction"
+
+    share:
+      show: "Finish & share"
+      hide: "Not finished yet"
+      title: "My Finished 2050 Pathway"
+      body: "Lorem yo"
+      demand: "Demand"
+      supply: "Supply"
+      share: "Share your pathway"
+      error: "Demand is exceeding supply"
+
+    menu:
+      mine: "My 2050 pathway"
+      examples:
+        link: "Example pathways"
+        blurb: "You can apply the following pre-sets and jump back to your own pathway at any time."
+      help: "Help"
+      exit: "Exit 2050 pathways calculator"
+
+    charts:
+      energy:
+        link: "Energy"
+        button1: "Demand vs supply"
+      electricity:
+        link: "Electricity"
+      emissions:
+        link: "Emissions"
+      flows:
+        link: "Flows"
+      map:
+        link: "Map"
+      air:
+        link: "Air"
+      security:
+        link: "Energy security"
+      costs:
+        link: "Costs"
+      overview:
+        link: "Overview"
+
+    all:
+      show: "View all pathway actions"
+      hide: "Hide all pathway actions"
+

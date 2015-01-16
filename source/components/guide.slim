@@ -1,0 +1,23 @@
+img.fixed-logo src="/images/logo.png"
+
+.centered
+  section
+    article
+      .col
+        h1= I18n.t('guide.welcome.title')
+        p= I18n.t('guide.welcome.body')
+
+      .col
+        = image_tag "http://placecage.com/200/200"
+
+  section
+    article
+      .col
+        h1= I18n.t('guide.done.title')
+        p= I18n.t('guide.done.body')
+        = link_to I18n.t('guide.done.button'), calculator_path, class: :button
+      .col
+        = image_tag "http://placecage.com/200/200"
+
+= link_to I18n.t('guide.button'), calculator_path, class: "skip-guide"
+
