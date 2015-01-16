@@ -10,5 +10,6 @@ define(['knockout'], function(ko) {
 
   ko.components.register('main-nav', {});
   ko.components.register('calculator-header', {});
+  ko.components.register('pathway-sidebar', {});
 });
 
