@@ -7,7 +7,8 @@ aside.controls-sidebar
 
   .tabs data-bind="foreach: pathwayCategories"
     .tab data-bind="foreach: actions(), css: { active: $parent.currentTabId() === id }"
-      input data-bind="event: { change: setValue }" type="range" / these should be current pathway actions... they are not
+      input data-bind="event: { change: setValue }" type="range"
+      / these should be current pathway actions... they are not
       label data-bind="text: name"
 
   button.show-overview data-bind="click: toggleOverview"= I18n.t('calculator.all.show')
