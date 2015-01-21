@@ -16,6 +16,11 @@ define(['knockout', 'text!/components/pathway-sidebar.html', 'pathway'],
     self.setActiveTab = function(pathwayCategory) {
       self.currentTabId(pathwayCategory.id);
     };
+
+    self.setActionValue = function(action) {
+      self.pathway.updateAction(action);
+    };
+
   };
 
   return {

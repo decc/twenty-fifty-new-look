@@ -57,10 +57,10 @@ define(['knockout'], function(ko) {
   var Action = function(args) {
     var self = this;
 
-    self.id = args.id;
+    self.name = args.name;
     self.categoryId = args.categoryId;
     self.typeId = args.typeId;
-    self.value = args.value;
+    self.value = args.value || 0;
     self.info = args.info;
     self.pdf = args.pdf;
   };
@@ -86,13 +86,22 @@ define(['knockout'], function(ko) {
   var Pathway = function(args) {
     var self = this;
 
-    self.actions = [self.getActions()];
+    self.actions = self.getActions();
   }
 
   Pathway.prototype = {
     getActions: function() {
-      ko.utils.arrayMap(PATHWAY_ACTIONS, function(action) {
+      return ko.utils.arrayMap(PATHWAY_ACTIONS, function(action) {
         return new Action(action);
+      });
+    },
+
+    /** Updates pathway action by name */
+    updateAction: function(action) {
+      this.actions.forEach(function(a) {
+        if(a.name === action.name) {
+          a.value = action.value;
+        }
       });
     }
   };
