@@ -17,7 +17,9 @@ define(['knockout', 'text!/components/pathway-sidebar.html', 'pathway'],
       self.currentTabId(pathwayCategory.id);
     };
 
-    self.setActionValue = function(action) {
+    self.setActionValue = function(action, e) {
+      /** @todo use observables!! */
+      action.value = e.target.value;
       self.pathway.updateAction(action);
     };
 

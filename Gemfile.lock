@@ -7,6 +7,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    autoprefixer-rails (5.0.0.1)
+      execjs
     bourbon (4.1.0)
       sass (~> 3.3)
       thor
@@ -82,6 +84,9 @@ GEM
       middleman-sprockets (>= 3.1.2)
       sass (>= 3.4.0, < 4.0)
       uglifier (~> 2.5)
+    middleman-autoprefixer (2.4.0)
+      autoprefixer-rails (>= 5.0.0.1, < 5.1.0)
+      middleman-core (>= 3.3.3)
     middleman-core (3.3.7)
       activesupport (~> 4.1.0)
       bundler (~> 1.1)
@@ -161,6 +166,7 @@ DEPENDENCIES
   fontcustom
   jshintrb
   middleman (~> 3.3.7)
+  middleman-autoprefixer
   middleman-imageoptim
   middleman-livereload (~> 3.1.0)
   sass
