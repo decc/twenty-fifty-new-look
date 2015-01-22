@@ -1,3 +1,7 @@
+%button
+  border: 0
+  padding: 0
+
 .button
   font-size: 2em
   padding: .125em 1.5em
@@ -10,4 +14,12 @@
   font-family: $font-light
   margin: 1em 0 0 0
   border: 0
+
+.info-button
+  @extend %button, %icon-info-before
+  background: #cccccc
+  border-radius: 20px
+  font-size: 11px
+  padding: 0 2px
+  color: #f5f5f5
 

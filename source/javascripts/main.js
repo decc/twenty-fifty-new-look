@@ -10,6 +10,7 @@
       hasher: 'vendor/hasher',
       signals: 'vendor/signals',
       ajax: 'vendor/ajax',
+      scroller: 'vendor/scroller.min',
       text: 'vendor/text'
     }
   });

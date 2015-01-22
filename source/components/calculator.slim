@@ -13,8 +13,7 @@
           header.cityscape cityscoop
           | charts
 
-        pathway-sidebar params="toggleOverview: toggleOverview"
+        pathway-sidebar params="pathway: pathway"
 
-        section.overview data-bind="css: { active: overviewVisible }"
-          button.hide-overview data-bind="click: toggleOverview"= I18n.t('calculator.all.hide')
+        all-pathway-actions params="pathway: pathway, visible: overviewVisible, toggle: toggleOverview"
 
