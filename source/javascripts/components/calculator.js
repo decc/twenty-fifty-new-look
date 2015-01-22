@@ -33,35 +33,6 @@ define(['knockout', 'text!/components/calculator.html'], function(ko, html) {
   };
 
   /**
-   * Represents a single datapoint of a pathway calculation
-   *
-   * @param {object} args - arguments object
-   * @param {number} args.id - action id
-   * @param {number} args.categoryId
-   * @param {number} args.typeId
-   * @param {number} args.value
-   * @param {string} args.info - html string describing action
-   * @param {strung} args.pdf - URI of related pdf
-   */
-  var Action = function(args) {
-    var self = this;
-
-    self.id = args.id;
-    self.categoryId = args.categoryId;
-    self.typeId = args.categoryType;
-    self.value = args.value;
-    self.info = args.info;
-    self.pdf = args.pdf;
-  };
-
-  /** Represents a dataset for a 2050 calculation */
-  var Pathway = function() {
-    var self = this;
-
-    self.actions = [];
-  }
-
-  /**
    * The main app view model. Tracks app state
    * @class AppViewModel
    */

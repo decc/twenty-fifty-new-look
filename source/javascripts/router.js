@@ -21,6 +21,8 @@ define(['crossroads', 'hasher'], function(crossroads, hasher) {
         app.getPage('share', {});
       });
 
+      // calculator/{name | sha }
+
       var parseHash = function(newHash) {
         crossroads.parse(newHash);
       };
