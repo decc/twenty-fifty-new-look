@@ -8,8 +8,9 @@ define(['knockout'], function(ko) {
    * @todo There must be a better way of doing this!
    */
 
-  ko.components.register('main-nav', {});
-  ko.components.register('calculator-header', {});
-  ko.components.register('pathway-sidebar', {});
+  ['main-nav', 'calculator-header', 'pathway-sidebar', 'all-pathway-actions']
+  .forEach(function(c) {
+    ko.components.register(c, {});
+  });
 });
 

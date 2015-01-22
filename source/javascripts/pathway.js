@@ -19,29 +19,6 @@ define(['knockout'], function(ko) {
     { "id": 3, "name": "radio" }
   ];
 
-  var PathwayCategory = function(args) {
-    var self = this;
-
-    self.id = args.id;
-    self.name = args.name;
-  }
-
-  PathwayCategory.prototype = {
-    /**
-     * @returns {array} Array of action instances representing category
-     * actions
-     */
-    actions: function() {
-      var self = this;
-
-      return ko.utils.arrayFilter(PATHWAY_ACTIONS, function(action) {
-        if(action.categoryId === self.id) {
-          return new Action(action);
-        }
-      });
-    }
-  };
-
   /**
    * Represents a single datapoint of a pathway calculation
    *
@@ -60,7 +37,7 @@ define(['knockout'], function(ko) {
     self.name = args.name;
     self.categoryId = args.categoryId;
     self.typeId = args.typeId;
-    self.value = args.value || 0;
+    self.value = ko.observable(args.value || 0);
     self.info = args.info;
     self.pdf = args.pdf;
   };
@@ -103,14 +80,21 @@ define(['knockout'], function(ko) {
           a.value = action.value;
         }
       });
+    },
+
+    /** Get actions by category id */
+    actionsForCategory: function(id) {
+      return ko.utils.arrayFilter(this.actions, function(action) {
+        if(action.categoryId === id) {
+          return action;
+        }
+      });
     }
   };
 
   /** @returns {array} Array of PathwayCategory instances. */
   Pathway.categories = function() {
-    return ko.utils.arrayMap(ACTION_CATEGORIES, function(category) {
-      return new PathwayCategory(category);
-    });
+    return ACTION_CATEGORIES;
   };
 
   return Pathway;

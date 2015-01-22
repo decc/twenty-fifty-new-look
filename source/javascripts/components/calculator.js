@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/calculator.html'], function(ko, html) {
+define(['knockout', 'text!/components/calculator.html', 'pathway'], function(ko, html, Pathway) {
   'use strict';
 
   /** Constants for pathway */
@@ -43,15 +43,12 @@ define(['knockout', 'text!/components/calculator.html'], function(ko, html) {
     self.mainNavVisible = ko.observable(false);
 
     self.activeTab = ko.observable(0)
+    self.pathway = new Pathway();
+    self.pathwayCategories = Pathway.categories();
 
-    /**
-     * Togglews value of observable boolean
-     * @param {object} context - context of boolName
-     * @param {string} boolName - name of ko observable to toggle
-     */
     var toggleObservableBool = function(context, boolName) {
       var toggleable = context[boolName];
-      toggleable(!toggleable());
+      context[boolName](!toggleable());
     };
 
     /** toggle overview visibility */

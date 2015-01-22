@@ -6,10 +6,10 @@ define(['knockout', 'text!/components/pathway-sidebar.html', 'pathway'],
   var ViewModel = function(params) {
     var self = this;
 
-    self.toggleOverview = params.toggleOverview;
-    /** @todo pathway should be dynamic... so we can load named */
-    self.pathway = new Pathway();
     self.pathwayCategories = Pathway.categories();
+    self.pathway = params.pathway;
+
+    self.toggleOverview = params.toggleOverview;
     self.currentTabId = ko.observable(1);
 
     /** Sets visible tab */
@@ -21,6 +21,10 @@ define(['knockout', 'text!/components/pathway-sidebar.html', 'pathway'],
       /** @todo use observables!! */
       action.value = e.target.value;
       self.pathway.updateAction(action);
+    };
+
+    self.showOverlay = function(action) {
+      alert('todo: show overlay component');
     };
 
   };
