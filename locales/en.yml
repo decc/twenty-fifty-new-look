@@ -16,7 +16,6 @@ en:
 
   calculator:
     header:
-      menu: "Menu"
       reduction: "C02 Reduction"
 
     share:
