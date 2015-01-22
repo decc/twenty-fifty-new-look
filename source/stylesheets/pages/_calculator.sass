@@ -71,12 +71,13 @@ $nav-width: 33.333%
   @include transition(transform .3s ease-in-out)
   left: 100%
 
-  &.active
+  &.is-active
     @include transform(translatex(-100%))
 
 
 .tabs
   .tab
     display: none
-    &.active
+    &.is-active
       display: block
+
