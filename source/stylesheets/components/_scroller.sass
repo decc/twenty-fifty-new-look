@@ -1,0 +1,41 @@
+$scroll-nav-width: 35px
+
+.scrollable-nav
+
+  $color-scroll-nav: #95ceca
+
+  position: fixed
+  right: $scroll-nav-width
+  top: 50%
+  @include transform(translate(0, -50%))
+
+  > ul
+    list-style: none
+
+    > li
+      margin-bottom: $scroll-nav-width
+
+  a
+    display: block
+    border: 3px solid $color-scroll-nav
+    border-radius: 50px
+    width: $scroll-nav-width
+    height: $scroll-nav-width
+    text-indent: 999px
+    overflow: hidden
+
+    &.active
+      background: $color-scroll-nav
+
+.scrollable-next
+  @extend %icon-button, %icon-air-before
+  position: fixed
+  margin: auto
+  bottom: $scroll-nav-width
+  left: 50%
+  margin-left: -35px / 2
+  color: #ffffff
+
+  &:before
+    font-size: 35px
+

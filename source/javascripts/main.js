@@ -15,6 +15,8 @@
     }
   });
 
+  require(['bindings/scroller']);
+
   require(['app', 'componentLoader', 'customElements'], function(app) {
 
     app.init();

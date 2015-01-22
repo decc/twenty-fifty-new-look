@@ -1,7 +1,7 @@
 img.fixed-logo src="/images/logo.png"
 
-.centered
-  section
+.centered data-bind="scrolls"
+  section.scrollable
     article
       .col
         h1= I18n.t('guide.welcome.title')
@@ -10,7 +10,8 @@ img.fixed-logo src="/images/logo.png"
       .col
         = image_tag "http://placecage.com/200/200"
 
-  section
+
+  section.scrollable
     article
       .col
         h1= I18n.t('guide.done.title')
@@ -19,5 +20,6 @@ img.fixed-logo src="/images/logo.png"
       .col
         = image_tag "http://placecage.com/200/200"
 
+button.scrollable-next
 = link_to I18n.t('guide.button'), calculator_path, class: "skip-guide"
 
