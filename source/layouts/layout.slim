@@ -6,12 +6,10 @@ html
     meta http-equiv="X-UA-Compatible" content="IE=edge"
     meta name="viewport" content="width=device-width, user-scalable=no"
 
-    = stylesheet_link_tag "all"
-    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Lato:100,300,700,900"
-
     title= current_page.data.title || "DECC"
 
     = stylesheet_link_tag "main"
+    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Lato:100,300,700,900"
 
   body class= page_classes
     = yield
