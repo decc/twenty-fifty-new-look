@@ -10,12 +10,10 @@
       hasher: 'vendor/hasher',
       signals: 'vendor/signals',
       ajax: 'vendor/ajax',
-      scroller: 'vendor/scroller.min',
+      scroller: 'vendor/scroller',
       text: 'vendor/text'
     }
   });
-
-  require(['bindings/scroller']);
 
   require(['app', 'componentLoader', 'customElements'], function(app) {
 
