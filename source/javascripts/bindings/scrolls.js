@@ -3,11 +3,10 @@ define(['knockout', 'scroller'], function(ko, Scroller) {
 
   ko.bindingHandlers.scrolls = {
     init: function(el, valueAccessor) {
-      new Scroller(el, { nav: true, next: true });
+      new Scroller(el, { nav: true, next: true })._activateCurrent();
     },
 
     update: function(el, valueAccessor) {
-      // hide / show next button
     }
   };
 });
