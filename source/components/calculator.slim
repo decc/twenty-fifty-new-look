@@ -3,19 +3,24 @@
   .wrapper data-bind="css: { 'with-nav': mainNavVisible }"
     main-nav
 
-
     .content-wrapper
       calculator-header params="mainNavVisible: mainNavVisible"
 
       .content
-
         .bit
           header.cityscape cityscoop
           | charts
+
+          .modal-overlay data-bind="css: { 'is-active': overlayVisible }"
+            .closer &times;
+            h2 hi am overlay
+            ul
+              li Download pdf
+
+            iDonec egestas, turpis at faucibus egestas, lorem mi mattis eros, vitae placerat metus ligula at velit. Suspendisse eu malesuada turpis, scelerisque lobortis magna. Ut auctor nibh non malesuada pretium.
 
         pathway-sidebar params="pathway: pathway"
 
         all-pathway-actions params="pathway: pathway, visible: overviewVisible, toggle: toggleOverview"
 
-    .overlay
 
