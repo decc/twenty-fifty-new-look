@@ -4,14 +4,36 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
   'use strict';
 
   /**
-   * The main app view model. Tracks app state
-   * @class AppViewModel
+   * Tracks calculator
+   * @class CalculatorViewModel
    */
   var ViewModel = function() {
     var self = this;
 
     self.overviewVisible = ko.observable(false);
     self.mainNavVisible = ko.observable(false);
+
+
+
+
+    self.overlayVisible = ko.observable(false);
+    self.overlayContent = ko.observable();
+
+    self.overlayAction = ko.observable({});
+
+    self.showOverlay = function(action) {
+      self.overlayVisible(true);
+      self.overlayAction(action);
+    };
+
+    self.hideOverlay = function() {
+      self.overlayVisible(false);
+    };
+
+
+
+
+
 
     self.activeTab = ko.observable(0)
     self.pathway = new Pathway();
@@ -34,7 +56,6 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
 
     /** set active tab */
     self.setActiveTab = function(tab) {
-      console.dir(tab)
       self.activeTab(id)
     }
 

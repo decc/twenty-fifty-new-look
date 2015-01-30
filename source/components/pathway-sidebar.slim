@@ -10,7 +10,8 @@ aside.controls-sidebar
     .tab data-bind="foreach: $parent.pathway.actionsForCategory(id), css: { 'is-active': $parent.currentTabId() === id }"
       input data-bind="value: value" type="range"
       label data-bind="text: name"
-      button.info-button data-bind="click: $parents[1].showOverlay"
+      /button.info-button data-bind="click: $parents[2].showOverlay"
+      button.info-button data-bind="click: $parents[2].showOverlay"
 
   button.show-overview data-bind="click: $parent.toggleOverview"= I18n.t('calculator.all.show')
 

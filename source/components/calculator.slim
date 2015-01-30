@@ -11,13 +11,14 @@
           header.cityscape cityscoop
           | charts
 
-          .modal-overlay data-bind="css: { 'is-active': overlayVisible }"
-            .closer &times;
-            h2 hi am overlay
+          .modal-overlay data-bind="visible: overlayVisible"
+            .closer data-bind="click: hideOverlay" &times;
+            h2 data-bind="text: overlayAction().name"
             ul
-              li Download pdf
+              li
+                a target="_blank" data-bind="attr: { href: overlayAction().pdf }" Download pdf
 
-            iDonec egestas, turpis at faucibus egestas, lorem mi mattis eros, vitae placerat metus ligula at velit. Suspendisse eu malesuada turpis, scelerisque lobortis magna. Ut auctor nibh non malesuada pretium.
+            p data-bind="text: overlayAction().info"
 
         pathway-sidebar params="pathway: pathway"
 
