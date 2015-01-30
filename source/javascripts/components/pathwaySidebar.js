@@ -22,11 +22,6 @@ define(['knockout', 'text!/components/pathway-sidebar.html', 'pathway'],
       action.value = e.target.value;
       self.pathway.updateAction(action);
     };
-
-    self.showOverlay = function(action) {
-      alert('todo: show overlay component');
-    };
-
   };
 
   return {
