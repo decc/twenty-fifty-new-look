@@ -1,0 +1,30 @@
+.main-nav
+  color: #ffffff
+
+  a
+    color: #ffffff
+    text-decoration: none
+
+  ul
+    @extend %plain-list
+
+  .top-level
+    @include col(50%)
+    background: #2C313B
+    padding: 2em 0
+
+    > ul
+      a
+        display: block
+        padding: 1em 0
+        &.active, &:hover
+          background: $color-highlight
+
+    .logo
+      width: 100%
+
+  .secondary
+    @include col(50%)
+    background: $color-highlight
+    padding: 2em 1em
+
