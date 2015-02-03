@@ -5,6 +5,9 @@ define(['knockout', 'text!/components/main-nav.html', 'ajax'], function(ko, html
     var self = this;
 
     self.exampleCategories = ko.observableArray();
+    self.subNavSection = ko.observable('mine');
+
+    self.showSubNav = function() {};
 
     Ajax.request({
       url: '/data/examples.json',

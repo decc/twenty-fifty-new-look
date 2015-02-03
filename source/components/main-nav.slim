@@ -4,20 +4,30 @@ nav.main-nav
     = image_tag "/images/logo.png", class: :logo
 
     ul
-      li= link_to I18n.t('calculator.menu.mine')
-      li= link_to I18n.t('calculator.menu.examples.link')
-      li= link_to I18n.t('calculator.menu.help')
+      li
+        a data-bind="click: showSubNav('mine')" = I18n.t('calculator.menu.mine.link')
+      li
+        a data-bind="click: showSubNav('examples')" = I18n.t('calculator.menu.examples.link')
+      li
+        a data-bind="click: showSubNav('help')" = link_to I18n.t('calculator.menu.help.link')
 
     = link_to I18n.t('calculator.menu.exit'), home_path
 
   .secondary
-    = I18n.t('calculator.menu.examples.blurb')
+    nav data-bind="visible: subNavSection() === 'mine'"
+      = I18n.t('calculator.menu.mine.body')
 
-    ul data-bind="foreach: exampleCategories"
-      li
-        h3 data-bind="text: name"
+    nav data-bind="visible: subNavSection() == 'examples'"
+      = I18n.t('calculator.menu.examples.body')
 
-        ul data-bind="foreach: examples"
-          li
-            a data-bind="text: name, attr: { href: '/#/calculator/examples/' + slug }"
+      ul data-bind="foreach: $parent.exampleCategories"
+        li
+          h3 data-bind="text: name"
+
+          ul data-bind="foreach: examples"
+            li
+              a data-bind="text: name, attr: { href: '/#/calculator/examples/' + slug }"
+
+    nav data-bind="visible: subNavSection() == 'help'"
+      = I18n.t('calculator.menu.help.body')
 
