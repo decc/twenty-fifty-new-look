@@ -1,16 +1,15 @@
-aside.controls-sidebar
+aside.controls-sidebar data-bind="tabs"
 
   nav.tab-nav
     ul data-bind="foreach: pathwayCategories"
       li
-        button data-bind="click: $parent.setActiveTab, text: name"
+        button.tab-button data-bind="text: name, attr: { 'data-tab': $index }"
 
   .tabs data-bind="foreach: pathwayCategories"
     / todo: render appropriate control for action
-    .tab data-bind="foreach: $parent.pathway.actionsForCategory(id), css: { 'is-active': $parent.currentTabId() === id }"
+    .tab data-bind="foreach: $parent.pathway.actionsForCategory(id), css: { active: $index() === 1 }"
       input data-bind="value: value" type="range"
       label data-bind="text: name"
-      /button.info-button data-bind="click: $parents[2].showOverlay"
       button.info-button data-bind="click: $parents[2].showOverlay"
 
   button.show-overview data-bind="click: $parent.toggleOverview"= I18n.t('calculator.all.show')

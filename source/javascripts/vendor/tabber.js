@@ -10,8 +10,6 @@
      */
     var Tabber = function(el, onChange){
       this.el = el;
-      this.nav = this.el.querySelector('.tab-nav');
-      this.tabs = this.el.querySelectorAll('.tab');
       this.onChange = onChange || function(){};
 
       this._bindEvents();
@@ -19,6 +17,17 @@
 
     /** @memberof Tabber */
     Tabber.prototype = {
+
+
+      navAccessor: function() {
+        return this.el.querySelector('.tab-nav');
+      },
+
+      tabsAccessor: function() {
+
+        return this.el.querySelectorAll('.tab');
+      },
+
       /**
        * bind events
        * @private
@@ -26,7 +35,7 @@
       _bindEvents: function(){
         var that = this;
 
-        this.nav.addEventListener('click', function(e){
+        this.el.addEventListener('click', function(e){
           var target = e.target;
 
           if(target.classList.contains('tab-button')){
@@ -42,8 +51,8 @@
        */
       _tabButtonClicked: function(el){
         // work out which tab?
-        var tabId = (el.getAttribute('data-tab') * 1) - 1, // from 1 based to 0
-            tab = this.tabs[tabId],
+        var tabId = (el.getAttribute('data-tab') * 1),
+            tab = this.tabsAccessor()[tabId],
             oldTabId = this.getCurrentTab().id;
 
         // hide all the tabs
@@ -66,7 +75,7 @@
        * @param {function} fn - callback
        */
       _itterateTabs: function(fn){
-        for(var i = 0, tabs = this.tabs; i < tabs.length; i++){
+        for(var i = 0, tabs = this.tabsAccessor(); i < tabs.length; i++){
           var tab = tabs[i];
           fn.call(this, tab, i);
         }
