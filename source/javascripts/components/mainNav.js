@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/main-nav.html', 'ajax'], function(ko, html, Ajax) {
+define(['knockout', 'text!/components/main-nav.html', 'ajax', 'bindings/tabs'], function(ko, html, Ajax) {
   'use strict';
 
   var ViewModel = function() {

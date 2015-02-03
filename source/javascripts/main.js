@@ -11,7 +11,8 @@
       signals: 'vendor/signals',
       ajax: 'vendor/ajax',
       scroller: 'vendor/scroller',
-      text: 'vendor/text'
+      text: 'vendor/text',
+      tabber: 'vendor/tabber'
     }
   });
 
