@@ -19,6 +19,10 @@ define(['knockout'], function(ko) {
     { "id": 3, "name": "radio" }
   ];
 
+  var EXAMPLES = [
+    { name: 'Nathans example', slug: 'nathans-example', values: '111232321132323' }
+  ];
+
   /**
    * Represents a single datapoint of a pathway calculation
    *
@@ -61,7 +65,11 @@ define(['knockout'], function(ko) {
 
   /** Represents a dataset for a 2050 calculation */
   var Pathway = function(args) {
-    var self = this;
+    var args = args || {},
+        self = this;
+
+    self.name = args.name;
+    self.values = args.values; // TODO: Map values to pathway action values
 
     self.actions = self.getActions();
   }
@@ -95,6 +103,23 @@ define(['knockout'], function(ko) {
   /** @returns {array} Array of PathwayCategory instances. */
   Pathway.categories = function() {
     return ACTION_CATEGORIES;
+  };
+
+  /** @returns {object|null} Pathway instance if found else null */
+  Pathway.find = function(slug) {
+    // find example by slug
+    var example = ko.utils.arrayFirst(EXAMPLES, function(ex) {
+      if(ex.slug === slug) {
+        return ex;
+      }
+    });
+
+    return example ? new Pathway(example) : null;
+  };
+
+  /** @returns {string} Default pathway values as bitwise string */
+  Pathway.defaultValues = function() {
+    return null; // TODO: return default values
   };
 
   return Pathway;

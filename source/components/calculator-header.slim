@@ -1,5 +1,7 @@
 header
   button.toggle-nav data-bind="click: toggleMainNav"
+  .span data-bind="text: pathwayName"
+
   = I18n.t('calculator.header.reduction')
 
   = link_to I18n.t('calculator.share.show'), share_path
