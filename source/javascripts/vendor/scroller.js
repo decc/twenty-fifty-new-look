@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Scroller - Like a slide show type thing but not.
+ * @author Nathan G
+ * @license MIT
+ * @version 0.0.3
+ */
+
 (function(){
   'use strict';
   (function(window){
@@ -9,7 +16,11 @@
         };
     })();
 
-    /** Helper methods to cater for ie < 10 */
+    /** Helper methods, mainly to cater for ie < 10
+     * @namespace Scroller.Helpers
+     */
+
+    /** @lends Scroller.Helpers */
     var Helpers = {
       /**
        * Does el have class
@@ -69,20 +80,27 @@
       },
 
       /**
+       * time of previous call to throttle
+       * @private
+       */
+      _prev: (function(){return new Date().getTime();})(),
+
+      /**
        * throttle callback
        *
        * @param {number} ms - delay
        * @param {function} fn - callback function
        */
-      _prev: (function(){return new Date().getTime();})(),
+      throttle: function(ms, fn){
+        var that = this;
+        return function(){
+          var now = new Date().getTime();
 
-      throttle: function(ms, fn, context){
-        var now = new Date().getTime();
-
-        if((now - this._prev) >= ms){
-          this._prev = now;
-          fn.apply(context, arguments);
-        }
+          if((now - that._prev) >= ms){
+            that._prev = now;
+            fn.apply(this, arguments);
+          }
+        };
       }
     };
 
@@ -101,25 +119,56 @@
 
       if(!this.el){ throw new Error('Scroller requires el'); }
 
-      this.init();
+      this._init();
     };
 
-    /** Version number */
-    Scroller.version = '0.0.2';
-
+    /** @memberof Scroller */
     Scroller.prototype = {
-      /** Initialize scroller */
-      init: function(){
+      /**
+       * Initialize scroller
+       * @private
+       */
+      _init: function(){
         this.scrolling = false;
         this.events = [];
         this.animMs = this.opts.animMs || 300;
         this.sections = this.el.querySelectorAll('.scrollable');
 
-        if(!!this.opts.nav){ this.nav = this._generateNav(); }
+        this._parseOptions();
 
         this.on('activatesection', this._activateButton);
         this._activateCurrent();
         this._bindEvents();
+      },
+
+      _parseOptions: function() {
+        if(!!this.opts.nav){ this.nav = this._generateNav(); }
+        if(!!this.opts.next){ this.next = this._generateNext(); }
+      },
+
+      /**
+       * Generate Next button
+       *
+       * @private
+       * @returns {object} next button
+       */
+
+      _generateNext: function() {
+        var next = document.createElement('button');
+
+        next.className = 'is-hidden scrollable-next';
+        next.innerHTML = 'next';
+
+        this.on('activatesection', function(scroller) {
+          if(!scroller._hasNextSection()) {
+            Helpers.addClass(scroller.next, 'is-hidden');
+          } else {
+            Helpers.removeClass(scroller.next, 'is-hidden');
+          }
+        });
+
+        this.el.appendChild(next);
+        return next;
       },
 
       /**
@@ -199,9 +248,11 @@
         });
 
         // if were scrolling but not via our animation
-        document.addEventListener('scroll', function(){
+        document.addEventListener('scroll', function(e){
           if(!that.scrolling){
-            Helpers.throttle(100, that._activateCurrent, that);
+            Helpers.throttle(200, that._activateCurrent).call(that);
+          }else{
+            e.preventDefault();
           }
         });
 
@@ -212,6 +263,7 @@
         }, false);
 
         this.el.addEventListener('touchend', function(e){
+          /** @todo extract this to its own method */
           var touchEndY = e.changedTouches[0].pageY,
               minSwipe = 300;
 
@@ -222,7 +274,7 @@
           }
         });
 
-        /** Disable scroll when on el */
+        /** Disable touchmove when on el */
         this.el.addEventListener('touchmove', function(e){
           e.preventDefault(e);
         });
@@ -264,7 +316,6 @@
         });
 
         this.currentSectionId = gap.id;
-
         this._event('activatesection');
       },
 
@@ -310,6 +361,10 @@
         window.scrollTo(window.pageXOffset, el.offsetTop);
       },
 
+      /**
+       * Called on mousewheel event
+       * @private
+       */
       _onMouseWheel: function(e){
         /** @todo in chrome, scrolling jiggers if you mousewheel during anim */
         if(!this.scrolling){
@@ -322,6 +377,10 @@
         }
       },
 
+      /**
+       * Called on keydown event
+       * @private
+       */
       _onKeyDown: function(e){
         var code = e.keyCode || e.charCode;
 
@@ -342,10 +401,18 @@
        * @private
        */
       _nextSection: function(){
-        if(this.currentSectionId < this.sections.length - 1){
+        if(this._hasNextSection()){
           this._scrollToEl(this.sections[++this.currentSectionId]);
           this._event('activatesection');
         }
+      },
+
+      _hasNextSection: function() {
+        return (this.currentSectionId < this.sections.length - 1);
+      },
+
+      _hasPrevSection: function() {
+        return (this.currentSectionId > 0);
       },
 
       /**
@@ -354,7 +421,7 @@
        *  @private
        */
       _prevSection: function(){
-        if(this.currentSectionId > 0){
+        if(this._hasPrevSection()){
           this._scrollToEl(this.sections[--this.currentSectionId]);
           this._event('activatesection');
         }
@@ -421,6 +488,7 @@
       /**
        * fire event by name
        *
+       * @private
        * @param {string} name - name of event to fire
        */
       _event: function(name){
@@ -432,6 +500,7 @@
       /**
        * Itterate subscribers
        *
+       * @private
        * @param {function} callback - to be called per event subscriber
        */
       _itterateSubscribers: function(callback){
@@ -445,7 +514,6 @@
       /**
        * Bind events
        *
-       * @private
        * @param {string} e - event name
        * @param {function} fn - function to be called on e
        * @param {string} name - unique identifier so that listener can be
@@ -484,6 +552,6 @@
     }else{
       window.Scroller = Scroller;
     }
-  })(this);
+  })(window);
 }).call(this);
 

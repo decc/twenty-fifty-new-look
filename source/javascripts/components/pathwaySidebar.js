@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/pathway-sidebar.html', 'pathway'],
+define(['knockout', 'text!/components/pathway-sidebar.html', 'pathway', 'bindings/tabs'],
   function(ko, html, Pathway) {
 
   'use strict';
@@ -22,11 +22,6 @@ define(['knockout', 'text!/components/pathway-sidebar.html', 'pathway'],
       action.value = e.target.value;
       self.pathway.updateAction(action);
     };
-
-    self.showOverlay = function(action) {
-      alert('todo: show overlay component');
-    };
-
   };
 
   return {

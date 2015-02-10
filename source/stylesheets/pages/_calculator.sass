@@ -19,14 +19,6 @@ $nav-width: 33.333%
 .main-nav
   @include col($nav-width)
 
-  ul
-    @include col(50%)
-
-  .top-level
-    background: #2C313B
-
-  .secondary
-
 .content-wrapper
   @include col(100% - $nav-width)
   @include omega
@@ -38,6 +30,7 @@ $nav-width: 33.333%
 
 .bit
   @include col(66%)
+  position: relative
 
 .controls-sidebar
   @include col(33%)
@@ -85,6 +78,6 @@ $nav-width: 33.333%
 .tabs
   .tab
     display: none
-    &.is-active
+    &.is-active, &.active
       display: block
 

@@ -33,7 +33,7 @@ input:
 
 output:
   fonts: source/fonts                              # required
-  _icons.sass: source/stylesheets
+  _icons.sass: source/stylesheets/base
 
 
 # --------------------------------------------------------------------------- #

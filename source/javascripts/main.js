@@ -11,9 +11,10 @@ var graph111 = null;
       hasher: 'vendor/hasher',
       signals: 'vendor/signals',
       ajax: 'vendor/ajax',
-      scroller: 'vendor/scroller.min',
+      scroller: 'vendor/scroller',
       text: 'vendor/text',
-      d3: 'vendor/d3'
+      d3: 'vendor/d3',
+      tabber: 'vendor/tabber'
     }
   });
 
