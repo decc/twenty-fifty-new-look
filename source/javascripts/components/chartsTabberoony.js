@@ -1,11 +1,13 @@
-define(['knockout', 'text!/components/chart-tabs.html'], function(ko, html) {
+define(['knockout', 'text!/components/chart-tabs.html', 'bindings/chart'], function(ko, html) {
   'use strict';
 
-  var ViewModel = function() {
+  var ViewModel = function(params) {
     var self = this;
 
-    var CHARTS = [
-      { "id": 1, "name": "energy", "title": "Energy", "data": {sponk:true} },
+    self.pathway = params.pathway;
+
+    self.CHARTS = [
+      { "id": 1, "name": "energy", "title": "Energy" },
       { "id": 2, "name": "electricity", "title": "Electricity" },
       { "id": 3, "name": "emissions", "title": "Emissions" },
       { "id": 4, "name": "flows", "title": "Flows" },
@@ -16,7 +18,6 @@ define(['knockout', 'text!/components/chart-tabs.html'], function(ko, html) {
       { "id": 9, "name": "overview", "title": "Overview" }
     ];
 
-    self.charts = CHARTS;
     self.currentTabId = ko.observable(1);
 
     /** Sets visible tab */
@@ -24,13 +25,6 @@ define(['knockout', 'text!/components/chart-tabs.html'], function(ko, html) {
       self.currentTabId(chart.id);
     };
 
-    self.setCSS = function(chart) {
-      var css = 'icon-'+name+'-before';
-      if(self.currentTabId() === id) {
-        css += 'is-active';
-      }
-      return css;
-    };
   };
 
   return {

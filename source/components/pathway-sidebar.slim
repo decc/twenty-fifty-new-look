@@ -8,7 +8,7 @@ aside.controls-sidebar
   .tabs.pathway-categories data-bind="foreach: pathwayCategories"
     / todo: render appropriate control for action
     .tab data-bind="foreach: $parent.pathway.actionsForCategory(id), css: { 'is-active': $parent.currentTabId() === id }"
-      input data-bind="value: value" type="range"
+      input data-bind="name: getTypeName(), params: { min: 1, max: 4 }"
       label data-bind="text: name"
       button.info-button data-bind="click: $parents[1].showOverlay"
 

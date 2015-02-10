@@ -1,3 +1,4 @@
+var graph111 = null;
 (function(require) {
   'use strict';
 
@@ -11,7 +12,8 @@
       signals: 'vendor/signals',
       ajax: 'vendor/ajax',
       scroller: 'vendor/scroller.min',
-      text: 'vendor/text'
+      text: 'vendor/text',
+      d3: 'vendor/d3'
     }
   });
 

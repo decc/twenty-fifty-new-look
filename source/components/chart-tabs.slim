@@ -1,9 +1,9 @@
 nav.tab-nav.chart-tab-nav
-  ul data-bind="foreach: charts"
+  ul data-bind="foreach: CHARTS"
     li data-bind="attr: { class: 'icon-'+name+'-before' }, css: { 'is-active': $parent.currentTabId() === id }"
       button data-bind="click: $parent.setActiveTab, text: name"
 
-.tabs.chart-tabs data-bind="foreach: charts"
+.tabs.chart-tabs data-bind="foreach: CHARTS"
   .tab data-bind="css: { 'is-active': $parent.currentTabId() === id }"
-    h2 data-bind="text: name"
-    .chart
+    h2 data-bind="text: title"
+    .chart data-bind="chart: name, data: $parent.pathway.chartData"

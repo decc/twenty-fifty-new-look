@@ -28,7 +28,7 @@ page "/components/**.*.html", layout: false
 
 # Reload the browser automatically whenever files change
 configure :development do
-  activate :livereload, :host => "127.0.0.1"
+  activate :livereload, :host => "localhost"
 end
 
 activate :i18n
