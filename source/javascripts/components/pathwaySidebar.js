@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/pathway-sidebar.html', 'pathway', 'bindings/tabs'],
+define(['knockout', 'text!/components/pathway-sidebar.html', 'pathway', 'bindings/tabs', 'bindings/actionInputs/rangeInt', 'bindings/actionInputs/rangeFloat', 'bindings/actionInputs/radio'],
   function(ko, html, Pathway) {
 
   'use strict';
@@ -22,6 +22,8 @@ define(['knockout', 'text!/components/pathway-sidebar.html', 'pathway', 'binding
       action.value = e.target.value;
       self.pathway.updateAction(action);
     };
+
+
   };
 
   return {

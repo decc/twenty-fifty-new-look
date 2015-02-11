@@ -9,9 +9,20 @@ aside.controls-sidebar data-bind="tabs"
 
   .tabs.pathway-categories data-bind="foreach: pathwayCategories"
     .tab data-bind="foreach: $parent.pathway.actionsForCategory(id), css: { 'is-active': $parent.currentTabId() === id }"
-      input data-bind="name: getTypeName(), params: { min: 1, max: 4 }"
       label data-bind="text: name"
       button.info-button data-bind="click: $parents[2].showOverlay"
 
-  button.show-overview data-bind="click: $parent.toggleOverview"= I18n.t('calculator.all.show')
+      div
+        <!-- ko if: getTypeName() === 'rangeInt' -->
+          input data-bind="rangeInt: value, params: { name: name, min: min, max: max, step: step }"
+        <!-- /ko -->
 
+        <!-- ko if: getTypeName() === 'rangeFloat' -->
+          input data-bind="rangeFloat: value, params: { name: name, min: min, max: max, step: step }"
+        <!-- /ko -->
+
+        <!-- ko if: getTypeName() === 'radio' -->
+          span data-bind="radio: value, params: { name: name, max: max }"
+        <!-- /ko -->
+
+  button.show-overview data-bind="click: $parent.toggleOverview"= I18n.t('calculator.all.show')

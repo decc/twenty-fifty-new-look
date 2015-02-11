@@ -1,4 +1,3 @@
-var graph111 = null;
 (function(require) {
   'use strict';
 
@@ -19,7 +18,6 @@ var graph111 = null;
   });
 
   require(['app', 'componentLoader', 'customElements'], function(app) {
-
     app.init();
   });
 })(require, define);

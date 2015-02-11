@@ -38,6 +38,10 @@ define(['knockout', 'd3', 'pathway'], function(ko, d3, pathway) {
     draw: function(data, update){
       var self = this;
 
+      var chartLayers = data.chartLayers;
+      var chartLine = data.chartLine;
+      // debugger
+
       var width = self.width;
       var height = self.height;
       var margin = self.margin;
@@ -46,11 +50,11 @@ define(['knockout', 'd3', 'pathway'], function(ko, d3, pathway) {
       var yMax = 4000;
 
       var x = d3.scale.linear()
-          .domain(d3.extent(data, function(d) { return d.date; }))
+          .domain(d3.extent(chartLayers, function(d) { return d.date; }))
           .range([0, width]);
 
       var y = d3.scale.linear()
-          // .domain([0, d3.max(data, function(d) { return d.value; })])
+          // .domain([0, d3.max(chartLayers, function(d) { return d.value; })])
           .domain([yMin, yMax])
           .range([height, 0]);
 
@@ -85,14 +89,13 @@ define(['knockout', 'd3', 'pathway'], function(ko, d3, pathway) {
         .y(function(d) { return y(d.value); })
         .interpolate("basis");
 
-      var layers = stack(nest.entries(data));
+      var layers = stack(nest.entries(chartLayers));
 
       if (update === true) {
-        // self.svg.select(".line")
-        //   .datum(data)
-        //   .transition()
-        //   .attr("d", line);
-        //   return 1;
+        self.svg.select(".line")
+          .datum(chartLine)
+          .transition()
+          .attr("d", line);
 
         self.svg.selectAll(".layer")
           .data(layers)
@@ -132,18 +135,10 @@ define(['knockout', 'd3', 'pathway'], function(ko, d3, pathway) {
           .attr("d", function(d) { return area(d.values); });
 
       // Secondary data
-      // self.svg.append("path")
-      //     .datum(data)
-      //     .attr("class", "area")
-      //     .attr("d", area)
-      //     .attr('fill', function(d, i){
-      //       return self.colours(i);
-      //     });
-
-      // self.svg.append("path")
-      //     .datum(data)
-      //     .attr("class", "line")
-      //     .attr("d", line)
+      self.svg.append("path")
+          .datum(chartLine)
+          .attr("class", "line")
+          .attr("d", line)
 
       self.svg.append("g")
           .attr("class", "x axis")
