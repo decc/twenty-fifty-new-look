@@ -9,7 +9,10 @@
       .content
         .bit
           header.cityscape cityscoop
-          | charts
+
+          section.charts
+            charts-tabberoony params="pathway: pathway"
+
 
           .modal-overlay data-bind="visible: overlayVisible"
             .closer data-bind="click: hideOverlay" &times;

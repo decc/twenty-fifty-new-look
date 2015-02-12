@@ -1,5 +1,3 @@
-// THIS FILE IS GENERATED. SEE /source/icons/_icons.sass
-
 @include font-face(<%= font_name %>, '/fonts/<%= @font_path_alt %>', normal, normal, false, eot woff ttf svg)
 
 %icon
@@ -30,5 +28,9 @@
 %icon-<%= name.to_s %>-before
   &:before
     @extend %icon-content-<%= name %>
+
+.icon-<%= name.to_s %>-before
+  @extend %icon-content-<%= name %>-before
+
 <% end %>
 
