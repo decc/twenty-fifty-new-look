@@ -1,4 +1,9 @@
 .main-nav
+  @include col($nav-width)
+  @include omega
+
+  height: 100vh
+
   color: #ffffff
 
   a
@@ -9,6 +14,7 @@
     @extend %plain-list
 
   .top-level
+    height: 100%
     @include col(50%)
     background: #2C313B
     padding: 2em 0
@@ -24,6 +30,7 @@
       width: 100%
 
   .secondary
+    height: 100%
     @include col(50%)
     background: $color-highlight
     padding: 2em 1em
