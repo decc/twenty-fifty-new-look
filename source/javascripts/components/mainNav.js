@@ -4,12 +4,12 @@ define(['knockout', 'text!/components/main-nav.html', 'ajax', 'pathway', 'bindin
   var ViewModel = function() {
     var self = this;
 
-    self.examplePathways = ko.observableArray();
+    self.exampleCategories = Pathway.exampleCategories();
+    self.pathway = Pathway;
+    debugger
     self.subNavSection = ko.observable('mine');
 
     self.showSubNav = function() {};
-
-    self.examplePathways(Pathway.examples);
   };
 
   return {
