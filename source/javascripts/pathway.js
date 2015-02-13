@@ -147,7 +147,6 @@ define(['knockout', 'ajax', 'config', 'chartParser'], function(ko, Ajax, config,
     self.chartData = ko.observable();
     ko.computed(function() {
       var pathwayString = self.getPathwayString();
-
       if(!self.locked) {
         Ajax.request({
           method: 'GET',
@@ -158,6 +157,7 @@ define(['knockout', 'ajax', 'config', 'chartParser'], function(ko, Ajax, config,
             self.chartData(energyDemandChartData);
           },
           onError: function(){}
+        });
       }
     });
 
@@ -294,7 +294,6 @@ define(['knockout', 'ajax', 'config', 'chartParser'], function(ko, Ajax, config,
       examples.filter(function(example) {
         example.category === category
       });
-      debugger
       return examples;
     }
   };

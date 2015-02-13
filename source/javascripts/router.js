@@ -24,7 +24,6 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
         }
 
         pathway.setPathwayString(pathway.values);
-
         app.getPage('calculator', { pathway: pathway });
       });
 
