@@ -4,9 +4,10 @@ define(['knockout', 'text!/components/calculator-header.html'],
   'use strict';
 
   var ViewModel = function(params) {
-    var self = this;
+    var self = this,
+        navVisible = params.mainNavVisible;
 
-    var navVisible = params.mainNavVisible;
+    self.pathwayName = params.pathwayName;
 
     self.toggleMainNav = function() {
       navVisible(!navVisible());

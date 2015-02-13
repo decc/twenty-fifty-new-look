@@ -1,3 +1,4 @@
+var hello;
 define(['knockout', 'router', 'appViewModel'],
   function(ko, router, AppViewModel) {
 

@@ -4,14 +4,14 @@
     main-nav
 
     .content-wrapper
-      calculator-header params="mainNavVisible: mainNavVisible"
+      calculator-header params="mainNavVisible: mainNavVisible, pathwayName: currentPathway().name"
 
       .content
         .bit
           header.cityscape cityscoop
 
           section.charts
-            charts-tabberoony params="pathway: pathway"
+            charts-tabberoony params="pathway: currentPathway"
 
 
           .modal-overlay data-bind="visible: overlayVisible"
@@ -23,8 +23,7 @@
 
             p data-bind="text: overlayAction().info"
 
-        pathway-sidebar params="pathway: pathway"
+        pathway-sidebar params="pathway: currentPathway"
 
-        all-pathway-actions params="pathway: pathway, visible: overviewVisible, toggle: toggleOverview"
-
+        all-pathway-actions params="pathway: currentPathway, visible: overviewVisible, toggle: toggleOverview"
 

@@ -7,13 +7,13 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
    * Tracks calculator
    * @class CalculatorViewModel
    */
-  var ViewModel = function() {
+  var ViewModel = function(params) {
+    var params = params || {};
+
     var self = this;
 
     self.overviewVisible = ko.observable(false);
     self.mainNavVisible = ko.observable(false);
-
-
 
 
     self.overlayVisible = ko.observable(false);
@@ -31,12 +31,10 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
     };
 
 
+    self.currentPathway = ko.observable(params.pathway);
 
 
-
-
-    self.activeTab = ko.observable(0)
-    self.pathway = new Pathway();
+    // self.pathway = new Pathway();
     self.pathwayCategories = Pathway.categories();
 
     var toggleObservableBool = function(context, boolName) {

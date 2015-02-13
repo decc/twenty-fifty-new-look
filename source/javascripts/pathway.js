@@ -58,6 +58,10 @@ define(['knockout', 'ajax', 'config', 'chartParser'], function(ko, Ajax, config,
     { "id": 3, "name": "radio" }
   ];
 
+  var EXAMPLES = [
+    { name: 'Nathans example', slug: 'nathans-example', values: '40111111211111110324132004314110434104103204440410111' }
+  ];
+
   /**
    * Represents a single datapoint of a pathway calculation
    *
@@ -112,7 +116,14 @@ define(['knockout', 'ajax', 'config', 'chartParser'], function(ko, Ajax, config,
 
   /** Represents a dataset for a 2050 calculation */
   var Pathway = function(args) {
-    var self = this;
+    var args = args || {},
+        self = this;
+
+
+    self.name = args.name;
+    self.values = args.values; // TODO: Map values to pathway action values
+
+    self.locked = false;
 
     self.actions = ko.observableArray(self.getActions());
     self.chartParser = new ChartParser();
@@ -120,18 +131,20 @@ define(['knockout', 'ajax', 'config', 'chartParser'], function(ko, Ajax, config,
     ko.computed(function() {
       var pathwayString = self.getPathwayString();
 
-      Ajax.request({
-        method: 'GET',
-        url: 'http://2050-calculator-tool.decc.gov.uk/pathways/'+pathwayString+'/data',
-        onSuccess: function(data){
-          var data = JSON.parse(data.response);
-          var energyDemandChartData = self.chartParser.energyDemand(data.final_energy_demand, data.primary_energy_supply);
-          self.chartData(energyDemandChartData);
-        },
-        onError: function(){
+      if(!self.locked) {
+        Ajax.request({
+          method: 'GET',
+          url: 'http://2050-calculator-tool.decc.gov.uk/pathways/'+pathwayString+'/data',
+          onSuccess: function(data){
+            var data = JSON.parse(data.response);
+            var energyDemandChartData = self.chartParser.energyDemand(data.final_energy_demand, data.primary_energy_supply);
+            self.chartData(energyDemandChartData);
+          },
+          onError: function(){
 
-        }
-      });
+          }
+        });
+      }
     });
 
   }
@@ -163,12 +176,44 @@ define(['knockout', 'ajax', 'config', 'chartParser'], function(ko, Ajax, config,
 
     getMagicChar: function(char) {
       if(typeof(char) === "number") {
-        var mapping = { '0.0': 0, '1.0': 1, '1.1': "b", '1.2': "c", '1.3': "d", '1.4': "e", '1.5': "f", '1.6': "g", '1.7': "h", '1.8': "i", '1.9': "j", '2.0': 2, '2.1': "l", '2.2': "m", '2.3': "n", '2.4': "o", '2.5': "p", '2.6': "q", '2.7': "r", '2.8': "s", '2.9': "t", '3.0': 3, '3.1': "v", '3.2': "w", '3.3': "x", '3.4': "y", '3.5': "z", '3.6': "A", '3.7': "B", '3.8': "C", '3.9': "D", '4.0': 4 }
+        var mapping = { '0.0': 0, '1.0': 1, '1.1': "b", '1.2': "c", '1.3': "d", '1.4': "e", '1.5': "f", '1.6': "g", '1.7': "h", '1.8': "i", '1.9': "j", '2.0': 2, '2.1': "l", '2.2': "m", '2.3': "n", '2.4': "o", '2.5': "p", '2.6': "q", '2.7': "r", '2.8': "s", '2.9': "t", '3.0': 3, '3.1': "v", '3.2': "w", '3.3': "x", '3.4': "y", '3.5': "z", '3.6': "A", '3.7': "B", '3.8': "C", '3.9': "D", '4.0': 4 };
         char = mapping[char.toFixed(1)];
       } else if(typeof(char) === "string") {
         char = char.charCodeAt() - 64;
       }
       return char;
+    },
+
+    getActionFromMagicChar: function(char, actionType) {
+      if(actionType === "rangeFloat") {
+        var mapping = { '0': 0.0, '1': 1.0, 'b': 1.1, 'c': 1.2, 'd': 1.3, 'e': 1.4, 'f': 1.5, 'g': 1.6, 'h': 1.7, 'i': 1.8, 'j': 1.9, '2': 2.0, 'l': 2.1, 'm': 2.2, 'n': 2.3, 'o': 2.4, 'p': 2.5, 'q': 2.6, 'r': 2.7, 's': 2.8, 't': 2.9, '3': 3.0, 'v': 3.1, 'w': 3.2, 'x': 3.3, 'y': 3.4, 'z': 3.5, 'A': 3.6, 'B': 3.7, 'C': 3.8, 'D': 3.9, '4': 4.0 };
+        var value = mapping[char];
+
+      } else if(actionType === "radio") {
+        var value = String.fromCharCode(parseInt(char) + 64);
+      } else {
+        var value = parseInt(char);
+      }
+      return value;
+    },
+
+    setPathwayString: function(magicString) {
+      var magicStringLength = 53;
+      var actions = this.actions();
+
+      this.locked = true;
+
+      for(var i = 0; i < magicStringLength; i++) {
+        // search for correct action at this point in pathway string
+        for(var j = 0; j < actions.length; j++) {
+          if(actions[j].pathwayStringIndex === i) {
+            actions[j].value(this.getActionFromMagicChar(magicString[i], actions[j].getTypeName()));
+          }
+        }
+      }
+
+      this.locked = false;
+      this.actions.valueHasMutated();
     },
 
     getPathwayString: function() {
@@ -203,6 +248,28 @@ define(['knockout', 'ajax', 'config', 'chartParser'], function(ko, Ajax, config,
   /** @returns {array} Array of PathwayCategory instances. */
   Pathway.categories = function() {
     return ACTION_CATEGORIES;
+  };
+
+  /** @returns {object|null} Pathway instance if found else null */
+  Pathway.find = function(slug) {
+    // find example by slug
+    var example = ko.utils.arrayFirst(Pathway.examples(), function(ex) {
+      if(ex.slug === slug) {
+        return ex;
+      }
+    });
+
+    return example ? new Pathway(example) : null;
+  };
+
+    /** @returns {object|null} Pathway instance if found else null */
+  Pathway.examples = function() {
+    return EXAMPLES;
+  };
+
+  /** @returns {string} Default pathway values as bitwise string */
+  Pathway.defaultValues = function() {
+    return null; // TODO: return default values
   };
 
   return Pathway;
