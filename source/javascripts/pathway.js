@@ -151,16 +151,13 @@ define(['knockout', 'ajax', 'config', 'chartParser'], function(ko, Ajax, config,
       if(!self.locked) {
         Ajax.request({
           method: 'GET',
-          url: 'http://2050-calculator-tool.decc.gov.uk/pathways/'+pathwayString+'/data',
+          url: config.apiUrl + '/pathways/' + pathwayString+'/data',
           onSuccess: function(data){
             var data = JSON.parse(data.response);
             var energyDemandChartData = self.chartParser.energyDemand(data.final_energy_demand, data.primary_energy_supply);
             self.chartData(energyDemandChartData);
           },
-          onError: function(){
-
-          }
-        });
+          onError: function(){}
       }
     });
 
