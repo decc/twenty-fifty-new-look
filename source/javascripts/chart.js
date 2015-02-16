@@ -118,25 +118,25 @@ define(['knockout', 'd3', 'pathway'], function(ko, d3, pathway) {
       // Primary data
 
 
-      var john = self.svg.selectAll(".layer").data(layers);
+      var layersSVG = self.svg.selectAll(".layer").data(layers);
 
-      john
+      layersSVG
         .enter().append("path")
           .attr("class", function(d) { return "layer layer-" + d.key.replace(/ +/g, '-').replace(/[^\w|-]/g, '').toLowerCase(); })
           .attr("d", function(d) { return area(d.values); });
 
-      john
+      layersSVG
         .transition()
           .attr("d", function(d) { return area(d.values); });
 
       // Secondary data
 
-      var jane = self.svg.selectAll(".line").data([chartLine])
+      var lineSVG = self.svg.selectAll(".line").data([chartLine])
 
-      jane.enter().append("path")
+      lineSVG.enter().append("path")
           .attr("class", "line")
           .attr("d", line);
-      jane.transition()
+      lineSVG.transition()
         .duration(300)
         .attr("d", line)
 
