@@ -35,12 +35,12 @@ define(['knockout', 'd3', 'pathway'], function(ko, d3, pathway) {
     },
 
     /** draw / redraw chart */
-    draw: function(data, update){
+    draw: function(data){
       var self = this;
 
       var chartLayers = data.chartLayers;
       var chartLine = data.chartLine;
-      // debugger
+
 
       var width = self.width;
       var height = self.height;
@@ -91,19 +91,7 @@ define(['knockout', 'd3', 'pathway'], function(ko, d3, pathway) {
 
       var layers = stack(nest.entries(chartLayers));
 
-      if (update === true) {
-        self.svg.select(".line")
-          .datum(chartLine)
-          .transition()
-          .attr("d", line);
 
-        self.svg.selectAll(".layer")
-          .data(layers)
-            .transition()
-            .attr("d", function(d) { return area(d.values); });
-
-        return true;
-      }
 
       var colourGradients = [];
       // Colour gradient data for each layer
@@ -128,17 +116,31 @@ define(['knockout', 'd3', 'pathway'], function(ko, d3, pathway) {
       };
 
       // Primary data
-      self.svg.selectAll(".layer")
-        .data(layers)
+
+
+      var layersSVG = self.svg.selectAll(".layer").data(layers);
+
+      layersSVG
         .enter().append("path")
           .attr("class", function(d) { return "layer layer-" + d.key.replace(/ +/g, '-').replace(/[^\w|-]/g, '').toLowerCase(); })
           .attr("d", function(d) { return area(d.values); });
 
+      layersSVG
+        .transition()
+          .attr("d", function(d) { return area(d.values); });
+
       // Secondary data
-      self.svg.append("path")
-          .datum(chartLine)
+
+      var lineSVG = self.svg.selectAll(".line").data([chartLine])
+
+      lineSVG.enter().append("path")
           .attr("class", "line")
-          .attr("d", line)
+          .attr("d", line);
+      lineSVG.transition()
+        .duration(300)
+        .attr("d", line)
+
+      self.svg.selectAll('.axis').remove();
 
       self.svg.append("g")
           .attr("class", "x axis")

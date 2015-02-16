@@ -1,0 +1,67 @@
+.calculator-header
+  height: 7vh
+  min-height: 60px
+  @include row
+  background: $color-background-dark
+
+  .toggle-nav
+    @include col(6%)
+    @include omega
+    height: 100%
+    width: 6%
+    min-width: 60px
+    color: $color-button-text
+    background: none
+    border: none
+
+  .co2-reduction
+    @include col(20%)
+    @include omega
+    width: 69%
+    height: 100%
+    color: $color-background-dark
+
+    .percentage
+      font-weight: bold
+
+    .container
+      @extend %vertical-centered
+      text-align: right
+      padding-right: 2em
+      width: 50%
+      background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0) 75%)
+      position: relative
+
+      &:after
+        content: ''
+        position: absolute
+        width: 0
+        height: 0
+        right: 0
+        top: 0
+        border-top: 40px solid $color-background-dark
+        border-left: 40px solid transparent
+
+      &:before
+        content: ''
+        position: absolute
+        width: 0
+        height: 0
+        right: 0
+        bottom: 0
+        border-bottom: 40px solid $color-background-dark
+        border-left: 40px solid transparent
+
+  .finish-share
+    @include col($right-col-width)
+    @include omega
+
+    @extend %vertical-centered
+
+    min-width: $right-col-min-width
+
+    background: $color-highlight
+    color: $color-button-text
+    text-align: center
+    text-decoration: none
+
