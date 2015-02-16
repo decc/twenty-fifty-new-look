@@ -1,5 +1,8 @@
 header.calculator-header
   button.toggle-nav data-bind="click: toggleMainNav"
+  .span data-bind="text: pathwayName"
+
+  = I18n.t('calculator.header.reduction')
   .co2-reduction
     .container
       span

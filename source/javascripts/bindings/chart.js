@@ -9,13 +9,11 @@ define(['knockout', 'chart'], function(ko, Chart) {
       self.chart = new Chart().init(element)
 
       context.chart = self.chart;
-      context.chart.draw(data());
     },
     update: function(element, valueAccessor, allBindings, vm, context) {
       var value = valueAccessor();
       var data = allBindings.get('data');
-
-      context.chart.draw(data(), true)
+      context.chart.draw(data())
     }
   };
 

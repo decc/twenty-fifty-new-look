@@ -32,7 +32,7 @@ define(['knockout'], function(ko) {
       var value = valueAccessor();
       var data = allBindings.get('data');
 
-      element.setAttribute('value', parseInt(value()));
+      element.value = value();
 
       var valueLabel = element.parentNode.querySelector('span');
       valueLabel.innerHTML = value();

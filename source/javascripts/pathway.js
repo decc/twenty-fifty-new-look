@@ -58,6 +58,26 @@ define(['knockout', 'ajax', 'config', 'chartParser'], function(ko, Ajax, config,
     { "id": 3, "name": "radio" }
   ];
 
+  var EXAMPLES = [
+      { category: 'Extreme Pathways', name: 'Doesn\'t tackle climate change', slug: 'blank-example', values: '10111111111111110111111001111110111101101101110110111' },
+      { category: 'Extreme Pathways', name: 'Maximum demand, no supply', slug: 'max-demand-no-supply-example', values: '10111111111111110111111004424440444404204304440420111' },
+      { category: 'Extreme Pathways', name: 'Maximum supply, no demand', slug: 'max-supply-no-demand-example', values: '40444444444444440443424001121110111101102101110110111' },
+      { category: 'Extreme Pathways', name: 'Nathans example', slug: 'nathans-example', values: '40111111211111110324132004314110434104103204440410111' },
+      { category: 'Extreme Pathways', name: 'Jolyons example', slug: 'nathans-example', values: 'q0111111211111110324132004314110434104103204440410111' },
+
+      { category: 'Government Pathways', name: 'Analagous to MARKAL 3.26', slug: 'markal-326-example', values: 'i0g2dd2pp1121f1i0322112004314110433304202304320420121' },
+      { category: 'Government Pathways', name: 'Higher renewables, more energy efficiency', slug: 'high-renewables-more-energy-effficiency-example', values: 'e0d3jrg221ci12110222112004423220444404202304440420141' },
+      { category: 'Government Pathways', name: 'Higher nuclear, less energy efficiency', slug: 'high-nuclear-less-energy-effficiency-example', values: 'r013ce1111111111042233B002322220233302202102330220121' },
+      { category: 'Government Pathways', name: 'Higher CCS, more bioenergy', slug: 'high-css-more-bioenergy-example', values: 'f023df111111111f0322123003223220333203102303430310221' },
+      { category: 'Government Pathways', name: 'Low cost pathway', slug: 'low-cost-example', values: 'q011111111111111032413l004314110434104103204440410111' },
+
+      { category: '3rd Party Pathways', name: 'Friends of the Earth', slug: 'friends-of-the-earth-example', values: '10h4nn4431w23y110244111004424440343304202304430420441' },
+      { category: '3rd Party Pathways', name: 'Campaign to Protect Rural England', slug: 'campaign-to-protect-rural-england', values: '10h2pdppp12332130233122004414430343304102304430410231' },
+      { category: '3rd Party Pathways', name: 'Mark Brinkley', slug: 'mark-brinkley', values: '20222144411341110343321003422440423404203203340420141' },
+      { category: '3rd Party Pathways', name: 'National Grid', slug: 'national-grid', values: 'h0h2gg1211cj1j110322222003313230234102102203440320121' },
+      { category: '3rd Party Pathways', name: 'Atkins', slug: 'atkins-example', values: 'g0f2oj11t1rgqj1j0343111003324240244104201304430420231' }
+  ];
+
   /**
    * Represents a single datapoint of a pathway calculation
    *
@@ -112,31 +132,49 @@ define(['knockout', 'ajax', 'config', 'chartParser'], function(ko, Ajax, config,
 
   /** Represents a dataset for a 2050 calculation */
   var Pathway = function(args) {
-    var self = this;
+    var args = args || {},
+        self = this;
+
+
+    self.name = args.name;
+    self.values = args.values; // TODO: Map values to pathway action values
+
+    // Do not make requests until after all binding updates
+    self.locked = true;
 
     self.actions = ko.observableArray(self.getActions());
     self.chartParser = new ChartParser();
     self.chartData = ko.observable();
     ko.computed(function() {
       var pathwayString = self.getPathwayString();
+      if(!self.locked) {
+        Ajax.request({
+          method: 'GET',
+          url: config.apiUrl + '/pathways/' + pathwayString+'/data',
+          onSuccess: function(data){
 
-      Ajax.request({
-        method: 'GET',
-        url: config.apiUrl + '/pathways/' + pathwayString + '/data',
-        onSuccess: function(data){
-          var data = JSON.parse(data.response);
-          var energyDemandChartData = self.chartParser.energyDemand(data.final_energy_demand, data.primary_energy_supply);
-          self.chartData(energyDemandChartData);
-        },
-        onError: function(){
 
-        }
-      });
+            var data = JSON.parse(data.response);
+            var energyDemandChartData = self.chartParser.energyDemand(data.final_energy_demand, data.primary_energy_supply);
+            self.chartData(energyDemandChartData);
+          },
+          onError: function(){}
+        });
+      }
     });
 
   }
 
   Pathway.prototype = {
+    lock: function() {
+      this.locked = true;
+    },
+
+    unlock: function() {
+      this.locked = false;
+      this.actions.valueHasMutated();
+    },
+
     getActions: function() {
       return ko.utils.arrayMap(PATHWAY_ACTIONS, function(action) {
         return new Action(action);
@@ -163,12 +201,43 @@ define(['knockout', 'ajax', 'config', 'chartParser'], function(ko, Ajax, config,
 
     getMagicChar: function(char) {
       if(typeof(char) === "number") {
-        var mapping = { '0.0': 0, '1.0': 1, '1.1': "b", '1.2': "c", '1.3': "d", '1.4': "e", '1.5': "f", '1.6': "g", '1.7': "h", '1.8': "i", '1.9': "j", '2.0': 2, '2.1': "l", '2.2': "m", '2.3': "n", '2.4': "o", '2.5': "p", '2.6': "q", '2.7': "r", '2.8': "s", '2.9': "t", '3.0': 3, '3.1': "v", '3.2': "w", '3.3': "x", '3.4': "y", '3.5': "z", '3.6': "A", '3.7': "B", '3.8': "C", '3.9': "D", '4.0': 4 }
+        var mapping = { '0.0': 0, '1.0': 1, '1.1': "b", '1.2': "c", '1.3': "d", '1.4': "e", '1.5': "f", '1.6': "g", '1.7': "h", '1.8': "i", '1.9': "j", '2.0': 2, '2.1': "l", '2.2': "m", '2.3': "n", '2.4': "o", '2.5': "p", '2.6': "q", '2.7': "r", '2.8': "s", '2.9': "t", '3.0': 3, '3.1': "v", '3.2': "w", '3.3': "x", '3.4': "y", '3.5': "z", '3.6': "A", '3.7': "B", '3.8': "C", '3.9': "D", '4.0': 4 };
         char = mapping[char.toFixed(1)];
       } else if(typeof(char) === "string") {
         char = char.charCodeAt() - 64;
       }
       return char;
+    },
+
+    getActionFromMagicChar: function(char, actionType) {
+      if(actionType === "rangeFloat") {
+        var mapping = { '0': 0.0, '1': 1.0, 'b': 1.1, 'c': 1.2, 'd': 1.3, 'e': 1.4, 'f': 1.5, 'g': 1.6, 'h': 1.7, 'i': 1.8, 'j': 1.9, '2': 2.0, 'l': 2.1, 'm': 2.2, 'n': 2.3, 'o': 2.4, 'p': 2.5, 'q': 2.6, 'r': 2.7, 's': 2.8, 't': 2.9, '3': 3.0, 'v': 3.1, 'w': 3.2, 'x': 3.3, 'y': 3.4, 'z': 3.5, 'A': 3.6, 'B': 3.7, 'C': 3.8, 'D': 3.9, '4': 4.0 };
+        var value = mapping[char];
+
+      } else if(actionType === "radio") {
+        var value = String.fromCharCode(parseInt(char) + 64);
+      } else {
+        var value = parseInt(char);
+      }
+      return value;
+    },
+
+    setActionsFromPathwayString: function(magicString) {
+      var magicStringLength = 53;
+      var actions = this.actions();
+
+      this.lock();
+
+      for(var i = 0; i < magicStringLength; i++) {
+        // search for correct action at this point in pathway string
+        for(var j = 0; j < actions.length; j++) {
+          if(actions[j].pathwayStringIndex === i) {
+            actions[j].value(this.getActionFromMagicChar(magicString[i], actions[j].getTypeName()));
+          }
+        }
+      }
+
+      this.unlock();
     },
 
     getPathwayString: function() {
@@ -203,6 +272,48 @@ define(['knockout', 'ajax', 'config', 'chartParser'], function(ko, Ajax, config,
   /** @returns {array} Array of PathwayCategory instances. */
   Pathway.categories = function() {
     return ACTION_CATEGORIES;
+  };
+
+  /** @returns {array} Pathway categories */
+  Pathway.exampleCategories = function() {
+    var exampleCategories = [];
+    Pathway.examples().map(function(example) {
+      // Don't duplicate
+      if(exampleCategories.indexOf(example.category) === -1) {
+        exampleCategories.push(example.category);
+      }
+    });
+    return exampleCategories;
+  };
+
+    /** @returns {array} Pathway examples (all or by category) */
+  Pathway.examples = function(category) {
+    if(typeof category === "undefined") {
+      return EXAMPLES;
+    } else {
+      // Search by category
+      var examples = EXAMPLES;
+      examples.filter(function(example) {
+        example.category === category
+      });
+      return examples;
+    }
+  };
+
+  /** @returns {object|null} Pathway instance if found else null */
+  Pathway.find = function(slug) {
+    // find example by slug
+    var example = ko.utils.arrayFirst(Pathway.examples(), function(ex) {
+      if(ex.slug === slug) {
+        return ex;
+      }
+    });
+    return example ? new Pathway(example) : null;
+  };
+
+  /** @returns {string} Default pathway values as bitwise string */
+  Pathway.defaultValues = function() {
+    return '10111111111111110111111001111110111101101101110110111';
   };
 
   return Pathway;
