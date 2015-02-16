@@ -125,9 +125,9 @@ define(['knockout', 'd3', 'pathway'], function(ko, d3, pathway) {
           .attr("class", function(d) { return "layer layer-" + d.key.replace(/ +/g, '-').replace(/[^\w|-]/g, '').toLowerCase(); })
           .attr("d", function(d) { return area(d.values); });
 
-      // john
-      //   .transition()
-      //     .attr("d", function(d) { return area(d.values); });
+      john
+        .transition()
+          .attr("d", function(d) { return area(d.values); });
 
       // Secondary data
 
