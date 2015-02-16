@@ -14,5 +14,6 @@ html
   body class= page_classes
     = yield
 
-  script data-main="/javascripts/main.js" src="/javascripts/vendor/require.js"
+
+  =javascript_include_tag 'vendor/require', :"data-main" => "/javascripts/main.js"
 
