@@ -3,6 +3,6 @@ define([],
   'use strict';
 
   return {
-    'apiUrl': "http://2050-calculator-tool.decc.gov.uk"
+    'apiUrl': "http://2050-api.ngrok.com"
   };
 });
