@@ -55,6 +55,8 @@
             tab = this.tabsAccessor()[tabId],
             oldTabId = this.getCurrentTab().id;
 
+        debugger
+
         // hide all the tabs
         this._itterateTabs(function(tab){
           tab.classList.remove('active');
