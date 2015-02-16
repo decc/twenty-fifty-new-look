@@ -1,5 +1,6 @@
 .viewport
-  @include container
+  @include container(auto)
+  height: 100vh
   overflow: hidden
   position: relative
 
@@ -32,6 +33,9 @@
   @include col($right-col-width)
   min-width: $right-col-min-width
   @include omega
+  height: 90vh
+  margin-bottom: 100px
+  overflow: auto
 
   .tab
     padding: 2em 1em
