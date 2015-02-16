@@ -23,11 +23,11 @@ nav.main-nav data-bind="tabs"
 
       ul data-bind="foreach: exampleCategories"
         li
-          h3 data-bind="text: name"
+          h3 data-bind="text: $data"
 
-          ul data-bind="foreach: examples"
+          ul data-bind="foreach: $parent.pathway.examples($data)"
             li
-              a data-bind="text: name, attr: { href: '/#/calculator/examples/' + slug }"
+              a data-bind="text: name, attr: { href: '/#/calculator/' + slug }"
 
     .tab
       = I18n.t('calculator.menu.help.body')

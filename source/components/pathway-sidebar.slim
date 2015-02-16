@@ -1,16 +1,26 @@
 aside.controls-sidebar data-bind="tabs"
 
-  nav.tab-nav
+  nav.tab-nav.pathway-category-tab-nav
     ul data-bind="foreach: pathwayCategories"
-      li
-        button.tab-button data-bind="text: name, attr: { 'data-tab': $index }"
+      li data-bind="css: { 'is-active': $parent.currentTabId() === id }"
+        button.tab-button data-bind="click: $parent.setActiveTab, text: name"
 
-  .tabs data-bind="foreach: pathwayCategories"
-    / todo: render appropriate control for action
-    .tab data-bind="foreach: $parent.pathway.actionsForCategory(id), css: { active: $index() === 1 }"
-      input data-bind="value: value" type="range"
+  .tabs.pathway-categories data-bind="foreach: pathwayCategories"
+    .tab data-bind="foreach: $parent.pathway().actionsForCategory(id), css: { 'is-active': $parent.currentTabId() === id }"
       label data-bind="text: name"
       button.info-button data-bind="click: $parents[2].showOverlay"
 
-  button.show-overview data-bind="click: $parent.toggleOverview"= I18n.t('calculator.all.show')
+      div
+        <!-- ko if: getTypeName() === 'rangeInt' -->
+          input data-bind="rangeInt: value, params: { name: name, min: min, max: max, step: step }"
+        <!-- /ko -->
 
+        <!-- ko if: getTypeName() === 'rangeFloat' -->
+          input data-bind="rangeFloat: value, params: { name: name, min: min, max: max, step: step }"
+        <!-- /ko -->
+
+        <!-- ko if: getTypeName() === 'radio' -->
+          span data-bind="radio: value, params: { name: name, max: max }"
+        <!-- /ko -->
+
+  button.show-overview data-bind="click: $parent.toggleOverview"= I18n.t('calculator.all.show')

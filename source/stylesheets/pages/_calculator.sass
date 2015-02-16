@@ -1,4 +1,3 @@
-$nav-width: 33.333%
 
 .viewport
   @include container
@@ -16,9 +15,6 @@ $nav-width: 33.333%
 .cityscape
   height: 200px
 
-.main-nav
-  @include col($nav-width)
-
 .content-wrapper
   @include col(100% - $nav-width)
   @include omega
@@ -29,16 +25,17 @@ $nav-width: 33.333%
   position: relative
 
 .bit
-  @include col(66%)
+  @include col((100%-$right-col-width))
   position: relative
-
-.controls-sidebar
-  @include col(33%)
   @include omega
 
+.controls-sidebar
+  @include col($right-col-width)
+  min-width: $right-col-min-width
+  @include omega
 
-
-
+  .tab
+    padding: 2em 1em
 
 
 .toggle-nav

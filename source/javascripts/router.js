@@ -1,4 +1,4 @@
-define(['crossroads', 'hasher'], function(crossroads, hasher) {
+define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway) {
   'use strict';
 
   /** @todo Layer of abstraction between appViewModel and router */
@@ -13,15 +13,27 @@ define(['crossroads', 'hasher'], function(crossroads, hasher) {
         app.getPage('guide', {});
       });
 
-      crossroads.addRoute('calculator', function() {
-        app.getPage('calculator', {});
+      crossroads.addRoute('calculator/:slug:', function(slug) {
+        var pathway = Pathway.find(slug) || app.userPathway;
+        hello = pathway
+
+        // 404 if invalid slug
+        if(slug && !pathway) {
+          hasher.replaceHash('not-found');
+          return;
+        }
+
+        pathway.setPathwayString(pathway.values);
+        app.getPage('calculator', { pathway: pathway });
+      });
+
+      crossroads.addRoute('not-found', function() {
+        console.log('404');
       });
 
       crossroads.addRoute('share', function() {
         app.getPage('share', {});
       });
-
-      // calculator/{name | sha }
 
       var parseHash = function(newHash) {
         crossroads.parse(newHash);
