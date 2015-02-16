@@ -93,27 +93,27 @@ define(['knockout', 'd3', 'pathway'], function(ko, d3, pathway) {
 
 
 
-      var colourGradients = [];
-      // Colour gradient data for each layer
-      for (var i = 0; i < layers.length; i++) {
-        var layerCoefficient = (i+1)/layers.length // color opacity
-        colourGradients.push([
-          {offset: "0%", color: self.colours(i), opacity: 1 - layerCoefficient},
-          {offset: "100%", color: self.colours(i), opacity: 1 - layerCoefficient/3}
-        ]);
-
-        self.svg.append("linearGradient")
-            .attr("id", "area-gradient-" + (i+1))
-            .attr("gradientUnits", "userSpaceOnUse")
-            .attr("x1", 0).attr("y1", y(yMin))
-            .attr("x2", 0).attr("y2", y(yMax))
-          .selectAll("stop")
-            .data(colourGradients[i])
-          .enter().append("stop")
-            .attr("offset", function(d) { return d.offset; })
-            .attr("stop-color", function(d) { return d.color; })
-            .attr("stop-opacity", function(d) { return d.opacity; });
-      };
+      // var colourGradients = [];
+      // // Colour gradient data for each layer
+      // for (var i = 0; i < layers.length; i++) {
+      //   var layerCoefficient = (i+1)/layers.length // color opacity
+      //   colourGradients.push([
+      //     {offset: "0%", color: self.colours(i), opacity: 1 - layerCoefficient},
+      //     {offset: "100%", color: self.colours(i), opacity: 1 - layerCoefficient/3}
+      //   ]);
+      //
+      //   self.svg.append("linearGradient")
+      //       .attr("id", "area-gradient-" + (i+1))
+      //       .attr("gradientUnits", "userSpaceOnUse")
+      //       .attr("x1", 0).attr("y1", y(yMin))
+      //       .attr("x2", 0).attr("y2", y(yMax))
+      //     .selectAll("stop")
+      //       .data(colourGradients[i])
+      //     .enter().append("stop")
+      //       .attr("offset", function(d) { return d.offset; })
+      //       .attr("stop-color", function(d) { return d.color; })
+      //       .attr("stop-opacity", function(d) { return d.opacity; });
+      // };
 
       // Primary data
 
@@ -123,10 +123,13 @@ define(['knockout', 'd3', 'pathway'], function(ko, d3, pathway) {
       layersSVG
         .enter().append("path")
           .attr("class", function(d) { return "layer layer-" + d.key.replace(/ +/g, '-').replace(/[^\w|-]/g, '').toLowerCase(); })
-          .attr("d", function(d) { return area(d.values); });
+          .attr("d", function(d) { return area(d.values); })
+          .attr('fill', function(d, i) { return self.colours(i); })
+          .attr('opacity', '0.6');
 
       layersSVG
         .transition()
+          .duration(300)
           .attr("d", function(d) { return area(d.values); });
 
       // Secondary data
