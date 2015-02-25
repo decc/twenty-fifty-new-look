@@ -1,6 +1,14 @@
-header
-  button.toggle-nav data-bind="click: toggleMainNav"= I18n.t('calculator.header.menu')
-  = I18n.t('calculator.header.reduction')
+header.calculator-header
+  button.toggle-nav data-bind="click: toggleMainNav"
+  .pathway-owner
+    span data-bind="text: pathwayName"
 
-  = link_to I18n.t('calculator.share.show'), share_path
+  .co2-reduction
+    .container
+      span
+        span.percentage 40%
+        =I18n.t('calculator.header.reduction')
+
+  a.finish-share href=share_path
+    span= I18n.t('calculator.share.show')
 

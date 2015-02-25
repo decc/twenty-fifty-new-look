@@ -1,0 +1,25 @@
+%clearfix
+  @include clearfix
+
+// Private, use mixins instead
+%_col
+  display: block
+  float: left
+
+%_omega
+  padding-right: 0!important
+
+%plain-list
+  width: 100%
+  list-style: none
+  margin: 0
+  padding: 0
+
+%vertical-centered
+  height: 100%
+  display: table
+
+  >span
+    display: table-cell
+    vertical-align: middle
+

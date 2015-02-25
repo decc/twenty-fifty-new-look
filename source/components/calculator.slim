@@ -3,33 +3,27 @@
   .wrapper data-bind="css: { 'with-nav': mainNavVisible }"
     main-nav
 
-
     .content-wrapper
-      calculator-header params="mainNavVisible: mainNavVisible"
+      calculator-header params="mainNavVisible: mainNavVisible, pathwayName: currentPathway().name"
 
       .content
-
         .bit
-          header.cityscape cityscoop
-          | charts
+          header.cityscape
 
-        aside.controls-sidebar
+          section.charts
+            chart-tabs params="pathway: currentPathway"
 
-          nav.tab-nav
 
-          .tabs
-            .tab
-              input type="range"
-            .tab
-              input type="range"
-              input type="range"
-            .tab
-              input type="range"
-              input type="range"
-              input type="range"
+          .modal-overlay data-bind="visible: overlayVisible"
+            .closer data-bind="click: hideOverlay" &times;
+            h2 data-bind="text: overlayAction().name"
+            ul
+              li
+                a target="_blank" data-bind="attr: { href: overlayAction().pdf }" Download pdf
 
-          button.show-overview data-bind="click: toggleOverview"= I18n.t('calculator.all.show')
+            p data-bind="text: overlayAction().info"
 
-        section.overview data-bind="css: { active: overviewVisible }"
-          button.hide-overview data-bind="click: toggleOverview"= I18n.t('calculator.all.hide')
+        pathway-sidebar params="pathway: currentPathway"
+
+        all-pathway-actions params="pathway: currentPathway, visible: overviewVisible, toggle: toggleOverview"
 

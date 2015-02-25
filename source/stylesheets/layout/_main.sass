@@ -1,0 +1,36 @@
+html, body
+  height: 100%
+
+.fixed-logo
+  position: fixed
+  top: 2em
+  left: 2em
+  width: 240px
+  max-width: 15%
+
+.centered
+  display: table
+  height: 100%
+  width: 100%
+  text-align: center
+  background-size: cover
+  color: $color-intro-text
+  background-color: $color-background
+  background-image: radial-gradient(circle at 50% 100%, $color-background 15%, rgba(0,0,0,0) 40%), url(/images/rays.svg)
+  background-position: center center
+  background-attachment: fixed
+  background-repeat: no-repeat
+
+  section
+    height: 100vh
+    width: 100%
+    display: table
+    vertical-align: middle
+
+  article
+    margin: auto
+    line-height: 2
+    display: table-cell
+    vertical-align: middle
+    width: 50%
+

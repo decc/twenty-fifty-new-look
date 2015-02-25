@@ -1,13 +1,13 @@
 {
   "checksum": {
-    "previous": "29a06d0abd441a578a3f82971353c7c471e325d43b60dc4a7da71626d04204ba",
-    "current": "29a06d0abd441a578a3f82971353c7c471e325d43b60dc4a7da71626d04204ba"
+    "previous": "4c01bef4688b72897b47fe36f624e72efde335d0a7b2bb6dd43e56630743d9ff",
+    "current": "4c01bef4688b72897b47fe36f624e72efde335d0a7b2bb6dd43e56630743d9ff"
   },
   "fonts": [
-    "source/fonts/icons_29a06d0abd441a578a3f82971353c7c4.ttf",
-    "source/fonts/icons_29a06d0abd441a578a3f82971353c7c4.svg",
-    "source/fonts/icons_29a06d0abd441a578a3f82971353c7c4.woff",
-    "source/fonts/icons_29a06d0abd441a578a3f82971353c7c4.eot"
+    "source/fonts/icons_4c01bef4688b72897b47fe36f624e72e.ttf",
+    "source/fonts/icons_4c01bef4688b72897b47fe36f624e72e.svg",
+    "source/fonts/icons_4c01bef4688b72897b47fe36f624e72e.woff",
+    "source/fonts/icons_4c01bef4688b72897b47fe36f624e72e.eot"
   ],
   "glyphs": {
     "air": {
@@ -37,6 +37,10 @@
     "costs": {
       "codepoint": 61702,
       "source": "source/icons/costs.svg"
+    },
+    "down_arrow": {
+      "codepoint": 61712,
+      "source": "source/icons/down_arrow.svg"
     },
     "electricity": {
       "codepoint": 61703,
@@ -92,7 +96,7 @@
     },
     "no_hash": false,
     "output": {
-      "_icons.sass": "source/stylesheets",
+      "_icons.sass": "source/stylesheets/base",
       "css": "source/fonts",
       "fonts": "source/fonts",
       "preview": "source/fonts"
@@ -104,6 +108,6 @@
     ]
   },
   "templates": [
-    "source/stylesheets/_icons.sass"
+    "source/stylesheets/base/_icons.sass"
   ]
 }

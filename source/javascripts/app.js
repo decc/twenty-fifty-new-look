@@ -1,3 +1,4 @@
+var hello;
 define(['knockout', 'router', 'appViewModel'],
   function(ko, router, AppViewModel) {
 
@@ -6,7 +7,7 @@ define(['knockout', 'router', 'appViewModel'],
   return {
     init: function() {
       var appViewModel = new AppViewModel();
-      router.init(appViewModel);
+      router.init(ko, appViewModel);
       ko.applyBindings(appViewModel);
     }
   };

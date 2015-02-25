@@ -17,5 +17,3 @@
 # Ignore .DS_store file
 .DS_Store
 /doc
-
-Gemfile.lock

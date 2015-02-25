@@ -1,11 +1,13 @@
-define(['knockout'], function(ko) {
+define(['knockout', 'pathway'], function(ko, Pathway) {
   'use strict';
 
   var AppViewModel = function() {
     var self = this;
 
-    self.pageComponent = ko.observable('splash-component');
+    self.pageComponent = ko.observable('splash');
     self.pageParams = ko.observable();
+
+    self.userPathway = new Pathway({ name: 'You', values: Pathway.defaultValues() });
 
     self.getPage = function(component, params) {
       self.pageComponent(component);

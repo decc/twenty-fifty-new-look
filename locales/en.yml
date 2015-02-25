@@ -16,7 +16,6 @@ en:
 
   calculator:
     header:
-      menu: "Menu"
       reduction: "C02 Reduction"
 
     share:
@@ -30,11 +29,15 @@ en:
       error: "Demand is exceeding supply"
 
     menu:
-      mine: "My 2050 pathway"
+      mine:
+        link: "My 2050 pathway"
+        body: "bla"
       examples:
         link: "Example pathways"
-        blurb: "You can apply the following pre-sets and jump back to your own pathway at any time."
-      help: "Help"
+        body: "You can apply the following pre-sets and jump back to your own pathway at any time."
+      help:
+        link: "Help"
+        body: "blabla"
       exit: "Exit 2050 pathways calculator"
 
     charts:

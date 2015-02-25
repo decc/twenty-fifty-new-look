@@ -1,17 +1,34 @@
-nav.main-nav
+nav.main-nav data-bind="tabs"
 
   .top-level
-    = image_tag "/images/logo.png"
+    = image_tag "/images/logo.png", class: :logo
 
-    ul
-      li= link_to I18n.t('calculator.menu.mine')
-      li= link_to I18n.t('calculator.menu.examples.link')
-      li= link_to I18n.t('calculator.menu.help')
+    ul.tab-nav
+      li
+        button.tab-button.active data-tab="0" = I18n.t('calculator.menu.mine.link')
+      li
+        button.tab-button data-tab="1" = I18n.t('calculator.menu.examples.link')
+      li
+        button.tab-button data-tab="2" = link_to I18n.t('calculator.menu.help.link')
 
-    = link_to I18n.t('calculator.menu.exit')
+    = link_to I18n.t('calculator.menu.exit'), home_path
 
-  .secondary
-    = I18n.t('calculator.menu.examples.blurb')
+  .secondary.tabs
+    .tab.active
+      = I18n.t('calculator.menu.mine.body')
+      = link_to I18n.t('calculator.menu.mine.link'), calculator_path
 
-    | itterate example categories
+    .tab
+      = I18n.t('calculator.menu.examples.body')
+
+      ul data-bind="foreach: exampleCategories"
+        li
+          h3 data-bind="text: $data"
+
+          ul data-bind="foreach: $parent.pathway.examples($data)"
+            li
+              a data-bind="text: name, attr: { href: '/#/calculator/' + slug }"
+
+    .tab
+      = I18n.t('calculator.menu.help.body')
 
