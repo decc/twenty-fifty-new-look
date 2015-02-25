@@ -1,9 +1,18 @@
 nav.tab-nav.chart-tab-nav
-  ul data-bind="foreach: CHARTS"
+  ul data-bind="foreach: CHART_TABS"
     li data-bind="attr: { class: 'icon-'+name+'-before' }, css: { 'is-active': $parent.currentTabId() === id }"
-      button data-bind="click: $parent.setActiveTab, text: name"
+      button data-bind="click: $parent.setActiveTab, text: title"
 
-.tabs.chart-tabs data-bind="foreach: CHARTS"
-  .tab data-bind="css: { 'active': $parent.currentTabId() === id }"
-    h2 data-bind="text: title"
-    .chart data-bind="chart: name, data: $parent.pathway().chartData"
+.tabs.chart-tabs data-bind="foreach: CHART_TABS"
+  .tab data-bind="
+    css: { 'active': $parent.currentTabId() === id },
+    component: {
+      name: 'chartViews/' + (typeof viewmodel === 'undefined' ? name : viewmodel),
+      params: {
+        charts: charts,
+        data: $parent.pathway().chartData,
+        Pathway: $parent.Pathway,
+        DataRequester: $parent.DataRequester,
+        ChartParser: $parent.ChartParser
+      }
+    }"

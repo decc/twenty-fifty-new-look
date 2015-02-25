@@ -1,19 +1,23 @@
-define(['knockout', 'chart'], function(ko, Chart) {
+define(['knockout', 'charts/energyDemand', 'charts/energySupply', 'charts/costsContext', 'charts/costsCompared'], function(ko, EnergyDemandChart, EnergySupplyChart, CostsContextChart, CostsComparedChart) {
   'use strict';
 
   ko.bindingHandlers.chart = {
-    init: function(element, valueAccessor, allBindings, vm, context) {
-      var value = valueAccessor();
+    init: function(element, valueAccessor, allBindings) {
+      var name = valueAccessor();
       var data = allBindings.get('data')
+      var params = allBindings.get('params')
 
-      self.chart = new Chart().init(element)
+      // TODO: this
+      self.chart = eval("new " + name + "(" + JSON.stringify(params) + ")");
+      self.chart.init(element);
 
-      context.chart = self.chart;
+      element.chart = self.chart;
     },
     update: function(element, valueAccessor, allBindings, vm, context) {
-      var value = valueAccessor();
+      var name = valueAccessor();
       var data = allBindings.get('data');
-      context.chart.draw(data())
+
+      element.chart.draw(data()[name])
     }
   };
 
