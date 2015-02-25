@@ -52,10 +52,9 @@
       _tabButtonClicked: function(el){
         // work out which tab?
         var tabId = (el.getAttribute('data-tab') * 1),
-            tab = this.tabsAccessor()[tabId],
-            oldTabId = this.getCurrentTab().id;
+            tab = this.tabsAccessor()[tabId]
+            // oldTabId = this.getCurrentTab().id;
 
-        debugger
 
         // hide all the tabs
         this._itterateTabs(function(tab){
@@ -66,9 +65,9 @@
         tab.classList.add('active');
 
         // onChange callback
-        if(tabId !== oldTabId){
-          this.onChange(this);
-        }
+        // if(tabId !== oldTabId){
+        //   this.onChange(this);
+        // }
       },
 
       /**

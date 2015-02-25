@@ -1,4 +1,4 @@
-define(['knockout', 'ajax', 'config', 'chartParser'], function(ko, Ajax, config, ChartParser) {
+define(['knockout', 'dataRequester', 'config', 'chartParser'], function(ko, DataRequester, config, ChartParser) {
   'use strict';
 
   var PATHWAY_ACTIONS = [
@@ -148,17 +148,16 @@ define(['knockout', 'ajax', 'config', 'chartParser'], function(ko, Ajax, config,
     ko.computed(function() {
       var pathwayString = self.getPathwayString();
       if(!self.locked) {
-        Ajax.request({
-          method: 'GET',
-          url: config.apiUrl + '/pathways/' + pathwayString+'/data',
-          onSuccess: function(data){
+        DataRequester.pathway(pathwayString, function(data){
+          var data = JSON.parse(data.response);
+          self.chartData({
+            EnergyDemandChart: self.chartParser.energy(data.final_energy_demand, data.primary_energy_supply),
+            EnergySupplyChart: self.chartParser.energy(data.primary_energy_supply, data.final_energy_demand),
 
-
-            var data = JSON.parse(data.response);
-            var energyDemandChartData = self.chartParser.energyDemand(data.final_energy_demand, data.primary_energy_supply);
-            self.chartData(energyDemandChartData);
-          },
-          onError: function(){}
+            CostsContextChart: self.chartParser.costsContext(data.cost_components),
+            CostsComparedChart: self.chartParser.costsCompared(data.cost_components),
+            CostsSensitivityChart: self.chartParser.costsContext(data.cost_components),
+          });
         });
       }
     });
