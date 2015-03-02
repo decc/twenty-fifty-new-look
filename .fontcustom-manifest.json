@@ -1,13 +1,13 @@
 {
   "checksum": {
-    "previous": "4c01bef4688b72897b47fe36f624e72efde335d0a7b2bb6dd43e56630743d9ff",
-    "current": "4c01bef4688b72897b47fe36f624e72efde335d0a7b2bb6dd43e56630743d9ff"
+    "previous": "76e59ad04acc29ef7c14d1d6ce58563569d94e70598fbb9f386c8b313a43afac",
+    "current": "76e59ad04acc29ef7c14d1d6ce58563569d94e70598fbb9f386c8b313a43afac"
   },
   "fonts": [
-    "source/fonts/icons_4c01bef4688b72897b47fe36f624e72e.ttf",
-    "source/fonts/icons_4c01bef4688b72897b47fe36f624e72e.svg",
-    "source/fonts/icons_4c01bef4688b72897b47fe36f624e72e.woff",
-    "source/fonts/icons_4c01bef4688b72897b47fe36f624e72e.eot"
+    "source/fonts/icons_76e59ad04acc29ef7c14d1d6ce585635.ttf",
+    "source/fonts/icons_76e59ad04acc29ef7c14d1d6ce585635.svg",
+    "source/fonts/icons_76e59ad04acc29ef7c14d1d6ce585635.woff",
+    "source/fonts/icons_76e59ad04acc29ef7c14d1d6ce585635.eot"
   ],
   "glyphs": {
     "air": {
@@ -54,9 +54,9 @@
       "codepoint": 61705,
       "source": "source/icons/energy.svg"
     },
-    "energysecurity": {
-      "codepoint": 61706,
-      "source": "source/icons/energysecurity.svg"
+    "energy-security": {
+      "codepoint": 61713,
+      "source": "source/icons/energy-security.svg"
     },
     "flows": {
       "codepoint": 61707,
