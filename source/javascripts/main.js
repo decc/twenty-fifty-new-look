@@ -10,12 +10,14 @@
       hasher: 'vendor/hasher',
       signals: 'vendor/signals',
       ajax: 'vendor/ajax',
-      text: 'vendor/text'
+      scroller: 'vendor/scroller',
+      text: 'vendor/text',
+      d3: 'vendor/d3',
+      tabber: 'vendor/tabber'
     }
   });
 
   require(['app', 'componentLoader', 'customElements'], function(app) {
-
     app.init();
   });
 })(require, define);

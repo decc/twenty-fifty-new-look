@@ -28,7 +28,7 @@ page "/components/**.*.html", layout: false
 
 # Reload the browser automatically whenever files change
 configure :development do
-  activate :livereload
+  activate :livereload, :host => "localhost"
 end
 
 activate :i18n
@@ -48,16 +48,32 @@ set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 set :images_dir, 'images'
 
+module RequireJS
+    class << self
+        def registered(app)
+            app.after_build do |builder|
+                exec('node r.js -o build/javascripts/app.build.js');
+            end
+        end
+        alias :included :registered
+    end
+end
+
+::Middleman::Extensions.register(:requirejs, RequireJS)
+
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment
   activate :minify_css
 
   # Minify Javascript on build
-  activate :minify_javascript
+  # activate :minify_javascript
+  #
+  # # build js
+  # activate :requirejs
 
   # Enable cache buster
-  activate :asset_hash
+  # activate :asset_hash
 
   # Or use a different image path
   # set :http_prefix, "/Content/images/"
