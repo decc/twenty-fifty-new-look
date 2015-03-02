@@ -25,7 +25,8 @@ define(['knockout'], function(ko) {
       element.childNodes[0].checked = true;
 
       var valueLabel = document.createElement('span');
-      element.appendChild(valueLabel);
+      valueLabel.classList.add('value-label');
+      element.parentNode.insertBefore(valueLabel, element);
     },
 
     update: function(element, valueAccessor, allBindings, vm, context) {
@@ -34,7 +35,7 @@ define(['knockout'], function(ko) {
 
       element.querySelector('input[value="' + value() + '"]').checked = true
 
-      var valueLabel = element.querySelector('span');
+      var valueLabel = element.parentNode.querySelector('span');
       valueLabel.innerHTML = value();
     }
   };

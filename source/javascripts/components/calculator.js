@@ -38,6 +38,8 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
 
     self.currentPathway = ko.observable(params.pathway);
 
+    self.pathwayUpdating = params.pathway.updating;
+
 
     // self.pathway = new Pathway();
     self.pathwayCategories = Pathway.categories();

@@ -25,7 +25,9 @@ define(['knockout'], function(ko) {
       })
 
       var valueLabel = document.createElement('span');
-      element.parentNode.appendChild(valueLabel);
+      valueLabel.classList.add('value-label');
+      element.parentNode.insertBefore(valueLabel, element);
+
       valueLabel.innerHTML = value();
     },
 

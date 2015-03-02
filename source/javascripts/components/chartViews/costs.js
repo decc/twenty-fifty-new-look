@@ -5,6 +5,8 @@ define(['knockout', 'text!/components/chartViews/costs.html'],
   var ViewModel = function(args) {
     var self = this;
 
+    self.calculator = args.calculator;
+
     self.comparisonChartsEnabled = ko.observable(false);
 
     self.tabs = args.charts;
@@ -22,6 +24,8 @@ define(['knockout', 'text!/components/chartViews/costs.html'],
     // Update comparison charts
     ko.computed(function() {
 
+      self.calculator.pathwayUpdating(true);
+
       args.DataRequester.pathway(self.selectedExample(), function(data) {
         var data = JSON.parse(data.response)
 
@@ -34,6 +38,8 @@ define(['knockout', 'text!/components/chartViews/costs.html'],
           CostsComparedChart: comparedData,
           CostsSensitivityChart: comparedData
         });
+
+        self.calculator.pathwayUpdating(false);
       });
 
       if(self.selectedExample()) {
