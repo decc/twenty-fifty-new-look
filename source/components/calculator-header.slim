@@ -9,7 +9,7 @@ header.calculator-header
         span.percentage 40%
         =I18n.t('calculator.header.reduction')
 
-  a.finish-share
+  button.finish-share data-bind="click: $parent.toggleShare"
     span= I18n.t('calculator.share.show')
 
-  a.help help me
+  button.help help me

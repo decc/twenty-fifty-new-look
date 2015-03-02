@@ -11,9 +11,9 @@
           header.cityscape data-bind="visible: cityscapeVisible"
 
           section#charts.charts
-            .chart-tabs-container data-bind="visible: shareVisible, component: { name: 'chart-tabs', params: { pathway: currentPathway } }"
+            .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway } }"
 
-          section#share.share data-bind="visible: shareVisible, component: { name: 'share', params: { pathway: currentPathway } }"
+          section#share.share data-bind="visible: shareVisible(), component: { name: 'share', params: { pathway: currentPathway } }"
 
           .modal-overlay data-bind="visible: overlayVisible"
             .closer data-bind="click: hideOverlay" &times;
