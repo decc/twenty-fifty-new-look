@@ -35,6 +35,12 @@ define(['knockout', 'text!/components/chartViews/costs.html'],
           CostsSensitivityChart: comparedData
         });
       });
+
+      if(self.selectedExample()) {
+        self.comparisonChartsEnabled(true);
+      } else {
+        self.comparisonChartsEnabled(false);
+      }
     });
 
 
@@ -46,9 +52,10 @@ define(['knockout', 'text!/components/chartViews/costs.html'],
     };
 
     self.enableComparisonCharts = function() {
-      if(self.selectedExample()) {
-        self.comparisonChartsEnabled(true);
-      }
+      // console.log(self.selectedExample())
+      // if(self.selectedExample()) {
+      //   self.comparisonChartsEnabled(true);
+      // }
     }
   };
 

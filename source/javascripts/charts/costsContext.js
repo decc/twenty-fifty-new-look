@@ -1,15 +1,10 @@
 define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
   'use strict';
 
-  var hasAxis = false;
-
-  var CostsContextChart = function(args) {
-    var args = args || {};
-    hasAxis = args.hasAxis || false;
-  };
+  var CostsContextChart = function() {};
 
   CostsContextChart.prototype = new Chart({
-    height: 240,
+    height: 150,
     margin: { top: 40, right: 50, bottom: 70, left: 100 }
   });
 
@@ -70,13 +65,12 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
             "stroke-width" : "1px"
           });
 
-      if(hasAxis) {
+      if(self.hasAxis) {
         self.svg.selectAll('.axis').remove();
 
         self.svg.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + self.margin.top + ")")
-            .attr("shape-rendering", "crispEdges")
             .call(self.xAxis)
           .append("text")
             .attr("class", "label")

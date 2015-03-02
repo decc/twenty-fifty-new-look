@@ -2,11 +2,11 @@ aside.controls-sidebar data-bind="tabs"
 
   nav.tab-nav.pathway-category-tab-nav
     ul data-bind="foreach: pathwayCategories"
-      li data-bind="css: { 'is-active': $parent.currentTabId() === id }"
+      li data-bind="css: { 'active': $parent.currentTabId() === id }"
         button.tab-button data-bind="attr: { 'data-tab': id }, click: $parent.setActiveTab, text: name"
 
   .tabs.pathway-categories data-bind="foreach: pathwayCategories"
-    .tab data-bind="foreach: $parent.pathway().actionsForCategory(id), css: { 'is-active': $parent.currentTabId() === id }"
+    .tab data-bind="foreach: $parent.pathway().actionsForCategory(id), css: { 'active': $parent.currentTabId() === id }"
       label data-bind="text: name"
       button.info-button data-bind="click: $parents[2].showOverlay"
 

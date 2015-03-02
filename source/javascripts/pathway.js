@@ -151,8 +151,11 @@ define(['knockout', 'dataRequester', 'config', 'chartParser'], function(ko, Data
         DataRequester.pathway(pathwayString, function(data){
           var data = JSON.parse(data.response);
           self.chartData({
-            EnergyDemandChart: self.chartParser.energy(data.final_energy_demand, data.primary_energy_supply),
-            EnergySupplyChart: self.chartParser.energy(data.primary_energy_supply, data.final_energy_demand),
+            EnergyDemandChart: self.chartParser.energyDemand(data.final_energy_demand, data.primary_energy_supply),
+            EnergySupplyChart: self.chartParser.energySupply(data.primary_energy_supply, data.final_energy_demand),
+
+            ElectricityDemandChart: self.chartParser.electricityDemand(data.electricity.demand, data.electricity.supply),
+            ElectricitySupplyChart: self.chartParser.electricitySupply(data.electricity.supply, data.electricity.demand),
 
             CostsContextChart: self.chartParser.costsContext(data.cost_components),
             CostsComparedChart: self.chartParser.costsCompared(data.cost_components),

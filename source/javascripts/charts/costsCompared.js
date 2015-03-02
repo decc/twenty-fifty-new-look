@@ -1,16 +1,11 @@
 define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
   'use strict';
 
-  var hasAxis = false;
-
-  var CostsComparedChart = function(args) {
-    var args = args || {};
-    hasAxis = args.hasAxis || false;
-  };
+  var CostsComparedChart = function() {};
 
   CostsComparedChart.prototype = new Chart({
-    height: 240,
-    margin: { top: 40, right: 50, bottom: 70, left: 100 }
+    height: 150,
+    margin: { top: 40, right: 50, bottom: 50, left: 100 }
   });
 
   CostsComparedChart.prototype.constructor = CostsComparedChart
@@ -77,7 +72,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
             "stroke-width" : "1px"
           });
 
-      if(hasAxis) {
+      if(self.hasAxis) {
         self.svg.selectAll('.axis').remove();
 
         self.svg.append("g")

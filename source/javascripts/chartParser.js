@@ -5,27 +5,29 @@ define([], function() {
 
   ChartParser.prototype = {
 
-    energy: function(layerData, lineData) {
+    // Generic stacked area vs line chart
+    areaVsLine: function(layerData, lineData, skipLayers) {
       var chartLayers = [];
       var chartLine = [];
       for(var layerName in layerData) {
-        for(var i = 0; i < layerData[layerName].length; i++) {
-          var value = layerData[layerName][i];
-          var date = 2010 + i * 5;
 
-          // Remove totals: Demand and supply charts use different names here
-          // Electricity oversupply (imports) not used
-          if(layerName !== "Total Use" && layerName !== "Total Primary Supply" && layerName !== "Electricity oversupply (imports)") {
+        // Don't parse unused/total layers
+        if(!skipLayers.some(function(skip){ return layerName === skip })) {
+          // Loop data points of each layer
+          for(var i = 0; i < layerData[layerName].length; i++) {
+            var value = layerData[layerName][i];
+            var date = 2010 + i * 5;
+
             chartLayers.push({ key: layerName, date: date, value: Math.abs(value) });
           }
         }
       }
 
-      // Demand and supply charts use different names here
-      lineData = lineData["Total Use"] ? lineData["Total Use"] : lineData["Total Primary Supply"];
+      // Loop data points of line
       for(var i = 0; i < lineData.length; i++) {
         var value = lineData[i];
         var date = 2010 + i * 5;
+
         chartLine.push({ date: date, value: Math.abs(value) });
       }
 
@@ -34,6 +36,32 @@ define([], function() {
         chartLine: chartLine
       };
     },
+
+    energyDemand: function(primaryData, secondaryData) {
+      var lineData = secondaryData["Total Primary Supply"];
+      var skipLayers = ["Total Use", "Food consumption [UNUSED]"];
+      return this.areaVsLine(primaryData, lineData, skipLayers);
+    },
+
+    energySupply: function(primaryData, secondaryData) {
+      var lineData = secondaryData["Total Use"];
+      var skipLayers = ["Total Primary Supply", "Electricity oversupply (imports)"];
+      return this.areaVsLine(primaryData, lineData, skipLayers);
+    },
+
+
+    electricityDemand: function(primaryData, secondaryData) {
+      var lineData = secondaryData["Total generation supplied to grid"];
+      var skipLayers = ["Total"];
+      return this.areaVsLine(primaryData, lineData, skipLayers);
+    },
+
+    electricitySupply: function(primaryData, secondaryData) {
+      var lineData = secondaryData["Total"];
+      var skipLayers = ["Total generation supplied to grid", "Tidal [UNUSED - See III.c]"];
+      return this.areaVsLine(primaryData, lineData, skipLayers);
+    },
+
 
     costsContext: function(data) {
       // Calculates total of all cost components

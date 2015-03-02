@@ -7,27 +7,29 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
   EnergySupplyChart.prototype = new Chart();
 
-  EnergySupplyChart.prototype.draw = function(data){
+  EnergySupplyChart.prototype.draw = function(data, width, height){
       var self = this;
 
       var chartLayers = data.chartLayers;
       var chartLine = data.chartLine;
 
-      var width = self.width;
-      var height = self.height;
-      var margin = self.margin;
+      self.outerWidth = width || self.outerWidth;
+      self.outerHeight = height ||self.outerHeight;
+
+      self.width = self.outerWidth - self.margin.left - self.margin.right;
+      self.height = self.outerHeight - self.margin.top - self.margin.bottom;
 
       var yMin = 0;
       var yMax = 4000;
 
       var x = d3.scale.linear()
           .domain(d3.extent(chartLayers, function(d) { return d.date; }))
-          .range([0, width]);
+          .range([0, self.width]);
 
       var y = d3.scale.linear()
           // .domain([0, d3.max(chartLayers, function(d) { return d.value; })])
           .domain([yMin, yMax])
-          .range([height, 0]);
+          .range([self.height, 0]);
 
       var xAxis = d3.svg.axis()
           .scale(x)
@@ -95,14 +97,42 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
           });
 
       // Secondary data
-      var lineSVG = self.svg.selectAll(".line").data([chartLine])
+      var lineContainer = self.svg.selectAll(".line-container")
+          .data([chartLine])
 
-      lineSVG.enter().append("path")
-          .attr("class", "line")
-          .attr("d", line);
-      lineSVG.transition()
-        .duration(300)
-        .attr("d", line)
+      lineContainer.enter().append("g")
+          .attr("class", "line-container")
+          .each(function(d, i) {
+            d3.select(this).append("path")
+              .attr("class", "line")
+              .attr("d", line)
+
+            var label =  d3.select(this).append("g")
+              .attr("class", "line-label")
+              .attr("fill", "#fff")
+
+            label.append("rect")
+              .attr("width", self.margin.right)
+              .attr("height", 24);
+
+            label.append("text")
+              .text("Demand")
+              .attr("dx", "6px")
+              .attr("dy", "1.05em");
+          });
+
+      self.svg.selectAll('.line').data([chartLine])
+          .transition()
+          .attr("d", line)
+
+      self.svg.selectAll('.line-label').data([chartLine])
+          .transition()
+            .attr("transform", function(d) {
+              var end = d[d.length - 1];
+              var textHeight = 12;
+              return "translate(" + x(end.date) + "," + (y(end.value) - textHeight)+ ")";
+            })
+            // console.log(self.svg.selectAll('.line-label').select('.line-label text').node().getBBox())
 
 
       self.setupLineAxes();

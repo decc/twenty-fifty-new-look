@@ -8,11 +8,11 @@ define(['d3'], function(d3) {
     self.element = null;
     self.data = {};
 
-    self.margin = args.margin || { top: 20, right: 150, bottom: 70, left: 100 };
-    self.outerWidth = args.width || 640;
-    self.outerHeight = args.height || 480;
+    self.margin;
+    self.outerWidth;
+    self.outerHeight;
 
-    self.hasAxis = args.hasAxis || false;
+    self.hasAxis;
   };
 
   Chart.colourGradients = function() {
@@ -46,9 +46,14 @@ define(['d3'], function(d3) {
      * initialize chart
      * @returns {object} - current Chart instance
      */
-    init: function(element){
+    init: function(element, args){
       var self = this;
+      var args = args || {};
       self.element = element;
+
+      self.margin = args.margin || { top: 20, right: 150, bottom: 70, left: 100 };
+      self.outerWidth = args.width || 640;
+      self.outerHeight = args.height || 480;
 
       self.minimumHeightForLabel = 12;
 
@@ -57,9 +62,11 @@ define(['d3'], function(d3) {
       self.width = self.outerWidth - self.margin.left - self.margin.right;
       self.height = self.outerHeight - self.margin.top - self.margin.bottom;
 
+      self.hasAxis = args.hasAxis || false;
+
       self.svg = d3.select(self.element).append('svg')
-          .attr("preserveAspectRatio", "xMinYMin meet")
-          .attr("viewBox", "0 0 "+self.outerWidth+" "+self.outerHeight)
+          // .attr("preserveAspectRatio", "xMinYMin meet")
+          // .attr("viewBox", "0 0 "+self.outerWidth+" "+self.outerHeight)
           .attr('width', '100%')
           .attr('height', '100%')
         .append("g")
@@ -74,7 +81,7 @@ define(['d3'], function(d3) {
       return d3.svg.line()
           .x(function(d) { return self.x(d.date); })
           .y(function(d) { return self.y(d.value); })
-          .interpolate("basis");
+          .interpolate("monotone");
     },
 
     stackOrderByEndValue: function(d) {
@@ -122,7 +129,7 @@ define(['d3'], function(d3) {
       self.svg.append("g")
           .attr("class", "x axis")
           .attr("transform", "translate(0," + self.height + ")")
-          .attr("shape-rendering", "crispEdges")
+          // .attr("shape-rendering", "crispEdges")
           .call(self.xAxis)
         .append("text")
           .attr("class", "label")
@@ -134,7 +141,7 @@ define(['d3'], function(d3) {
       self.svg.append("g")
           .attr("class", "y axis")
           .attr("transform", "translate(0, 0)")
-          .attr("shape-rendering", "crispEdges")
+          // .attr("shape-rendering", "crispEdges")
           .call(self.yAxis)
         .append("text")
           .attr("class", "label")
@@ -146,6 +153,7 @@ define(['d3'], function(d3) {
           .attr("dy", "-1em")
           .text("Energy (J)");
 
+      self.svg.selectAll("line.horizontalGrid").remove();
       self.svg.selectAll("line.horizontalGrid").data(self.x.ticks(4)).enter()
         .append("line")
           .attr({
@@ -155,7 +163,7 @@ define(['d3'], function(d3) {
             "y1" : 0,
             "y2" : self.height,
             "fill" : "none",
-            "shape-rendering" : "crispEdges",
+            // "shape-rendering" : "crispEdges",
             "stroke" : "rgba(255, 255, 255, 0.2)",
             "stroke-width" : "1px"
           });

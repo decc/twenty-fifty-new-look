@@ -14,8 +14,13 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
 
     self.overviewVisible = ko.observable(false);
     self.mainNavVisible = ko.observable(false);
+    self.shareVisible = ko.observable(false);
 
+    window.onresize = function () {
+      self.cityscapeVisible(window.innerHeight > 768);
+    };
 
+    self.cityscapeVisible = ko.observable(window.innerHeight > 768);
     self.overlayVisible = ko.observable(false);
     self.overlayContent = ko.observable();
 
@@ -52,6 +57,11 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
       toggleObservableBool(self, 'mainNavVisible');
     }
 
+    /** toggle share page visibility */
+    self.toggleShare = function() {
+      toggleObservableBool(self, 'shareVisible');
+    }
+
     /** set active tab */
     self.setActiveTab = function(tab) {
       self.activeTab(id)
@@ -61,7 +71,7 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
 
   return {
     viewModel: ViewModel,
-    template: html
+    template: html,
   };
 });
 

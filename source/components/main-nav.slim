@@ -5,13 +5,13 @@ nav.main-nav data-bind="tabs"
 
     ul.tab-nav
       li
-        button.tab-button.active data-tab="0" = I18n.t('calculator.menu.mine.link')
+        button.tab-button data-tab="1" data-bind="click: setActiveTab, css: { 'active': parseInt(currentTabId(), 10) === 1 }" = I18n.t('calculator.menu.mine.link')
       li
-        button.tab-button data-tab="1" = I18n.t('calculator.menu.examples.link')
+        button.tab-button data-tab="2" data-bind="click: setActiveTab, css: { 'active': parseInt(currentTabId(), 10) === 2 }" = I18n.t('calculator.menu.examples.link')
       li
-        button.tab-button data-tab="2" = link_to I18n.t('calculator.menu.help.link')
+        button.tab-button data-tab="3" data-bind="click: setActiveTab, css: { 'active': parseInt(currentTabId(), 10) === 3 }" = link_to I18n.t('calculator.menu.help.link')
 
-    = link_to I18n.t('calculator.menu.exit'), home_path
+    = link_to I18n.t('calculator.menu.exit'), home_path, class: "tab-button exit"
 
   .secondary.tabs
     .tab.active
@@ -27,7 +27,7 @@ nav.main-nav data-bind="tabs"
 
           ul data-bind="foreach: $parent.pathway.examples($data)"
             li
-              a data-bind="text: name, attr: { href: '/#/calculator/' + slug }"
+              a data-bind="text: name, attr: { href: '/#/calculator/' + slug }, event: { click: $root.reload }"
 
     .tab
       = I18n.t('calculator.menu.help.body')

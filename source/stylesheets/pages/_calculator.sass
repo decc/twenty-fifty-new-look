@@ -28,6 +28,7 @@
 .bit
   @include col((100%-$right-col-width))
   position: relative
+  height: 100%
   @include omega
 
 .controls-sidebar
@@ -78,7 +79,7 @@
   left: 100%
   height: 100%
 
-  &.is-active
+  &.active
     @include transform(translatex(-100%))
 
   .pathway-actions-wrapper
@@ -91,6 +92,7 @@
 .tabs
   .tab
     display: none
-    &.is-active, &.active
+
+    &.active
       display: block
 

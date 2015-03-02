@@ -1,13 +1,13 @@
 define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
   'use strict';
 
-  var EnergyDemandChart = function() {
+  var ElectricityDemandChart = function() {
 
   };
 
-  EnergyDemandChart.prototype = new Chart();
+  ElectricityDemandChart.prototype = new Chart();
 
-  EnergyDemandChart.prototype.draw = function(data, width, height){
+  ElectricityDemandChart.prototype.draw = function(data, width, height){
       var self = this;
 
       var chartLayers = data.chartLayers;
@@ -136,6 +136,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       self.setupLineAxes();
   };
 
-  return EnergyDemandChart;
+  return ElectricityDemandChart;
 });
 

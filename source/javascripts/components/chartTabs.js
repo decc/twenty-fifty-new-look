@@ -18,7 +18,11 @@ define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartP
           { "id": 2, "name": "EnergySupplyChart", "title": "Supply vs Demand" }
         ]
       },
-      // { "id": 2, "name": "electricity", "title": "Electricity" },
+      { "id": 2, "name": "electricity", "title": "Electricity", "viewmodel": "tabbed", "charts": [
+          { "id": 1, "name": "ElectricityDemandChart", "title": "Demand vs Supply" },
+          { "id": 2, "name": "ElectricitySupplyChart", "title": "Supply vs Demand" }
+        ]
+      },
       // { "id": 3, "name": "emissions", "title": "Emissions" },
       // { "id": 4, "name": "flows", "title": "Flows" },
       // { "id": 5, "name": "map", "title": "Map" },
@@ -29,8 +33,7 @@ define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartP
           { "id": 2, "name": "CostsComparedChart", "title": "Compared" },
           { "id": 3, "name": "CostsContextChart", "title": "Sensitivity" }
         ]
-      },
-      // { "id": 9, "name": "overview", "title": "Overview" }
+      }
     ]
 
     self.CHARTS = [
