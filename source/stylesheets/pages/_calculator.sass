@@ -37,10 +37,51 @@
   @include omega
   height: 100%
   margin-bottom: 100px
-  overflow: auto
+  overflow: hidden
+
+  .tabs
+    overflow: auto
 
   .tab
-    padding: 2em 1em
+    padding: 1em
+    &.active
+      background-color: $color-background-light
+
+    .item
+      padding: 1em 0em
+      width: 100%
+      font-size: 70%
+      border-bottom: 1px dashed #ccc
+
+      div
+        overflow: auto
+
+      .info-button
+        float: right
+        margin-top: 1vh
+
+      label
+        float: left
+        margin-top: 0.5vh
+
+      .count-label
+        float: right
+        padding: 1em
+        background-color: $color-highlight
+        color: $color-button-text
+        margin-left: 1em
+        &:after
+          content: "0"
+
+      .value-label
+        display: none
+
+      .option
+        width: 100%
+        padding: 1em 0em 0em 0em
+
+        input
+          width: 100%
 
 
 .toggle-nav
@@ -51,7 +92,7 @@
 .show-overview
   @extend %button, %icon-arrow-left-before
   position: absolute
-  bottom: 0
+  bottom: 0px
 
 .hide-overview
   @extend %button, %icon-arrow-right-before
@@ -95,4 +136,3 @@
 
     &.active
       display: block
-
