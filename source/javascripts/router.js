@@ -36,7 +36,10 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
       });
 
       crossroads.addRoute('share', function() {
-        app.getPage('share', {});
+        // TODO: make this open share tab
+        // but you can also share examples?
+        // maybe it doesn't need a route
+        // app.getPage('share', {});
       });
 
       var parseHash = function(newHash) {

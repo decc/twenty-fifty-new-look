@@ -1,14 +1,15 @@
 header.calculator-header
   button.toggle-nav data-bind="click: toggleMainNav"
-  .span data-bind="text: pathwayName"
+  .pathway-owner
+    span data-bind="text: pathwayName"
 
-  = I18n.t('calculator.header.reduction')
   .co2-reduction
     .container
       span
         span.percentage 40%
         =I18n.t('calculator.header.reduction')
 
-  a.finish-share href=share_path
+  button.finish-share data-bind="click: $parent.toggleShare"
     span= I18n.t('calculator.share.show')
 
+  button.help help me

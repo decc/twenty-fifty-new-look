@@ -1,3 +1,17 @@
+.chart
+  // display: inline-block
+  // position: relative
+  // width: 100%
+  // padding-bottom: 100% /* aspect ratio */
+  // vertical-align: top
+  // overflow: hidden
+  svg
+    // display: inline-block
+    // position: absolute
+    // top: 10px
+    // left: 0
+
+
 .domain
   fill: none
   stroke-width: 1
@@ -8,8 +22,21 @@
   stroke: #fcfdfd
 
 .label
-  stroke: #c7ced9
+  stroke: none
+  fill: #c7ced9
   text-anchor: middle
+
+.layer-label
+  stroke: #c7ced9
+
+  &[data-state="inactive"]
+    display: none
+
+.line-label
+  fill: #5a6378
+
+  text
+    stroke: #fff
 
 .line
   fill: none
@@ -17,6 +44,25 @@
   stroke-width: 4
 
 .layer
+
+.d3-chart[data-state="graph-hover"]
+  .layer-label
+    display: none
+
+  .layer-container[data-state="active"]
+    .layer
+      opacity: 1
+      stroke: #fff
+      stroke-width: 4px
+
+    .layer-label
+      display: block
+      stroke: #fff
+
+
+
+
+
 
 
 // .layer-transport

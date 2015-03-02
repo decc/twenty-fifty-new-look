@@ -1,0 +1,21 @@
+.tabs.chart-component
+  .tab data-bind="with: contextTab, css: { 'active': currentTabId() === contextTab.id }"
+    h2.title data-bind="text: 'a'"
+    .costs-chartset
+      .chart.compare data-bind="chart: name, data: $parent.data, params: { hasAxis: true }"
+      select data-bind="options: $parent.examples, optionsCaption: 'Select an example to compare your costs', optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample"
+
+      .chart.compare data-bind="visible: $parent.comparisonChartsEnabled, chart: name, data: $parent.comparisonData"
+
+  .tab data-bind="with: comparedTab, css: { 'active': currentTabId() === comparedTab.id }"
+    h2 data-bind="text: 'a'"
+    .costs-chartset
+      .chart.compare data-bind="chart: name, data: $parent.data, params: { hasAxis: true }"
+      select data-bind="options: $parent.examples, optionsCaption: 'Select an example to compare your costs', optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample"
+
+      .chart.compare data-bind="visible: $parent.comparisonChartsEnabled, chart: name, data: $parent.comparisonData"
+
+
+ul.tab-nav.chart-component-tabs data-bind="foreach: tabs"
+  li data-bind="attr: { class: ($parent.currentTabId() === id ? 'active' : '') + ' one-of-'+$parent.tabs.length }"
+    button.tab-button data-bind="attr: { 'data-tab': id }, click: $parent.setActiveTab, text: title"
