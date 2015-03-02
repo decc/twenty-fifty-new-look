@@ -14,7 +14,7 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
 
     self.overviewVisible = ko.observable(false);
     self.mainNavVisible = ko.observable(false);
-    self.shareVisible = ko.observable(true);
+    self.shareVisible = ko.observable(false);
 
     window.onresize = function () {
       self.cityscapeVisible(window.innerHeight > 768);

@@ -19,8 +19,8 @@ en:
       reduction: "C02 Reduction"
 
     share:
-      show: "Finish & share"
-      hide: "Not finished yet"
+      show: "Finish & Share"
+      hide: "Not Finished Yet"
       title: "My Finished 2050 Pathway"
       body: "Lorem yo"
       demand: "Demand"

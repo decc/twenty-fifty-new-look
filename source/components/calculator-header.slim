@@ -9,7 +9,11 @@ header.calculator-header
         span.percentage 40%
         =I18n.t('calculator.header.reduction')
 
-  button.finish-share data-bind="click: $parent.toggleShare"
-    span= I18n.t('calculator.share.show')
+  .controls
+    button.finish-share data-bind="click: $parent.toggleShare"
+      span data-bind="visible: $parent.shareVisible()" = I18n.t('calculator.share.hide')
+      span data-bind="visible: !$parent.shareVisible()" = I18n.t('calculator.share.show')
 
-  button.help help me
+    button.help
+      / span data-bind="visible: $parent.shareVisible()" ?
+      img src="/images/spinner.gif" data-bind="visible: 1"

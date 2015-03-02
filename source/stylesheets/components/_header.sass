@@ -57,16 +57,30 @@
         border-bottom: 40px solid $color-background-dark
         border-left: 40px solid transparent
 
-  .finish-share
+  .controls
     @include col($right-col-width)
     @include omega
-
-    @extend %vertical-centered
-
     min-width: $right-col-min-width
+    position: relative
+    height: 100%
 
-    background: $color-highlight
-    color: $color-button-text
-    text-align: center
-    text-decoration: none
+    button
+      border: none
+      color: $color-button-text
+      background: $color-highlight
+      height: 100%
 
+    .finish-share
+      @extend %vertical-centered
+      padding-right: 7vh
+      width: 100%
+
+    .help
+      position: absolute
+      top: 0
+      right: 0
+      width: 7vh
+      cursor: help
+      font-size: 2em
+      font-weight: bold
+      border-left: 1px solid #fff
