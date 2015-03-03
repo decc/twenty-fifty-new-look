@@ -354,6 +354,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser'], function(ko, Data
     self.info = args.info;
     self.pdf = config.apiUrl + args.pdf;
     self.pathwayStringIndex = args.pathwayStringIndex;
+    self.tooltips = args.tooltips;
   };
 
   /** @lends Action */
@@ -427,6 +428,10 @@ define(['knockout', 'dataRequester', 'config', 'chartParser'], function(ko, Data
   Pathway.prototype = {
     lock: function() {
       this.locked(true);
+    },
+
+    toggle: function(data, event){
+      console.log(event.target);
     },
 
     unlock: function() {
@@ -577,4 +582,3 @@ define(['knockout', 'dataRequester', 'config', 'chartParser'], function(ko, Data
 
   return Pathway;
 });
-
