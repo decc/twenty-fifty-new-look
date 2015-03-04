@@ -28,7 +28,7 @@ page "/components/**.*.html", layout: false
 
 # Reload the browser automatically whenever files change
 configure :development do
-  activate :livereload, :host => "localhost"
+  # activate :livereload, :host => "localhost"
 end
 
 activate :i18n
@@ -81,4 +81,3 @@ configure :build do
   # optimise image files on build
   activate :imageoptim
 end
-
