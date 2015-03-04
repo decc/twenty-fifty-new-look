@@ -1,5 +1,81 @@
-.costs-chartset
-  height: 350px
+.chart-component .tab
 
-  .compare
-    height: 45%
+  .costs-chartset
+    position: relative
+    height: 100%
+
+    .chart
+      position: relative
+
+      .bar-title
+        position: absolute
+        top: 50%
+        left: 0
+        color: #fff
+        width: 150px
+        padding-right: 1em
+        font-weight: normal
+        font-size: 1em
+
+      .bar-label
+        display: none
+        text-anchor: middle
+
+      .d3-chart[data-state="graph-hover"]
+        .layer-label
+          display: none
+
+        .layer-container[data-state="active"]
+          .layer
+            opacity: 1
+            stroke: #fff
+            stroke-width: 4px
+
+          .layer-label
+            display: block
+            stroke: #fff
+
+        .bar-container[data-state="active"]
+          .bar
+            opacity: 1
+            stroke: #fff
+            stroke-width: 4px
+
+          .bar-label
+            display: block
+            stroke: #fff
+
+    .compare
+      height: 42.8%
+
+      &.top
+        margin-top: 6%
+        padding-bottom: 20px
+
+      &.bottom
+        padding-top: 20px
+        visibility: hidden
+
+        &.active
+          visibility: visible
+
+    .example-selector
+      position: absolute
+      left: 20px
+      top: 46%
+      margin-top: -23px
+      display: table
+      z-index: 10
+
+      select
+        color: #fff
+        display: table-cell
+        vertical-align: middle
+        padding: 0.5em 1em
+        height: 46px
+        background: none
+        border: 1px solid #fff
+
+        option
+          background: $color_background_dark
+

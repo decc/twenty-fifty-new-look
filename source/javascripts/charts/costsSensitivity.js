@@ -1,13 +1,13 @@
 define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
   'use strict';
 
-  var CostsContextChart = function() {};
+  var CostsSensitivityChart = function() {};
 
-  CostsContextChart.prototype = new Chart({});
+  CostsSensitivityChart.prototype = new Chart({});
 
-  CostsContextChart.prototype.constructor = CostsContextChart
+  CostsSensitivityChart.prototype.constructor = CostsSensitivityChart
 
-  CostsContextChart.prototype.draw = function(data, width, height){
+  CostsSensitivityChart.prototype.draw = function(data, width, height){
     var self = this;
 
     if(typeof data === "undefined") {
@@ -121,6 +121,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     }
   };
 
-  return CostsContextChart;
+  return CostsSensitivityChart;
 });
 

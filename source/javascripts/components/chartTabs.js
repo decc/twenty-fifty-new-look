@@ -6,7 +6,7 @@ define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartP
 
     // - For chartView components TODO: fix them so they can require? :) --
     self.DataRequester = DataRequester;
-    self.ChartParser = new ChartParser();
+    self.ChartParser = ChartParser;
     self.Pathway = Pathway;
     // ---------------
 

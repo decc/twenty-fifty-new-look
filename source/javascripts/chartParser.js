@@ -1,9 +1,32 @@
 define([], function() {
   'use strict';
 
-  var ChartParser = function() {};
+  var ChartParser = function(data) {
+    var self = this;
+    self.data = data;
+  };
 
   ChartParser.prototype = {
+
+    // CO2 reduction overview chart
+    summary: function() {
+      return this.data.ghg.percent_reduction_from_1990;
+    },
+
+    overview: function() {
+      var data = this.data.ghg;
+
+      // Calculates total of all GHGs at 2050
+      var total = 0;
+
+      for(var cost in data) {
+        if(typeof data[cost] === "object") {
+          total += data[cost][data[cost].length - 1];
+        }
+      }
+
+      return total;
+    },
 
     // Generic stacked area vs line chart
     areaVsLine: function(layerData, lineData, skipLayers) {
@@ -37,33 +60,47 @@ define([], function() {
       };
     },
 
-    energyDemand: function(primaryData, secondaryData) {
+    energyDemand: function() {
+      var primaryData = this.data.final_energy_demand;
+      var secondaryData = this.data.primary_energy_supply;
+
       var lineData = secondaryData["Total Primary Supply"];
       var skipLayers = ["Total Use", "Food consumption [UNUSED]"];
       return this.areaVsLine(primaryData, lineData, skipLayers);
     },
 
-    energySupply: function(primaryData, secondaryData) {
+    energySupply: function() {
+      var primaryData = this.data.primary_energy_supply;
+      var secondaryData = this.data.final_energy_demand;
+
       var lineData = secondaryData["Total Use"];
       var skipLayers = ["Total Primary Supply", "Electricity oversupply (imports)"];
       return this.areaVsLine(primaryData, lineData, skipLayers);
     },
 
 
-    electricityDemand: function(primaryData, secondaryData) {
+    electricityDemand: function() {
+      var primaryData = this.data.electricity.demand;
+      var secondaryData = this.data.electricity.supply;
+
       var lineData = secondaryData["Total generation supplied to grid"];
       var skipLayers = ["Total"];
       return this.areaVsLine(primaryData, lineData, skipLayers);
     },
 
-    electricitySupply: function(primaryData, secondaryData) {
+    electricitySupply: function() {
+      var primaryData = this.data.electricity.supply;
+      var secondaryData = this.data.electricity.demand;
+
       var lineData = secondaryData["Total"];
       var skipLayers = ["Total generation supplied to grid", "Tidal [UNUSED - See III.c]"];
       return this.areaVsLine(primaryData, lineData, skipLayers);
     },
 
 
-    costsContext: function(data) {
+    costsContext: function() {
+      var data = this.data.cost_components;
+
       // Calculates total of all cost components
       var total = 0;
 
@@ -74,7 +111,8 @@ define([], function() {
       return total;
     },
 
-    costsCompared: function(data) {
+    costsCompared: function() {
+      var data = this.data.cost_components;
 
       var categories = {};
 
@@ -148,8 +186,23 @@ define([], function() {
       var categoriesFlattened = Object.keys(categories).map(function(key) { return { key: key, value: categories[key] } })
 
       return categoriesFlattened;
-    }
+    },
+
+    costsSensitivity: function() {
+      var data = this.data.cost_components;
+
+      // Calculates total of all cost components
+      var total = 0;
+
+      for(var cost in data) {
+        total += data[cost].point;
+      }
+
+      return total;
+    },
   };
+
+
 
   return ChartParser;
 });

@@ -397,7 +397,6 @@ define(['knockout', 'dataRequester', 'config', 'chartParser'], function(ko, Data
     self.updating = ko.observable(false);
 
     self.actions = ko.observableArray(self.getActions());
-    self.chartParser = new ChartParser();
     self.chartData = ko.observable();
     ko.computed(function() {
       var pathwayString = self.getPathwayString();
@@ -405,16 +404,22 @@ define(['knockout', 'dataRequester', 'config', 'chartParser'], function(ko, Data
         self.updating(true);
         DataRequester.pathway(pathwayString, function(data){
           var data = JSON.parse(data.response);
+          self.chartParser = new ChartParser(data);
+
           self.chartData({
-            EnergyDemandChart: self.chartParser.energyDemand(data.final_energy_demand, data.primary_energy_supply),
-            EnergySupplyChart: self.chartParser.energySupply(data.primary_energy_supply, data.final_energy_demand),
+            SummaryChart: self.chartParser.summary(),
 
-            ElectricityDemandChart: self.chartParser.electricityDemand(data.electricity.demand, data.electricity.supply),
-            ElectricitySupplyChart: self.chartParser.electricitySupply(data.electricity.supply, data.electricity.demand),
+            OverviewChart: self.chartParser.overview(),
 
-            CostsContextChart: self.chartParser.costsContext(data.cost_components),
-            CostsComparedChart: self.chartParser.costsCompared(data.cost_components),
-            CostsSensitivityChart: self.chartParser.costsContext(data.cost_components),
+            EnergyDemandChart: self.chartParser.energyDemand(),
+            EnergySupplyChart: self.chartParser.energySupply(),
+
+            ElectricityDemandChart: self.chartParser.electricityDemand(),
+            ElectricitySupplyChart: self.chartParser.electricitySupply(),
+
+            CostsContextChart: self.chartParser.costsContext(),
+            CostsComparedChart: self.chartParser.costsCompared(),
+            CostsSensitivityChart: self.chartParser.costsSensitivity(),
           });
 
           self.updating(false);

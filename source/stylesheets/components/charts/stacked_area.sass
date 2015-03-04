@@ -1,0 +1,56 @@
+.chart
+  .layer-label
+    stroke: #c7ced9
+
+    &[data-state="inactive"]
+      display: none
+
+  .line-label
+    fill: #5a6378
+
+    text
+      stroke: #fff
+
+  .d3-chart[data-state="graph-hover"]
+    .layer-label
+      display: none
+
+    .layer-container[data-state="active"]
+      .layer
+        opacity: 1
+        stroke: #fff
+        stroke-width: 4px
+
+      .layer-label
+        display: block
+        stroke: #fff
+
+  .background-text
+    stroke: $color-background-dark
+    font-size: 1.6em
+
+
+
+
+
+
+// .layer-transport
+//   fill: url(#area-gradient-1)
+//
+// .layer-industry
+//   fill: url(#area-gradient-2)
+//
+// .layer-heating-and-cooling
+//   fill: url(#area-gradient-3)
+//
+// .layer-lighting--appliances
+//   fill: url(#area-gradient-4)
+//
+// .layer-layer-food-consumption-unused
+//   fill: url(#area-gradient-5)
+//
+// .layer-group6
+//   fill: url(#area-gradient-6)
+//
+// .layer-group7
+//   fill: url(#area-gradient-7)
