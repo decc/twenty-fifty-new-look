@@ -47,6 +47,7 @@
 
   .tab
     padding: 1em
+    position: relative
     &.active
       background-color: $color-background-light
 
@@ -55,6 +56,10 @@
       width: 100%
       font-size: 70%
       border-bottom: 1px dashed #ccc
+      &:hover
+        .option
+          .tooltip
+            opacity: 1
 
       div
         overflow: auto
@@ -86,6 +91,7 @@
           width: auto
           margin: 0vw 4vw 0vw 0vw
 
+
         .tooltip
           padding: 1em
           background-color: #464d5e
@@ -93,8 +99,10 @@
           margin-top: 1em
           margin-bottom: 1em
           position: absolute
-          display: none
-          width: 85%
+          display: block
+          width: 90%
+          transition: all 0.2s linear
+          opacity: 0
           &:after
             content: ""
             position: absolute
@@ -107,6 +115,7 @@
             width: 0
             z-index: 1
 
+
 .toggle-nav
   @extend %icon-menu-before
   .with-nav &
@@ -117,7 +126,7 @@
   position: absolute
   bottom: 0px
   width: 100%
-  line-height: 7vh
+  line-height: 4em
   box-shadow: 0px -5px 5px 0px #888
   &:before
     margin-right: 0.5em
@@ -147,13 +156,15 @@
   @include transition(transform .3s ease-in-out)
   left: 100%
   height: 100%
+  z-index:  50 
 
   &.active
     @include transform(translatex(-100%))
 
   .pathway-actions-wrapper
     overflow: auto
-    height: calc(100% - $header-height)
+    height: 87vh
+    padding: 1em
 
 
 
