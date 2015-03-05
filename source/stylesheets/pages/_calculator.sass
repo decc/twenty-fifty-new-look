@@ -156,13 +156,15 @@
   @include transition(transform .3s ease-in-out)
   left: 100%
   height: 100%
+  z-index:  50 
 
   &.active
     @include transform(translatex(-100%))
 
   .pathway-actions-wrapper
     overflow: auto
-    height: calc(100% - $header-height)
+    height: 87vh
+    padding: 1em
 
 
 

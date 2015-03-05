@@ -15,6 +15,7 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
     self.overviewVisible = ko.observable(false);
     self.mainNavVisible = ko.observable(false);
     self.shareVisible = ko.observable(false);
+    self.faqVisible = ko.observable(false);
 
     window.onresize = function () {
       self.cityscapeVisible(window.innerHeight > 768);
@@ -64,6 +65,11 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
       toggleObservableBool(self, 'shareVisible');
     }
 
+    /** toggle faq page visibility */
+    self.toggleFaq = function() {
+      toggleObservableBool(self, 'faqVisible');
+    }
+
     /** set active tab */
     self.setActiveTab = function(tab) {
       self.activeTab(id)
@@ -76,4 +82,3 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
     template: html,
   };
 });
-
