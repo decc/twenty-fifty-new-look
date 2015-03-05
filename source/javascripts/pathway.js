@@ -421,6 +421,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser'], function(ko, Data
             CostsContextChart: self.chartParser.costsContext(),
             CostsComparedChart: self.chartParser.costsCompared(),
             CostsSensitivityChart: self.chartParser.costsSensitivity(),
+            CostsSensitivityComponentsChart: self.chartParser.costsSensitivityComponents(),
           });
 
           self.updating(false);

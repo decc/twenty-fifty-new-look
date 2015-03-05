@@ -200,6 +200,13 @@ define([], function() {
 
       return total;
     },
+
+    costsSensitivityComponents: function() {
+      var data = this.data.cost_components;
+      var flattenedData = Object.keys(data).map(function(key) { return { key: key, value: data[key] } })
+
+      return flattenedData;
+    },
   };
 
 

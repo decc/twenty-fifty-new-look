@@ -31,7 +31,7 @@ define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartP
       { "id": 8, "name": "costs", "title": "Costs", "charts": [
           { "id": 1, "name": "CostsContextChart", "title": "In Context" },
           { "id": 2, "name": "CostsComparedChart", "title": "Compared" },
-          { "id": 3, "name": "CostsContextChart", "title": "Sensitivity" }
+          { "id": 3, "name": "CostsSensitivityChart", "title": "Sensitivity" }
         ]
       }
     ]

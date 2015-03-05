@@ -26,28 +26,29 @@ define(['knockout', 'text!/components/chartViews/costs.html'],
 
     // Update comparison charts
     ko.computed(function() {
+      if(self.selectedExample()) {
+        self.calculator.pathwayUpdating(true);
 
-      self.calculator.pathwayUpdating(true);
+        args.DataRequester.pathway(self.selectedExample(), function(data) {
+          var data = JSON.parse(data.response)
+          var chartParser = new args.ChartParser(data);
 
-      args.DataRequester.pathway(self.selectedExample(), function(data) {
-        var data = JSON.parse(data.response)
-        var chartParser = new args.ChartParser(data);
+          // Only parse data for charts in this chart view
+          var contextData = chartParser.costsContext()
+          var comparedData = chartParser.costsCompared()
+          var sensitivityData = chartParser.costsSensitivity()
+          var sensitivityComponentsData = chartParser.costsSensitivityComponents()
 
-        // Only parse data for charts in this chart view
-        var contextData = chartParser.costsContext()
-        var comparedData = chartParser.costsCompared()
-        var sensitivityData = chartParser.costsSensitivity()
+          self.comparisonData({
+            CostsContextChart: contextData,
+            CostsComparedChart: comparedData,
+            CostsSensitivityChart: sensitivityData,
+            CostsSensitivityComponentsChart: sensitivityComponentsData
+          });
 
-        self.comparisonData({
-          CostsContextChart: contextData,
-          CostsComparedChart: comparedData,
-          CostsSensitivityChart: sensitivityData
+          self.calculator.pathwayUpdating(false);
         });
 
-        self.calculator.pathwayUpdating(false);
-      });
-
-      if(self.selectedExample()) {
         self.comparisonChartsEnabled(true);
       } else {
         self.comparisonChartsEnabled(false);
@@ -59,7 +60,7 @@ define(['knockout', 'text!/components/chartViews/costs.html'],
     };
 
 
-    self.currentTabId = ko.observable(1);
+    self.currentTabId = ko.observable(3);
 
     /** Sets visible tab */
     self.setActiveTab = function(chart) {
