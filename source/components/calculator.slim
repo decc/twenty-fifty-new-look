@@ -8,12 +8,13 @@
 
       .content
 
-        = partial "components/partials/faq-overlay" 
+        = partial "components/partials/faq-overlay"
 
         .bit
           header.cityscape data-bind="visible: cityscapeVisible"
 
-          section#charts.charts
+          section#charts.charts data-bind="css: { noTop: !cityscapeVisible() }"
+            span.toggle-city data-bind="click: toggleCity"
             .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway } }"
 
           section#share.share data-bind="visible: shareVisible(), component: { name: 'share', params: { pathway: currentPathway } }"
