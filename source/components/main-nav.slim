@@ -8,10 +8,8 @@ nav.main-nav data-bind="tabs"
         button.tab-button data-tab="1" data-bind="click: setActiveTab, css: { 'active': parseInt(currentTabId(), 10) === 1 }" = I18n.t('calculator.menu.mine.link')
       li
         button.tab-button data-tab="2" data-bind="click: setActiveTab, css: { 'active': parseInt(currentTabId(), 10) === 2 }" = I18n.t('calculator.menu.examples.link')
-      li
-        button.tab-button data-tab="3" data-bind="click: setActiveTab, css: { 'active': parseInt(currentTabId(), 10) === 3 }" = link_to I18n.t('calculator.menu.help.link')
 
-    = link_to I18n.t('calculator.menu.exit'), home_path, class: "tab-button exit"
+    = link_to I18n.t('calculator.menu.guide'), home_path, class: "tab-button exit"
 
   .secondary.tabs
     .tab.active
