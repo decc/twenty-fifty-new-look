@@ -407,22 +407,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser'], function(ko, Data
           var data = JSON.parse(data.response);
           self.chartParser = new ChartParser(data);
 
-          self.chartData({
-            SummaryChart: self.chartParser.summary(),
-
-            OverviewChart: self.chartParser.overview(),
-
-            EnergyDemandChart: self.chartParser.energyDemand(),
-            EnergySupplyChart: self.chartParser.energySupply(),
-
-            ElectricityDemandChart: self.chartParser.electricityDemand(),
-            ElectricitySupplyChart: self.chartParser.electricitySupply(),
-
-            CostsContextChart: self.chartParser.costsContext(),
-            CostsComparedChart: self.chartParser.costsCompared(),
-            CostsSensitivityChart: self.chartParser.costsSensitivity(),
-            CostsSensitivityComponentsChart: self.chartParser.costsSensitivityComponents(),
-          });
+          self.chartData(self.chartParser.all());
 
           self.updating(false);
         });

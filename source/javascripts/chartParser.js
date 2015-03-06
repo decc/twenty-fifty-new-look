@@ -8,6 +8,27 @@ define([], function() {
 
   ChartParser.prototype = {
 
+    all: function() {
+      return {
+        SummaryChart: this.summary(),
+
+        OverviewChart: this.overview(),
+
+        EnergyDemandChart: this.energyDemand(),
+        EnergySupplyChart: this.energySupply(),
+
+        ElectricityDemandChart: this.electricityDemand(),
+        ElectricitySupplyChart: this.electricitySupply(),
+
+        MapChart: this.map(),
+
+        CostsContextChart: this.costsContext(),
+        CostsComparedChart: this.costsCompared(),
+        CostsSensitivityChart: this.costsSensitivity(),
+        CostsSensitivityComponentsChart: this.costsSensitivityComponents(),
+      }
+    },
+
     // CO2 reduction overview chart
     summary: function() {
       return this.data.ghg.percent_reduction_from_1990;
@@ -95,6 +116,66 @@ define([], function() {
       var lineData = secondaryData["Total"];
       var skipLayers = ["Total generation supplied to grid", "Tidal [UNUSED - See III.c]"];
       return this.areaVsLine(primaryData, lineData, skipLayers);
+    },
+
+
+    map: function() {
+      var data = this.data.map;
+
+      var labels = {
+        'III.a.2': 'Offshore wind',
+        'III.a.1': 'Onshore wind',
+        'IV.c': 'Micro wind',
+        'VI.a.Biocrop': 'Energy crops',
+        'VI.a.Forestry': 'Forest',
+        'VI.c': 'Marine algae',
+        'V.b': 'Biocrops',
+        'IV.a': 'Solar PV',
+        'IV.b': 'Solar thermal',
+        'VII.a': 'Solar PV',
+        'III.b': 'Hydro',
+        'III.c.TidalRange': 'Tidal range',
+        'III.c.TidalStream': 'Tidal stream',
+        'I.a': '2 GW coal gas or biomass power stations without CCS',
+        'I.b': '1.2 GW coal gas or biomass power stations with CCS',
+        'II.a': '3 GW nuclear power station',
+        'III.d': '0.01 GW geothermal stations',
+        'VII.c': '1 GW gas standby power stations',
+        'VI.b': '215 kt/y waste to energy conversion facilities'
+      };
+
+      data = {
+        land: [
+          { "key": labels["III.b"], "value": data["III.b"] },
+          { "key": labels["IV.b"], "value": data["IV.b"] },
+          { "key": labels["IV.a"], "value": data["IV.a"] },
+          { "key": labels["IV.c"], "value": data["IV.c"] },
+          { "key": labels["III.a.1"], "value": data["III.a.1"] },
+          { "key": labels["VI.a.Forestry"], "value": data["VI.a.Forestry"] },
+          { "key": labels["VI.a.Biocrop"], "value": data["VI.a.Biocrop"] }
+        ],
+        "wave": 240.99441907661074,
+        "III.a.1": 724.0079999999999,
+        "III.b": 60.54545454545453,
+        "IV.a": 0,
+        "IV.b": 39.954878820088204,
+        "IV.c": 0,
+        "VI.a.Biocrop": 23849.5728797235,
+        "III.a.2": 3240,
+        "III.c.TidalStream": 380.51750380517524,
+        "III.c.TidalRange": 525.8928571428571,
+        "VI.c": 0,
+        "V.b": 19963.495322838233,
+        "VII.a": 214.73339506918438,
+        "I.a": 0,
+        "I.b": 20.61666666666667,
+        "II.a": 10.453333333333335,
+        "III.d": 0,
+        "VII.c": 7.465371722718342,
+        "VI.b": 103.29001860465115
+      };
+
+      return data;
     },
 
 

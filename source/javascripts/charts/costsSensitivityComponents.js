@@ -75,15 +75,13 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
     var components = self.svg.selectAll(".component")
         .data(data)
-        console.log(data)
-    console.log(componentOrder)
 
     var componentsEnter = components.enter().append("g")
       .attr("class", "component")
       .attr("transform", function(d, i) { return "translate(0, "+(componentOrder[d.id] * (componentHeight + spacing))+")"; });
 
     components.transition()
-      .attr("transform", function(d, i) { debugger; return "translate(0, "+(componentOrder[d.id] * (componentHeight + spacing))+")"; });
+      .attr("transform", function(d, i) { return "translate(0, "+(componentOrder[d.id] * (componentHeight + spacing))+")"; });
 
 
     bars.forEach(function(bar, n) {
@@ -112,7 +110,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
     componentsEnter.selectAll("line.horizontalGrid").remove();
     componentsEnter.each(function(d, i) {
-      // debugger
       d3.select(this).selectAll("line.horizontalGrid").data(self.x.ticks(nTicks)).enter()
       .append("line")
         .attr({
