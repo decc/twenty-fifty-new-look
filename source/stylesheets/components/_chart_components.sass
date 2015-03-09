@@ -25,31 +25,45 @@
       width: 25%
 
     .tab-button
-      padding: 20px
+      padding: 0
+      height: $chart-tab-nav-height
       width: 100%
       color: #FFF
       border: none
       background: none
 
 .chart-component
+  position: relative
+  overflow: hidden
   height: 100%
 
   .tab
+    display: block !important
+    left: -100000px
+    position: absolute
+    top: 0
+    width: 100%
     height: 100%
-    padding-bottom: 58px
+    padding: $chart-tab-padding-top $chart-tab-padding-right $chart-tab-padding-bottom $chart-tab-padding-left
+
+    &.active
+      left: 0
 
     .title
-      margin-top: 0
-      height: 0
+      position: absolute
+      top: $chart-tab-padding-top
+      left: $chart-tab-padding-left
+      color: #fff
+      font-size: 1em
+      font-weight: normal
 
     .chart
       height: 100%
 
-  select
-    color: #fff
-    padding: 1em
-    background: none
-    border: 3px solid #fff
-
-    option
-      background: $color_background_dark
+    .note
+      color: #fff
+      font-size: 0.7em
+      line-height: 1
+      position: absolute
+      left: $chart-tab-padding-left
+      bottom: $chart-tab-padding-bottom - 15

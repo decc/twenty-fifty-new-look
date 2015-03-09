@@ -9,7 +9,7 @@ en:
       title: "Welcome"
       body: "lalala"
     done:
-      title: "You're all set to go..."
+      title: "You're all set to go!"
       body: 'lorem'
       button: 'Start'
     button: "Skip guide"
@@ -19,8 +19,8 @@ en:
       reduction: "C02 Reduction"
 
     share:
-      show: "Finish & share"
-      hide: "Not finished yet"
+      show: "Finish & Share"
+      hide: "Not Finished Yet"
       title: "My Finished 2050 Pathway"
       body: "Lorem yo"
       demand: "Demand"
@@ -31,14 +31,11 @@ en:
     menu:
       mine:
         link: "My 2050 pathway"
-        body: "bla"
+        body: ""
       examples:
         link: "Example pathways"
         body: "You can apply the following pre-sets and jump back to your own pathway at any time."
-      help:
-        link: "Help"
-        body: "blabla"
-      exit: "Exit 2050 pathways calculator"
+      guide: "Return to guide"
 
     charts:
       energy:

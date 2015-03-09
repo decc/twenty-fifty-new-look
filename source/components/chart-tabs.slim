@@ -9,6 +9,7 @@ nav.tab-nav.chart-tab-nav
     component: {
       name: 'chartViews/' + (typeof viewmodel === 'undefined' ? name : viewmodel),
       params: {
+        calculator: $parents[1],
         charts: charts,
         data: $parent.pathway().chartData,
         Pathway: $parent.Pathway,

@@ -55,6 +55,8 @@ define(['d3'], function(d3) {
       self.outerWidth = args.width || 640;
       self.outerHeight = args.height || 480;
 
+      self.title = args.title || 'Chart';
+
       self.minimumHeightForLabel = 12;
 
       self.colours = d3.scale.category20();
@@ -71,7 +73,9 @@ define(['d3'], function(d3) {
           .attr('height', '100%')
         .append("g")
           .attr("class", "d3-chart")
-          .attr("transform", "translate(" + self.margin.left + "," + self.margin.top + ")");
+          .attr("transform", "translate(" + self.margin.left + "," + self.margin.top + ")")
+          .attr('width', '100%')
+          .attr('height', '100%');
 
       return self;
     },
@@ -163,7 +167,6 @@ define(['d3'], function(d3) {
             "y1" : 0,
             "y2" : self.height,
             "fill" : "none",
-            // "shape-rendering" : "crispEdges",
             "stroke" : "rgba(255, 255, 255, 0.2)",
             "stroke-width" : "1px"
           });

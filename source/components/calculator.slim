@@ -4,9 +4,12 @@
     main-nav
 
     .content-wrapper
-      calculator-header params="mainNavVisible: mainNavVisible, pathwayName: currentPathway().name"
+      calculator-header params="mainNavVisible: mainNavVisible, pathwayName: currentPathway().name, pathway: currentPathway"
 
       .content
+
+        = partial "components/partials/faq-overlay" 
+
         .bit
           header.cityscape data-bind="visible: cityscapeVisible"
 
@@ -27,4 +30,3 @@
         pathway-sidebar params="pathway: currentPathway"
 
         all-pathway-actions params="pathway: currentPathway, visible: overviewVisible, toggle: toggleOverview"
-

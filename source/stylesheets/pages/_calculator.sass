@@ -37,10 +37,83 @@
   @include omega
   height: 100%
   margin-bottom: 100px
-  overflow: auto
+  overflow: hidden
+  position: relative
+
+  .tabs
+    overflow: auto
+    padding-left: 1px
+    height: calc(100% - 14vh)
 
   .tab
-    padding: 2em 1em
+    padding: 1em
+    position: relative
+    &.active
+      background-color: $color-background-light
+
+    .item
+      padding: 1em 0em
+      width: 100%
+      font-size: 70%
+      border-bottom: 1px dashed #ccc
+      &:hover
+        .option
+          .tooltip
+            opacity: 1
+
+      div
+        overflow: auto
+
+      .info-button
+        float: right
+        margin-top: 1vh
+
+      label
+        float: left
+        margin-top: 0.5vh
+        max-width: 70%
+
+      .value-label
+        float: right
+        padding: 1em
+        background-color: $color-highlight
+        color: $color-button-text
+        margin-left: 1em
+
+      .option
+        width: 100%
+        padding: 1em 0em 0em 0em
+
+        input
+          width: 100%
+
+        input[type=radio]
+          width: auto
+          margin: 0vw 4vw 0vw 0vw
+
+
+        .tooltip
+          padding: 1em
+          background-color: #464d5e
+          color: #fff
+          margin-top: 1em
+          margin-bottom: 1em
+          position: absolute
+          display: block
+          width: 90%
+          transition: all 0.2s linear
+          opacity: 0
+          &:after
+            content: ""
+            position: absolute
+            top: -10px
+            left: 0vw
+            border-style: solid
+            border-width: 0 15px 18px
+            border-color: #464d5e transparent
+            display: block
+            width: 0
+            z-index: 1
 
 
 .toggle-nav
@@ -51,7 +124,12 @@
 .show-overview
   @extend %button, %icon-arrow-left-before
   position: absolute
-  bottom: 0
+  bottom: 0px
+  width: 100%
+  line-height: 4em
+  box-shadow: 0px -5px 5px 0px #888
+  &:before
+    margin-right: 0.5em
 
 .hide-overview
   @extend %button, %icon-arrow-right-before
@@ -78,13 +156,15 @@
   @include transition(transform .3s ease-in-out)
   left: 100%
   height: 100%
+  z-index:  50 
 
   &.active
     @include transform(translatex(-100%))
 
   .pathway-actions-wrapper
     overflow: auto
-    height: calc(100% - $header-height)
+    height: 87vh
+    padding: 1em
 
 
 
@@ -95,4 +175,3 @@
 
     &.active
       display: block
-

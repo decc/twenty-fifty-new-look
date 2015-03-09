@@ -1,13 +1,13 @@
 define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
   'use strict';
 
-  var CostsComparedChart = function() {};
+  var CostsSensitivityChart = function() {};
 
-  CostsComparedChart.prototype = new Chart({});
+  CostsSensitivityChart.prototype = new Chart({});
 
-  CostsComparedChart.prototype.constructor = CostsComparedChart
+  CostsSensitivityChart.prototype.constructor = CostsSensitivityChart
 
-  CostsComparedChart.prototype.draw = function(data, width, height){
+  CostsSensitivityChart.prototype.draw = function(data, width, height){
     var self = this;
 
     if(typeof data === "undefined") {
@@ -34,58 +34,26 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         .orient("top")
         .ticks(nTicks);
 
-    var y = d3.scale.linear()
-        .domain([0, 1])
-        .range([0, self.height]);
-
-    var stack = function(data) {
-      var previousX = 0;
-
-      data.sort(function(a, b) { return a.value - b.value });
-
-      return data.map(function(d, i) { return { key: d.key, colour: self.colours(i), value: d.value, x0: previousX, x1: previousX += d.value }; });
-    };
-
     self.x = x;
     self.xAxis = xAxis;
 
-    var bars = self.svg.selectAll(".bar-container")
-        .data(stack(data))
 
-    bars.enter().append("g")
-      .attr("class", "bar-container")
-      .each(function(d, i) {
-        d3.select(this).append("rect")
-          .attr("class", "bar")
-          .attr('fill', function(d) { return d.colour; })
-          .attr('opacity', '0.6')
-          .attr("y", 0)
-          .attr("height", self.height)
-          .attr("x", function(d) { return x(d.x0); })
-          .attr("width", function(d) { return x(d.value); })
-          .on('mouseover', function(d) {
-            d3.select(this.parentNode).attr("data-state", "active")
-            d3.select(this.parentNode.parentNode).attr("data-state", "graph-hover")
-          })
-          .on('mouseout', function(d) {
-            d3.select(this.parentNode).attr("data-state", "inactive")
-            d3.select(this.parentNode.parentNode).attr("data-state", "inactive")
-          });
-        d3.select(this).append("text")
-          .attr("class", "bar-label")
-          .attr("y", y(0.5))
-      })
+    var bars = self.svg.selectAll(".bar")
+        .data([data])
 
-    self.svg.selectAll(".bar")
-      .data(stack(data))
-      .transition()
-      .attr("x", function(d) { return x(d.x0); })
-      .attr("width", function(d) { return x(d.value); });
+    bars.enter().append("rect")
+        .attr("class", "bar")
+        .attr('fill', self.colours(1))
+        .attr('opacity', '0.6')
+        .attr("y", 0)
+        .attr("height", self.height)
+        .attr("x", function(d) { return x(0); })
+        .attr("width", function(d) { return self.width - x(d); });
 
-    self.svg.selectAll(".bar-label")
-      .data(stack(data))
-      .attr("x", function(d) { return x(d.x0 + d.value/2); })
-      .text(function(d) { return d.key + " (" + parseInt(d.value, 10) + ")"; })
+    bars.transition()
+        .attr("x", function(d) { return x(0); })
+        .attr("width", function(d) { return x(d); });
+
 
     self.svg.selectAll("line.horizontalGrid").remove();
     self.svg.selectAll("line.horizontalGrid").data(self.x.ticks(nTicks)).enter()
@@ -102,7 +70,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
           "stroke-width" : "1px"
         });
 
-    // Borders
     self.svg.selectAll('.border').remove();
     self.svg.append("line")
       .attr({
@@ -154,6 +121,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     }
   };
 
-  return CostsComparedChart;
+  return CostsSensitivityChart;
 });
 

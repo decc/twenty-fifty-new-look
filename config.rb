@@ -5,7 +5,7 @@
 # Per-page layout changes:
 #
 # With no layout
-page "/components/**.*.html", layout: false
+page "/components/*", layout: false
 #
 # With alternative layout
 # page "/path/to/file.html", :layout => :otherlayout
@@ -81,4 +81,3 @@ configure :build do
   # optimise image files on build
   activate :imageoptim
 end
-

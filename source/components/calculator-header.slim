@@ -3,13 +3,14 @@ header.calculator-header
   .pathway-owner
     span data-bind="text: pathwayName"
 
-  .co2-reduction
-    .container
-      span
-        span.percentage 40%
-        =I18n.t('calculator.header.reduction')
+  .total-co2-reduction
+    .chart.compare.top data-bind="chart: 'SummaryChart', data: pathway().chartData, params: { text: '#{I18n.t("calculator.header.reduction")}', margin: { top: 0, right: 0, bottom: 0, left: 0 } }" style="height: 100%"
 
-  button.finish-share data-bind="click: $parent.toggleShare"
-    span= I18n.t('calculator.share.show')
+  .controls
+    button.finish-share data-bind="click: $parent.toggleShare"
+      span data-bind="visible: $parent.shareVisible()" = I18n.t('calculator.share.hide')
+      span data-bind="visible: !$parent.shareVisible()" = I18n.t('calculator.share.show')
 
-  button.help help me
+    button.help data-bind="click: $parent.toggleFaq"
+      span data-bind="visible: !$parent.pathwayUpdating()" ?
+      img data-bind="visible: $parent.pathwayUpdating()" src="/images/spinner.gif"

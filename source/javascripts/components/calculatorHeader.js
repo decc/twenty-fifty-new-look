@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/calculator-header.html'],
+define(['knockout', 'text!/components/calculator-header.html', 'bindings/chart'],
   function(ko, html) {
 
   'use strict';
@@ -8,6 +8,7 @@ define(['knockout', 'text!/components/calculator-header.html'],
         navVisible = params.mainNavVisible;
 
     self.pathwayName = params.pathwayName;
+    self.pathway = params.pathway;
 
     self.toggleMainNav = function() {
       navVisible(!navVisible());
