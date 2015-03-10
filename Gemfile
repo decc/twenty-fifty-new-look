@@ -16,4 +16,5 @@ gem 'slim'
 gem 'bourbon'
 gem 'fontcustom'
 gem 'jshintrb'
+gem 'rdiscount'
 
