@@ -1,12 +1,13 @@
-nav.main-nav data-bind="tabs"
+nav.main-nav
 
   .top-level
     = image_tag "/images/logo.png", class: :logo
 
     = link_to I18n.t('calculator.menu.mine.link'), calculator_path
 
+    button data-bind="click: toggleSubnav" = I18n.t('calculator.menu.examples.link')
 
-  .secondary.tabs
+  .secondary
     = I18n.t('calculator.menu.examples.body')
 
     ul data-bind="foreach: exampleCategories"
