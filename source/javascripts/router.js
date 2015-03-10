@@ -24,10 +24,12 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
         var actionSection = document.querySelector('.pathway-category-tab-nav');
         pathway.setActionsFromPathwayString(pathway.values);
 
-        // TODO: check if calculator already made
-        if(hello != 4)
+        // check if calculator already made
+        var oldHash = arguments[0] || '';
+
+        if(oldHash.split('/')[0] !== 'calculator') {
           app.getPage('calculator', { pathway: pathway });
-        hello = 4;
+        }
 
       });
 
@@ -35,19 +37,13 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
         console.log('404');
       });
 
-      crossroads.addRoute('share', function() {
-        // TODO: make this open share tab
-        // but you can also share examples?
-        // maybe it doesn't need a route
-        // app.getPage('share', {});
-      });
-
-      var parseHash = function(newHash) {
-        crossroads.parse(newHash);
+      var parseHash = function(newHash, oldHash) {
+        crossroads.parse(newHash, [oldHash]);
       };
 
       hasher.initialized.add(parseHash);
       hasher.changed.add(parseHash);
+
       hasher.init();
 
       if(!window.location.hash) { hasher.setHash('home'); }
