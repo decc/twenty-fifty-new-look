@@ -3,9 +3,11 @@ nav.main-nav
   .top-level
     = image_tag "/images/logo.png", class: :logo
 
-    = link_to I18n.t('calculator.menu.mine.link'), calculator_path
+    = link_to I18n.t('calculator.menu.mine.link'), calculator_path, class: "tab-button", :'data-bind' => "click: closeSubnav"
 
-    button data-bind="click: toggleSubnav" = I18n.t('calculator.menu.examples.link')
+    button class="tab-button" data-bind="click: toggleSubnav, css: { active: navState() === 2 }"= I18n.t('calculator.menu.examples.link')
+
+    = link_to I18n.t('calculator.menu.guide'), home_path, class: "tab-button exit"
 
   .secondary
     = I18n.t('calculator.menu.examples.body')

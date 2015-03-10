@@ -15,6 +15,11 @@ define(['knockout', 'text!/components/main-nav.html', 'ajax', 'pathway', 'bindin
       self.navState(state);
       console.log(self.navState())
     };
+
+    self.closeSubnav = function() {
+      self.navState(1);
+      return true;
+    }
   };
 
   return {
