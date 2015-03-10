@@ -108,6 +108,7 @@ GEM
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    rdiscount (2.1.8)
     sass (3.4.12)
     slim (3.0.2)
       temple (~> 0.7.3)
@@ -145,6 +146,7 @@ DEPENDENCIES
   jshintrb
   middleman (~> 3.3.7)
   middleman-livereload
+  rdiscount
   sass
   slim
   tzinfo-data
