@@ -4,14 +4,16 @@ define(['knockout', 'text!/components/calculator-header.html', 'bindings/chart']
   'use strict';
 
   var ViewModel = function(params) {
-    var self = this,
-        navVisible = params.mainNavVisible;
+    var self = this;
+
+    var navState = params.navState;
 
     self.pathwayName = params.pathwayName;
     self.pathway = params.pathway;
 
     self.toggleMainNav = function() {
-      navVisible(!navVisible());
+      var state = (navState() >= 1) ? 0 : 1;
+      navState(state);
     };
   };
 
