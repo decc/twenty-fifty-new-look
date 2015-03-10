@@ -4,81 +4,61 @@ img.fixed-logo src="/images/logo.png"
 
   section.scrollable
     article
-      .col
-        p The UK is committed to reducing its greenhouse gas emissions by at least 80% by 2050, relative to 1990 levels.
-        p To do this we must decarbonise the UK economy while ensuring secure and affordable energy supplies.
+      .col = m 'guide.1'
       .col
         img src="/images/guide/screenshot.png"
 
   section.scrollable
     article
-      p How should this be done? The 2050 Calculator lets you take control and propose your own energy pathway for the country.
+      = m 'guide.2'
       img src="/images/guide/landscape.png"
 
   section.scrollable
     article
       .col
         img src="/images/guide/choices.png"
-      .col
-        p The calculator allows you to consider the choices and trade-offs we face. It covers all parts of the economy and all greenhouse gas emissions released in the UK.
+      .col=  m 'guide.3'
+
+  section.scrollable
+    article = m 'guide.4'
+
+  section.scrollable
+    article= m 'guide.5'
 
   section.scrollable
     article
-      p The calculator models what is thought to be physically and technically possible in forty-two different sectors. It is based on scientific and engineering data and was built in collaboration with a wide range of organisations from inside and outside of government.
-
-  section.scrollable
-    article
-      p
-        | The model, all its assumptions and the code for this interface are all available open source.
-        | &nbsp;
-        a href="http://github.com/decc/twenty-fifty" http://github.com/decc/twenty-fifty
-      p
-        | For more information go to:
-        | &nbsp;
-        a href="https://www.gov.uk/2050-pathways-analysis" https://www.gov.uk/2050-pathways-analysis
-
-  section.scrollable
-    article
-      h3 Let's get started...
-      p
-        | When you open the calculator for the first time you'll notice the 80% CO
-        sub 2
-        | emission reduction target at the top of the page.
+      = m 'guide.6'
       img src="/images/guide/header.png"
 
   section.scrollable
     article
       .col
-        p The sliders on the right hand side of the page can be used to adjust the emphasis and effort on choices and trade-offs for energy demand, supply and other factors. As these sliders are adjusted, the calculator will update it's forecast and update your progress in the reduction target bar.
-        p Use the "Demand", "Supply" and "Other" tabs to toggle between the available sliders.
+        = m 'guide.7'
         img src="/images/guide/target.png"
       .col
         img src="/images/guide/sliders.png"
 
   section.scrollable
-    article
-      .col style="width:35%"
+    article.slide8
+      .col
         img src="/images/guide/options.png"
-      .col style="width:65%"
-        p On the left hand side of the page there are 8 distinct areas representing various indicators that will be affected by your choices and trade-offs. These represent the effect on the supply and demand of energy and electricity as well as environmental and economical impacts.
-        p Click through each tab to see how your pathway affects these.
+      .col= m 'guide.8'
 
   section.scrollable
     article
-      .col
-        p For example pathways, use the menu button in the top left of the page to reveal the main menu, and click on "Example Pathways" to reveal a set of example pathways you are able to load into the calculator.
+      .col= m 'guide.9'
       .col
         img src="/images/guide/example-pathways.png"
 
   section.scrollable
     article
-      p Once you've hit the 80% reduction target use the "Finish & Share" button for an overview of your pathway results and options to to share your pathway with friends and colleagues.
+      = m 'guide.10'
       img src="/images/guide/overview.png"
 
   section.scrollable
     article
-      h1= I18n.t('guide.done.title')
-      = link_to I18n.t('guide.done.button'), calculator_path, class: :button
+      h2= t('guide.done.title')
+      = link_to t('guide.done.button'), calculator_path, class: :button
 
-= link_to I18n.t('guide.button'), calculator_path, class: "skip-guide"
+= link_to t('guide.button'), calculator_path, class: "skip-guide"
 
