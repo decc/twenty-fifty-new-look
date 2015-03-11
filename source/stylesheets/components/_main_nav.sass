@@ -1,9 +1,12 @@
-.main-nav
+main-nav
+  position: fixed
+  top: 0
+  left: 0
   @include col($nav-width)
   @include omega
 
+.main-nav
   height: 100vh
-
   color: #ffffff
 
   a
@@ -14,20 +17,37 @@
     @extend %plain-list
 
   .top-level
+    position: relative
     height: 100%
     @include col(50%)
     background: #2C313B
     padding: 2em 0
 
-    > ul
-      a
-        display: block
-        padding: 1em 0
-        &.active, &:hover
-          background: $color-highlight
-
     .logo
+      width: 90%
+
+    .tab-nav
+      margin-top: 1.5em
+
+    .tab-button
+      display: block
       width: 100%
+      padding: 20px 0 20px 1em
+      text-align: left
+      background: none
+      border: none
+
+      &:hover
+        background: $color-background-dark
+
+      &.active
+        background: $color-highlight
+
+    .exit
+      position: absolute
+      left: 0
+      bottom: 0
+      background: rgba(255, 255, 255, 0.05)
 
   .secondary
     height: 100%

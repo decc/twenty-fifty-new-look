@@ -12,7 +12,6 @@ define(['knockout', 'text!/components/pathway-sidebar.html', 'pathway', 'binding
     self.toggleOverview = params.toggleOverview;
     self.currentTabId = ko.observable(1);
 
-    /** Sets visible tab */
     self.setActiveTab = function(pathwayCategory) {
       self.currentTabId(pathwayCategory.id);
     };

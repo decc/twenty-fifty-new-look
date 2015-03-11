@@ -1,15 +1,51 @@
+.overview
+  overflow: hidden
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  background: #fff
+  @include transition(transform .3s ease-in-out)
+  left: 100%
+  height: 100%
+
+  &.active
+    @include transform(translatex(-100%))
+
+.pathway-actions-wrapper
+  overflow: auto
+  height: calc(100% - $header-height)
+
+
 .pathway-actions
   margin: 0
   padding: 0
   width: 100%
+  display: block
+  @include clearfix
+
 
   > li
     list-style: none
     margin: 0
     padding: 0
     width: 25%
+    float: left
+    padding: 10px
+    min-height: 80px
+    border-bottom: 1px dashed #ccc
+    @extend %vertical-centered
 
     .value
       padding: 2px .25em
       background: #ccc
+      text-align: center
+      width: 50px
+
+      &.high
+        background: #D53980
+        color: #fff
+      &.med
+        background: #E394B8
+        color: #fff
 

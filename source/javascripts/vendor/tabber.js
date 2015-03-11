@@ -50,11 +50,11 @@
       _tabButtonClicked: function(el){
         // work out which tab?
         var tabId = (el.getAttribute('data-tab') * 1),
-            tab = this.tabsAccessor()[tabId],
+            tab = this.tabsAccessor()[tabId - 1],
             oldTabId = this.getCurrentTab().id;
 
         // hide all the tabs
-        this._itterateTabs(function(tab){
+        this._iterateTabs(function(tab){
           tab.classList.remove('active');
         });
 
@@ -72,7 +72,7 @@
        * @private
        * @param {function} fn - callback
        */
-      _itterateTabs: function(fn){
+      _iterateTabs: function(fn){
         for(var i = 0, tabs = this.tabsAccessor(); i < tabs.length; i++){
           var tab = tabs[i];
           fn.call(this, tab, i);
@@ -86,9 +86,9 @@
       getCurrentTab: function(){
         var active = null;
 
-        this._itterateTabs(function(tab, i){
+        this._iterateTabs(function(tab, i){
           if(tab.classList.contains('active')){
-            active = {id: i, tab: tab};
+            active = {id: i+1, tab: tab};
           }
         });
 

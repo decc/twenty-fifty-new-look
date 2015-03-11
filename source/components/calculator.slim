@@ -1,18 +1,21 @@
 .viewport
+  main-nav params="navState: navState"
 
-  .wrapper data-bind="css: { 'with-nav': mainNavVisible }"
-    main-nav
+  .wrapper data-bind="css: { 'with-nav': navState() > 0, 'with-subnav': navState() === 2 }"
 
     .content-wrapper
-      calculator-header params="mainNavVisible: mainNavVisible, pathwayName: currentPathway().name"
+      calculator-header params="navState: navState, pathwayName: currentPathway().name, pathway: currentPathway"
 
       .content
+        = partial "components/partials/faq-overlay"
+
         .bit
-          header.cityscape
+          header.cityscape data-bind="visible: cityscapeVisible"
 
-          section.charts
-            charts-tabberoony params="pathway: currentPathway"
+          section#charts.charts
+            .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway } }"
 
+          section#share.share data-bind="visible: shareVisible(), component: { name: 'share', params: { pathway: currentPathway } }"
 
           .modal-overlay data-bind="visible: overlayVisible"
             .closer data-bind="click: hideOverlay" &times;

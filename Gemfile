@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 gem "middleman", "~>3.3.7"
 gem "middleman-livereload"
-gem 'middleman-imageoptim'
+# gem 'middleman-imageoptim'
 
 # For faster file watcher updates on Windows:
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
@@ -16,4 +16,5 @@ gem 'slim'
 gem 'bourbon'
 gem 'fontcustom'
 gem 'jshintrb'
+gem 'rdiscount'
 

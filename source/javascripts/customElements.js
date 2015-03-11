@@ -8,7 +8,7 @@ define(['knockout'], function(ko) {
    * @todo There must be a better way of doing this!
    */
 
-  ['main-nav', 'calculator-header', 'pathway-sidebar', 'all-pathway-actions', 'charts-tabberoony']
+  ['main-nav', 'calculator-header', 'pathway-sidebar', 'all-pathway-actions', 'chart-tabs']
   .forEach(function(c) {
     ko.components.register(c, {});
   });

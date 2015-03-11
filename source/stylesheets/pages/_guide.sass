@@ -1,18 +1,21 @@
 .guide
-  section
-    width: 50%
-    margin: auto
-    min-width: 600px
 
-    // Alternate image side
-    &:nth-of-type(2n)
-      .col
-        @include omega
-        float: right
+  section
+    padding: 15%
+    text-align: center
+    width: 100%
+
+    *
+      font-family: sans-serif
+      line-height: 1.6em
+
+  section:after
+    content: " "
+    clear: both
+    display: block
 
   article
-    h1,h2
-      text-align: left
+    h1, h2
       margin-bottom: 10px
       font-size: 1.5em
 
@@ -20,16 +23,26 @@
       @include col(50%)
       text-align: left
 
-      img
-        width: 100%
-        height: 100%
-        max-width: 300px
-        max-height: 300px
-        padding: 1em
+    img
+      width: 100%
+
+    a
+      color: $color-highlight
+      text-decoration: none
+
+      &.button
+        @extend .button
 
 .skip-guide
   @extend .button
   position: fixed
   bottom: 1em
   left: 1em
+
+.slide8
+  .col
+    &:first-of-type
+      width: 35%
+    &:last-of-type
+      width: 65%
 

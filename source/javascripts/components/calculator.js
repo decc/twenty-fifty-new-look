@@ -12,10 +12,21 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
 
     var self = this;
 
+    // Main navigation state.
+    // 0: closed, 1: primary, 2: secondary
+    self.navState = ko.observable(0);
+
     self.overviewVisible = ko.observable(false);
     self.mainNavVisible = ko.observable(false);
+    self.subNavVisible = ko.observable(false);
+    self.shareVisible = ko.observable(false);
+    self.faqVisible = ko.observable(false);
 
+    window.onresize = function () {
+      self.cityscapeVisible(window.innerHeight > 768);
+    };
 
+    self.cityscapeVisible = ko.observable(window.innerHeight > 768);
     self.overlayVisible = ko.observable(false);
     self.overlayContent = ko.observable();
 
@@ -30,9 +41,8 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
       self.overlayVisible(false);
     };
 
-
     self.currentPathway = ko.observable(params.pathway);
-
+    self.pathwayUpdating = params.pathway.updating;
 
     // self.pathway = new Pathway();
     self.pathwayCategories = Pathway.categories();
@@ -52,6 +62,16 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
       toggleObservableBool(self, 'mainNavVisible');
     }
 
+    /** toggle share page visibility */
+    self.toggleShare = function() {
+      toggleObservableBool(self, 'shareVisible');
+    }
+
+    /** toggle faq page visibility */
+    self.toggleFaq = function() {
+      toggleObservableBool(self, 'faqVisible');
+    }
+
     /** set active tab */
     self.setActiveTab = function(tab) {
       self.activeTab(id)
@@ -61,7 +81,7 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
 
   return {
     viewModel: ViewModel,
-    template: html
+    template: html,
   };
 });
 

@@ -1,13 +1,13 @@
 {
   "checksum": {
-    "previous": "4c01bef4688b72897b47fe36f624e72efde335d0a7b2bb6dd43e56630743d9ff",
-    "current": "4c01bef4688b72897b47fe36f624e72efde335d0a7b2bb6dd43e56630743d9ff"
+    "previous": "5dfda172e740caff034232c56aa9c5fb82bd1f6643c48cb1d49aa2e0a33af4b6",
+    "current": "5dfda172e740caff034232c56aa9c5fb82bd1f6643c48cb1d49aa2e0a33af4b6"
   },
   "fonts": [
-    "source/fonts/icons_4c01bef4688b72897b47fe36f624e72e.ttf",
-    "source/fonts/icons_4c01bef4688b72897b47fe36f624e72e.svg",
-    "source/fonts/icons_4c01bef4688b72897b47fe36f624e72e.woff",
-    "source/fonts/icons_4c01bef4688b72897b47fe36f624e72e.eot"
+    "source/fonts/icons_5dfda172e740caff034232c56aa9c5fb.ttf",
+    "source/fonts/icons_5dfda172e740caff034232c56aa9c5fb.svg",
+    "source/fonts/icons_5dfda172e740caff034232c56aa9c5fb.woff",
+    "source/fonts/icons_5dfda172e740caff034232c56aa9c5fb.eot"
   ],
   "glyphs": {
     "air": {
@@ -54,17 +54,33 @@
       "codepoint": 61705,
       "source": "source/icons/energy.svg"
     },
-    "energysecurity": {
-      "codepoint": 61706,
-      "source": "source/icons/energysecurity.svg"
+    "energy-security": {
+      "codepoint": 61713,
+      "source": "source/icons/energy-security.svg"
+    },
+    "envelope": {
+      "codepoint": 61714,
+      "source": "source/icons/envelope.svg"
+    },
+    "facebook": {
+      "codepoint": 61715,
+      "source": "source/icons/facebook.svg"
     },
     "flows": {
       "codepoint": 61707,
       "source": "source/icons/flows.svg"
     },
+    "google-plus": {
+      "codepoint": 61716,
+      "source": "source/icons/google-plus.svg"
+    },
     "info": {
       "codepoint": 61708,
       "source": "source/icons/info.svg"
+    },
+    "linkedin": {
+      "codepoint": 61717,
+      "source": "source/icons/linkedin.svg"
     },
     "map": {
       "codepoint": 61709,
@@ -77,6 +93,14 @@
     "overview": {
       "codepoint": 61711,
       "source": "source/icons/overview.svg"
+    },
+    "share-alt": {
+      "codepoint": 61718,
+      "source": "source/icons/share-alt.svg"
+    },
+    "twitter": {
+      "codepoint": 61719,
+      "source": "source/icons/twitter.svg"
     }
   },
   "options": {

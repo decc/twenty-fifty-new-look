@@ -1,3 +1,5 @@
+require 'rdiscount'
+
 ###
 # Page options, layouts, aliases and proxies
 ###
@@ -5,7 +7,7 @@
 # Per-page layout changes:
 #
 # With no layout
-page "/components/**.*.html", layout: false
+page "/components/*", layout: false
 #
 # With alternative layout
 # page "/path/to/file.html", :layout => :otherlayout
@@ -22,6 +24,16 @@ page "/components/**.*.html", layout: false
 ###
 # Helpers
 ###
+
+helpers do
+  def markdown(string)
+    RDiscount.new(string).to_html
+  end
+
+  def m(i18n)
+    markdown(I18n.t(i18n))
+  end
+end
 
 # Automatic image dimensions on image_tag helper
 # activate :automatic_image_sizes
@@ -48,16 +60,32 @@ set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 set :images_dir, 'images'
 
+module RequireJS
+    class << self
+        def registered(app)
+            app.after_build do |builder|
+                exec('node r.js -o build/javascripts/app.build.js');
+            end
+        end
+        alias :included :registered
+    end
+end
+
+::Middleman::Extensions.register(:requirejs, RequireJS)
+
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment
   activate :minify_css
 
   # Minify Javascript on build
-  activate :minify_javascript
+  # activate :minify_javascript
+  #
+  # # build js
+  # activate :requirejs
 
   # Enable cache buster
-  activate :asset_hash
+  # activate :asset_hash
 
   # Or use a different image path
   # set :http_prefix, "/Content/images/"
@@ -65,4 +93,3 @@ configure :build do
   # optimise image files on build
   activate :imageoptim
 end
-
