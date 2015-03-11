@@ -8,7 +8,14 @@
   padding: 10%
   overflow: auto
   color: #ffffff
-  z-index: 25
+  z-index: -10
+  opacity: 0
+  @include transition(opacity .3s, z-index 0s .3s)
+
+  &.is-active
+    z-index: 10
+    opacity: 1
+    @include transition(opacity .3s)
 
   .social
     @extend %inline-list
@@ -16,8 +23,6 @@
     a
       color: #ffffff
       text-decoration: none
-      &:hover
-        text-decoration: underline
 
   .closer
     position: absolute

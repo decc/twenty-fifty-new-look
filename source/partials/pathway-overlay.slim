@@ -1,4 +1,4 @@
-.modal-overlay data-bind="visible: overlayVisible"
+.modal-overlay data-bind="css: { 'is-active': overlayVisible() }"
   .closer data-bind="click: hideOverlay" &times;
   h2 data-bind="text: overlayAction().name"
   ul.social
