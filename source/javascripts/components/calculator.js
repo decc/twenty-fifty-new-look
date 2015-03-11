@@ -64,12 +64,22 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
 
     /** toggle share page visibility */
     self.toggleShare = function() {
-      toggleObservableBool(self, 'shareVisible');
+      if(!self.faqVisible()){
+        toggleObservableBool(self, 'shareVisible');
+      } else {
+        toggleObservableBool(self, 'faqVisible');
+        toggleObservableBool(self, 'shareVisible');
+      }
     }
 
     /** toggle faq page visibility */
     self.toggleFaq = function() {
-      toggleObservableBool(self, 'faqVisible');
+      if(!self.shareVisible()){
+        toggleObservableBool(self, 'faqVisible');
+      } else {
+        toggleObservableBool(self, 'shareVisible');
+        toggleObservableBool(self, 'faqVisible');
+      }
     }
 
     /** set active tab */
