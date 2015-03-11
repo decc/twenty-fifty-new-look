@@ -35,7 +35,6 @@
 
 .controls-sidebar
   @include col($right-col-width)
-  min-width: $right-col-min-width
   @include omega
   height: 100%
   margin-bottom: 100px
@@ -62,6 +61,7 @@
         .option
           .tooltip
             opacity: 1
+            z-index: 100
 
       div
         overflow: auto
@@ -105,6 +105,7 @@
           width: 90%
           transition: all 0.2s linear
           opacity: 0
+          z-index: -1
           &:after
             content: ""
             position: absolute

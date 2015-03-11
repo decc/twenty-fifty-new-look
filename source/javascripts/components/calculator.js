@@ -23,10 +23,10 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
     self.faqVisible = ko.observable(false);
 
     window.onresize = function () {
-      self.cityscapeVisible(window.innerHeight > 768);
+      self.cityspaceVisible(window.innerWidth > 768);
     };
 
-    self.cityscapeVisible = ko.observable(window.innerHeight > 768);
+    self.cityscapeVisible = ko.observable(window.innerWidth > 768);
     self.overlayVisible = ko.observable(false);
     self.overlayContent = ko.observable();
 
@@ -85,6 +85,11 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
     /** set active tab */
     self.setActiveTab = function(tab) {
       self.activeTab(id)
+    }
+
+    /** toggle city scape */
+    self.toggleCity = function(){
+      toggleObservableBool(self, 'cityscapeVisible');
     }
 
   };
