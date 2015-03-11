@@ -4,12 +4,46 @@ en:
     title: "2050 Energy calculator"
     body: "By the year 2050 we need to dramatically change the way we produce and consume energy.<br>Government targets require us to reduce emmissions to 20% of 1990 levels."
     button: "Start"
+
   guide:
-    welcome:
-      title: "Welcome"
-      body: "lalala"
+    '1': "The UK is committed to reducing its greenhouse gas emissions by at least 80% by 2050, relative to 1990 levels.
+
+
+      To do this we must decarbonise the UK economy while ensuring secure and affordable energy supplies."
+
+    '2': "How should this be done? The 2050 Calculator lets you take control and propose your own energy pathway for the country."
+
+    '3': "The calculator allows you to consider the choices and trade-offs we face. It covers all parts of the economy and all greenhouse gas emissions released in the UK."
+
+    '4': "The calculator models what is thought to be physically and technically possible in forty-two different sectors. It is based on scientific and engineering data and was built in collaboration with a wide range of organisations from inside and outside of government."
+
+    '5': "The model, all its assumptions and the code for this interface are all available open source.
+      [http://github.com/decc/twenty-fifty](http://github.com/decc/twenty-fifty)
+
+
+      For more information go to:
+      [https://www.gov.uk/2050-pathways-analysis](https://www.gov.uk/2050-pathways-analysis)"
+
+    '6': "### Let's get started...
+
+      When you open the calculator for the first time you'll notice the 80% CO<sub>2</sub> emission reduction target at the top of the page."
+
+    '7': "The sliders on the right hand side of the page can be used to adjust the emphasis and effort on choices and trade-offs for energy demand, supply and other factors. As these sliders are adjusted, the calculator will update it's forecast and update your progress in the reduction target bar.
+
+
+      Use the \"Demand\", \"Supply\" and \"Other\" tabs to toggle between the available sliders."
+
+    '8': "On the left hand side of the page there are 8 distinct areas representing various indicators that will be affected by your choices and trade-offs. These represent the effect on the supply and demand of energy and electricity as well as environmental and economical impacts.
+
+
+      Click through each tab to see how your pathway affects these."
+
+    '9': "For example pathways, use the menu button in the top left of the page to reveal the main menu, and click on \"Example Pathways\" to reveal a set of example pathways you are able to load into the calculator."
+
+    '10': "Once you've hit the 80% reduction target use the \"Finish & Share\" button for an overview of your pathway results and options to to share your pathway with friends and colleagues."
+
     done:
-      title: "You're all set to go..."
+      title: "You're all set to go!"
       body: 'lorem'
       button: 'Start'
     button: "Skip guide"
@@ -31,14 +65,11 @@ en:
     menu:
       mine:
         link: "My 2050 pathway"
-        body: "bla"
+        body: ""
       examples:
         link: "Example pathways"
         body: "You can apply the following pre-sets and jump back to your own pathway at any time."
-      help:
-        link: "Help"
-        body: "blabla"
-      exit: "Exit 2050 pathways calculator"
+      guide: "Return to guide"
 
     charts:
       energy:

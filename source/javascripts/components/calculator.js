@@ -12,8 +12,13 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
 
     var self = this;
 
+    // Main navigation state.
+    // 0: closed, 1: primary, 2: secondary
+    self.navState = ko.observable(0);
+
     self.overviewVisible = ko.observable(false);
     self.mainNavVisible = ko.observable(false);
+    self.subNavVisible = ko.observable(false);
     self.shareVisible = ko.observable(false);
     self.faqVisible = ko.observable(false);
 
@@ -36,11 +41,8 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
       self.overlayVisible(false);
     };
 
-
     self.currentPathway = ko.observable(params.pathway);
-
     self.pathwayUpdating = params.pathway.updating;
-
 
     // self.pathway = new Pathway();
     self.pathwayCategories = Pathway.categories();
@@ -62,12 +64,22 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
 
     /** toggle share page visibility */
     self.toggleShare = function() {
-      toggleObservableBool(self, 'shareVisible');
+      if(!self.faqVisible()){
+        toggleObservableBool(self, 'shareVisible');
+      } else {
+        toggleObservableBool(self, 'faqVisible');
+        toggleObservableBool(self, 'shareVisible');
+      }
     }
 
     /** toggle faq page visibility */
     self.toggleFaq = function() {
-      toggleObservableBool(self, 'faqVisible');
+      if(!self.shareVisible()){
+        toggleObservableBool(self, 'faqVisible');
+      } else {
+        toggleObservableBool(self, 'shareVisible');
+        toggleObservableBool(self, 'faqVisible');
+      }
     }
 
     /** set active tab */
@@ -87,3 +99,4 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
     template: html,
   };
 });
+

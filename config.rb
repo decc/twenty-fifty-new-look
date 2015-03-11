@@ -1,3 +1,5 @@
+require 'rdiscount'
+
 ###
 # Page options, layouts, aliases and proxies
 ###
@@ -23,12 +25,22 @@ page "/components/*", layout: false
 # Helpers
 ###
 
+helpers do
+  def markdown(string)
+    RDiscount.new(string).to_html
+  end
+
+  def m(i18n)
+    markdown(I18n.t(i18n))
+  end
+end
+
 # Automatic image dimensions on image_tag helper
 # activate :automatic_image_sizes
 
 # Reload the browser automatically whenever files change
 configure :development do
-  # activate :livereload, :host => "localhost"
+  activate :livereload, :host => "localhost"
 end
 
 activate :i18n

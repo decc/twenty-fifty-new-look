@@ -47,8 +47,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         .attr('opacity', '0.6')
         .attr("y", 0)
         .attr("height", self.height)
-        .attr("x", function(d) { return x(0); })
-        .attr("width", function(d) { return self.width - x(d); });
+        .attr("x", x(0))
+        .attr("width", function(d) { return x(d); });
 
     bars.transition()
         .attr("x", function(d) { return x(0); })

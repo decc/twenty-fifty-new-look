@@ -1,34 +1,22 @@
-nav.main-nav data-bind="tabs"
+nav.main-nav
 
   .top-level
     = image_tag "/images/logo.png", class: :logo
 
-    ul.tab-nav
+    = link_to I18n.t('calculator.menu.mine.link'), calculator_path, class: "tab-button", :'data-bind' => "click: closeSubnav"
+
+    button class="tab-button" data-bind="click: toggleSubnav, css: { active: navState() === 2 }"= I18n.t('calculator.menu.examples.link')
+
+    = link_to I18n.t('calculator.menu.guide'), home_path, class: "tab-button exit"
+
+  .secondary
+    = I18n.t('calculator.menu.examples.body')
+
+    ul data-bind="foreach: exampleCategories"
       li
-        button.tab-button data-tab="1" data-bind="click: setActiveTab, css: { 'active': parseInt(currentTabId(), 10) === 1 }" = I18n.t('calculator.menu.mine.link')
-      li
-        button.tab-button data-tab="2" data-bind="click: setActiveTab, css: { 'active': parseInt(currentTabId(), 10) === 2 }" = I18n.t('calculator.menu.examples.link')
-      li
-        button.tab-button data-tab="3" data-bind="click: setActiveTab, css: { 'active': parseInt(currentTabId(), 10) === 3 }" = link_to I18n.t('calculator.menu.help.link')
+        h3 data-bind="text: $data"
 
-    = link_to I18n.t('calculator.menu.exit'), home_path, class: "tab-button exit"
-
-  .secondary.tabs
-    .tab.active
-      = I18n.t('calculator.menu.mine.body')
-      = link_to I18n.t('calculator.menu.mine.link'), calculator_path
-
-    .tab
-      = I18n.t('calculator.menu.examples.body')
-
-      ul data-bind="foreach: exampleCategories"
-        li
-          h3 data-bind="text: $data"
-
-          ul data-bind="foreach: $parent.pathway.examples($data)"
-            li
-              a data-bind="text: name, attr: { href: '/#/calculator/' + slug }, event: { click: $root.reload }"
-
-    .tab
-      = I18n.t('calculator.menu.help.body')
+        ul data-bind="foreach: $parent.pathway.examples($data)"
+          li
+            a data-bind="text: name, attr: { href: '/#/calculator/' + slug }, event: { click: $root.reload }"
 

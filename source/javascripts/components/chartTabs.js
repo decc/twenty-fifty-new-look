@@ -25,13 +25,16 @@ define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartP
       },
       // { "id": 3, "name": "emissions", "title": "Emissions" },
       // { "id": 4, "name": "flows", "title": "Flows" },
-      // { "id": 5, "name": "map", "title": "Map" },
+      { "id": 5, "name": "map", "title": "Map", "charts": [
+          { "id": 1, "name": "MapChart", "title": "Map" }
+        ]
+      },
       // { "id": 6, "name": "air", "title": "Air" },
       // { "id": 7, "name": "energy-security", "title": "Energy Security" },
       { "id": 8, "name": "costs", "title": "Costs", "charts": [
           { "id": 1, "name": "CostsContextChart", "title": "In Context" },
           { "id": 2, "name": "CostsComparedChart", "title": "Compared" },
-          { "id": 3, "name": "CostsContextChart", "title": "Sensitivity" }
+          { "id": 3, "name": "CostsSensitivityChart", "title": "Sensitivity" }
         ]
       }
     ]
@@ -49,7 +52,7 @@ define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartP
       { "id": 10, "name": "overview", "title": "Overview" }
     ];
 
-    self.currentTabId = ko.observable(8);
+    self.currentTabId = ko.observable(5);
 
     /** Sets visible tab */
     self.setActiveTab = function(chart) {

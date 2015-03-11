@@ -1,4 +1,4 @@
-define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySupply', 'charts/electricityDemand', 'charts/electricitySupply', 'charts/costsContext', 'charts/costsCompared', 'charts/costsSensitivity'], function(ko, SummaryChart, EnergyDemandChart, EnergySupplyChart, ElectricityDemandChart, ElectricitySupplyChart, CostsContextChart, CostsComparedChart, CostsSensitivityChart) {
+define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySupply', 'charts/electricityDemand', 'charts/electricitySupply', 'charts/map', 'charts/costsContext', 'charts/costsCompared', 'charts/costsSensitivity', 'charts/costsSensitivityComponents'], function(ko, SummaryChart, EnergyDemandChart, EnergySupplyChart, ElectricityDemandChart, ElectricitySupplyChart, MapChart, CostsContextChart, CostsComparedChart, CostsSensitivityChart, CostsSensitivityComponentsChart) {
   'use strict';
 
   ko.bindingHandlers.chart = {
@@ -6,7 +6,7 @@ define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySuppl
       var name = valueAccessor();
       var data = allBindings.get('data');
       var params = allBindings.get('params') || {};
-      console.log(data())
+
       //            ||
       // TODO: this \/
       self.chart = eval("new " + name);
@@ -17,7 +17,14 @@ define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySuppl
         var containerStyle = window.getComputedStyle(element);
         var width = parseInt(containerStyle.width, 10) - parseInt(containerStyle.paddingLeft, 10) - parseInt(containerStyle.paddingRight, 10);
         var height = parseInt(containerStyle.height, 10) - parseInt(containerStyle.paddingTop, 10) - parseInt(containerStyle.paddingBottom, 10);
-        element.chart.draw(data()[name], width, height);
+
+        if(typeof data === "object") {
+          // Multiple pathway chart
+          element.chart.draw(data, width, height);
+        } else {
+          // Single pathway chart
+          element.chart.draw(data()[name], width, height);
+        }
       });
     },
     update: function(element, valueAccessor, allBindings, vm, context) {
@@ -28,7 +35,13 @@ define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySuppl
       var width = parseInt(containerStyle.width, 10) - parseInt(containerStyle.paddingLeft, 10) - parseInt(containerStyle.paddingRight, 10);
       var height = parseInt(containerStyle.height, 10) - parseInt(containerStyle.paddingTop, 10) - parseInt(containerStyle.paddingBottom, 10);
 
-      element.chart.draw(data()[name], width, height);
+      if(typeof data === "object") {
+        // Multiple pathway chart
+        element.chart.draw(data, width, height);
+      } else {
+        // Single pathway chart
+        element.chart.draw(data()[name], width, height);
+      }
     }
   };
 
