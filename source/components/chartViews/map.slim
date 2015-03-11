@@ -1,1 +1,15 @@
-.chart.map data-bind="chart: chart.name, data: data, params: { margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
+.map
+  section.col
+    h2.title Illustration of scale of land and sea use in 2050 (positions are arbitrary)
+
+    .chart data-bind="chart: chart.name, data: data, params: { margin: { top: 0, right: 0, bottom: 0, left: 0 }, autoSize: true }"
+      img.map-image src="/images/uk-map.png"
+
+  section.col
+    h2.title Illustration of the number of thermal power stations in 2050 (scales and positions are arbitrary)
+
+    ul.thermal data-bind="foreach: thermalData"
+      li data-bind="attr: { class: 'icon-air-before' }"
+        span.value data-bind="text: value"
+        | &nbsp;&times;&nbsp;
+        span.name data-bind="text: key"

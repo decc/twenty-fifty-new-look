@@ -20,6 +20,8 @@ define([], function() {
         ElectricityDemandChart: this.electricityDemand(),
         ElectricitySupplyChart: this.electricitySupply(),
 
+        FlowsChart: this.flows(),
+
         MapChart: this.map(),
 
         CostsContextChart: this.costsContext(),
@@ -29,24 +31,82 @@ define([], function() {
       }
     },
 
+    energyDemandUnused: function() {
+      return ["Total Use", "Food consumption [UNUSED]"];
+    },
+
+    energySupplyUnused: function() {
+      return ["Total Primary Supply", "Electricity oversupply (imports)"];
+    },
+
+    energyEmissionsUnused: function() {
+      return [];
+    },
+
     // CO2 reduction overview chart
     summary: function() {
       return this.data.ghg.percent_reduction_from_1990;
     },
 
     overview: function() {
-      var data = this.data.ghg;
+      var data = {
+        "demand": this.data.demand,
+        "supply": this.data.supply,
+        "emissions": this.data.ghg
+      };
 
-      // Calculates total of all GHGs at 2050
-      var total = 0;
+      // Data organised by chart -> date
+      var overviewYearlyData = {
+        "demand": {
+          "2010": [], "2015": [], "2020": [], "2025": [], "2030": [], "2035": [], "2040": [], "2045": [], "2050": []
+        },
+        "supply": {
+          "2010": [], "2015": [], "2020": [], "2025": [], "2030": [], "2035": [], "2040": [], "2045": [], "2050": []
+        },
+        "emission": {
+          "2010": [], "2015": [], "2020": [], "2025": [], "2030": [], "2035": [], "2040": [], "2045": [], "2050": []
+        }
+      };
 
-      for(var cost in data) {
-        if(typeof data[cost] === "object") {
-          total += data[cost][data[cost].length - 1];
+      for(var ghg in ghgs) {
+        // Loop data points of each GHG
+        for(var i = 0; i < ghgs[ghg].length; i++) {
+          var value = ghgs[ghg][i];
+          var date = 2010 + i * 5;
+
+          overviewYearlyData["emission"][date].push({ key: ghg, value: Math.abs(value) });
         }
       }
 
-      return total;
+      for(var topic in data)
+        var topic = data[topic]
+        for(var demand in topic) {
+          // Don't parse unused/total layers
+          if(!energyDemandUnused().some(function(skip){ return demand === skip })) {
+            // Loop data points of each GHG
+            for(var i = 0; i < data[demand].length; i++) {
+              var value = data[demand][i];
+              var date = 2010 + i * 5;
+
+              overviewYearlyData["demand"][date].push({ key: demand, value: Math.abs(value) });
+            }
+          }
+        }
+
+      for(var supply in supplies) {
+        // Don't parse unused/total layers
+        if(!energySupplyUnused().some(function(skip){ return supply === skip })) {
+          // Loop data points of each GHG
+          for(var i = 0; i < supplies[supply].length; i++) {
+            var value = supplies[supply][i];
+            var date = 2010 + i * 5;
+
+            overviewYearlyData["supply"][date].push({ key: supply, value: Math.abs(value) });
+          }
+        }
+      }
+
+      return overviewYearlyData;
     },
 
     // Generic stacked area vs line chart
@@ -86,7 +146,7 @@ define([], function() {
       var secondaryData = this.data.primary_energy_supply;
 
       var lineData = secondaryData["Total Primary Supply"];
-      var skipLayers = ["Total Use", "Food consumption [UNUSED]"];
+      var skipLayers = this.energyDemandUnused();
       return this.areaVsLine(primaryData, lineData, skipLayers);
     },
 
@@ -95,7 +155,7 @@ define([], function() {
       var secondaryData = this.data.final_energy_demand;
 
       var lineData = secondaryData["Total Use"];
-      var skipLayers = ["Total Primary Supply", "Electricity oversupply (imports)"];
+      var skipLayers = this.energySupplyUnused();
       return this.areaVsLine(primaryData, lineData, skipLayers);
     },
 
@@ -116,6 +176,55 @@ define([], function() {
       var lineData = secondaryData["Total"];
       var skipLayers = ["Total generation supplied to grid", "Tidal [UNUSED - See III.c]"];
       return this.areaVsLine(primaryData, lineData, skipLayers);
+    },
+
+
+    flows: function() {
+      var data = this.data.sankey;
+
+      var nodes = {};
+      var links = [];
+
+      // Populate node object
+      // Keys: names for searching
+      // Values: IDs for sankey
+      var count = 0;
+      data.forEach(function(d) {
+        // Set any source node once and iterate counter
+        if(!nodes[d[0]]) {
+          nodes[d[0]] = count;
+          count++;
+        }
+
+        // Set any target node once and iterate counter
+        if(!nodes[d[2]]) {
+          nodes[d[2]] = count;
+          count++;
+        }
+      })
+
+      // Populate links object
+      data.forEach(function(d) {
+        if(d[1] === 0) {
+          return true;
+        }
+
+        links.push({
+          "source": nodes[d[0]],
+          "target": nodes[d[2]],
+          "value": d[1]
+        })
+      })
+
+      // Convert nodes object to array of objects
+      var nodes = Object.keys(nodes).map(function(d) { return { "name": d }; });
+
+      var data = {
+        nodes: nodes,
+        links: links
+      };
+
+      return data;
     },
 
 
@@ -145,6 +254,14 @@ define([], function() {
       };
 
       data = {
+        thermal: [
+          { "key": labels["III.d"], "icon": "geothermal", "value": Math.ceil(data["III.d"]) },
+          { "key": labels["II.a"], "icon": "nuclear", "value": Math.ceil(data["II.a"]) },
+          { "key": labels["VII.c"], "icon": "gas-standby", "value": Math.ceil(data["VII.c"]) },
+          { "key": labels["I.b"], "icon": "coal-gas-biomass-css", "value": Math.ceil(data["I.b"]) },
+          { "key": labels["I.a"], "icon": "without-css", "value": Math.ceil(data["I.a"]) },
+          { "key": labels["VI.b"], "icon": "waste-conversion", "value": Math.ceil(data["VI.b"]) }
+        ],
         land: [
           { "key": labels["III.b"], "value": data["III.b"] },
           { "key": labels["IV.b"], "value": data["IV.b"] },
@@ -154,25 +271,19 @@ define([], function() {
           { "key": labels["VI.a.Forestry"], "value": data["VI.a.Forestry"] },
           { "key": labels["VI.a.Biocrop"], "value": data["VI.a.Biocrop"] }
         ],
-        "wave": 240.99441907661074,
-        "III.a.1": 724.0079999999999,
-        "III.b": 60.54545454545453,
-        "IV.a": 0,
-        "IV.b": 39.954878820088204,
-        "IV.c": 0,
-        "VI.a.Biocrop": 23849.5728797235,
-        "III.a.2": 3240,
-        "III.c.TidalStream": 380.51750380517524,
-        "III.c.TidalRange": 525.8928571428571,
-        "VI.c": 0,
-        "V.b": 19963.495322838233,
-        "VII.a": 214.73339506918438,
-        "I.a": 0,
-        "I.b": 20.61666666666667,
-        "II.a": 10.453333333333335,
-        "III.d": 0,
-        "VII.c": 7.465371722718342,
-        "VI.b": 103.29001860465115
+        offshore: [
+          { "key": labels["III.a.2"], "value": data["III.a.2"] },
+          { "key": labels["VI.c"], "value": data["VI.c"] },
+          { "key": labels["III.c.TidalStream"], "value": data["III.c.TidalStream"] },
+          { "key": labels["III.c.TidalRange"], "value": data["III.c.TidalRange"] }
+        ],
+        imports: [
+          { "key": labels["VII.a"], "value": data["VII.a"] },
+          { "key": labels["V.b"], "value": data["V.b"] }
+        ],
+        wave: [
+          { "key": "wave", "value": data["wave"] }
+        ]
       };
 
       return data;

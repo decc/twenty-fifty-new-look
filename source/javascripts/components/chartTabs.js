@@ -24,7 +24,10 @@ define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartP
         ]
       },
       // { "id": 3, "name": "emissions", "title": "Emissions" },
-      // { "id": 4, "name": "flows", "title": "Flows" },
+      { "id": 4, "name": "flows", "title": "Flows", "viewmodel": "simple", "charts": [
+          { "id": 1, "name": "FlowsChart", "title": "Flows" }
+        ]
+      },
       { "id": 5, "name": "map", "title": "Map", "charts": [
           { "id": 1, "name": "MapChart", "title": "Map" }
         ]
@@ -35,6 +38,10 @@ define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartP
           { "id": 1, "name": "CostsContextChart", "title": "In Context" },
           { "id": 2, "name": "CostsComparedChart", "title": "Compared" },
           { "id": 3, "name": "CostsSensitivityChart", "title": "Sensitivity" }
+        ]
+      },
+      { "id": 9, "name": "overview", "title": "Overview", "charts": [
+          { "id": 1, "name": "OverviewChart", "title": "Overview" }
         ]
       }
     ]
@@ -52,7 +59,7 @@ define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartP
       { "id": 10, "name": "overview", "title": "Overview" }
     ];
 
-    self.currentTabId = ko.observable(5);
+    self.currentTabId = ko.observable(9);
 
     /** Sets visible tab */
     self.setActiveTab = function(chart) {

@@ -13,6 +13,8 @@ define(['d3'], function(d3) {
     self.outerHeight;
 
     self.hasAxis;
+
+    self.drawParams = {};
   };
 
   Chart.colourGradients = function() {
@@ -65,6 +67,8 @@ define(['d3'], function(d3) {
       self.height = self.outerHeight - self.margin.top - self.margin.bottom;
 
       self.hasAxis = args.hasAxis || false;
+
+      self.drawParams = args.drawParams || false;
 
       self.svg = d3.select(self.element).append('svg')
           // .attr("preserveAspectRatio", "xMinYMin meet")

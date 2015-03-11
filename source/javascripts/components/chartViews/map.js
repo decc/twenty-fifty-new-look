@@ -7,6 +7,8 @@ define(['knockout', 'text!/components/chartViews/map.html'],
 
     self.chart = args.charts[0];
     self.data = args.data;
+
+    self.thermalData = args.data()[args.charts[0].name]["thermal"]
   };
 
   return {
