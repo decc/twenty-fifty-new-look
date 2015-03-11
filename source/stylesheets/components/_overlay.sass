@@ -10,8 +10,19 @@
   color: #ffffff
   z-index: 25
 
+  .social
+    @extend %inline-list
+    margin-bottom: 2em
+    a
+      color: #ffffff
+      text-decoration: none
+      &:hover
+        text-decoration: underline
+
   .closer
     position: absolute
     top: 1em
     right: 1em
     cursor: pointer
+    font-size: 50px
+

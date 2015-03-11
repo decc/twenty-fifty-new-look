@@ -23,3 +23,12 @@
     display: table-cell
     vertical-align: middle
 
+%inline-list
+  @extend %plain-list
+
+  li
+    display: inline-block
+    margin-right: 1em
+    &:last-of-type
+      margin-right: 0
+
