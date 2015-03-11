@@ -9,13 +9,13 @@
       .content
         = partial "partials/faq-overlay"
 
-        section#share.share data-bind="visible: shareVisible(), component: { name: 'share', params: { pathway: currentPathway } }"
+        section#share.share data-bind="css: { 'is-active': shareVisible() }, component: { name: 'share', params: { pathway: currentPathway } }"
 
         .bit
           header.cityscape data-bind="visible: cityscapeVisible"
 
           section#charts.charts
-            .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway } }"
+            .chart-tabs-container data-bind="component: { name: 'chart-tabs', params: { pathway: currentPathway } }"
 
         = partial "partials/pathway-overlay"
 
