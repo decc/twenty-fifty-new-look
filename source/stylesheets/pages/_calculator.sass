@@ -5,18 +5,20 @@
   position: relative
 
 .wrapper
-  @include col(150%)
-  @include transform(translatex($nav-width * -1))
+  @include col(100%)
+  @include transform(translatex(0))
   @include transition(transform .3s ease-in-out)
   @include omega
   &.with-nav
-    @include transform(translatex(0))
+    @include transform(translatex($nav-width / 2))
+  &.with-subnav
+    @include transform(translatex($nav-width))
 
 .cityscape
   height: 200px
 
 .content-wrapper
-  @include col(100% - $nav-width)
+  @include col(100%)
   @include omega
 
 .content

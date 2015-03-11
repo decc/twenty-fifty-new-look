@@ -12,8 +12,13 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
 
     var self = this;
 
+    // Main navigation state.
+    // 0: closed, 1: primary, 2: secondary
+    self.navState = ko.observable(0);
+
     self.overviewVisible = ko.observable(false);
     self.mainNavVisible = ko.observable(false);
+    self.subNavVisible = ko.observable(false);
     self.shareVisible = ko.observable(false);
     self.faqVisible = ko.observable(false);
 
@@ -36,11 +41,8 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
       self.overlayVisible(false);
     };
 
-
     self.currentPathway = ko.observable(params.pathway);
-
     self.pathwayUpdating = params.pathway.updating;
-
 
     // self.pathway = new Pathway();
     self.pathwayCategories = Pathway.categories();
@@ -92,3 +94,4 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
     template: html,
   };
 });
+

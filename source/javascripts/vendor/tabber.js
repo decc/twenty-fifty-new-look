@@ -17,8 +17,6 @@
 
     /** @memberof Tabber */
     Tabber.prototype = {
-
-
       navAccessor: function() {
         return this.el.querySelector('.tab-nav');
       },
