@@ -1,0 +1,9 @@
+.modal-overlay data-bind="visible: overlayVisible"
+  .closer data-bind="click: hideOverlay" &times;
+  h2 data-bind="text: overlayAction().name"
+  ul
+    li
+      a target="_blank" data-bind="attr: { href: overlayAction().pdf }" Download pdf
+
+  p data-bind="text: overlayAction().info"
+
