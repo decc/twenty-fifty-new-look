@@ -1,13 +1,13 @@
 {
   "checksum": {
-    "previous": "5dfda172e740caff034232c56aa9c5fb82bd1f6643c48cb1d49aa2e0a33af4b6",
-    "current": "5dfda172e740caff034232c56aa9c5fb82bd1f6643c48cb1d49aa2e0a33af4b6"
+    "previous": "3d9c7d65b599249d4f4c0da5d7e83df998e5dfd3ce982586e3edce09a500b7f3",
+    "current": "3d9c7d65b599249d4f4c0da5d7e83df998e5dfd3ce982586e3edce09a500b7f3"
   },
   "fonts": [
-    "source/fonts/icons_5dfda172e740caff034232c56aa9c5fb.ttf",
-    "source/fonts/icons_5dfda172e740caff034232c56aa9c5fb.svg",
-    "source/fonts/icons_5dfda172e740caff034232c56aa9c5fb.woff",
-    "source/fonts/icons_5dfda172e740caff034232c56aa9c5fb.eot"
+    "source/fonts/icons_3d9c7d65b599249d4f4c0da5d7e83df9.ttf",
+    "source/fonts/icons_3d9c7d65b599249d4f4c0da5d7e83df9.svg",
+    "source/fonts/icons_3d9c7d65b599249d4f4c0da5d7e83df9.woff",
+    "source/fonts/icons_3d9c7d65b599249d4f4c0da5d7e83df9.eot"
   ],
   "glyphs": {
     "air": {
@@ -54,6 +54,10 @@
       "codepoint": 61705,
       "source": "source/icons/energy.svg"
     },
+    "energy-conversion-facilities": {
+      "codepoint": 61720,
+      "source": "source/icons/energy-conversion-facilities.svg"
+    },
     "energy-security": {
       "codepoint": 61713,
       "source": "source/icons/energy-security.svg"
@@ -69,6 +73,14 @@
     "flows": {
       "codepoint": 61707,
       "source": "source/icons/flows.svg"
+    },
+    "gas-power-stations": {
+      "codepoint": 61721,
+      "source": "source/icons/gas-power-stations.svg"
+    },
+    "geothermal-stations-facilities": {
+      "codepoint": 61722,
+      "source": "source/icons/geothermal-stations-facilities.svg"
     },
     "google-plus": {
       "codepoint": 61716,
@@ -90,9 +102,21 @@
       "codepoint": 61710,
       "source": "source/icons/menu.svg"
     },
+    "nuclear-power-stations": {
+      "codepoint": 61723,
+      "source": "source/icons/nuclear-power-stations.svg"
+    },
     "overview": {
       "codepoint": 61711,
       "source": "source/icons/overview.svg"
+    },
+    "power-stations-with-ccs": {
+      "codepoint": 61724,
+      "source": "source/icons/power-stations-with-ccs.svg"
+    },
+    "power-stations-without-ccs": {
+      "codepoint": 61725,
+      "source": "source/icons/power-stations-without-ccs.svg"
     },
     "share-alt": {
       "codepoint": 61718,
