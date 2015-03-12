@@ -41,10 +41,9 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
       self.overlayVisible(false);
     };
 
-    self.currentPathway = ko.observable(params.pathway);
+    self.currentPathway = params.pathway;
     self.pathwayUpdating = params.pathway.updating;
 
-    // self.pathway = new Pathway();
     self.pathwayCategories = Pathway.categories();
 
     var toggleObservableBool = function(context, boolName) {
