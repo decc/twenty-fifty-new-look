@@ -7,7 +7,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser'], function(ko, Data
        "2": "Individuals travel 7% further than today, cars and vans are 80% of 2050 passenger mileage",
        "3": "Individuals travel 7% further than today; cars and vans 74% of 2050 passenger mileage",
        "4": "In 2050, individuals travel the same distance as today. Signficant shift to public transport."
-       }, pdf: "/assets/onepage/23.pdf" },
+       }, pdf: "/assets/onepage/23.pdf", info: "Hi am info yeah" },
 
     { name: "Shift to zero emission transport", categoryId: 1, typeId: 1, pathwayStringIndex: 26, tooltips: {
        "1": "By 2050, 20% plug in hybrid electric cars; 2.5% zero emission cars.",

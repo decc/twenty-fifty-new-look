@@ -7,24 +7,18 @@
       calculator-header params="navState: navState, pathwayName: currentPathway().name, pathway: currentPathway"
 
       .content
-        = partial "components/partials/faq-overlay"
+        = partial "partials/faq-overlay"
+
+        section#share.share data-bind="css: { 'is-active': shareVisible() }, component: { name: 'share', params: { pathway: currentPathway } }"
 
         .bit
           header.cityscape data-bind="visible: cityscapeVisible"
 
-          section#charts.charts
+          section#charts.charts data-bind="css: { noTop: !cityscapeVisible() }"
+            span.toggle-city data-bind="click: toggleCity"
             .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway } }"
 
-          section#share.share data-bind="visible: shareVisible(), component: { name: 'share', params: { pathway: currentPathway } }"
-
-          .modal-overlay data-bind="visible: overlayVisible"
-            .closer data-bind="click: hideOverlay" &times;
-            h2 data-bind="text: overlayAction().name"
-            ul
-              li
-                a target="_blank" data-bind="attr: { href: overlayAction().pdf }" Download pdf
-
-            p data-bind="text: overlayAction().info"
+        = partial "partials/pathway-overlay"
 
         pathway-sidebar params="pathway: currentPathway"
 
