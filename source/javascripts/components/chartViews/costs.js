@@ -7,8 +7,6 @@ define(['knockout', 'text!/components/chartViews/costs.html'],
 
     self.calculator = args.calculator;
 
-    self.comparisonChartsEnabled = ko.observable(false);
-
     self.tabs = args.charts;
     self.contextTab = self.tabs[0];
     self.comparedTab = self.tabs[1];
@@ -48,10 +46,6 @@ define(['knockout', 'text!/components/chartViews/costs.html'],
 
           self.calculator.pathwayUpdating(false);
         });
-
-        self.comparisonChartsEnabled(true);
-      } else {
-        self.comparisonChartsEnabled(false);
       }
     });
 

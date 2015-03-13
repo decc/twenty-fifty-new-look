@@ -1,6 +1,6 @@
 .tabs.chart-component data-bind="foreach: charts"
   .tab data-bind="css: { 'active': $parent.currentTabId() === id }"
-    .chart data-bind="chart: name, data: $parent.data"
+    .chart data-bind="chart: name, data: $parent.data, params: { margin: { top: 20, right: 150, bottom: 70, left: 100 } }"
 
 ul.tab-nav.chart-component-tabs data-bind="foreach: charts"
   li data-bind="attr: { class: ($parent.currentTabId() === id ? 'active' : '') + ' one-of-'+$parent.charts.length }"

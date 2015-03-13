@@ -8,11 +8,15 @@ define(['d3'], function(d3) {
     self.element = null;
     self.data = {};
 
+    self.title;
+
     self.margin;
     self.outerWidth;
     self.outerHeight;
 
     self.hasAxis;
+
+    self.drawParams = {};
   };
 
   Chart.colourGradients = function() {
@@ -51,7 +55,7 @@ define(['d3'], function(d3) {
       var args = args || {};
       self.element = element;
 
-      self.margin = args.margin || { top: 20, right: 150, bottom: 70, left: 100 };
+      self.margin = args.margin || { top: 0, right: 0, bottom: 0, left: 0 };
       self.outerWidth = args.width || 640;
       self.outerHeight = args.height || 480;
 
@@ -65,6 +69,8 @@ define(['d3'], function(d3) {
       self.height = self.outerHeight - self.margin.top - self.margin.bottom;
 
       self.hasAxis = args.hasAxis || false;
+
+      self.drawParams = args.drawParams || false;
 
       self.svg = d3.select(self.element).append('svg')
           // .attr("preserveAspectRatio", "xMinYMin meet")

@@ -19,34 +19,6 @@
     .chart
       position: relative
 
-      .bar-label
-        display: none
-        text-anchor: middle
-
-      .d3-chart[data-state="graph-hover"]
-        .layer-label
-          display: none
-
-        .layer-container[data-state="active"]
-          .layer
-            opacity: 1
-            stroke: #fff
-            stroke-width: 4px
-
-          .layer-label
-            display: block
-            stroke: #fff
-
-        .bar-container[data-state="active"]
-          .bar
-            opacity: 1
-            stroke: #fff
-            stroke-width: 4px
-
-          .bar-label
-            display: block
-            stroke: #fff
-
     .compare
       height: 42.8%
 
@@ -56,30 +28,26 @@
 
       &.bottom
         padding-top: 20px
-        visibility: hidden
 
-        &.active
-          visibility: visible
+  .example-selector
+    position: absolute
+    left: 20px
+    top: 46%
+    margin-top: -23px
+    display: table
+    z-index: 10
 
-    .example-selector
-      position: absolute
-      left: 20px
-      top: 46%
-      margin-top: -23px
-      display: table
-      z-index: 10
+    select
+      color: #fff
+      display: table-cell
+      vertical-align: middle
+      padding: 0.5em 1em
+      height: 46px
+      background: none
+      border: 1px solid #fff
 
-      select
-        color: #fff
-        display: table-cell
-        vertical-align: middle
-        padding: 0.5em 1em
-        height: 46px
-        background: none
-        border: 1px solid #fff
-
-        option
-          background: $color_background_dark
+      option
+        background: $color_background_dark
 
   .costs-chartset-scroll
     .chart
@@ -91,18 +59,10 @@
       &.bottom
         height: 100px
         margin-bottom: 20px
-        visibility: hidden
-
-        &.active
-          visibility: visible
 
 
     .sensitivity-components
       height: 2400px
-      visibility: hidden
-
-      &.active
-        visibility: visible
 
       .bar-label
         text-anchor: end

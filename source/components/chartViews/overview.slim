@@ -1,0 +1,11 @@
+.overview-tab
+  .date-range
+    span.min data-bind="text: rangeAttributes().min"
+    input type="range" data-bind="value: date, attr: { min: rangeAttributes().min, max: rangeAttributes().max, step: rangeAttributes().step }"
+    span.max data-bind="text: rangeAttributes().max"
+
+  h2.title data-bind="text: 'Snapshot ' + date() + ' outlook'"
+
+  .div data-bind="foreach: chartKeys"
+    h3.chart-title data-bind="text: $data"
+    .chart data-bind="chart: $parent.chart.name, data: $parent.data, params: { title: $data, drawParams: { date: $parent.date }, margin: { top: 20, right: 20, bottom: 20, left: 20 } }"

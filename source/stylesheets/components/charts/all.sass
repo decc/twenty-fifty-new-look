@@ -1,5 +1,9 @@
 .chart
 
+  &.full-size
+    padding: 20px
+    height: 100%
+
   .domain
     fill: none
     stroke-width: 1
@@ -26,3 +30,20 @@
 
   .layer
 
+  .bar-label
+    display: none
+    text-anchor: middle
+    pointer-events: none
+
+  .d3-chart[data-state="graph-hover"]
+    .layer-label
+      display: none
+      pointer-events: none
+
+    .bar-container[data-state="active"]
+      .bar
+        opacity: 1
+
+      .bar-label
+        display: block
+        stroke: #fff
