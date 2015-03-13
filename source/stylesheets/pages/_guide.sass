@@ -14,17 +14,6 @@
     clear: both
     display: block
 
-  // section
-  //   width: 50%
-  //   margin: auto
-  //   min-width: 600px
-
-  //   // Alternate image side
-  //   &:nth-of-type(2n)
-  //     .col
-  //       @include omega
-  //       float: right
-
   article
     h1, h2
       margin-bottom: 10px
@@ -35,7 +24,7 @@
       text-align: left
 
     img
-      max-width: 100%
+      width: 100%
 
     a
       color: $color-highlight
@@ -49,4 +38,11 @@
   position: fixed
   bottom: 1em
   left: 1em
+
+.slide8
+  .col
+    &:first-of-type
+      width: 35%
+    &:last-of-type
+      width: 65%
 

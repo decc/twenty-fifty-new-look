@@ -1,4 +1,4 @@
-@include font-face(icons, '/fonts/icons_5dfda172e740caff034232c56aa9c5fb', normal, normal, false, eot woff ttf svg)
+@include font-face(icons, '/fonts/icons_11f6d9431652087be4b8a2f6034db218', normal, normal, false, eot woff ttf svg)
 
 %icon
   font-family: "icons" !important
@@ -224,6 +224,25 @@
 
 
 
+%icon-content-energy-conversion-facilities
+  @extend %icon
+  content: '\f118'
+
+%icon-energy-conversion-facilities-after
+  &:after
+    @extend %icon-content-energy-conversion-facilities
+
+%icon-energy-conversion-facilities-before
+  &:before
+    @extend %icon-content-energy-conversion-facilities
+
+.icon-energy-conversion-facilities-before
+  @extend %icon-energy-conversion-facilities-before
+
+
+
+
+
 %icon-content-energy-security
   @extend %icon
   content: '\f111'
@@ -295,6 +314,44 @@
 
 .icon-flows-before
   @extend %icon-flows-before
+
+
+
+
+
+%icon-content-gas-power-stations
+  @extend %icon
+  content: '\f119'
+
+%icon-gas-power-stations-after
+  &:after
+    @extend %icon-content-gas-power-stations
+
+%icon-gas-power-stations-before
+  &:before
+    @extend %icon-content-gas-power-stations
+
+.icon-gas-power-stations-before
+  @extend %icon-gas-power-stations-before
+
+
+
+
+
+%icon-content-geothermal-stations-facilities
+  @extend %icon
+  content: '\f11a'
+
+%icon-geothermal-stations-facilities-after
+  &:after
+    @extend %icon-content-geothermal-stations-facilities
+
+%icon-geothermal-stations-facilities-before
+  &:before
+    @extend %icon-content-geothermal-stations-facilities
+
+.icon-geothermal-stations-facilities-before
+  @extend %icon-geothermal-stations-facilities-before
 
 
 
@@ -395,6 +452,25 @@
 
 
 
+%icon-content-nuclear-power-stations
+  @extend %icon
+  content: '\f11b'
+
+%icon-nuclear-power-stations-after
+  &:after
+    @extend %icon-content-nuclear-power-stations
+
+%icon-nuclear-power-stations-before
+  &:before
+    @extend %icon-content-nuclear-power-stations
+
+.icon-nuclear-power-stations-before
+  @extend %icon-nuclear-power-stations-before
+
+
+
+
+
 %icon-content-overview
   @extend %icon
   content: '\f10f'
@@ -409,6 +485,44 @@
 
 .icon-overview-before
   @extend %icon-overview-before
+
+
+
+
+
+%icon-content-power-stations-with-ccs
+  @extend %icon
+  content: '\f11c'
+
+%icon-power-stations-with-ccs-after
+  &:after
+    @extend %icon-content-power-stations-with-ccs
+
+%icon-power-stations-with-ccs-before
+  &:before
+    @extend %icon-content-power-stations-with-ccs
+
+.icon-power-stations-with-ccs-before
+  @extend %icon-power-stations-with-ccs-before
+
+
+
+
+
+%icon-content-power-stations-without-ccs
+  @extend %icon
+  content: '\f11d'
+
+%icon-power-stations-without-ccs-after
+  &:after
+    @extend %icon-content-power-stations-without-ccs
+
+%icon-power-stations-without-ccs-before
+  &:before
+    @extend %icon-content-power-stations-without-ccs
+
+.icon-power-stations-without-ccs-before
+  @extend %icon-power-stations-without-ccs-before
 
 
 

@@ -5,18 +5,20 @@
   position: relative
 
 .wrapper
-  @include col(150%)
-  @include transform(translatex($nav-width * -1))
+  @include col(100%)
+  @include transform(translatex(0))
   @include transition(transform .3s ease-in-out)
   @include omega
   &.with-nav
-    @include transform(translatex(0))
+    @include transform(translatex($nav-width / 2))
+  &.with-subnav
+    @include transform(translatex($nav-width))
 
 .cityscape
   height: 200px
 
 .content-wrapper
-  @include col(100% - $nav-width)
+  @include col(100%)
   @include omega
 
 .content
@@ -59,6 +61,7 @@
         .option
           .tooltip
             opacity: 1
+            z-index: 100
 
       div
         overflow: auto
@@ -102,6 +105,7 @@
           width: 90%
           transition: all 0.2s linear
           opacity: 0
+          z-index: -1
           &:after
             content: ""
             position: absolute
@@ -135,12 +139,8 @@
   width: 100%
   background: #f5f5f5
   text-transform: capitalize
-  padding: 1em 0
   box-shadow: 0px -5px 5px 0px #888
-  margin-top: 1em
-  position: fixed
-  bottom: 0
-  height: 52px
+  line-height: 4em
   &:before
     margin-right: 0.5em
 
