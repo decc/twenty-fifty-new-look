@@ -6,13 +6,17 @@ define(['knockout', 'text!/components/chartViews/overview.html'],
   var ViewModel = function(params) {
     var self = this;
 
-    self.charts = params.charts;
+    var minDate = 2015;
+    var maxDate = 2050;
+
+    self.chart = params.charts[0];
     self.data = params.data;
-    self.date = ko.observable(2015);
+    self.chartKeys = Object.keys(self.data()[self.chart.name]);
+    self.date = ko.observable(minDate);
 
     self.rangeAttributes = ko.observable({
-      min: 2015,
-      max: 2050,
+      min: minDate,
+      max: maxDate,
       step: 5
     });
   };

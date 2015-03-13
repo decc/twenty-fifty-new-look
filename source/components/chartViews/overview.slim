@@ -6,5 +6,6 @@
 
   h2.title data-bind="text: 'Snapshot ' + date() + ' outlook'"
 
-  .div data-bind="foreach: charts"
-    .chart data-bind="chart: name, data: $parent.data, params: { drawParams: { date: $parent.date } }"
+  .div data-bind="foreach: chartKeys"
+    h3.chart-title data-bind="text: $data"
+    .chart data-bind="chart: $parent.chart.name, data: $parent.data, params: { title: $data, drawParams: { date: $parent.date }, margin: { top: 20, right: 20, bottom: 20, left: 20 } }"

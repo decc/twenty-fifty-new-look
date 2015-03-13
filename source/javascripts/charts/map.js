@@ -25,7 +25,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
     var spacing = 8;
     var minLabelSize = 8;
-    var importsFencePadding = 50;
+    var importsFencePaddingX = 80;
+    var importsFencePaddingY = 40;
 
     var y = d3.scale.linear()
         .domain([yMin, yMax])
@@ -51,27 +52,27 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
     var landData = stackSquares(data.land, "ASC");
     var landX = Math.round(self.width / 2);
-    var landY = Math.round(y(200));
+    var landY = y(280);
 
     var offshoreData = stackSquares(data.offshore, "DESC");
     var offshoreX = self.width;
-    var offshoreY = Math.round(y(50));
+    var offshoreY = y(0);
 
     var importsData = stackSquares(data.imports, "DESC");
     var importsTotal = data.imports.reduce(function(a, b) { return Math.sqrt(a.value) + Math.sqrt(b.value) + spacing; });
     var importsMax = importsData[0].y1;
-    var importsX = Math.round(y(0));
+    var importsX = y(5);
     var importsY = Math.round(self.height);
 
     var waveData = data.wave;
-    var waveX = Math.round(y(50));
-    var waveY = Math.round(y(20));
+    var waveX = y(150);
+    var waveY = y(20);
 
     var land = self.svg.selectAll(".land-square-container")
         .data(landData)
 
     land.enter().append("g")
-      .attr("class", function(d) { return "land-square-container " + d.key.replace(/ +/g, '-').replace(/[^\w|-]/g, '').toLowerCase(); })
+      .attr("class", function(d) { return "square-container land-square-container " + d.key.replace(/ +/g, '-').replace(/[^\w|-]/g, '').toLowerCase(); })
       .attr("transform", function(d) { return "translate(" + landX + ", " + parseInt(landY + y(d.y0)) +")"; })
       .each(function(d, i) {
         d3.select(this).append("rect")
@@ -93,14 +94,23 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
           .attr("data-state", (y(d.value) > minLabelSize ? "active" : "inactive"))
       });
 
-    self.svg.selectAll(".land-square-container").data(landData)
+    self.svg.selectAll(".land-square-container").data(landData).transition()
       .attr("transform", function(d) { return "translate(" + landX + ", " + parseInt(landY + y(d.y0)) +")"; })
+      .each(function(d, i) {
+        d3.select(this).select("rect").transition()
+          .attr("height", y(d.value))
+          .attr("width", y(d.value))
+        d3.select(this).select("text").transition()
+          .attr("x", y(d.value))
+          .attr("y", y(d.value) / 2)
+          .attr("data-state", (y(d.value) > minLabelSize ? "active" : "inactive"))
+      });
 
     var offshore = self.svg.selectAll(".offshore-square-container")
       .data(offshoreData)
 
     offshore.enter().append("g")
-      .attr("class", function(d) { return "offshore-square-container " + d.key.replace(/ +/g, '-').replace(/[^\w|-]/g, '').toLowerCase(); })
+      .attr("class", function(d) { return "square-container offshore-square-container " + d.key.replace(/ +/g, '-').replace(/[^\w|-]/g, '').toLowerCase(); })
       .attr("transform", function(d) { return "translate(" + offshoreX + ", " + parseInt(offshoreY + y(d.y0)) +")"; })
       .each(function(d, i) {
         d3.select(this).append("rect")
@@ -124,15 +134,25 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
           .attr("data-state", (y(d.value) > minLabelSize ? "active" : "inactive"))
       });
 
-    self.svg.selectAll(".offshore-square-container").data(offshoreData)
+    self.svg.selectAll(".offshore-square-container").data(offshoreData).transition()
       .attr("transform", function(d) { return "translate(" + offshoreX + ", " + parseInt(offshoreY + y(d.y0)) +")"; })
+      .each(function(d, i) {
+        d3.select(this).select("rect").transition()
+          .attr("height", y(d.value))
+          .attr("x", -y(d.value))
+          .attr("width", y(d.value))
+        d3.select(this).select("text").transition()
+          .attr("x", -y(d.value))
+          .attr("y", y(d.value) / 2)
+          .attr("data-state", (y(d.value) > minLabelSize ? "active" : "inactive"))
+      });
 
     var imports = self.svg.selectAll(".imports-square-container")
       .data(importsData)
 
     imports.enter().append("g")
-      .attr("class", function(d) { return "imports-square-container " + d.key.replace(/ +/g, '-').replace(/[^\w|-]/g, '').toLowerCase(); })
-      .attr("transform", function(d) { return "translate(" + importsX + ", " + parseInt(importsY - y(d.y0)) +")"; })
+      .attr("class", function(d) { return "square-container imports-square-container " + d.key.replace(/ +/g, '-').replace(/[^\w|-]/g, '').toLowerCase(); })
+      .attr("transform", function(d) { return "translate(" + importsX + ", " + parseInt(importsY - y(d.y0) - y(d.value)) +")"; })
       .each(function(d, i) {
         d3.select(this).append("rect")
           .attr("class", "square")
@@ -153,39 +173,62 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
           .attr("data-state", (y(d.value) > minLabelSize ? "active" : "inactive"))
       });
 
-    self.svg.selectAll(".imports-square-container").data(importsData)
-      .attr("transform", function(d) { return "translate(" + importsX + ", " + parseInt(importsY - y(d.y1)) +")"; })
+    self.svg.selectAll(".imports-square-container").data(importsData).transition()
+      .attr("transform", function(d) { return "translate(" + importsX + ", " + parseInt(importsY - y(d.y0) - y(d.value)) +")"; })
+      .each(function(d, i) {
+        d3.select(this).select("rect").transition()
+          .attr("height", y(d.value))
+          .attr("width", y(d.value))
+        d3.select(this).select("text").transition()
+          .attr("x", y(d.value))
+          .attr("y", y(d.value) / 2)
+          .attr("data-state", (y(d.value) > minLabelSize ? "active" : "inactive"))
+      });
 
-    self.svg.append("path").data(importsData)
-      .attr('d', function(d) { return "M" + importsX + " " + Math.round(importsY - y(importsTotal) - importsFencePadding) + " Q " + Math.round(importsX + y(importsMax) + importsFencePadding) + " " + Math.round(importsY - y(importsTotal) - importsFencePadding) + ", " + Math.round(y(importsMax) + importsFencePadding) + ", " + importsY; })
+    self.svg.select(".import-fence").remove();
+    self.svg.append("path")
+      .attr('d', "M" + importsX + " " + Math.round(importsY - y(importsTotal) - importsFencePaddingY) + " Q " + Math.round(importsX + y(importsMax) + importsFencePaddingX) + " " + Math.round(importsY - y(importsTotal) - importsFencePaddingY) + ", " + Math.round(y(importsMax) + importsFencePaddingX) + ", " + importsY)
       .attr("class", "import-fence")
       .attr("fill", "none")
-      .attr('stroke', "white")
+      .attr('stroke', "#777d8a")
       .attr('stroke-width', '2px')
       .attr('stroke-dasharray', '8, 4')
 
-    var wave = self.svg.selectAll(".wave-square-container")
+    self.svg.select(".import-fence-title").remove();
+    self.svg.append("text")
+      .attr("class", "import-fence-title")
+      .attr("x", 0)
+      .attr("y", importsY - y(importsTotal) - importsFencePaddingY)
+      .attr("dy", "1.8em")
+      .text("Imports")
+      .attr("fill", "#777d8a")
+      .attr("font-size", "0.8em")
+
+    var wave = self.svg.selectAll(".wave-container")
       .data(waveData)
 
-    wave.enter().append("g")
+    var waf = wave.enter().append("g")
       .attr("class", "wave-container")
       .attr("transform", function(d) { return "translate(" + waveX + ", " + waveY +")"; })
 
-    wave.append("line")
+    waf.append("line")
       .attr("class", "wave")
       .attr('stroke', '#00a2ff')
       .attr('stroke-width', '4px')
-      .attr("x1", waveX)
-      .attr("x2", waveX)
-      .attr("y1", function(d) { return waveY; })
+      .attr("x1", 0)
+      .attr("x2", 0)
+      .attr("y1", 0)
       .attr("y2", function(d) { return y(d.value); })
-    wave.append("text")
-      .attr("class", "square-label")
-      .attr("dx", "-0.5em")
-      .attr("y", function(d) { return y(d.value) / 2; })
-      .attr("dy", "0.35em")
+    waf.append("text")
+      .attr("class", "wave-label")
+      .attr("x", 0)
+      .attr("dx", "-1em")
+      .attr("y", 0)
+      .attr("dy", "0.65em")
       .attr("text-anchor", "end")
-      .text(function(d) { return d.key; })
+      .attr("fill", "#fff")
+      .attr("data-state", "active")
+      .text("Wave")
 
     self.svg.selectAll(".wave-container").data(waveData)
       .attr("transform", function(d) { return "translate(" + waveX + ", " + waveY +")"; })
