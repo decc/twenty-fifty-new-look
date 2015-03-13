@@ -1,4 +1,4 @@
-define(['knockout', 'dataRequester', 'config', 'chartParser'], function(ko, DataRequester, config, ChartParser) {
+define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'], function(ko, DataRequester, config, ChartParser, Action) {
   'use strict';
 
   var PATHWAY_ACTIONS = [
@@ -303,11 +303,6 @@ define(['knockout', 'dataRequester', 'config', 'chartParser'], function(ko, Data
     { "id": 3, "name": "Other" }
   ];
 
-  var ACTION_TYPES = [
-    { "id": 1, "name": "rangeInt" },
-    { "id": 2, "name": "rangeFloat" },
-    { "id": 3, "name": "radio" }
-  ];
 
   var EXAMPLES = [
       { category: 'Extreme Pathways', name: 'Doesn\'t tackle climate change', slug: 'blank-example', values: '10111111111111110111111001111110111101101101110110111' },
@@ -329,58 +324,6 @@ define(['knockout', 'dataRequester', 'config', 'chartParser'], function(ko, Data
       { category: '3rd Party Pathways', name: 'Atkins', slug: 'atkins-example', values: 'g0f2oj11t1rgqj1j0343111003324240244104201304430420231' }
   ];
 
-  /**
-   * Represents a single datapoint of a pathway calculation
-   *
-   * @class Action
-   * @param {object} args - arguments object
-   * @param {number} args.id - action id
-   * @param {number} args.categoryId
-   * @param {number} args.typeId
-   * @param {number} args.value
-   * @param {string} args.info - html string describing action
-   * @param {strung} args.pdf - URI of related pdf
-   */
-  var Action = function(args) {
-    var self = this;
-
-    self.name = args.name;
-    self.categoryId = args.categoryId;
-    self.typeId = args.typeId;
-    self.value = ko.observable(args.value || 1);
-    self.min = args.min || 1;
-    self.max = args.max || 4;
-    self.step = args.step || 1;
-    self.info = args.info;
-    self.pdf = config.apiUrl + args.pdf;
-    self.pathwayStringIndex = args.pathwayStringIndex;
-    self.tooltips = args.tooltips;
-  };
-
-  /** @lends Action */
-  Action.prototype = {
-    /** Type of input data provided by action */
-    type: function() {},
-
-    /** Category */
-    category: function() {},
-
-    /**
-     * setter for this.value
-     * @param {number} value
-     */
-    setValue: function(value) {
-      this.value = value;
-    },
-
-    getTypeName: function() {
-      var self = this
-      var action = ko.utils.arrayFirst(ACTION_TYPES, function(action) {
-        return action.id === self.typeId;
-      });
-      return action.name
-    }
-  };
 
   /** Represents a dataset for a 2050 calculation */
   var Pathway = function(args) {
@@ -481,11 +424,12 @@ define(['knockout', 'dataRequester', 'config', 'chartParser'], function(ko, Data
       var magicStringLength = 53;
       var actions = this.actions();
 
+
       this.lock();
 
       for(var i = 0; i < magicStringLength; i++) {
         // search for correct action at this point in pathway string
-        for(var j = 0; j < actions.length; j++) {
+        for(var j = 0, l = actions.length; j < l; j++) {
           if(actions[j].pathwayStringIndex === i) {
             actions[j].value(this.getActionFromMagicChar(magicString[i], actions[j].getTypeName()));
           }
