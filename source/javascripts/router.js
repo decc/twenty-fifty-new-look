@@ -13,7 +13,7 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
         app.getPage('guide', {});
       });
 
-      crossroads.addRoute('calculator/:slug:', function(slug) {
+      crossroads.addRoute('calculator/:slug:', function(lastRoute, slug) {
         var pathway = Pathway.find(slug) || app.userPathway;
 
         // 404 if invalid slug
@@ -21,14 +21,16 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
           hasher.replaceHash('not-found');
           return;
         }
-        var actionSection = document.querySelector('.pathway-category-tab-nav');
+
         pathway.setActionsFromPathwayString(pathway.values);
 
         // check if calculator already made
-        var oldHash = arguments[0] || '';
+        var oldHash = lastRoute || '';
 
         if(oldHash.split('/')[0] !== 'calculator') {
-          app.getPage('calculator', { pathway: pathway });
+          app.getPage('calculator', { pathway: app.currentPathway });
+        } else {
+          app.currentPathway(pathway);
         }
 
       });
@@ -40,6 +42,7 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
       var parseHash = function(newHash, oldHash) {
         crossroads.parse(newHash, [oldHash]);
       };
+
 
       hasher.initialized.add(parseHash);
       hasher.changed.add(parseHash);
