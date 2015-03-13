@@ -20,9 +20,13 @@ define([], function() {
         ElectricityDemandChart: this.electricityDemand(),
         ElectricitySupplyChart: this.electricitySupply(),
 
+        EnergyEmissionsChart: this.energyEmissions(),
+
         FlowsChart: this.flows(),
 
         MapChart: this.map(),
+
+        AirQualityChart: this.airQuality(),
 
         CostsContextChart: this.costsContext(),
         CostsComparedChart: this.costsCompared(),
@@ -40,7 +44,7 @@ define([], function() {
     },
 
     energyEmissionsUnused: function() {
-      return [];
+      return ["Total"];
     },
 
     // CO2 reduction overview chart
@@ -50,58 +54,38 @@ define([], function() {
 
     overview: function() {
       var data = {
-        "demand": this.data.demand,
-        "supply": this.data.supply,
-        "emissions": this.data.ghg
+        "Demand": this.data.final_energy_demand,
+        "Supply": this.data.primary_energy_supply,
+        "Emissions": this.data.ghg
       };
 
       // Data organised by chart -> date
       var overviewYearlyData = {
-        "demand": {
+        "Demand": {
           "2010": [], "2015": [], "2020": [], "2025": [], "2030": [], "2035": [], "2040": [], "2045": [], "2050": []
         },
-        "supply": {
+        "Supply": {
           "2010": [], "2015": [], "2020": [], "2025": [], "2030": [], "2035": [], "2040": [], "2045": [], "2050": []
         },
-        "emission": {
+        "Emissions": {
           "2010": [], "2015": [], "2020": [], "2025": [], "2030": [], "2035": [], "2040": [], "2045": [], "2050": []
         }
       };
 
-      for(var ghg in ghgs) {
-        // Loop data points of each GHG
-        for(var i = 0; i < ghgs[ghg].length; i++) {
-          var value = ghgs[ghg][i];
-          var date = 2010 + i * 5;
 
-          overviewYearlyData["emission"][date].push({ key: ghg, value: Math.abs(value) });
-        }
-      }
+      for(var topicName in data) {
+        var skipLayers = this["energy" + topicName + "Unused"]();
+        var topic = data[topicName]
 
-      for(var topic in data)
-        var topic = data[topic]
-        for(var demand in topic) {
+        for(var item in topic) {
           // Don't parse unused/total layers
-          if(!energyDemandUnused().some(function(skip){ return demand === skip })) {
+          if(!skipLayers.some(function(skip){ return item === skip })) {
             // Loop data points of each GHG
-            for(var i = 0; i < data[demand].length; i++) {
-              var value = data[demand][i];
+            for(var i = 0; i < topic[item].length; i++) {
+              var value = topic[item][i];
               var date = 2010 + i * 5;
-
-              overviewYearlyData["demand"][date].push({ key: demand, value: Math.abs(value) });
+              overviewYearlyData[topicName][date].push({ key: item, value: Math.abs(value) });
             }
-          }
-        }
-
-      for(var supply in supplies) {
-        // Don't parse unused/total layers
-        if(!energySupplyUnused().some(function(skip){ return supply === skip })) {
-          // Loop data points of each GHG
-          for(var i = 0; i < supplies[supply].length; i++) {
-            var value = supplies[supply][i];
-            var date = 2010 + i * 5;
-
-            overviewYearlyData["supply"][date].push({ key: supply, value: Math.abs(value) });
           }
         }
       }
@@ -179,6 +163,15 @@ define([], function() {
     },
 
 
+    energyEmissions: function() {
+      var primaryData = this.data.ghg;
+      var secondaryData = this.data.final_energy_demand;
+
+      var skipLayers = this.energyEmissionsUnused();
+      return this.areaVsLine(primaryData, [], skipLayers);
+    },
+
+
     flows: function() {
       var data = this.data.sankey;
 
@@ -214,7 +207,7 @@ define([], function() {
           "target": nodes[d[2]],
           "value": d[1]
         })
-      })
+      });
 
       // Convert nodes object to array of objects
       var nodes = Object.keys(nodes).map(function(d) { return { "name": d }; });
@@ -289,6 +282,11 @@ define([], function() {
       return data;
     },
 
+    airQuality: function() {
+      var data = this.data.air_quality;
+
+      return data;
+    },
 
     costsContext: function() {
       var data = this.data.cost_components;

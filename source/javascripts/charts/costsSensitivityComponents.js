@@ -11,7 +11,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     var self = this;
     var dataNested = [];
     var data = [];
-
+console.log("hi")
     if(typeof dataObjects.comparison()["CostsSensitivityComponentsChart"] === "undefined") {
       return 1;
     }
@@ -42,7 +42,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     }
 
     self.outerWidth = width || self.outerWidth;
-    self.outerHeight = height ||self.outerHeight;
+    self.outerHeight = height || self.outerHeight;
 
     self.width = self.outerWidth - self.margin.left - self.margin.right;
     self.height = self.outerHeight - self.margin.top - self.margin.bottom;

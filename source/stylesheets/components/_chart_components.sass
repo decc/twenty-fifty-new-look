@@ -50,20 +50,25 @@
       left: 0
 
     .title
-      position: absolute
-      top: $chart-tab-padding-top
-      left: $chart-tab-padding-left
       color: #fff
-      font-size: 1em
-      font-weight: normal
+      font-size: 1.1em
 
-    .chart
-      height: 100%
-
-    .note
-      color: #fff
+    p
       font-size: 0.7em
-      line-height: 1
-      position: absolute
-      left: $chart-tab-padding-left
-      bottom: $chart-tab-padding-bottom - 15
+
+    &.fixed
+      .title
+        position: absolute
+        top: $chart-tab-padding-top
+        left: $chart-tab-padding-left
+
+      .chart
+        height: 100%
+
+      .note
+        color: #fff
+        font-size: 0.7em
+        line-height: 1
+        position: absolute
+        left: $chart-tab-padding-left
+        bottom: $chart-tab-padding-bottom - 15

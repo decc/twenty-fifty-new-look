@@ -8,6 +8,8 @@ define(['d3'], function(d3) {
     self.element = null;
     self.data = {};
 
+    self.title;
+
     self.margin;
     self.outerWidth;
     self.outerHeight;
@@ -53,7 +55,7 @@ define(['d3'], function(d3) {
       var args = args || {};
       self.element = element;
 
-      self.margin = args.margin || { top: 20, right: 150, bottom: 70, left: 100 };
+      self.margin = args.margin || { top: 0, right: 0, bottom: 0, left: 0 };
       self.outerWidth = args.width || 640;
       self.outerHeight = args.height || 480;
 

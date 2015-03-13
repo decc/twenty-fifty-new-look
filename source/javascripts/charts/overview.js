@@ -10,9 +10,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
   OverviewChart.prototype.draw = function(data, width, height){
     var self = this;
 
-    data = data[self.drawParams.date()]
+    data = data[self.title][self.drawParams.date()]
 
-    console.log(self.drawParams.date())
     if(typeof data === "undefined") {
       return 1;
     }
@@ -24,7 +23,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     self.height = self.outerHeight - self.margin.top - self.margin.bottom;
 
     var xMin = 0;
-    var xMax = 1000;
+    var xMax = 5000;
 
     var nTicks = 5;
 
