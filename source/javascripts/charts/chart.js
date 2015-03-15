@@ -161,7 +161,7 @@ define(['d3'], function(d3) {
           .attr("x", -self.height / 2)
           .attr("y", -self.margin.left / 2)
           .attr("dy", "-1em")
-          .text("Energy (J)");
+          .text("Energy (TWh/yr)");
 
       self.svg.selectAll("line.horizontalGrid").remove();
       self.svg.selectAll("line.horizontalGrid").data(self.x.ticks(4)).enter()

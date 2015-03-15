@@ -11,7 +11,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     var self = this;
     var dataNested = [];
     var data = [];
-console.log("hi")
+
     if(typeof dataObjects.comparison()["CostsSensitivityComponentsChart"] === "undefined") {
       return 1;
     }
@@ -32,7 +32,7 @@ console.log("hi")
 
     // Sort nested arrays
     dataNested.sort(function(a, b) {
-      return ((a.current.value.point > b.current.value.point) ? 1 : -1);
+      return ((a.current.value.point > b.current.value.point) ? -1 : 1);
     });
     var componentOrder = [];
 
@@ -48,7 +48,7 @@ console.log("hi")
     self.height = self.outerHeight - self.margin.top - self.margin.bottom;
 
     var xMin = 0;
-    var xMax = 1000;
+    var xMax = 10000;
 
     var nTicks = 5;
 
@@ -66,11 +66,12 @@ console.log("hi")
 
     var spacing = 8;
     var barHeight = 8;
-    var componentHeight = barHeight * 3;
+    var componentHeight = barHeight * 4;
     var bars = [
-      { name: '', color: "#e9d", opacity: 0.6 },
-      // { color: "orange", opacity: 0.6 },
-      { color: "lightgoldenrodyellow", opacity: 0.6 }
+      { color: "#e9d", opacity: 0.7 },
+      { color: "#e9d", opacity: 0.4 },
+      { color: "lightgoldenrodyellow", opacity: 0.7 },
+      { color: "lightgoldenrodyellow", opacity: 0.4 }
     ]
 
     var components = self.svg.selectAll(".component")
@@ -87,19 +88,26 @@ console.log("hi")
     bars.forEach(function(bar, n) {
       componentsEnter.append("rect")
         .attr("class", "bar bar-"+n)
-        .attr('fill', bar.color)
-        .attr('opacity', bars.opacity)
+        .attr('fill', self.colours(n))
+        .attr('opacity', bar.opacity)
         .attr("y", (n * barHeight))
         .attr("height", barHeight)
         .attr("x", x(0))
-        .attr("width", function(d) { return Math.abs(x(d.current.value.point)); });
     });
 
     components.select(".bar-0").transition()
       .attr("width", function(d) { return Math.abs(x(d.current.value.point)); });
 
     components.select(".bar-1").transition()
+      .attr("width", function(d) { return Math.abs(x(d.current.value.range)); })
+      .attr("x", function(d) { return Math.abs(x(d.current.value.point)); });
+
+    components.select(".bar-2").transition()
       .attr("width", function(d) { return Math.abs(x(d.comparison.value.point)); });
+
+    components.select(".bar-3").transition()
+      .attr("width", function(d) { return Math.abs(x(d.comparison.value.range)); })
+      .attr("x", function(d) { return Math.abs(x(d.comparison.value.point)); });
 
     componentsEnter.append("text")
           .attr("class", "bar-label")

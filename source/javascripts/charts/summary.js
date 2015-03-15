@@ -34,12 +34,13 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     self.x = x;
     self.xAxis = xAxis;
 
+    self.svg.select("#arrow-gradient").remove();
     self.svg.append("linearGradient").data([data])
         .attr("id", "arrow-gradient")
         .attr("gradientUnits", "userSpaceOnUse")
         .attr("x1", x(xMin)).attr("y1", 0)
-        // .attr("x2", function(d) { return x(d) }).attr("y2", 0)
-        .attr("x2", function(d) { return x(xMax); }).attr("y2", 0)
+        .attr("x2", function(d) { return x(d) }).attr("y2", 0)
+        // .attr("x2", function(d) { return x(xMax); }).attr("y2", 0)
       .selectAll("stop")
         .data([
           { offset: "0%", color: "#fff", opacity: 0 },
@@ -71,19 +72,42 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         .attr("y", 44)
 
     text.transition()
-        .attr("x", function(d) { return x(d / 2) })
+        .attr("x", function(d) { return self.width / 2 })
         .text(function(d) { return (d + "% CO₂ Reduction") })
 
-    self.svg.selectAll('.demarcation').remove();
-    self.svg.append("rect")
+    self.svg.selectAll('.target').remove();
+    self.svg.append("line")
       .attr({
-        "class": "demarcation",
+        "class": "target",
+        "x1" : x(80),
+        "x2" : x(80),
+        "y1" : 0,
+        "y2" : self.height,
+        "stroke": "rgba(255,255,255, 0.5)",
+        "stroke-dasharray": "4 3"
+      });
+
+    self.svg.selectAll('.target-achieved').remove();
+    self.svg.append("rect").data([data])
+      .attr({
+        "class": "target-achieved",
         "x" : x(80),
         "width" : x(20),
         "y" : 0,
         "height" : self.height,
-        "fill": "rgba(255,255,255, 0.3)"
+        "fill": function(d) { return d > 80 ? "#95cfca" : "none"; },
+        "fill-opacity": "0.3"
       });
+
+    self.svg.selectAll('.target-label').remove();
+    self.svg.append("text")
+      .attr({
+        "class": "target-label",
+        "x": x(90),
+        "y": 0,
+        "dy": "2.6em"
+      })
+      .text("80% Target")
   };
 
   return SummaryChart;

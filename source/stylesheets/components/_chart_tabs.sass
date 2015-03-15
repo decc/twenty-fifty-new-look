@@ -5,10 +5,14 @@
 
 .charts
   position: absolute
-  top: 200px
+  top: $cityscape-height
   bottom: 0
   left: 0
   right: 0
+
+  @media screen and (max-height: $device-height-small)
+    top: 0
+
   &.noTop
     top: 0px
 
