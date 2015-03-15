@@ -39,7 +39,9 @@ define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartP
           { "id": 1, "name": "AirQualityChart", "title": "Air Quality" }
         ]
       },
-      { "id": 7, "name": "energy-security", "title": "Energy Security" },
+      { "id": 7, "name": "energySecurity", "title": "Energy Security", "charts": [
+          {"id": 1, "name": 'EnergySecurity', "title": 'a chart' }
+        ] },
       { "id": 8, "name": "costs", "title": "Costs", "charts": [
           { "id": 1, "name": "CostsContextChart", "title": "In Context" },
           { "id": 2, "name": "CostsComparedChart", "title": "Compared" },
@@ -50,22 +52,9 @@ define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartP
           { "id": 1, "name": "OverviewChart", "title": "Overview" }
         ]
       }
-    ]
-
-    self.CHARTS = [
-      { "id": 1, "name": "energyDemand", "title": "Demand vs Supply" },
-      { "id": 2, "name": "energySupply", "title": "Supply vs Demand" },
-      { "id": 3, "name": "electricity", "title": "Electricity" },
-      { "id": 4, "name": "emissions", "title": "Emissions" },
-      { "id": 5, "name": "flows", "title": "Flows" },
-      { "id": 6, "name": "map", "title": "Map" },
-      { "id": 7, "name": "air", "title": "Air" },
-      { "id": 8, "name": "energy-security", "title": "Energy Security" },
-      { "id": 9, "name": "costs", "title": "Costs" },
-      { "id": 10, "name": "overview", "title": "Overview" }
     ];
 
-    self.currentTabId = ko.observable(8);
+    self.currentTabId = ko.observable(7);
 
     /** Sets visible tab */
     self.setActiveTab = function(chart) {
