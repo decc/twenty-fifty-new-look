@@ -207,11 +207,11 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     var wave = self.svg.selectAll(".wave-container")
       .data(waveData)
 
-    var waf = wave.enter().append("g")
+    var waveEnter = wave.enter().append("g")
       .attr("class", "wave-container")
       .attr("transform", function(d) { return "translate(" + waveX + ", " + waveY +")"; })
 
-    waf.append("line")
+    waveEnter.append("line")
       .attr("class", "wave")
       .attr('stroke', '#00a2ff')
       .attr('stroke-width', '4px')
@@ -219,7 +219,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       .attr("x2", 0)
       .attr("y1", 0)
       .attr("y2", function(d) { return y(d.value); })
-    waf.append("text")
+    waveEnter.append("text")
       .attr("class", "wave-label")
       .attr("x", 0)
       .attr("dx", "-1em")
@@ -227,11 +227,15 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       .attr("dy", "0.65em")
       .attr("text-anchor", "end")
       .attr("fill", "#fff")
-      .attr("data-state", "active")
+      .attr("data-state", function(d) { return (y(d.value) > 0 ? "active" : "inactive"); })
       .text("Wave")
 
+    wave.select("line").transition()
+      .attr("y2", function(d) { return y(d.value); })
+
     self.svg.selectAll(".wave-container").data(waveData)
-      .attr("transform", function(d) { return "translate(" + waveX + ", " + waveY +")"; })
+      .select(".wave-label")
+        .attr("data-state", function(d) { return (y(d.value) > 0 ? "active" : "inactive"); })
 
 
   };

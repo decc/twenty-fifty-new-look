@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/chartViews/simple.html'],
+define(['knockout', 'text!/components/chartViews/flows.html'],
   function(ko, html) {
 
   'use strict';

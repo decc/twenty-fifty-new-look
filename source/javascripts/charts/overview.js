@@ -10,11 +10,11 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
   OverviewChart.prototype.draw = function(data, width, height){
     var self = this;
 
-    data = data[self.title][self.drawParams.date()]
-
     if(typeof data === "undefined") {
       return 1;
     }
+
+    data = data[self.title][self.drawParams.date()]
 
     self.outerWidth = width || self.outerWidth;
     self.outerHeight = height || self.outerHeight;
@@ -130,22 +130,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         "y1" : self.height,
         "y2" : self.height,
       });
-
-    if(self.hasAxis) {
-      self.svg.selectAll('.axis').remove();
-
-      self.svg.append("g")
-          .attr("class", "x axis")
-          .attr("shape-rendering", "crispEdges")
-          .call(self.xAxis)
-        .append("text")
-          .attr("class", "label")
-          .attr("x", self.width / 2)
-          .attr("y", -self.margin.top / 2)
-          .attr("dy", "-1.5em")
-          .text("Cost (£)");
-    } else {
-      self.svg.append("line")
+    self.svg.append("line")
       .attr({
         "class":"border",
         "x1" : 0,
@@ -153,7 +138,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         "y1" : 0,
         "y2" : 0,
       });
-    }
   };
 
   return OverviewChart;

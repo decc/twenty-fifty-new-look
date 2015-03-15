@@ -183,6 +183,10 @@ define([], function() {
       // Values: IDs for sankey
       var count = 0;
       data.forEach(function(d) {
+        if(d[1] === 0) {
+          return true;
+        }
+
         // Set any source node once and iterate counter
         if(!nodes[d[0]]) {
           nodes[d[0]] = count;
@@ -248,12 +252,12 @@ define([], function() {
 
       data = {
         thermal: [
-          { "key": labels["III.d"], "icon": "geothermal", "value": Math.ceil(data["III.d"]) },
-          { "key": labels["II.a"], "icon": "nuclear", "value": Math.ceil(data["II.a"]) },
-          { "key": labels["VII.c"], "icon": "gas-standby", "value": Math.ceil(data["VII.c"]) },
-          { "key": labels["I.b"], "icon": "coal-gas-biomass-css", "value": Math.ceil(data["I.b"]) },
-          { "key": labels["I.a"], "icon": "without-css", "value": Math.ceil(data["I.a"]) },
-          { "key": labels["VI.b"], "icon": "waste-conversion", "value": Math.ceil(data["VI.b"]) }
+          { "key": labels["III.d"], "icon": "geothermal-stations-facilities", "value": Math.ceil(data["III.d"]) },
+          { "key": labels["II.a"], "icon": "nuclear-power-stations", "value": Math.ceil(data["II.a"]) },
+          { "key": labels["VII.c"], "icon": "gas-power-stations", "value": Math.ceil(data["VII.c"]) },
+          { "key": labels["I.b"], "icon": "power-stations-with-ccs", "value": Math.ceil(data["I.b"]) },
+          { "key": labels["I.a"], "icon": "power-stations-without-ccs", "value": Math.ceil(data["I.a"]) },
+          { "key": labels["VI.b"], "icon": "energy-conversion-facilities", "value": Math.ceil(data["VI.b"]) }
         ],
         land: [
           { "key": labels["III.b"], "value": data["III.b"] },
