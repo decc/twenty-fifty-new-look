@@ -47,8 +47,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     self.y = y;
     self.yAxis = yAxis;
 
-    console.log(data.land)
-
     var squares = self.svg.selectAll(".square-container")
         .data(stackSquares(data.land))
 

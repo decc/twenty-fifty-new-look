@@ -46,7 +46,6 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
         crossroads.parse(newHash, [oldHash]);
       };
 
-
       hasher.initialized.add(parseHash);
       hasher.changed.add(parseHash);
 
