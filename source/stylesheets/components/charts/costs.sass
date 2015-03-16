@@ -1,15 +1,5 @@
 .chart-component .tab
 
-  .bar-title
-    position: absolute
-    top: 50%
-    left: 0
-    color: #fff
-    width: 150px
-    padding-right: 1em
-    font-weight: normal
-    font-size: 1em
-
   .example-selector
     select
       color: #fff
@@ -27,32 +17,23 @@
     position: relative
     height: 100%
 
-    .chart
-      position: relative
-
     .compare
-      height: 42.8%
+      height: 200px
 
       &.top
         margin-top: 6%
         padding-bottom: 20px
 
       &.bottom
-        padding-top: 20px
+        padding-top: 0
+        margin-top: -20px
 
     .example-selector
-      position: absolute
-      left: 20px
-      top: 46%
-      margin-top: -23px
+      position: relative
       display: table
       z-index: 10
 
   .costs-chartset-scroll
-    overflow-y: scroll
-
-    .chart
-      position: relative
 
     .sensitivity-summary
       height: 100px
@@ -66,7 +47,7 @@
       margin-bottom: -20px
 
     .sensitivity-components
-      height: 2400px
+      height: 1950px
 
       .bar-label
         text-anchor: end

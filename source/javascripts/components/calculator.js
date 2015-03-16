@@ -31,11 +31,19 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
     self.overlayVisible = ko.observable(false);
     self.overlayContent = ko.observable();
 
+    self.faqCloseMode = ko.observable(false);
+
     self.overlayAction = ko.observable({});
 
     self.showOverlay = function(action) {
-      self.overlayVisible(true);
-      self.overlayAction(action);
+      if(self.overlayVisible()) {
+        self.faqCloseMode(false);
+        self.overlayVisible(false);
+      } else {
+        self.faqCloseMode(true);
+        self.overlayVisible(true);
+        self.overlayAction(action);
+      }
     };
 
     self.hideOverlay = function() {
@@ -65,23 +73,30 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
 
     /** toggle share page visibility */
     self.toggleShare = function() {
-      if(!self.faqVisible()){
-        toggleObservableBool(self, 'shareVisible');
-        toggleObservableBool(self, 'mainViewVisible');
+      if(self.shareVisible()) {
+        self.faqCloseMode(false);
+        self.mainViewVisible(true);
+        self.shareVisible(false);
       } else {
-        toggleObservableBool(self, 'faqVisible');
-        toggleObservableBool(self, 'shareVisible');
-        toggleObservableBool(self, 'mainViewVisible');
+        self.faqCloseMode(true);
+        self.faqVisible(false);
+        self.overlayVisible(false);
+        self.mainViewVisible(false);
+        self.shareVisible(true);
       }
     }
 
     /** toggle faq page visibility */
     self.toggleFaq = function() {
-      if(!self.shareVisible()){
-        toggleObservableBool(self, 'faqVisible');
+      if(self.faqCloseMode()){
+        self.faqCloseMode(false);
+        self.mainViewVisible(true);
+        self.overlayVisible(false);
+        self.shareVisible(false);
+        self.faqVisible(false);
       } else {
-        toggleObservableBool(self, 'shareVisible');
-        toggleObservableBool(self, 'faqVisible');
+        self.faqCloseMode(true);
+        self.faqVisible(true);
       }
     }
 

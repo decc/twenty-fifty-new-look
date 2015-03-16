@@ -1,46 +1,51 @@
 .tabs.chart-component
-  .tab.fixed data-bind="with: contextTab, css: { 'active': currentTabId() === contextTab.id }"
-    h2.title The cost to society of your pathway. This is not your energy bill.
-    .costs-chartset
-      .chart.compare.top data-bind="chart: name, data: $parent.data, params: { hasAxis: true, margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
-        h3.bar-title Your pathway
+  .tab data-bind="with: contextTab, css: { 'active': currentTabId() === contextTab.id }"
+    .outer
+      .inner.scroll
+        h2.title The cost to society of your pathway. This is not your energy bill.
+        .costs-chartset
+          .chart.compare.top.has-axis data-bind="chart: name, data: $parent.data, params: { hasAxis: true, margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
+            h3.bar-title Your pathway
 
-      .example-selector
-        select data-bind="options: $parent.examples, optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample, event: { change: $parent.changeSelectedExampleName }"
+          .example-selector
+            select data-bind="options: $parent.examples, optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample, event: { change: $parent.changeSelectedExampleName }"
 
-      .chart.compare.bottom data-bind="chart: name, data: $parent.comparisonData, params: { margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
-        h3.bar-title data-bind="text: $parent.selectedExampleName"
+          .chart.compare.bottom data-bind="chart: name, data: $parent.comparisonData, params: { margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
+            h3.bar-title data-bind="text: $parent.selectedExampleName"
 
+        p.note Note: The cost of failing to tackle climate change is not included. Some pathways, including the 'All at Level 1' pathway shown here, fail to tackle climate change. The Stern review estimated that failing to tackle climate change could reduce global GDP by up to 20% (equivalent to up to £6500 per person per year on top of the cost of the energy system included in the chart above). Nor are the costs of travelling less, being colder, or consuming less included.
 
-    p.note Note: The cost of failing to tackle climate change is not included. Some pathways, including the 'All at Level 1' pathway shown here, fail to tackle climate change. The Stern review estimated that failing to tackle climate change could reduce global GDP by up to 20% (equivalent to up to £6500 per person per year on top of the cost of the energy system included in the chart above). Nor are the costs of travelling less, being colder, or consuming less included.
+  .tab data-bind="with: comparedTab, css: { 'active': currentTabId() === comparedTab.id }"
+    .outer
+      .inner.scroll
+        h2.title The cost of your pathway compared with other pathways. This is not your energy bill.
+        .costs-chartset
+          .chart.compare.top.has-axis data-bind="chart: name, data: $parent.data, params: { hasAxis: true, margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
+            h3.bar-title Your pathway
 
-  .tab.fixed data-bind="with: comparedTab, css: { 'active': currentTabId() === comparedTab.id }"
-    h2.title The cost of your pathway compared with other pathways. This is not your energy bill.
-    .costs-chartset
-      .chart.compare.top data-bind="chart: name, data: $parent.data, params: { hasAxis: true, margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
-        h3.bar-title Your pathway
+          .example-selector
+            select data-bind="options: $parent.examples, optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample, event: { change: $parent.changeSelectedExampleName }"
 
-      .example-selector
-        select data-bind="options: $parent.examples, optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample, event: { change: $parent.changeSelectedExampleName }"
+          .chart.compare.bottom data-bind="chart: name, data: $parent.comparisonData, params: { margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
+            h3.bar-title data-bind="text: $parent.selectedExampleName"
 
-      .chart.compare.bottom data-bind="chart: name, data: $parent.comparisonData, params: { margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
-        h3.bar-title data-bind="text: $parent.selectedExampleName"
-
-    p.note Note: The cost of failing to tackle climate change is not included. Some pathways, including the 'All at Level 1' pathway shown here, fail to tackle climate change. The Stern review estimated that failing to tackle climate change could reduce global GDP by up to 20% (equivalent to up to £6500 per person per year on top of the cost of the energy system included in the chart above). Nor are the costs of travelling less, being colder, or consuming less included.
+          p.note Note: The cost of failing to tackle climate change is not included. Some pathways, including the 'All at Level 1' pathway shown here, fail to tackle climate change. The Stern review estimated that failing to tackle climate change could reduce global GDP by up to 20% (equivalent to up to £6500 per person per year on top of the cost of the energy system included in the chart above). Nor are the costs of travelling less, being colder, or consuming less included.
 
   .tab data-bind="with: sensitivityTab, css: { 'active': currentTabId() === sensitivityTab.id }"
-    h2.title The cost of your pathway compared with another, allowing simple variation in cost estimates.
-    .costs-chartset-scroll
-      .chart.sensitivity-summary.top data-bind="chart: name, data: $parent.data, params: { hasAxis: true, margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
-        h3.bar-title Your pathway
+    .outer
+      .inner.scroll
+        h2.title The cost of your pathway compared with another, allowing simple variation in cost estimates.
+        .costs-chartset-scroll
+          .chart.sensitivity-summary.top.has-axis data-bind="chart: name, data: $parent.data, params: { hasAxis: true, margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
+            h3.bar-title Your pathway
 
-      .example-selector
-        select data-bind="options: $parent.examples, optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample, event: { change: $parent.changeSelectedExampleName }"
+          .example-selector
+            select data-bind="options: $parent.examples, optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample, event: { change: $parent.changeSelectedExampleName }"
 
-      .chart.sensitivity-summary.bottom data-bind="chart: name, data: $parent.comparisonData, params: { margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
-        h3.bar-title data-bind="text: $parent.selectedExampleName"
+          .chart.sensitivity-summary.bottom data-bind="chart: name, data: $parent.comparisonData, params: { margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
+            h3.bar-title data-bind="text: $parent.selectedExampleName"
 
-      .chart.sensitivity-components data-bind="chart: 'CostsSensitivityComponentsChart', data: { current: $parent.data, comparison: $parent.comparisonData }, params: { margin: { top: 0, right: 40, bottom: 0, left: 150 } }"
+          .chart.sensitivity-components data-bind="chart: 'CostsSensitivityComponentsChart', data: { current: $parent.data, comparison: $parent.comparisonData }, params: { margin: { top: 0, right: 40, bottom: 0, left: 150 } }"
 
 
 ul.tab-nav.chart-component-tabs data-bind="foreach: tabs"
