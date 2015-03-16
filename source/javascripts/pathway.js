@@ -354,7 +354,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
       }
     });
 
-    self.setActionsFromPathwayString(self.values);
+    self.setActionsFromPathwayString();
   }
 
   Pathway.prototype = {
@@ -418,17 +418,19 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
       return value;
     },
 
-    setActionsFromPathwayString: function(magicString) {
+    setActionsFromPathwayString: function() {
       var magicStringLength = 53;
       var actions = this.actions();
 
       this.lock();
 
+      var self = this;
+
       for(var i = 0; i < magicStringLength; i++) {
         // search for correct action at this point in pathway string
         for(var j = 0, l = actions.length; j < l; j++) {
           if(actions[j].pathwayStringIndex === i) {
-            actions[j].value(this.getActionFromMagicChar(magicString[i], actions[j].getTypeName()));
+            actions[j].value(this.getActionFromMagicChar(self.values[i], actions[j].getTypeName()));
           }
         }
       }

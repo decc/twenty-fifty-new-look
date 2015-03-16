@@ -14,18 +14,14 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
       });
 
       crossroads.addRoute('calculator/:slug:', function(lastRoute, slug) {
-        // var pathway = Pathway.find(slug) || app.userPathway;
-
         var pathway;
 
         if(pathway = Pathway.find(slug)) {
           app.examplePathway(pathway)
 
           app.pathway('example');
-          pathway = app.examplePathway;
         } else {
           app.pathway('user');
-          pathway = app.userPathway;
         }
 
         // 404 if invalid slug
