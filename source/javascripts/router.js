@@ -14,7 +14,19 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
       });
 
       crossroads.addRoute('calculator/:slug:', function(lastRoute, slug) {
-        var pathway = Pathway.find(slug) || app.userPathway;
+        // var pathway = Pathway.find(slug) || app.userPathway;
+
+        var pathway;
+
+        if(pathway = Pathway.find(slug)) {
+          app.examplePathway(pathway)
+
+          app.pathway('example');
+          pathway = app.examplePathway;
+        } else {
+          app.pathway('user');
+          pathway = app.userPathway;
+        }
 
         // 404 if invalid slug
         if(slug && !pathway) {
@@ -22,17 +34,12 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
           return;
         }
 
-        pathway.setActionsFromPathwayString(pathway.values);
-
         // check if calculator already made
         var oldHash = lastRoute || '';
 
         if(oldHash.split('/')[0] !== 'calculator') {
           app.getPage('calculator', { pathway: app.currentPathway });
-        } else {
-          app.currentPathway(pathway);
         }
-
       });
 
       crossroads.addRoute('not-found', function() {
