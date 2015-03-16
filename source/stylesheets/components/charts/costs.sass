@@ -1,6 +1,4 @@
 .chart-component .tab
-  &.scroll
-    overflow-y: scroll
 
   .bar-title
     position: absolute
@@ -11,6 +9,19 @@
     padding-right: 1em
     font-weight: normal
     font-size: 1em
+
+  .example-selector
+    select
+      color: #fff
+      display: table-cell
+      vertical-align: middle
+      padding: 0.5em 1em
+      height: 46px
+      background: none
+      border: 1px solid #fff
+
+      option
+        background: $color_background_dark
 
   .costs-chartset
     position: relative
@@ -29,27 +40,17 @@
       &.bottom
         padding-top: 20px
 
-  .example-selector
-    position: absolute
-    left: 20px
-    top: 46%
-    margin-top: -23px
-    display: table
-    z-index: 10
-
-    select
-      color: #fff
-      display: table-cell
-      vertical-align: middle
-      padding: 0.5em 1em
-      height: 46px
-      background: none
-      border: 1px solid #fff
-
-      option
-        background: $color_background_dark
+    .example-selector
+      position: absolute
+      left: 20px
+      top: 46%
+      margin-top: -23px
+      display: table
+      z-index: 10
 
   .costs-chartset-scroll
+    overflow-y: scroll
+
     .chart
       position: relative
 
@@ -60,6 +61,9 @@
         height: 100px
         margin-bottom: 20px
 
+    .example-selector
+      margin-top: 20px
+      margin-bottom: -20px
 
     .sensitivity-components
       height: 2400px

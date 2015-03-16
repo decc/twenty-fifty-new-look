@@ -20,6 +20,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     self.width = self.outerWidth - self.margin.left - self.margin.right;
     self.height = self.outerHeight - self.margin.top - self.margin.bottom;
 
+    // TODO: move to vendor
     d3.sankey = function() {
       var sankey = {},
           nodeWidth = 24,

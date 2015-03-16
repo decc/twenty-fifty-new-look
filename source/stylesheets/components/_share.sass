@@ -1,16 +1,34 @@
 .share
   position: absolute
-  top: 0px
+  top: $cityscape-height
   bottom: 0
   left: 0
   right: 0
   color: #fff
-  background-color: #2C313B
-  background-image: radial-gradient(circle at 50% 100%, $color-background 15%, rgba(0,0,0,0) 40%), url(/images/rays.svg)
-  background-size: 100% 100%
-  @extend .modal-overlay
+
+  @media screen and (max-height: $device-height-small)
+    top: 0
+
+  .background
+    overflow-y: scroll
+    height: 100%
+    padding-bottom: 63px
+    background-color: #2C313B
+    background-image: radial-gradient(circle at 50% 100%, $color-background 15%, rgba(0,0,0,0) 40%), url(/images/rays.svg)
+    background-size: 100% 100%
+
+  .share-section
+    @include clearfix
+
+  .share-description
+    float: left
+    width: 40%
+    padding: 20px 50px
+
 
   .share-chart
+    float: left
+    width: 60%
     padding: 20px 50px
 
   .social
@@ -18,6 +36,7 @@
     bottom: 0
     left: 0
     right: 0
+    margin: 0
     color: #fff
     background: #28a197
 
@@ -41,7 +60,7 @@
       li
         list-style-type: none
         text-align: center
-        width: percentage(1/6)
+        width: percentage(1/7)
 
         .icon
           color: #fff

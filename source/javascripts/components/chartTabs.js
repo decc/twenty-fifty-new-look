@@ -27,7 +27,7 @@ define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartP
           { "id": 1, "name": "EnergyEmissionsChart", "title": "Emissions" }
         ]
       },
-      { "id": 4, "name": "flows", "title": "Flows", "viewmodel": "simple", "charts": [
+      { "id": 4, "name": "flows", "title": "Flows", "charts": [
           { "id": 1, "name": "FlowsChart", "title": "Flows" }
         ]
       },

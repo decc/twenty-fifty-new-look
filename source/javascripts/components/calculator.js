@@ -21,6 +21,7 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
     self.subNavVisible = ko.observable(false);
     self.shareVisible = ko.observable(false);
     self.faqVisible = ko.observable(false);
+    self.mainViewVisible = ko.observable(true);
 
     window.onresize = function () {
       self.cityspaceVisible(window.innerWidth > 768);
@@ -65,9 +66,11 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
     self.toggleShare = function() {
       if(!self.faqVisible()){
         toggleObservableBool(self, 'shareVisible');
+        toggleObservableBool(self, 'mainViewVisible');
       } else {
         toggleObservableBool(self, 'faqVisible');
         toggleObservableBool(self, 'shareVisible');
+        toggleObservableBool(self, 'mainViewVisible');
       }
     }
 
