@@ -43,7 +43,7 @@ define(['knockout', 'text!/components/calculator.html', 'pathway'],
     };
 
     self.currentPathway = params.pathway;
-    self.pathwayUpdating = params.pathway.updating;
+    self.pathwayUpdating = self.currentPathway().updating;
 
     self.pathwayCategories = Pathway.categories();
 
