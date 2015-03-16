@@ -3,16 +3,21 @@ define(['knockout', 'text!/components/chartViews/energySecurity.html'],
 
   'use strict';
 
-  var ViewModel = function(params) {
+  var ViewModel = function(args) {
     var self = this;
 
-    self.data = params.data;
+    self.data = ko.computed(function() {
+      return args.data()[args.charts[0].name];
+    });
+
+    self.knowsBalance = ko.computed(function() {
+      return true;
+    });
   };
 
   return {
     viewModel: ViewModel,
     template: html
   };
-
 });
 

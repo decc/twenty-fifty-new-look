@@ -74,6 +74,50 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       { color: "lightgoldenrodyellow", opacity: 0.4 }
     ]
 
+    var cost_component_key = ["low", "point", "high", "range"];
+
+    var cost_component_options = {
+      "Oil": ["$75/bbl", "$130/bbl", "$170/bbl", "Uncertain"],
+      "Coal": ["$80/tCoal", "$110/tCoal", "$155/tCoal", "Uncertain"],
+      "Gas": ["45p/therm", "70p/therm", "100p/therm", "Uncertain"],
+      "Finance cost": ["None", "7% real", "10% real", "Uncertain"],
+      "Default" : ["Cheap", "Default", "Today's cost", "Uncertain"]
+    };
+
+    var selects = [];
+    data.forEach(function(d) {
+      var select = document.createElement('select');
+      select.className = 'ie-select select'
+      select.style.top = (componentOrder[d.id] * (componentHeight + spacing)) + "px";
+
+      // Get options for this cost component
+      if(typeof cost_component_options[d.current.key] === "undefined") {
+        var optionValues = cost_component_options["Default"];
+      } else {
+        var optionValues = cost_component_options[d.current.key];
+      }
+
+      cost_component_options["Default"].forEach(function(cost_component, i) {
+        var option = document.createElement('option');
+        option.innerHTML = optionValues[i];
+        option.setAttribute("value", optionValues[i]);
+        select.appendChild(option);
+      });
+
+      self.element.appendChild(select);
+
+    })
+
+    // self.element.append("xhtml:div")
+    //       .attr("class", "select")
+    //       .attr("x", 0)
+    //       .attr("dx", "-0.7em")
+    //       .attr("dy", "1.8em")
+    //       .append("select")
+    //       .append("option")
+    //         .attr("value", "john")
+    //         .html("Joja")
+
     var components = self.svg.selectAll(".component")
         .data(data)
 
@@ -112,9 +156,22 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     componentsEnter.append("text")
           .attr("class", "bar-label")
           .attr("x", 0)
-          .attr("dx", "-0.5em")
-          .attr("dy", "1em")
+          .attr("dx", "-0.7em")
+          .attr("dy", "1.8em")
           .text(function(d) { return d.current.key });
+
+    // componentsEnter.append("foreignObject")
+    //       .attr("class", "select")
+    //       .attr("x", 0)
+    //       .attr("dx", "-0.7em")
+    //       .attr("dy", "1.8em")
+    //       .attr("width", "200")
+    //       .attr("height", "150")
+    //       .append("xhtml:div")
+    //       .append("select")
+    //       .append("option")
+    //         .attr("value", "john")
+    //         .html("Joja")
 
     componentsEnter.selectAll("line.horizontalGrid").remove();
     componentsEnter.each(function(d, i) {

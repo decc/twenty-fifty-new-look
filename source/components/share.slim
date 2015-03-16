@@ -9,9 +9,8 @@
 
   .share-chart
     .overview-chartset data-bind="foreach: chartKeys"
-      h3.chart-title data-bind="text: $data"
-      .chart data-bind="chart: 'OverviewChart', data: data, params: { title: $data, drawParams: { date: date }, margin: { top: 20, right: 20, bottom: 20, left: 20 } }"
-
+      .chart data-bind="chart: 'OverviewChart', data: data, params: { title: $data, drawParams: { date: date }, margin: { top: 20, right: 20, bottom: 20, left: 110 } }"
+        h3.bar-title data-bind="text: $data"
 
   .social
     h3.title Share Your Pathway:

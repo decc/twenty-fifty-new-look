@@ -17,7 +17,7 @@ define(['knockout', 'text!/components/chartViews/costs.html'],
 
     // Selected example same for all tabs
     self.selectedExample = ko.observable(); // Set by select ko value
-    self.selectedExampleName = ko.observable(); // Set by change event
+    self.selectedExampleName = ko.observable(self.examples[0].name); // Set by change event
 
     // Observable comparison chart data
     self.comparisonData = ko.observable({});
