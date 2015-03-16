@@ -10,7 +10,7 @@ define(['knockout', 'ajax', 'config'], function(ko, Ajax, config) {
 
       Ajax.request({
         method: 'GET',
-        url: config.apiUrl + '/components/factsheets/' + factsheet,
+        url: config.siteUrl + '/components/factsheets/' + factsheet + '.html',
         onSuccess: function(data) {
           el.innerHTML = data.responseText;
         }
