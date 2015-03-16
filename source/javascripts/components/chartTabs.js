@@ -54,7 +54,7 @@ define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartP
       }
     ];
 
-    self.currentTabId = ko.observable(1);
+    self.currentTabId = ko.observable(8);
 
     /** Sets visible tab */
     self.setActiveTab = function(chart) {

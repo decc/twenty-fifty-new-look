@@ -54,7 +54,7 @@ define(['knockout', 'text!/components/chartViews/costs.html'],
     };
 
 
-    self.currentTabId = ko.observable(1);
+    self.currentTabId = ko.observable(3);
 
     /** Sets visible tab */
     self.setActiveTab = function(chart) {
