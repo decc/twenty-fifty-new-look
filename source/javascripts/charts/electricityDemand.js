@@ -10,6 +10,10 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
   ElectricityDemandChart.prototype.draw = function(data, width, height){
       var self = this;
 
+      if(typeof data === "undefined") {
+        return 1;
+      }
+
       var chartLayers = data.chartLayers;
       var chartLine = data.chartLine;
 

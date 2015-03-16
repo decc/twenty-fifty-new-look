@@ -94,3 +94,4 @@ configure :build do
   # optimise image files on build
   activate :imageoptim
 end
+

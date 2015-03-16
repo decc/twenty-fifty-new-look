@@ -1,4 +1,6 @@
-define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'], function(ko, DataRequester, config, ChartParser, Action) {
+define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
+  function(ko, DataRequester, config, ChartParser, Action) {
+
   'use strict';
 
   var PATHWAY_ACTIONS = [
@@ -304,15 +306,11 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'], functio
       { category: 'Extreme Pathways', name: 'Doesn\'t tackle climate change', slug: 'blank-example', values: '10111111111111110111111001111110111101101101110110111' },
       { category: 'Extreme Pathways', name: 'Maximum demand, no supply', slug: 'max-demand-no-supply-example', values: '10111111111111110111111004424440444404204304440420111' },
       { category: 'Extreme Pathways', name: 'Maximum supply, no demand', slug: 'max-supply-no-demand-example', values: '40444444444444440443424001121110111101102101110110111' },
-      { category: 'Extreme Pathways', name: 'Nathans example', slug: 'nathans-example', values: '40111111211111110324132004314110434104103204440410111' },
-      { category: 'Extreme Pathways', name: 'Jolyons example', slug: 'jolyons-example', values: '10111111111444440444444004444440444404203304440420111' },
-
       { category: 'Government Pathways', name: 'Analagous to MARKAL 3.26', slug: 'markal-326-example', values: 'i0g2dd2pp1121f1i0322112004314110433304202304320420121' },
       { category: 'Government Pathways', name: 'Higher renewables, more energy efficiency', slug: 'high-renewables-more-energy-effficiency-example', values: 'e0d3jrg221ci12110222112004423220444404202304440420141' },
       { category: 'Government Pathways', name: 'Higher nuclear, less energy efficiency', slug: 'high-nuclear-less-energy-effficiency-example', values: 'r013ce1111111111042233B002322220233302202102330220121' },
       { category: 'Government Pathways', name: 'Higher CCS, more bioenergy', slug: 'high-css-more-bioenergy-example', values: 'f023df111111111f0322123003223220333203102303430310221' },
       { category: 'Government Pathways', name: 'Low cost pathway', slug: 'low-cost-example', values: 'q011111111111111032413l004314110434104103204440410111' },
-
       { category: '3rd Party Pathways', name: 'Friends of the Earth', slug: 'friends-of-the-earth-example', values: '10h4nn4431w23y110244111004424440343304202304430420441' },
       { category: '3rd Party Pathways', name: 'Campaign to Protect Rural England', slug: 'campaign-to-protect-rural-england', values: '10h2pdppp12332130233122004414430343304102304430410231' },
       { category: '3rd Party Pathways', name: 'Mark Brinkley', slug: 'mark-brinkley', values: '20222144411341110343321003422440423404203203340420141' },
@@ -325,7 +323,6 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'], functio
   var Pathway = function(args) {
     var args = args || {},
         self = this;
-
 
     self.name = args.name;
     self.values = args.values; // TODO: Map values to pathway action values
@@ -354,6 +351,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'], functio
       }
     });
 
+    self.setActionsFromPathwayString();
   }
 
   Pathway.prototype = {
@@ -417,18 +415,19 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'], functio
       return value;
     },
 
-    setActionsFromPathwayString: function(magicString) {
+    setActionsFromPathwayString: function() {
       var magicStringLength = 53;
       var actions = this.actions();
 
-
       this.lock();
+
+      var self = this;
 
       for(var i = 0; i < magicStringLength; i++) {
         // search for correct action at this point in pathway string
         for(var j = 0, l = actions.length; j < l; j++) {
           if(actions[j].pathwayStringIndex === i) {
-            actions[j].value(this.getActionFromMagicChar(magicString[i], actions[j].getTypeName()));
+            actions[j].value(this.getActionFromMagicChar(self.values[i], actions[j].getTypeName()));
           }
         }
       }
@@ -482,7 +481,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'], functio
     return exampleCategories;
   };
 
-    /** @returns {array} Pathway examples (all or by category) */
+  /** @returns {array} Pathway examples (all or by category) */
   Pathway.examples = function(category) {
     if(typeof category === "undefined") {
       return EXAMPLES;
@@ -514,3 +513,4 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'], functio
 
   return Pathway;
 });
+
