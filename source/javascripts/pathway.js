@@ -330,7 +330,6 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'], functio
     var args = args || {},
         self = this;
 
-
     self.name = args.name;
     self.values = args.values; // TODO: Map values to pathway action values
 
@@ -517,3 +516,4 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'], functio
 
   return Pathway;
 });
+
