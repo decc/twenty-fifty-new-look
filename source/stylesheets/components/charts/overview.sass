@@ -11,7 +11,7 @@
       font-size: 2em
 
     .min
-      left: 20px
+      left: $chart-tabs-width + 20px
 
     .max
       right: 20px
@@ -22,12 +22,23 @@
 
   .title
     color: #FFF
-    margin: 20px
+    margin: 30px
 
-  .chart-title
-    color: #FFF
-    margin: 0 20px
+  .bar-title
+    transform: translateY(-130%)
+    left: 20px
 
   .bar-label
     text-anchor: start
+
+  .charts
+    position: absolute
+    top: 8em
+    bottom: 20px
+    left: $chart-tabs-width
+    right: 0
+
+    .chart
+      height: percentage(1/3)
+
 

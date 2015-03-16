@@ -13,8 +13,6 @@ define(['knockout'], function(ko) {
       var step = params.step;
       var tooltips = params.tooltips;
 
-      //console.log(tooltips);
-
       element.setAttribute('type', 'range');
       element.setAttribute('min', min);
       element.setAttribute('max', max);
@@ -26,6 +24,8 @@ define(['knockout'], function(ko) {
 
       element.addEventListener('change', function(){
         value(parseInt(element.value));
+        var tooltip = element.parentNode.querySelector('.tooltip');
+        tooltip.setAttribute('data-position', Math.round(element.value));
       })
 
       element.addEventListener('input', function(){

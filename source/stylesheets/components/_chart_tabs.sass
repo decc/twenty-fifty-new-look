@@ -17,9 +17,12 @@
     top: 0px
 
 .chart-tab-nav
-  float: left
-  width: 30%
+  position: absolute
+  top: 0
+  left: 0
+  width: $chart-tabs-width
   height: 100%
+  z-index: 10
 
   ul
     list-style: none
@@ -39,16 +42,8 @@
       button
         color: #FFF
 
-      &:before
-        color: #FFF
-
-    &:before
-      position: absolute
-      left: 0
-      top: 50%
-      margin-top: -0.45em
-      padding: 0 0.5em
-      font-size: 2em
+        &:before
+          color: #FFF
 
     button
       width: 100%
@@ -59,11 +54,19 @@
       background: none
       outline: none
 
+      &:before
+        position: absolute
+        left: 0
+        top: 50%
+        margin-top: -0.45em
+        padding: 0 0.5em
+        font-size: 2em
+
 .chart-tabs
   position: relative
   overflow: hidden
-  float: left
-  width: 70%
+  width: 100%
+  padding-left: $chart-tabs-width
   height: 100%
   background: radial-gradient(ellipse at bottom right, rgba(0, 0, 0, 0.5) 0%, transparent)
 
@@ -75,6 +78,7 @@
     width: 100%
     bottom: 0
     height: 100%
+    padding-left: $chart-tabs-width
 
     &.active
       visibility: visible
