@@ -120,13 +120,22 @@
             content: ""
             position: absolute
             top: -10px
-            left: 0vw
             border-style: solid
             border-width: 0 15px 18px
             border-color: #464d5e transparent
             display: block
             width: 0
             z-index: 1
+
+          &[data-position="1"]:after
+            left: 0
+          &[data-position="2"]:after
+            left: 25%
+          &[data-position="3"]:after
+            left: 50%
+          &[data-position="4"]:after
+            left: 75%
+
 
 
 .toggle-nav

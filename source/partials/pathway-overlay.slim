@@ -17,7 +17,8 @@
     li
       a.icon-envelope-before data-bind="attr: { href: 'mailto:?subject=' + overlayAction().name + '&body=' + overlayAction().pdf }" target="_blank"
 
-  / div data-bind="text: overlayAction().info"
+  div data-bind="html: overlayAction().info"
+
   div
     h1 Domestic transport behaviour
     | In the base year 2007 in the 2050 Calculator, each of us travelled about 14 000 km per year, excluding trips abroad. 83% of this distance was by car, van or motorcycle, 7% by rail, 6% by bus, 2% on foot, 1% by air and 0.5% by bike.
