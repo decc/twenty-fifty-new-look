@@ -1,7 +1,7 @@
-.modal-overlay data-bind="css: { 'is-active': overlayVisible() }"
+.modal-overlay.white data-bind="css: { 'is-active': overlayVisible() }"
   / .closer data-bind="click: hideOverlay" &times;
   h2 data-bind="text: overlayAction().name"
-  ul.social
+  ul.social.black
     li
       a.icon-download-before target="_blank" data-bind="attr: { href: overlayAction().pdf }" Download pdf
 
