@@ -99,10 +99,15 @@
         input
           width: 100%
 
+        input[type=range]
+          padding: 0 7px
+
         input[type=radio]
           width: auto
-          margin: 0vw 4vw 0vw 0vw
+          margin: 0vw 3.6vw 0vw 0vw
 
+        .radios
+          padding: 0 6px
 
         .tooltip
           padding: 1em
@@ -116,26 +121,18 @@
           transition: all 0.2s linear
           opacity: 0
           z-index: -1
-          &:after
+
+          .arrow
             content: ""
             position: absolute
             top: -10px
             border-style: solid
-            border-width: 0 15px 18px
+            border-width: 0 10px 10px
             border-color: #464d5e transparent
             display: block
             width: 0
             z-index: 1
-
-          &[data-position="1"]:after
-            left: 0
-          &[data-position="2"]:after
-            left: 25%
-          &[data-position="3"]:after
-            left: 50%
-          &[data-position="4"]:after
-            left: 75%
-
+            transition: left 0.3s
 
 
 .toggle-nav
