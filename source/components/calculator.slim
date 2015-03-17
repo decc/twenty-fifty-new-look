@@ -7,8 +7,6 @@
       calculator-header params="navState: navState, pathwayName: currentPathway().name, pathway: currentPathway"
 
       .content
-        = partial "partials/faq-overlay"
-
         section#share.share data-bind="css: { 'is-active': shareVisible() }, component: { name: 'share', params: { pathway: currentPathway } }"
 
         header.cityscape data-bind="visible: cityscapeVisible"
@@ -24,4 +22,6 @@
         pathway-sidebar data-bind="visible: mainViewVisible" params="pathway: currentPathway"
 
         all-pathway-actions params="pathway: currentPathway, visible: overviewVisible, toggle: toggleOverview"
+
+        section#faq.modal-overlay data-bind="css: { 'is-active': faqVisible() }, component: { name: 'faq' }"
 
