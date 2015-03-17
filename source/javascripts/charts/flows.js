@@ -323,7 +323,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
     var sankey = d3.sankey()
         .nodeWidth(15)
-        .nodePadding(10)
+        .nodePadding(30)
         .size([width, height]);
 
     var path = sankey.link();

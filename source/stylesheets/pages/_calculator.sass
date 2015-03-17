@@ -19,7 +19,7 @@
   position: absolute
   top: 0
   left: 0
-  right: 0
+  width: calc(100% - 308px)
 
   @media screen and (max-height: $device-height-small)
     top: 0
@@ -37,18 +37,20 @@
   height: 100 - $header-height
 
 .bit
-  @include col((100%-$right-col-width))
+  width: calc(100% - 308px)
+  // padding-right:
   position: relative
   height: 100%
   @include omega
 
 .controls-sidebar
-  @include col($right-col-width)
-  @include omega
+  width: $right-col-width
   height: 100%
   margin-bottom: 100px
   overflow: hidden
-  position: relative
+  position: absolute
+  top: 0
+  right: 0
   background: #F5F5F5
 
   .tabs
@@ -104,7 +106,7 @@
 
         input[type=radio]
           width: auto
-          margin: 0vw 3.6vw 0vw 0vw
+          margin: 0vw 46px 0vw 0vw
 
         .radios
           padding: 0 6px
