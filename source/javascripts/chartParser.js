@@ -32,7 +32,7 @@ define([], function() {
 
         CostsContextChart: this.costsContext(),
         CostsComparedChart: this.costsCompared(),
-        CostsSensitivityChart: this.costsSensitivity(),
+        CostsSensitivityChart: this.costsSensitivityComponents(),
         CostsSensitivityComponentsChart: this.costsSensitivityComponents(),
       }
     },
