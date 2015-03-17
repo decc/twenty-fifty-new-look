@@ -23,6 +23,35 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/fac
     self.faqVisible = ko.observable(false);
     self.mainViewVisible = ko.observable(true);
 
+    self.pinkButton = ko.observable(true);
+    self.blueButton = ko.observable(false);
+    self.whiteButton = ko.observable(false);
+    self.greyButton = ko.observable(false);
+
+    self.buttonColor =  function(color){
+      if(color == 'pink'){
+        self.blueButton(false);
+        self.whiteButton(false);
+        self.greyButton(false);
+        self.pinkButton(true);
+      } else if(color == 'white'){
+        self.blueButton(false);
+        self.pinkButton(false);
+        self.greyButton(false);
+        self.whiteButton(true);
+      } else if(color == 'blue'){
+        self.whiteButton(false);
+        self.pinkButton(false);
+        self.greyButton(false);
+        self.blueButton(true);
+      } else if(color == 'grey'){
+        self.whiteButton(false);
+        self.pinkButton(false);
+        self.blueButton(false);
+        self.greyButton(true);
+      }
+    }
+
     window.onresize = function () {
       self.cityspaceVisible(window.innerWidth > 768);
     };
@@ -44,10 +73,13 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/fac
         self.overlayVisible(true);
         self.overlayAction(action);
       }
+
+      self.buttonColor('white');
     };
 
     self.hideOverlay = function() {
       self.overlayVisible(false);
+      self.buttonColor('pink');
     };
 
     self.currentPathway = params.pathway;
@@ -76,12 +108,17 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/fac
         self.faqCloseMode(false);
         self.mainViewVisible(true);
         self.shareVisible(false);
+
+        self.buttonColor('pink');
+
       } else {
         self.faqCloseMode(true);
         self.faqVisible(false);
         self.overlayVisible(false);
         self.mainViewVisible(false);
         self.shareVisible(true);
+
+        self.buttonColor('grey');
       }
     }
 
@@ -93,9 +130,14 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/fac
         self.overlayVisible(false);
         self.shareVisible(false);
         self.faqVisible(false);
+
+        self.buttonColor('pink');
+
       } else {
         self.faqCloseMode(true);
         self.faqVisible(true);
+
+        self.buttonColor('blue');
       }
     }
 
@@ -116,4 +158,3 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/fac
     template: html,
   };
 });
-
