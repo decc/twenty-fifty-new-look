@@ -11,7 +11,50 @@
 
         section#share.share data-bind="css: { 'is-active': shareVisible() }, component: { name: 'share', params: { pathway: currentPathway } }"
 
-        header.cityscape data-bind="visible: cityscapeVisible"
+        header.cityscape data-bind="visible: cityscapeVisible, cityscape: currentPathway"
+          .car car
+          .car car
+          .car car
+          .car car
+          .car car
+          .car car
+          .car car
+          .car car
+          .car car
+          .car car
+
+          #electricity-imports
+          #thermometer
+
+          .boat boat
+          .boat boat
+          .boat boat
+          .boat boat
+          .boat boat
+
+          .cow cow
+          .cow cow
+          .cow cow
+          .cow cow
+          .cow cow
+
+          .crop crop
+          .crop crop
+          .crop crop
+          .crop crop
+          .crop crop
+          .crop crop
+          .crop crop
+          .crop crop
+          .crop crop
+          .crop crop
+          .crop crop
+          .crop crop
+          .crop crop
+          .crop crop
+          .crop crop
+          .crop crop
+          .crop crop
 
         .bit data-bind="visible: mainViewVisible"
           section#charts.charts data-bind="css: { noTop: !cityscapeVisible() }"

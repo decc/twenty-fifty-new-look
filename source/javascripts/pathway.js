@@ -359,6 +359,20 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
   }
 
   Pathway.prototype = {
+    /** find action by slug*/
+    findAction: function(slug) {
+      var actions = this.actions();
+      var found;
+
+      actions.forEach(function(action) {
+        if(action.name === slug) {
+          found = action;
+        }
+      });
+
+      return found || false;
+    },
+
     lock: function() {
       this.locked(true);
     },
