@@ -5,10 +5,15 @@ define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySuppl
     init: function(element, valueAccessor, allBindings) {
       var name = valueAccessor();
       var data = allBindings.get('data');
+      var object = allBindings.get('object');
 
       element.params = allBindings.get('params') || {};
 
-      self.chart = eval("new " + name);
+      if(typeof object === "undefined") {
+        self.chart = eval("new " + name);
+      } else {
+        self.chart = object;
+      }
       self.chart.init(element, element.params);
       element.chart = self.chart;
 

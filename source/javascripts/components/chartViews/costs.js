@@ -1,5 +1,5 @@
-define(['knockout', 'text!/components/chartViews/costs.html'],
-  function(ko, html) {
+define(['knockout', 'text!/components/chartViews/costs.html', 'charts/costsSensitivity'],
+  function(ko, html, CostsSensitivityChart) {
   'use strict';
 
   var ViewModel = function(args) {
@@ -11,6 +11,10 @@ define(['knockout', 'text!/components/chartViews/costs.html'],
     self.contextTab = self.tabs[0];
     self.comparedTab = self.tabs[1];
     self.sensitivityTab = self.tabs[2];
+
+    self.yourCostsSensitivityChart = new CostsSensitivityChart();
+    self.comparisonCostsSensitivityChart = new CostsSensitivityChart();
+
     self.data = args.data;
 
     self.examples = args.Pathway.examples();
@@ -40,7 +44,7 @@ define(['knockout', 'text!/components/chartViews/costs.html'],
           self.comparisonData({
             CostsContextChart: contextData,
             CostsComparedChart: comparedData,
-            CostsSensitivityChart: sensitivityData,
+            CostsSensitivityChart: sensitivityComponentsData,
             CostsSensitivityComponentsChart: sensitivityComponentsData
           });
 

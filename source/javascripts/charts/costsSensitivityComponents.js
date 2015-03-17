@@ -84,29 +84,67 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       "Default" : ["Cheap", "Default", "Today's cost", "Uncertain"]
     };
 
-    var selects = [];
-    data.forEach(function(d) {
-      var select = document.createElement('select');
-      select.className = 'ie-select select'
-      select.style.top = (componentOrder[d.id] * (componentHeight + spacing)) + "px";
+    var readSelects = function() {
+      var selects = document.querySelectorAll(".select");
+      var sensitivitySelection = [];
 
-      // Get options for this cost component
-      if(typeof cost_component_options[d.current.key] === "undefined") {
-        var optionValues = cost_component_options["Default"];
-      } else {
-        var optionValues = cost_component_options[d.current.key];
+      for(var i = 0; i < selects.length; i++) {
+        sensitivitySelection.push(selects[i].value);
       }
 
-      cost_component_options["Default"].forEach(function(cost_component, i) {
-        var option = document.createElement('option');
-        option.innerHTML = optionValues[i];
-        option.setAttribute("value", optionValues[i]);
-        select.appendChild(option);
+      return sensitivitySelection;
+    };
+
+    var selectChange = function(e) {
+      self.transitionBars();
+      self.drawParams.updateChart1.draw(self.drawParams.updateChart1.data)
+      self.drawParams.updateChart2.draw(self.drawParams.updateChart2.data)
+    };
+
+    var optionValues = [];
+
+    if(document.querySelector('.ie-select')) {
+      data.forEach(function(d) {
+        var select = document.querySelector('.ie-select[data-component="'+d.current.key+'"]')
+        select.style.top = (componentOrder[d.id] * (componentHeight + spacing)) + "px";
       });
+    } else {
+      data.forEach(function(d) {
+        var select = document.createElement('select');
+        select.className = 'ie-select select'
+        select.setAttribute('data-component', d.current.key);
+        select.style.top = (componentOrder[d.id] * (componentHeight + spacing)) + "px";
+        select.style.left = self.margin.left + "px";
+        select.id = d.id;
 
-      self.element.appendChild(select);
+        // Get options for this cost component
+        if(typeof cost_component_options[d.current.key] === "undefined") {
+          var optionValues = cost_component_options["Default"];
+        } else {
+          var optionValues = cost_component_options[d.current.key];
+        }
 
-    })
+        optionValues.forEach(function(cost_component, i) {
+          var option = document.createElement('option');
+          option.innerHTML = optionValues[i];
+          option.setAttribute("value", cost_component_key[i]);
+
+          if(cost_component_key[i] === "point") {
+            option.setAttribute("selected", "selected");
+          }
+
+          select.appendChild(option);
+        });
+
+        self.element.appendChild(select);
+      });
+    }
+
+    var selects = document.querySelectorAll(".select");
+    for(var i = 0; i < selects.length; i++) {
+      selects[i].addEventListener('change', selectChange);
+    };
+
 
     // self.element.append("xhtml:div")
     //       .attr("class", "select")
@@ -123,6 +161,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
     var componentsEnter = components.enter().append("g")
       .attr("class", "component")
+      .attr("id", function(d) { return d.id; })
       .attr("transform", function(d, i) { return "translate(0, "+(componentOrder[d.id] * (componentHeight + spacing))+")"; });
 
     components.transition()
@@ -139,29 +178,78 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         .attr("x", x(0))
     });
 
-    components.select(".bar-0").transition()
-      .attr("width", function(d) { return Math.abs(x(d.current.value.point)); });
+    componentsEnter.append("rect")
+      .attr("class", "bar bar-"+0+"-range")
+      .attr('fill', self.colours(0))
+      .attr('opacity', 0.4)
+      .attr("y", 0)
+      .attr("height", barHeight)
+      .attr("x", x(0))
+
+    componentsEnter.append("rect")
+      .attr("class", "bar bar-"+2+"-range")
+      .attr('fill', self.colours(2))
+      .attr('opacity', 0.4)
+      .attr("y", (2 * barHeight))
+      .attr("height", barHeight)
+      .attr("x", x(0))
 
     components.select(".bar-1").transition()
       .attr("width", function(d) { return Math.abs(x(d.current.value.range)); })
-      .attr("x", function(d) { return Math.abs(x(d.current.value.point)); });
-
-    components.select(".bar-2").transition()
-      .attr("width", function(d) { return Math.abs(x(d.comparison.value.point)); });
+      .attr("x", function(d) { return Math.abs(x(d.current.value.low)); });
 
     components.select(".bar-3").transition()
       .attr("width", function(d) { return Math.abs(x(d.comparison.value.range)); })
-      .attr("x", function(d) { return Math.abs(x(d.comparison.value.point)); });
+      .attr("x", function(d) { return Math.abs(x(d.comparison.value.low)); });
+
+    self.transitionBars = function() {
+      var components = self.svg.selectAll(".component")
+        .data(data);
+
+      var sensitivitySelection = readSelects();
+
+      components.each(function(d, i) {
+        if(sensitivitySelection[i] !== "range") {
+          d3.select(this).select(".bar-0").transition()
+            .attr("width", Math.abs(x(d.current.value[sensitivitySelection[i]])));
+
+          d3.select(this).select(".bar-2").transition()
+            .attr("width", Math.abs(x(d.comparison.value[sensitivitySelection[i]])));
+
+          d3.select(this).select(".bar-0-range").transition()
+            .attr("x", Math.abs(x(d.current.value["low"])))
+            .attr("width", 0);
+
+          d3.select(this).select(".bar-2-range").transition()
+            .attr("x", Math.abs(x(d.comparison.value["low"])))
+            .attr("width", 0);
+        } else {
+          d3.select(this).select(".bar-0").transition()
+            .attr("width", Math.abs(x(d.current.value["low"])));
+
+          d3.select(this).select(".bar-2").transition()
+            .attr("width", Math.abs(x(d.comparison.value["low"])));
+
+          d3.select(this).select(".bar-0-range").transition()
+            .attr("x", Math.abs(x(d.current.value["low"])))
+            .attr("width", Math.abs(x(d.current.value["range"])));
+
+          d3.select(this).select(".bar-2-range").transition()
+            .attr("x", Math.abs(x(d.comparison.value["low"])))
+            .attr("width", Math.abs(x(d.comparison.value["range"])));
+        }
+      });
+    }
+    self.transitionBars();
 
     componentsEnter.append("text")
           .attr("class", "bar-label")
-          .attr("x", 0)
+          .attr("x", -94)
           .attr("dx", "-0.7em")
-          .attr("dy", "1.8em")
+          .attr("dy", "1.85em")
           .text(function(d) { return d.current.key });
 
     // componentsEnter.append("foreignObject")
-    //       .attr("class", "select")
     //       .attr("x", 0)
     //       .attr("dx", "-0.7em")
     //       .attr("dy", "1.8em")
@@ -169,12 +257,13 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     //       .attr("height", "150")
     //       .append("xhtml:div")
     //       .append("select")
+    //         .attr("class", "select")
     //       .append("option")
     //         .attr("value", "john")
     //         .html("Joja")
 
-    componentsEnter.selectAll("line.horizontalGrid").remove();
-    componentsEnter.each(function(d, i) {
+    components.selectAll("line.horizontalGrid").remove();
+    components.each(function(d, i) {
       d3.select(this).selectAll("line.horizontalGrid").data(self.x.ticks(nTicks)).enter()
       .append("line")
         .attr({
@@ -190,8 +279,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         });
     });
 
-    // componentsEnter.selectAll('.border').remove();
-    componentsEnter.append("rect")
+    components.selectAll('.border').remove();
+    components.append("rect")
       .attr({
         "class": "border",
         "x": 0,

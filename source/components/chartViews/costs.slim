@@ -36,16 +36,16 @@
       .inner.scroll
         h2.title The cost of your pathway compared with another, allowing simple variation in cost estimates.
         .costs-chartset
-          .chart.sensitivity-summary.top.has-axis data-bind="chart: name, data: $parent.data, params: { hasAxis: true, margin: { top: 40, right: 40, bottom: 0, left: 220 } }"
+          .chart.sensitivity-summary.top.has-axis data-bind="chart: name, data: $parent.data, object: $parent.comparisonCostsSensitivityChart, params: { hasAxis: true, margin: { top: 40, right: 40, bottom: 0, left: 315 }, drawParams: { colour: 1 } }"
             h3.bar-title Your pathway
 
           .example-selector
             select data-bind="options: $parent.examples, optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample, event: { change: $parent.changeSelectedExampleName }"
 
-          .chart.sensitivity-summary.bottom data-bind="chart: name, data: $parent.comparisonData, params: { margin: { top: 40, right: 40, bottom: 20, left: 220 } }"
+          .chart.sensitivity-summary.bottom data-bind="chart: name, data: $parent.comparisonData, object: $parent.yourCostsSensitivityChart, params: { margin: { top: 40, right: 40, bottom: 20, left: 315 }, drawParams: { colour: 2 } }"
             h3.bar-title data-bind="text: $parent.selectedExampleName"
 
-          .chart.sensitivity-components data-bind="chart: 'CostsSensitivityComponentsChart', data: { current: $parent.data, comparison: $parent.comparisonData }, params: { margin: { top: 0, right: 40, bottom: 0, left: 220 } }"
+          .chart.sensitivity-components data-bind="chart: 'CostsSensitivityComponentsChart', data: { current: $parent.data, comparison: $parent.comparisonData }, params: { margin: { top: 0, right: 40, bottom: 0, left: 315 }, drawParams: { updateChart1: $parent.yourCostsSensitivityChart, updateChart2: $parent.comparisonCostsSensitivityChart } }"
 
 
 ul.tab-nav.chart-component-tabs data-bind="foreach: tabs"

@@ -10,6 +10,8 @@ define(['d3'], function(d3) {
 
     self.title;
 
+    self.transitionBars = function() {};
+
     self.margin;
     self.outerWidth;
     self.outerHeight;
