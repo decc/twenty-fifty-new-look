@@ -73,6 +73,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         .attr("height", function(d) { return y(0) - y(d.value); });
 
     bars.transition()
+        .attr("x", function(d, i) { return x(d.key); })
+        .attr("width", x.rangeBand())
         .attr("y", function(d) { return y(d.value); })
         .attr("height", function(d) { return y(0) - y(d.value); });
 
@@ -89,6 +91,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         .attr("height", function(d) { return y(d.value - d.y1); });
 
     rangeBars.transition()
+        .attr("x", function(d, i) { return x(d.key); })
+        .attr("width", x.rangeBand())
         .attr("y", function(d) { return y(d.value); })
         .attr("height", function(d) { return y(d.y1) - y(d.value); });
 

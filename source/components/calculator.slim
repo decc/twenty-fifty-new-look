@@ -14,9 +14,10 @@
         header.cityscape data-bind="visible: cityscapeVisible"
 
         .bit data-bind="visible: mainViewVisible"
-          section#charts.charts data-bind="css: { noTop: !cityscapeVisible() }"
-            / span.toggle-city data-bind="click: toggleCity"
-            .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway } }"
+          div
+            section#charts.charts data-bind="css: { noTop: !cityscapeVisible() }"
+              / span.toggle-city data-bind="click: toggleCity"
+              .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway } }"
 
         = partial "partials/pathway-overlay"
 

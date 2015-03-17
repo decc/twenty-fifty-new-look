@@ -24,9 +24,11 @@ aside.controls-sidebar data-bind="tabs"
           <!-- /ko -->
 
           <!-- ko if: getTypeName() === 'radio' -->
-            span data-bind="radio: value, params: { name: name, tooltips: tooltips, max: max }"
+            span.radios data-bind="radio: value, params: { name: name, tooltips: tooltips, max: max }"
           <!-- /ko -->
 
           span.tooltip
+            .arrow
+            .text
 
   button.show-overview data-bind="click: $parent.toggleOverview"= I18n.t('calculator.all.show')

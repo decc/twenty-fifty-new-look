@@ -85,7 +85,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     rangeBar.enter().append("rect")
         .attr("class", "bar range-bar")
         // .attr('fill', self.colours(self.drawParams.colour))
-        .attr('fill', self.drawParams.colour === 2 ? "#ff7f0e" : "#1f77b4")
+        .attr('fill', self.drawParams.colour === 2 ? "#ffbb78" : "#aec7e8")
         .attr('opacity', '0.3')
         .attr("y", 0)
         .attr("height", self.height)

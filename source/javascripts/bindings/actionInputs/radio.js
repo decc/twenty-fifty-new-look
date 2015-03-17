@@ -7,7 +7,7 @@ define(['knockout'], function(ko) {
       var params = allBindings.get('params');
       var max = params.max || 4;
 
-      var label = '.value-label';
+      element.label = '.value-label';
       var tooltips = params.tooltips;
 
 
@@ -32,12 +32,12 @@ define(['knockout'], function(ko) {
 
       element.childNodes[0].checked = true;
 
-      if(element.parentNode.previousSibling.querySelector(label) == null){
+      if(element.parentNode.previousSibling.querySelector(element.label) == null){
         var valueLabel = document.createElement('span');
         valueLabel.classList.add('value-label');
         element.parentNode.insertBefore(valueLabel, element);
       } else {
-        element.parentNode.previousSibling.querySelector(label).innerHTML = '0';
+        element.parentNode.previousSibling.querySelector(element.label).innerHTML = '0';
       }
 
     },
@@ -46,20 +46,30 @@ define(['knockout'], function(ko) {
       var value = valueAccessor();
       var data = allBindings.get('data');
       var map = { "A":"1", "B": "2", "C":"3", "D": "4" };
-      var label = '.value-label';
+      var val = map[value()];
 
       element.querySelector('input[value="' + value() + '"]').checked = true
 
-      var valueLabel = element.parentNode.previousSibling.querySelector(label)
+      var valueLabel = element.parentNode.previousSibling.querySelector(element.label)
       valueLabel.innerHTML = value();
 
-      var val = map[value()];
-      var text = element.querySelector('input[value="' + value() + '"]').getAttribute("tip"+val);
+      ko.bindingHandlers.radio.setTooltip(element, val, value());
+    },
+
+    setTooltip: function(element, value, className) {
+      var text = element.querySelector('input[value="' + className + '"]').getAttribute("tip"+value);
 
       var tooltip = element.parentNode.querySelector('.tooltip');
-      tooltip.innerHTML = text;
-      tooltip.className = "tooltip "+ value().toLowerCase();
+      tooltip.className = "tooltip "+ className.toLowerCase();
 
+      var tooltipText = element.parentNode.querySelector('.tooltip .text');
+      tooltipText.innerHTML = text;
+
+      var endValue = 3;
+      var endPosition = 172;
+      var arrowPosition = Math.round(((value - 1) / endValue * endPosition) + 2)
+      var tooltipArrow = element.parentNode.querySelector('.tooltip .arrow');
+      tooltipArrow.style.left = arrowPosition + "px";
     }
   };
 

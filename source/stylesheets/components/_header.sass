@@ -1,4 +1,5 @@
 .calculator-header
+  position: relative
   height: 7vh
   min-height: 60px
   @include row
@@ -20,8 +21,9 @@
     color: #fff
 
   .total-co2-reduction
-    @include col(52.4%)
+    @include col(77.4%)
     @include omega
+    padding-right: 308px !important
     height: 100%
     color: $color-background-dark
     border-left: 1px solid #333
@@ -57,7 +59,9 @@
   .controls
     @include col($right-col-width)
     @include omega
-    position: relative
+    position: absolute
+    top: 0
+    right: 0
     height: 100%
 
     button
