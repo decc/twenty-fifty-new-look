@@ -119,7 +119,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         }
     };
 
-    self.svg.selectAll('g.x.axis g text').each(insertLinebreaks);
+    self.svg.selectAll('g.x.axis g text').each(insertLinebreaks)
+        .attr('font-size', '0.7em');
 
     self.svg.append("g")
         .attr("class", "y axis")

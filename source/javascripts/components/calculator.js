@@ -57,6 +57,7 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/fac
     };
 
     self.cityscapeVisible = ko.observable(window.innerWidth > 768);
+    self.fullscreenVisible = ko.observable(false);
     self.overlayVisible = ko.observable(false);
     self.overlayContent = ko.observable();
 

@@ -1,3 +1,5 @@
 .double-size
-  .chart-fullscreen data-bind=""
-  .chart.full-size.flows data-bind="chart: chart.name, data: data, params: { margin: { top: 0, right: 0, bottom: 0, left: 0 } }"
+  .flows-chartset
+    p This is an energy flow chart. Each box on the right is a way we use energy. Each box on the left is a place we get energy. In between are the changes the energy goes through. The height of each line is proportional to the amount of energy
+    / .chart-fullscreen data-bind="click: fullscreen" click me
+    .chart.full-size.flows data-bind="chart: chart.name, data: data, params: { margin: { top: 0, right: 0, bottom: 0, left: 0 } }"

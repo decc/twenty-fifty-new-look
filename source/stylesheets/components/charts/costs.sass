@@ -1,12 +1,22 @@
 .chart-component .tab
 
   .example-selector
+    width: 100%
+
+    .select-title
+      color: #fff
+      font-size: 1em
+      top: 50%
+      transform: translateY(-50%)
+      margin: 0
+
     select
       color: #fff
       display: table-cell
       vertical-align: middle
-      padding: 0.5em 1em
-      height: 46px
+      padding: 0.5em
+      margin-left: 150px
+      height: 42px
       background: none
       border: 1px solid #fff
 
@@ -19,7 +29,6 @@
 
     .bar-title
       transform: translateY(-50%)
-
 
     .compare
       height: 200px
@@ -35,6 +44,16 @@
       position: relative
       display: table
       z-index: 10
+
+    &.sensitivity
+      .bar-title,
+      .select-title
+        width: 315px
+
+      .example-selector
+        select
+          margin-left: 315px
+
 
     .sensitivity-summary
       height: 100px
