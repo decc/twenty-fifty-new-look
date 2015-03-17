@@ -45,6 +45,23 @@
           .chart.sensitivity-summary.bottom data-bind="chart: name, data: $parent.comparisonData, object: $parent.yourCostsSensitivityChart, params: { margin: { top: 40, right: 40, bottom: 20, left: 315 }, drawParams: { colour: 2 } }"
             h3.bar-title data-bind="text: $parent.selectedExampleName"
 
+          ul.chart-key
+            li
+              span.colour#costs-sensitivity-colour-1
+              span.name The cost in your pathway
+
+            li
+              span.colour#costs-sensitivity-colour-2
+              span.name The range of cost estimates in your pathway
+
+            li
+              span.colour#costs-sensitivity-colour-3
+              span.name data-bind="text: 'The cost in \''  + $parent.selectedExampleName() +'\''"
+
+            li
+              span.colour#costs-sensitivity-colour-4
+              span.name data-bind="text: 'The range of cost estimates in \''  + $parent.selectedExampleName() +'\''"
+
           .chart.sensitivity-components data-bind="chart: 'CostsSensitivityComponentsChart', data: { current: $parent.data, comparison: $parent.comparisonData }, params: { margin: { top: 0, right: 40, bottom: 0, left: 315 }, drawParams: { updateChart1: $parent.yourCostsSensitivityChart, updateChart2: $parent.comparisonCostsSensitivityChart } }"
 
 

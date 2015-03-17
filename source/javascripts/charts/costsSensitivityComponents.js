@@ -169,6 +169,11 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
 
     bars.forEach(function(bar, n) {
+      // Key
+      var key = document.getElementById('costs-sensitivity-colour-' + (n+1));
+      key.style.background = self.colours(n);
+      key.style.opacity = bar.opacity;
+
       componentsEnter.append("rect")
         .attr("class", "bar bar-"+n)
         .attr('fill', self.colours(n))
