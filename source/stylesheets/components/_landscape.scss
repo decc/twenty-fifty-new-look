@@ -1,0 +1,831 @@
+#landscape {
+  background: #fff;
+  height: 300px;
+  max-width: 1200px;
+  overflow: hidden;
+  width: 75%;
+}
+
+.layer {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 50%;
+  right: 0;
+
+  /* centre align the inner div */
+  margin-left: -660px;
+  width: 1320px;
+
+  background-repeat: no-repeat;
+}
+
+#landscape-layer-1 {
+  background-image: url('/layers/layer1.svg');
+  background-position: 50% -23px;
+  background-size: auto 428px;
+}
+
+#landscape-layer-2 {
+  background-image: url('/layers/layer2.svg');
+  background-position: 124% -23px; /* new adjustment for landfill */
+  background-size: auto 434px;
+}
+
+#landscape-layer-3 {
+  background-image: url('/layers/layer3.svg');
+  background-position: 0 -56px;
+  background-size: auto 434px;
+}
+
+#landscape-layer-4 {
+  background-image: url('/layers/layer4.svg');
+  background-position: 0 -41px;
+  background-size: auto 428px;
+}
+
+
+
+
+
+
+
+
+.layer > *, i {
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+
+  position: absolute;
+
+  height: 300px; /* default height (landscape height) */
+}
+
+i {
+  opacity: 0;
+  @include transition(opacity .3s);
+
+  &.is-active,
+  &.persistant {
+    opacity: 1;
+  }
+
+  &:after {
+    background-position: 50% 100%;
+    background-repeat: no-repeat;
+    content: " "; /* is this smart ? */
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+
+/* === Airplanes === */
+
+i.airplane {
+  background-image: url(/svgs/airplane.svg);
+}
+
+i.airplane[data-value="1"] { bottom: 253px; left: 226px; width: 25px; }
+i.airplane[data-value="2"] { bottom: 253px; left: 536px; width: 20px; }
+i.airplane[data-value="3"] { bottom: 258px; left: 676px; width: 19px; }
+i.airplane[data-value="4"] { bottom: 243px; left: 176px; width: 18px; }
+i.airplane[data-value="5"] { bottom: 263px; left: 390px; width: 16px; }
+
+
+
+/* === Bikes === */
+
+i.bike {
+  background-image: url(/svgs/bike.svg);
+  bottom: 61px;
+  width: 18px;
+}
+
+i.bike[data-value="1"] { bottom: 60px; left: 566px; }
+i.bike[data-value="2"] { left: 260px; }
+i.bike[data-value="3"] { bottom: 56px; left: 732px; }
+i.bike[data-value="4"] { left: 216px; }
+i.bike[data-value="5"] { left: 450px; }
+
+
+
+/* === Biocrops === */
+
+.biocrops {
+  position: absolute;
+}
+
+#biocrops-layer-3 {
+  bottom: 93px;
+  left: 760px;
+}
+
+#biocrops-layer-4 {
+  bottom: 17px;
+  left: 152px;
+}
+
+.biocrops i {
+  display: inline-block;
+  position: relative;
+}
+
+#biocrops-layer-3 i.biocrop {
+  width: 6px;
+  background-image: url(/svgs/biocrop_layer3.svg);
+}
+
+#biocrops-layer-4 i.biocrop {
+  background-image: url(/svgs/biocrop_layer4.svg);
+  width: 8px;
+}
+
+
+
+/* === bioenergy === */
+
+i.bioenergy {
+  background-image: url(/svgs/bioenergy_powerstation.svg);
+}
+
+i.bioenergy.coal {
+  background-image: url(/svgs/coal_powerstation.svg);
+}
+
+/* on layer 1 */
+
+i.bioenergy[data-value="1"] { bottom: 254px; left: 975px; width: 20px; }
+i.bioenergy[data-value="3"] { bottom: 244px; left: 640px; width: 14px; }
+i.bioenergy[data-value="5"] { bottom: 254px; left: 940px; width: 14px; }
+i.bioenergy[data-value="7"] { bottom: 250px; left: 700px; width: 18px; }
+i.bioenergy[data-value="9"] { bottom: 236px; left: 600px; width: 17px; }
+i.bioenergy[data-value="10"] { bottom: 254px; left: 838px; width: 16px; }
+
+/* on layer 2 */
+
+i.bioenergy[data-value="2"] { bottom: 173px; left: 460px; width: 47px; }
+i.bioenergy[data-value="4"] { bottom: 190px; left: 1105px; width: 24px; }
+i.bioenergy[data-value="6"] { bottom: 190px; left: 980px; width: 37px; }
+i.bioenergy[data-value="8"] { bottom: 185px; left: 740px; width: 44px; }
+
+
+
+
+/* === Boats === */
+
+i.boat {
+  background-image: url(/svgs/boat.svg);
+  bottom: 223px;
+  width: 30px;
+}
+
+i.boat.green {
+  /* what goes here? */
+}
+
+i.boat[data-value="1"] { left: 270px; }
+i.boat[data-value="2"] { left: 310px; }
+i.boat[data-value="3"] { left: 350px; }
+i.boat[data-value="4"] { left: 390px; }
+i.boat[data-value="5"] { left: 430px; }
+
+
+
+/* === Cars === */
+
+i.car {
+  background-image: url(/svgs/car.svg);
+  bottom: 61px;
+  width: 24px;
+}
+
+i.car.electric:after {
+  background-image: url(/svgs/electric.svg);
+  background-size: 30% auto;
+  margin-bottom: 2px;
+}
+
+i.car.hydrogen:after {
+  background-image: url(/svgs/hydrogen.svg);
+  background-size: 45% auto;
+  margin-bottom: 2px;
+  margin-left: 1px;
+}
+
+i.car[data-value="1"] { left: 285px; }
+i.car[data-value="2"] { bottom: 56px; left: 696px; }
+i.car[data-value="3"] { bottom: 58px; left: 607px; }
+i.car[data-value="4"] { left: 103px; }
+i.car[data-value="5"] { left: 372px; }
+i.car[data-value="6"] { left: 43px; }
+i.car[data-value="7"] { bottom: 52px; left: 837px; }
+i.car[data-value="8"] { bottom: 60px; left: 538px; }
+i.car[data-value="9"] { left: 314px; }
+i.car[data-value="10"] { left: 402px; }
+
+
+
+/* === CCS === */
+
+i.ccs {
+  background-image: url(/svgs/ccs_powerstation.svg);
+}
+
+/* in layer 1 */
+
+i.ccs[data-value="1"] { bottom: 244px; left: 1008px; width: 30px; }
+i.ccs[data-value="3"] { bottom: 245px; left: 790px; width: 27px; }
+i.ccs[data-value="5"] { bottom: 245px; left: 1053px; width: 27px; }
+
+/* on layer 2 */
+
+i.ccs[data-value="2"] { bottom: 161px; left: 616px; width: 60px; }
+i.ccs[data-value="4"] { bottom: 174px; left: 1057px; width: 49px; }
+
+
+
+/* === Commercial Turbines === */
+
+.commercial-turbines {
+
+}
+
+.commercial-turbines i.turbine {
+  background-image: url(/svgs/turbine_land.svg);
+}
+
+.commercial-turbines i.turbine[data-value="1"] { bottom: 244px; left: 114px; width: 13px; }
+.commercial-turbines i.turbine[data-value="2"] { bottom: 249px; left: 198px; width: 18px; }
+.commercial-turbines i.turbine[data-value="3"] { bottom: 185px; left: 155px; width: 20px; }
+.commercial-turbines i.turbine[data-value="4"] { bottom: 182px; left: 278px; width: 15px; }
+.commercial-turbines i.turbine[data-value="5"] { bottom: 209px; left: 237px; width: 17px; }
+.commercial-turbines i.turbine[data-value="6"] { bottom: 200px; left: 50px; width: 16px; }
+
+
+
+/* === Cows === */
+
+i.cow {
+  background-image: url(/svgs/cow.svg);
+  bottom: 20px;
+  width: 46px;
+}
+
+i.cow[data-value="1"] { left: 386px; }
+i.cow[data-value="2"] { left: 88px; }
+i.cow[data-value="3"] { bottom: 16px; left: 640px; }
+i.cow[data-value="4"] { bottom: 18px; left: 526px; }
+i.cow[data-value="5"] { left: 30px; }
+
+i.cow[data-value="2"], i.cow[data-value="4"], i.cow[data-value="5"] {
+     -moz-transform: scaleX(-1);
+       -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+             filter: FlipH;
+         -ms-filter: "FlipH";
+}
+
+
+
+/* === Factory === */
+
+.factory {
+  bottom: 104px;
+  left: 1150px;
+  position: absolute;
+}
+
+.factory i {
+  display: inline-block;
+  position: relative;
+}
+
+.factory i.factory-building {
+  background-image: url(/svgs/factory.svg);
+}
+
+.factory[data-value="1"] i.factory-building { width: 80px; }
+.factory[data-value="2"] i.factory-building { width: 120px; }
+.factory[data-value="3"] i.factory-building { width: 104px; }
+.factory[data-value="4"] i.factory-building { width: 52px; }
+.factory[data-value="5"] i.factory-building { display: none; }
+
+
+
+/* === Geothermal === */
+
+i.geothermal {
+  background-image: url(/svgs/geothermal.svg);
+}
+
+/* on layer 1 */
+
+i.geothermal[data-value="2"] { bottom: 229px; left: 881px; width: 4px; }
+i.geothermal[data-value="4"] { bottom: 229px; left: 779px; width: 4px; }
+
+/* on layer 2 */
+
+i.geothermal[data-value="1"] { bottom: 124px; left: 700px; width: 10px; }
+i.geothermal[data-value="3"] { bottom: 127px; left: 516px; width: 8px; }
+i.geothermal[data-value="5"] { bottom: 126px; left: 851px; width: 10px; }
+
+
+
+/* === Imports === */
+
+.imports {
+  background: #fff;
+  height: 20px;
+  left: 0px;
+  position: absolute;
+
+      -ms-transition: all 300ms ease-in;
+  -webkit-transition: all 300ms ease-in;
+     -moz-transition: all 300ms ease-in;
+          transition: all 300ms ease-in;
+}
+
+.imports:before {
+  border: 10px solid transparent;
+  border-left-color: #fff;
+  content: " ";
+  position: absolute;
+  right: -20px;
+}
+
+.imports:after {
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  bottom: 4px;
+  content: " ";
+  height: 12px;
+  position: absolute;
+  right: 0;
+  width: 8px;
+}
+
+/* Electricity Imports */
+
+.electricity-imports {
+  bottom: 198px;
+}
+
+.electricity-imports:after {
+  background-image: url(/svgs/electric.svg);
+}
+
+.electricity-imports[data-value="1"] { width: 0px; }
+.electricity-imports[data-value="2"] { width: 0px; }
+.electricity-imports[data-value="3"] { width: 150px; }
+.electricity-imports[data-value="4"] { width: 300px; }
+.electricity-imports[data-value="5"] { width: 600px; }
+
+/* Bioenergy Imports */
+
+.bioenergy-imports {
+  bottom: 172px;
+}
+
+.bioenergy-imports:after {
+  background-image: url(/svgs/bioenergy.svg);
+}
+
+.bioenergy-imports[data-value="1"] { width: 0px; }
+.bioenergy-imports[data-value="2"] { width: 0px; }
+.bioenergy-imports[data-value="3"] { width: 100px; }
+.bioenergy-imports[data-value="4"] { width: 200px; }
+.bioenergy-imports[data-value="5"] { width: 400px; }
+
+
+
+
+/* === Insulation === */
+
+.insulation {
+  border-left: 6px solid rgb(90, 99, 120);
+  border-right: 6px solid rgb(90, 99, 120);
+  bottom: 46px;
+  display: inline-block;
+  height: 136px;
+  left: 896px;
+  position: absolute;
+  width: 190px;
+
+      -ms-transition: all 300ms ease-in;
+  -webkit-transition: all 300ms ease-in;
+     -moz-transition: all 300ms ease-in;
+          transition: all 300ms ease-in;
+}
+
+.insulation[data-value="1"] { }
+.insulation[data-value="2"] { border-width: 10px; width: 182px; }
+.insulation[data-value="3"] { border-width: 10px; width: 182px; }
+.insulation[data-value="4"] { border-width: 10px; width: 182px; }
+.insulation[data-value="5"] { border-width: 16px; width: 170px; }
+
+
+
+/* === Landfill === */
+
+i.landfill {
+  background-image: url(/svgs/landfill_high.svg);
+  bottom: 163px;
+  left: 1214px;
+  width: 57px;
+}
+
+i.landfill[data-value="1"] { background-image: url(/svgs/landfill_high.svg); }
+i.landfill[data-value="2"] { background-image: url(/svgs/landfill_med.svg); }
+i.landfill[data-value="3"] { background-image: url(/svgs/landfill_low.svg); }
+i.landfill[data-value="4"] { background-image: none; }
+i.landfill[data-value="5"] { background-image: none; }
+
+
+
+/* === Lorries === */
+
+i.lorry {
+  background-image: url(/svgs/lorry.svg);
+  bottom: 61px;
+  width: 30px;
+}
+
+i.lorry[data-value="1"] { left: 341px; }
+i.lorry[data-value="2"] { left: 486px; }
+i.lorry[data-value="3"] { bottom: 58px; left: 636px; }
+i.lorry[data-value="4"] { left: 141px; }
+i.lorry[data-value="5"] { left: 180px; }
+i.lorry[data-value="6"] { bottom: 54px; left: 785px; }
+i.lorry[data-value="7"] { left: 70px; }
+
+
+
+/* === Meters === */
+
+i.commercial-meter, i.home-meter {
+  background-image: url(/svgs/dial.svg);
+
+      -ms-transition: all 300ms ease-in;
+  -webkit-transition: all 300ms ease-in;
+     -moz-transition: all 300ms ease-in;
+          transition: all 300ms ease-in;
+
+      -ms-transform-origin: 50%;
+  -webkit-transform-origin: 50%;
+     -moz-transform-origin: 50%;
+          transform-origin: 50%;
+}
+
+i.commercial-meter {
+  background-position: 0 32px;
+  background-size: 42px auto;
+  bottom: 59px;
+  left: 170px;
+  height: 74px;
+  width: 74px;
+}
+
+i.commercial-meter[data-value="1"] {
+      -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+     -moz-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+i.commercial-meter[data-value="2"] {
+      -ms-transform: rotate(112.5deg);
+  -webkit-transform: rotate(112.5deg);
+     -moz-transform: rotate(112.5deg);
+          transform: rotate(112.5deg);
+}
+
+i.commercial-meter[data-value="3"] {
+      -ms-transform: rotate(99deg);
+  -webkit-transform: rotate(99deg);
+     -moz-transform: rotate(99deg);
+          transform: rotate(99deg);
+}
+
+i.commercial-meter[data-value="4"] {
+      -ms-transform: rotate(81deg);
+  -webkit-transform: rotate(81deg);
+     -moz-transform: rotate(81deg);
+          transform: rotate(81deg);
+}
+
+i.commercial-meter[data-value="5"] {
+      -ms-transform: rotate(63deg);
+  -webkit-transform: rotate(63deg);
+     -moz-transform: rotate(63deg);
+          transform: rotate(63deg);
+}
+
+
+i.home-meter {
+  background-position: 0 32px;
+  background-size: 42px auto;
+  bottom: 10px;
+  left: 934px;
+  height: 74px;
+  width: 74px;
+}
+
+i.home-meter[data-value="1"] {
+      -ms-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+     -moz-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+i.home-meter[data-value="2"] {
+      -ms-transform: rotate(144deg);
+  -webkit-transform: rotate(144deg);
+     -moz-transform: rotate(144deg);
+          transform: rotate(144deg);
+}
+
+i.home-meter[data-value="3"] {
+      -ms-transform: rotate(119deg);
+  -webkit-transform: rotate(119deg);
+     -moz-transform: rotate(119deg);
+          transform: rotate(119deg);
+}
+
+i.home-meter[data-value="4"] {
+      -ms-transform: rotate(70deg);
+  -webkit-transform: rotate(70deg);
+     -moz-transform: rotate(70deg);
+          transform: rotate(70deg);
+}
+
+i.home-meter[data-value="5"] {
+      -ms-transform: rotate(49deg);
+  -webkit-transform: rotate(49deg);
+     -moz-transform: rotate(49deg);
+          transform: rotate(49deg);
+}
+
+
+
+/* === Nuclear === */
+
+i.nuclear {
+  background-image: url(/svgs/nuclear_powerstation.svg);
+}
+
+/* on layer 1 */
+
+i.nuclear[data-value="1"] { bottom: 254px; left: 741px; width: 22px; }
+i.nuclear[data-value="3"] { bottom: 254px; left: 860px; width: 14px; }
+i.nuclear[data-value="5"] { bottom: 254px; left: 900px; width: 18px; }
+
+/* on layer 2 */
+
+i.nuclear[data-value="2"] { bottom: 179px; left: 541px; width: 40px; }
+i.nuclear[data-value="4"] { bottom: 190px; left: 880px; width: 28px; }
+
+
+
+/* === Oven / Hob === */
+
+/* Home */
+
+.home-oven {
+  background-size: 30% auto;
+  bottom: 53px;
+  left: 1034px;
+  position: absolute;
+  width: 23px;
+}
+
+.home-oven.gas { background-image: url(/svgs/gas.svg); }
+.home-oven.electric { background-image: url(/svgs/electric.svg); }
+
+.home-hob {
+  background-size: 60% auto;
+  bottom: 84px;
+  position: absolute;
+  width: 10px;
+}
+
+.home-hob.left { left: 1034px; }
+.home-hob.right { left: 1047px; }
+
+.home-hob.gas { background-image: url(/svgs/gas.svg); }
+.home-hob.electric { background-image: url(/svgs/electric.svg); }
+
+
+/* Commercial */
+
+.commercial-oven {
+  background-size: 30% auto;
+  bottom: 101px;
+  left: 76px;
+  position: absolute;
+  width: 18px;
+}
+
+.commercial-oven.gas { background-image: url(/svgs/gas.svg); }
+.commercial-oven.electric { background-image: url(/svgs/electric.svg); }
+
+.commercial-hob {
+  background-size: 60% auto;
+  bottom: 120px;
+  position: absolute;
+  width: 9px;
+}
+
+.commercial-hob.left { left: 76px; }
+.commercial-hob.right { left: 85px; }
+
+.commercial-hob.gas { background-image: url(/svgs/gas.svg); }
+.commercial-hob.electric { background-image: url(/svgs/electric.svg); }
+
+
+
+
+/* === Solar === */
+
+/* Home */
+
+.home-solar {
+  bottom: 186px;
+  position: absolute;
+}
+
+.home-solar.left {
+  left: 940px;
+}
+
+.home-solar.right {
+  left: 998px;
+}
+
+.home-solar i.solar {
+  background-image: url(/svgs/home_solar.svg);
+  display: inline-block;
+  position: relative;
+  width: 25px;
+}
+
+.home-solar i.solar[data-value="1"] { }
+.home-solar i.solar[data-value="2"] { }
+.home-solar i.solar[data-value="3"] { }
+
+/* Commercial */
+
+.commercial-solar i.solar {
+  background-image: url(/svgs/commercial_solar.svg);
+}
+
+.commercial-solar.left i.solar[data-value="1"] { bottom: 244px; left: 103px; width: 10px; }
+.commercial-solar.left i.solar[data-value="2"] { bottom: 249px; left: 185px; width: 11px; }
+.commercial-solar.left i.solar[data-value="3"] { bottom: 185px; left: 141px; width: 11px; }
+.commercial-solar.left i.solar[data-value="4"] { bottom: 182px; left: 268px; width: 9px; }
+.commercial-solar.left i.solar[data-value="5"] { bottom: 209px; left: 227px; width: 10px; }
+.commercial-solar.left i.solar[data-value="6"] { bottom: 200px; left: 40px; width: 10px; }
+
+.commercial-solar.right i.solar[data-value="1"] { bottom: 244px; left: 128px; width: 10px; }
+.commercial-solar.right i.solar[data-value="2"] { bottom: 249px; left: 218px; width: 11px; }
+.commercial-solar.right i.solar[data-value="3"] { bottom: 185px; left: 177px; width: 11px; }
+.commercial-solar.right i.solar[data-value="4"] { bottom: 182px; left: 294px; width: 9px; }
+.commercial-solar.right i.solar[data-value="5"] { bottom: 209px; left: 255px; width: 10px; }
+.commercial-solar.right i.solar[data-value="6"] { bottom: 200px; left: 66px; width: 10px; }
+
+/* Field */
+
+.solar-field {
+  bottom: 124px;
+  left: 720px;
+  position: absolute;
+}
+
+.solar-field i.solar {
+  background-image: url(/svgs/home_solar.svg);
+  display: inline-block;
+  position: relative;
+  width: 17px;
+}
+
+.solar-field i.solar[data-value="1"] { }
+.solar-field i.solar[data-value="2"] { }
+.solar-field i.solar[data-value="3"] { }
+
+
+
+/* === Trains === */
+
+.train {
+  bottom: 96px;
+  left: 476px;
+  position: absolute;
+}
+
+.train i {
+  display: inline-block;
+  position: relative;
+}
+
+.train i.train-left {
+  background-image: url(/svgs/train_left.svg);
+  width: 40px;
+}
+
+.train i.train-left.electric:after {
+  background-image: url(/svgs/electric.svg);
+  background-position: 28px 100%;
+  background-size: 18% auto;
+  margin-bottom: 3px;
+}
+
+.train i.train-right {
+  background-image: url(/svgs/train_right.svg);
+  width: 40px;
+}
+
+.train i.train-right.electric:after {
+  background-image: url(/svgs/electric.svg);
+  background-position: 5px 100%;
+  background-size: 18% auto;
+  margin-bottom: 3px;
+}
+
+.train i.carriage {
+  background-image: url(/svgs/carriage.svg);
+  width: 34px;
+}
+
+
+
+/* === Thermometer === */
+
+i.thermometer {
+  bottom: 123px;
+  left: 1054px;
+  width: 10px;
+}
+
+i.thermometer[data-value="1"] { background-image: url(/svgs/thermometer_1.svg); }
+i.thermometer[data-value="2"] { background-image: url(/svgs/thermometer_2.svg); }
+i.thermometer[data-value="3"] { background-image: url(/svgs/thermometer_3.svg); }
+i.thermometer[data-value="4"] { background-image: url(/svgs/thermometer_4.svg); }
+i.thermometer[data-value="5"] { background-image: url(/svgs/thermometer_5.svg); }
+
+
+
+/* === Underground Heatin === */
+
+.underground-heating {
+  bottom: 10px;
+  left: 1000px;
+  position: absolute;
+}
+
+.underground-heating i {
+  display: inline-block;
+  position: relative;
+}
+
+.underground-heating i.heating-unit {
+  background-image: url(/svgs/underground_heating_unit.svg);
+  width: 10px;
+}
+
+
+
+/* === Windfarms === */
+
+.windfarm {
+  position: absolute;
+}
+
+.windfarm i {
+  display: inline-block;
+  position: relative;
+}
+
+.windfarm.land {
+  bottom: 250px;
+  left: 1080px;
+}
+
+.windfarm.land i.turbine {
+  background-image: url(/svgs/turbine_land.svg);
+  width: 12px;
+}
+
+.windfarm.sea {
+  bottom: 224px;
+  left: 495px;
+}
+
+.windfarm.sea i.turbine {
+  background-image: url(/svgs/turbine_sea.svg);
+  width: 12px;
+}
+

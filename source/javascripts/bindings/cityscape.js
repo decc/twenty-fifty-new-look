@@ -2,7 +2,8 @@ define(['knockout'], function(ko) {
   'use strict';
 
   ko.bindingHandlers.cityscape = {
-    init: function(element, valueAccessor, allBindings) {},
+    init: function(element, valueAccessor, allBindings) {
+    },
 
     update: function(element, valueAccessor, allBindings) {
       var pathway = valueAccessor()();
@@ -43,11 +44,22 @@ define(['knockout'], function(ko) {
 
         setDataValue: function() {
           var el = document.getElementById(this.elementId);
-          var value = Helpers.findLevel(this.levels, this.levelAction);
+
+          var levels = (this.levels) ? this.levels : Helpers.defaultLevels;
+
+          var value = Helpers.findLevel(levels, this.levelAction);
 
           el.setAttribute('data-value', value);
 
           return value;
+        },
+
+        defaultLevels: {
+          0: 1,
+          1: 2,
+          2: 3,
+          3: 4,
+          4: 5
         }
       };
 
@@ -235,14 +247,6 @@ define(['knockout'], function(ko) {
 
         {
           // home temp
-          levels: {
-            0: 1,
-            1: 2,
-            2: 3,
-            3: 4,
-            4: 5
-          },
-
           elementId: 'thermometer',
           levelAction: 'Average temperature of homes',
 
@@ -393,14 +397,6 @@ define(['knockout'], function(ko) {
 
         // arrow in the sea
         {
-          levels: {
-            0: 1,
-            1: 2,
-            2: 3,
-            3: 4,
-            4: 5
-          },
-
           elementId: 'electricity-imports',
           levelAction: 'Electricity imports',
 
@@ -411,21 +407,33 @@ define(['knockout'], function(ko) {
 
         {
           // house walls
-          levels: {
-            0: 1,
-            1: 2,
-            2: 3,
-            3: 4,
-            4: 5
-          },
-
-          elementId: 'house',
+          elementId: 'insulation',
           levelAction: 'Home insulation',
 
           fn: function() {
             Helpers.setDataValue.call(this);
           }
 
+        },
+
+        {
+          // Energy intensity of industry
+          elementId: 'commercial-meter',
+          levelAction: 'Energy intensity of industry',
+
+          fn: function() {
+            Helpers.setDataValue.call(this);
+          }
+        },
+
+        {
+          // Home meter
+          elementId: 'home-meter',
+          levelAction: 'Home lighting & appliances',
+
+          fn: function() {
+            Helpers.setDataValue.call(this);
+          }
         }
       ];
 

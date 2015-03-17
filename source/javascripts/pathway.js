@@ -74,7 +74,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
        "4": "A mixture of gas/biogas; coal/biomass; and heat from power stations"
        }, pdf: "/assets/onepage/31.pdf" },
 
-    { name: "Home lighting &amp; appliances", categoryId: 1, typeId: 1, pathwayStringIndex: 37, tooltips: {
+    { name: "Home lighting & appliances", categoryId: 1, typeId: 1, pathwayStringIndex: 37, tooltips: {
        "1": "Energy demand for domestic lights and appliances increases by 20% (relative to 2007)",
        "2": "Energy demand for domestic lights and appliances is stable",
        "3": "Energy demand for domestic lights and appliances decreases by 40%",
