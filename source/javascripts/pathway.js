@@ -123,7 +123,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
        "4": "A mixture of gas/biogas, coal/biomass, and heat from power stations"
        }, pdf: "/assets/onepage/31.pdf" },
 
-    { name: "Commercial lighting &amp; appliances", categoryId: 1, typeId: 1, pathwayStringIndex: 47, tooltips: {
+    { name: "Commercial lighting & appliances", categoryId: 1, typeId: 1, pathwayStringIndex: 47, tooltips: {
        "1": "Energy demand for lights & appliances increases by 33%. Energy for cooking is stable",
        "2": "Energy demand for lights & appliances increases by 15%; decreases by 5% for cooking",
        "3": "Energy demand for lights & appliances decreases by 5%; decreases by 20% for cooking",
@@ -291,7 +291,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
        "4": "Carbon dioxide sequestration rate of ~110 million tonnes per annum by 2050"
        }, pdf: "/assets/onepage/47.pdf" },
 
-    { name: "Storage, demand shifting &amp; interconnection", categoryId: 3, typeId: 1, pathwayStringIndex: 51, tooltips: {
+    { name: "Storage, demand shifting &; interconnection", categoryId: 3, typeId: 1, pathwayStringIndex: 51, tooltips: {
        "1": "Today's 3.5 GW storage & 4 GW interconnection with Europe for balancing",
        "2": "4 GW storage & 10 GW interconnection with Europe for balancing",
        "3": "7 GW storage with 2 more pumped storage, 15 GW interconnection & some demand shifting",

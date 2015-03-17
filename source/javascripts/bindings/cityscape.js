@@ -39,7 +39,12 @@ define(['knockout'], function(ko) {
         },
 
         findLevel: function(levels, levelAction) {
-          return levels[pathway.findAction(levelAction).value()];
+          console.log(levelAction)
+          return levels[Helpers.getValue(levelAction)];
+        },
+
+        getValue: function(levelAction) {
+          return Math.round(pathway.findAction(levelAction).value());
         },
 
         setDataValue: function() {
@@ -107,14 +112,6 @@ define(['knockout'], function(ko) {
           },
 
           // % of 0 emmissions cars which use hydrogen(rather than electric)
-          powerSource: {
-            0: 0,
-            1: 0,
-            2: 0.25,
-            3: 0.833,
-            4: 1
-          },
-
           hydrogen: {
             0: 0,
             1: 0,
@@ -124,8 +121,6 @@ define(['knockout'], function(ko) {
           },
 
           fn: function() {
-            // TODO: Busses and bikes
-
             // domestic transport behaviour
             var carEls = Helpers.showEls.call(this);
 
@@ -151,6 +146,20 @@ define(['knockout'], function(ko) {
           }
         },
 
+        {
+          // rail pylons
+          levels: {
+            0: 0,
+            1: 0,
+            2: 1,
+            3: 3,
+            4: 4
+          },
+
+          levelAction: 'Shift to zero emission transport',
+          selector: '.railway-pylon'
+        },
+
         // domestic freight
         // TODO: 3 depend on same input. this could be cleaner
         {
@@ -163,7 +172,7 @@ define(['knockout'], function(ko) {
           },
 
           selector: '.lorry',
-          levelAction: 'Domestic freight',
+          levelAction: 'Domestic freight'
         },
 
         {
@@ -180,7 +189,7 @@ define(['knockout'], function(ko) {
         },
 
         {
-          // carrages of train
+          // carriages of train
           levels: {
             0: 2,
             1: 3,
@@ -189,10 +198,79 @@ define(['knockout'], function(ko) {
             4: 6
           },
 
-          selector: '.carrage',
+          selector: '.carriage',
           levelAction: 'Domestic freight'
         },
 
+        {
+          // bikes
+          levels: {
+            0: 0,
+            1: 0,
+            2: 1,
+            3: 3,
+            4: 5
+          },
+
+          selector: '.bike',
+          levelAction: 'Domestic transport behaviour'
+        },
+
+        {
+          // busses
+          levels: {
+            0: 0,
+            1: 0,
+            2: 1,
+            3: 3,
+            4: 5
+          },
+
+          eco: {
+            0: 0,
+            1: 0,
+            2: 1,
+            3: 1,
+            4: 1
+          },
+
+          selector: '.bus',
+          levelAction: 'Domestic transport behaviour',
+
+          // % of 0 emmissions cars which use hydrogen(rather than electric)
+          hydrogen: {
+            0: 0,
+            1: 0,
+            2: 0.25,
+            3: 0.166, // why does this go down?
+            4: 1
+          },
+
+          fn: function() {
+            // domestic transport behaviour
+            var busEls = Helpers.showEls.call(this);
+
+            // how many of these cars are zero emissions
+            var percentEcoBusses = Helpers.findLevel(this.eco, 'Shift to zero emission transport');
+            var numEcoBusses = Math.round(busEls.length * percentEcoBusses);
+
+            // get how many of these zero emmissions cars are hydrogen powered
+            var percentHydrogen = Helpers.findLevel(this.hydrogen, 'Shift to zero emission transport');
+            var numHydrogenCars = Math.round(numEcoBusses * percentHydrogen);
+
+            // first numEcoCars cars get class eco
+            // first numHydrogenCars ecoCars get class hydrogen
+            for(var i = 0; i < numEcoBusses; i++) {
+              var car = carEls[i];
+
+              car.classList.add('eco');
+
+              if(i < numHydrogenCars) {
+                car.classList.add('hydrogen');
+              }
+            }
+          }
+        },
         {
           // planes
           levels: {
@@ -251,9 +329,169 @@ define(['knockout'], function(ko) {
           levelAction: 'Average temperature of homes',
 
           fn: function() {
-            Helpers.setDataValue.call(this);
+            var value = Helpers.setDataValue.call(this);
 
-            // TODO: aircon?!
+            var aircon = document.getElementById('home-aircon');
+
+            if(value >=3) {
+              aircon.classList.add('is-active');
+            } else {
+              aircon.classList.remove('is-active');
+            }
+          }
+        },
+
+        {
+          fn: function() {
+            // bulb
+            var bulb = document.getElementById('bulb');
+
+            // get value
+            // if led add class led
+            var value = Helpers.getValue('Home lighting & appliances');
+
+            if(value > 2) {
+              bulb.classList.add('led');
+            } else {
+              bulb.classList.remove('led');
+            }
+          }
+        },
+
+        {
+          // commercial aircon
+          levels: {
+            0: 2,
+            1: 3,
+            2: 6,
+            3: 2,
+            4: 1
+          },
+
+          selector: '.commercial-aircon',
+          levelAction: 'Commercial demand for heating and cooling'
+        },
+
+        {
+          // landfill
+          elementId: 'landfill',
+          levelAction: 'Volume of waste and recycling',
+          fn: function() {
+            Helpers.setDataValue.call(this);
+          }
+        },
+
+        {
+          // factory growth
+          elementId: 'factory',
+          levelAction: 'Growth in industry',
+          fn: function() {
+            Helpers.setDataValue.call(this);
+          }
+        },
+
+        {
+          // solar electric commercial
+          selector: '.commercial-solar.left .solar',
+          levels: {
+            0: 0,
+            1: 0,
+            2: 3,
+            3: 6,
+            4: 6
+          },
+          levelAction: 'Solar panels for electricity',
+        },
+
+        {
+          // solar water commercial
+          selector: '.commercial-solar.right .solar',
+          levels: {
+            0: 0,
+            1: 0,
+            2: 3,
+            3: 0,
+            4: 0
+          },
+          levelAction: 'Solar panels for hot water',
+        },
+
+        {
+          // solar electric home
+          levelAction: 'Solar panels for electricity',
+          selector: '.home-solar.left .solar',
+          levels: {
+            0: 1,
+            1: 1,
+            2: 2,
+            3: 2,
+            4: 2
+          },
+
+          fn: function() {
+            Helpers.showEls.call(this);
+
+            var value = Helpers.getValue(this.levelAction);
+
+            // show first 3 field solars
+            var field = document.getElementById('solar-field');
+            var pannels = field.querySelectorAll('.solar');
+
+            for(var i = 0, l = 3; i < l; i++) {
+              var pannel = pannels[i];
+              if(value === 4) {
+                pannel.classList.add('is-active');
+              } else {
+                pannel.classList.remove('is-active');
+              }
+            }
+          }
+        },
+
+        {
+          // solar water home
+          levelAction: 'Solar panels for hot water',
+          selector: '.home-solar.right .solar',
+          levels: {
+            0: 1,
+            1: 1,
+            2: 2,
+            3: 2,
+            4: 2
+          },
+
+          fn: function() {
+            Helpers.showEls.call(this);
+
+            var value = Helpers.getValue(this.levelAction);
+
+            // show first 3 field solars
+            var field = document.getElementById('solar-field');
+            var pannels = field.querySelectorAll('.solar');
+
+            for(var i = 3, l = 6; i < l; i++) {
+              var pannel = pannels[i];
+              if(value === 4) {
+                pannel.classList.add('is-active');
+              } else {
+                pannel.classList.remove('is-active');
+              }
+            }
+          }
+        },
+        {
+          // solar water home
+          levelAction: 'Solar panels for hot water',
+          selector: '.home-solar.right .solar',
+          levels: {
+            0: 1,
+            1: 1,
+            2: 2,
+            2: 2
+          },
+
+          fn: function() {
+            Helpers.showEls.call(this);
           }
         },
 
@@ -295,7 +533,21 @@ define(['knockout'], function(ko) {
           },
 
           levelAction: 'Offshore wind',
-          selector: '.offshore-wind'
+          selector: '.windfarm.sea .turbine'
+        },
+
+        {
+          // recycle bins
+          levels: {
+            0: 1,
+            1: 1,
+            2: 2,
+            3: 2,
+            4: 3
+          },
+
+          selector: '.bin',
+          levelAction: 'Volume of waste and recycling'
         },
 
         {
@@ -308,7 +560,7 @@ define(['knockout'], function(ko) {
           },
 
           levelAction: 'Onshore wind',
-          selector: '.onshore-wind'
+          selector: '.windfarm.land .turbine'
         },
 
         // tidal stream
@@ -434,7 +686,78 @@ define(['knockout'], function(ko) {
           fn: function() {
             Helpers.setDataValue.call(this);
           }
+        },
+
+        {
+          // nuculear power
+          levels: {
+            0: 0,
+            1: 0,
+            2: 3,
+            3: 7,
+            4: 10
+          },
+
+          selector: '.nuclear',
+          levelAction: 'Nuclear power stations'
+        },
+
+        {
+          // CCS power stations
+          levels: {
+            0: 0,
+            1: 0,
+            2: 6,
+            3: 9,
+            4: 14
+          },
+
+          // % coal
+          fuel: {
+            0: 0,
+            1: 1,
+            2: 0.666,
+            3: 0.333,
+            4: 0
+          },
+
+          selector: '.ccs',
+          levelAction: 'CCS power stations',
+
+          fn: function() {
+            var ccs = Helpers.showEls.call(this);
+
+            var percentCoal = Helpers.findLevel(this.fuel, 'CCS power station fuel mix');
+            var numCoal = Math.round(ccs.length * percentCoal);
+
+            for(var i = 0, plant; plant = ccs[i]; i++) {
+              if(i < numCoal) {
+                plant.classList.add('coal');
+              } else {
+                plant.classList.remove('coal');
+              }
+            }
+          }
+        },
+
+        {
+          levelAction: 'Marine algae',
+          elementId: 'algae',
+
+          fn: function() {
+            Helpers.setDataValue.call(this);
+          }
+        },
+
+        {
+          levelAction: 'Bioenergy imports',
+          elementId: 'bioenergy-imports',
+
+          fn: function() {
+            Helpers.setDataValue.call(this);
+          }
         }
+
       ];
 
       // call all shower functions in elements (elements[i].fn)

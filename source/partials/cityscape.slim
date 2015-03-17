@@ -1,4 +1,8 @@
 header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: currentPathway, landscape"
+  #algae
+  #home-aircon
+  #bulb
+
   #landscape-layer-1.layer
     /! Airplanes
     i.airplane data-key="airplanes" data-value="1"
@@ -27,7 +31,7 @@ header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: curr
       i.ccs data-key="ccs" data-value="5"
     /! Imports
     #electricity-imports.electricity-imports.imports data-key="imports" data-value="5"
-    .bioenergy-imports.imports data-key="imports" data-value="5"
+    #bioenergy-imports.bioenergy-imports.imports data-key="imports" data-value="5"
     /! Geothermal
     #geothermal-layer-1
       i.geothermal data-key="geothermal" data-value="2"
@@ -91,13 +95,13 @@ header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: curr
       i.geothermal data-key="geothermal" data-value="3"
       i.geothermal data-key="geothermal" data-value="5"
     /! Landfill
-    i.landfill data-key="landfill" data-value="1"
+    i#landfill.landfill data-key="landfill" data-value="1"
     /! Nuclear
     #nuclear-layer-2
       i.nuclear data-key="nuclear" data-value="2"
       i.nuclear data-key="nuclear" data-value="4"
     /! Solar
-    .solar-field
+    #solar-field.solar-field
       i.solar data-key="solar-field" data-value="1"
       i.solar data-key="solar-field" data-value="2"
       i.solar data-key="solar-field" data-value="3"
@@ -105,7 +109,7 @@ header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: curr
       i.solar data-key="solar-field" data-value="5"
       i.solar data-key="solar-field" data-value="6"
     /! Factory
-    .factory data-key="factory" data-value="1"
+    #factory.factory data-key="factory" data-value="1"
       i.factory-building
       i.factory-building
   #landscape-layer-3.layer
