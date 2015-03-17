@@ -8,6 +8,12 @@ define(['knockout', 'text!/components/chartViews/flows.html'],
 
     self.chart = params.charts[0];
     self.data = params.data;
+
+    self.fullscreen = function() {
+      var chart = document.querySelector('.chart.flows');
+      var modal = document.getElementById('flows-fullscreen');
+      modal.appendChild(chart)
+    };
   };
 
   return {

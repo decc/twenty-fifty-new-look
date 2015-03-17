@@ -22,9 +22,11 @@ h2, .title
     stroke-width: 1
 
   .domain,
-  .tick,
   .axis
     stroke: #fcfdfd
+
+  .tick
+    fill: #fcfdfd
 
   .label
     stroke: none
@@ -59,9 +61,10 @@ h2, .title
 
       .bar-label
         display: block
-        stroke: #fff
+        fill: #fff
 
-.bar-title
+.bar-title,
+.select-title
   position: absolute
   top: 50%
   left: 0
