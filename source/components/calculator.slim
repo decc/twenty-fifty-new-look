@@ -16,6 +16,8 @@
             / span.toggle-city data-bind="click: toggleCity"
             .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway } }"
 
+        = partial "partials/pathway-overlay"
+
         pathway-sidebar data-bind="visible: mainViewVisible" params="pathway: currentPathway"
 
         all-pathway-actions params="pathway: currentPathway, visible: overviewVisible, toggle: toggleOverview"
