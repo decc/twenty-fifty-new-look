@@ -189,7 +189,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
     componentsEnter.append("rect")
       .attr("class", "bar bar-"+0+"-range")
-      .attr('fill', self.colours(0))
+      .attr('stroke', self.colours(0))
       .attr('opacity', 0.4)
       .attr("y", 0)
       .attr("height", barHeight)
@@ -197,7 +197,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
     componentsEnter.append("rect")
       .attr("class", "bar bar-"+2+"-range")
-      .attr('fill', self.colours(2))
+      .attr('stroke', self.colours(2))
       .attr('opacity', 0.4)
       .attr("y", (2 * barHeight))
       .attr("height", barHeight)
@@ -205,11 +205,19 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
     components.select(".bar-1").transition()
       .attr("width", function(d) { return Math.abs(x(d.current.value.range)); })
-      .attr("x", function(d) { return Math.abs(x(d.current.value.low)); });
+      .attr("x", function(d) { return Math.abs(x(d.current.value.low)); })
+      .attr('fill', 'none')
+      .attr('stroke', self.colours(1))
+      .attr('stroke-width', '2px')
+      .attr("stroke-dasharray", function(d) { return "0 " + Math.abs(x(d.current.value.range)) + " " + barHeight + " " + Math.abs(x(d.current.value.range)) + " " + barHeight; });
 
     components.select(".bar-3").transition()
       .attr("width", function(d) { return Math.abs(x(d.comparison.value.range)); })
-      .attr("x", function(d) { return Math.abs(x(d.comparison.value.low)); });
+      .attr("x", function(d) { return Math.abs(x(d.comparison.value.low)); })
+      .attr('fill', 'none')
+      .attr('stroke', self.colours(3))
+      .attr('stroke-width', '2px')
+      .attr("stroke-dasharray", function(d) { return "0 " + Math.abs(x(d.current.value.range)) + " " + barHeight + " " + Math.abs(x(d.current.value.range)) + " " + barHeight; });
 
     self.transitionBars = function() {
       var components = self.svg.selectAll(".component")
@@ -220,7 +228,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       components.each(function(d, i) {
         if(sensitivitySelection[i] !== "range") {
           d3.select(this).select(".bar-0").transition()
-            .attr("width", Math.abs(x(d.current.value[sensitivitySelection[i]])));
+            .attr("width", Math.abs(x(d.current.value[sensitivitySelection[i]])))
 
           d3.select(this).select(".bar-2").transition()
             .attr("width", Math.abs(x(d.comparison.value[sensitivitySelection[i]])));
@@ -246,6 +254,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
           d3.select(this).select(".bar-2-range").transition()
             .attr("x", Math.abs(x(d.comparison.value["low"])))
             .attr("width", Math.abs(x(d.comparison.value["range"])));
+
         }
       });
     }
