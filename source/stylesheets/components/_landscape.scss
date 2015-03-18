@@ -1,7 +1,7 @@
 #landscape {
   background: #fff;
   height: 300px;
-  max-width: 1200px;
+  max-width: 1920px; // max-width for whole calculator
   overflow: hidden;
 }
 
@@ -11,36 +11,102 @@
   top: 0;
   left: 50%;
   right: 0;
-
+  
   /* centre align the inner div */
   margin-left: -660px;
   width: 1320px;
-
+  
   background-repeat: no-repeat;
 }
 
-#landscape-layer-1 {
+.layer:before,
+.layer:after {
+  background-repeat: no-repeat;
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  
+     -moz-transform: scaleX(-1);
+       -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+             filter: FlipH;
+         -ms-filter: "FlipH";
+}
+
+.layer:before {
+  left: -100%;
+}
+
+.layer:after {
+  right: -100%;
+}
+
+#landscape-layer-1,
+#landscape-layer-1:before,
+#landscape-layer-1:after {
   background-image: url('/layers/layer1.svg');
   background-position: 50% -23px;
   background-size: auto 428px;
 }
 
-#landscape-layer-2 {
+#landscape-layer-2,
+#landscape-layer-2:before,
+#landscape-layer-2:after {
   background-image: url('/layers/layer2.svg');
   background-position: 124% -23px; /* new adjustment for landfill */
   background-size: auto 434px;
 }
 
-#landscape-layer-3 {
+#landscape-layer-2:before {
+  background-position: 124% -23px;
+}
+
+#landscape-layer-2:after {
+  background-position: -9px -153px;
+  right: -1267px;
+     -moz-transform: none;
+       -o-transform: none;
+  -webkit-transform: none;
+          transform: none;
+             filter: none;
+         -ms-filter: none;
+}
+
+#landscape-layer-3,
+#landscape-layer-3:before,
+#landscape-layer-3:after {
   background-image: url('/layers/layer3.svg');
   background-position: 0 -56px;
   background-size: auto 434px;
 }
 
-#landscape-layer-4 {
+#landscape-layer-3:before {
+  background-position: -366px -56px;
+  left: -1318px;
+}
+
+#landscape-layer-3:after {
+  background-position: 169px -39px;
+  background-size: auto 421px;
+}
+
+#landscape-layer-4,
+#landscape-layer-4:before,
+#landscape-layer-4:after {
   background-image: url('/layers/layer4.svg');
   background-position: 0 -41px;
   background-size: auto 428px;
+}
+
+#landscape-layer-4:before {
+  left: -1316px;
+}
+
+#landscape-layer-4:after {
+  background-position: -300px -41px;
 }
 
 #landscape-label {
@@ -69,6 +135,8 @@
   position: absolute;
 
   height: 300px; /* default height (landscape height) */
+  
+  z-index: 1;
 }
 
 i {
@@ -454,9 +522,9 @@ i.geothermal[data-value="5"] { bottom: 126px; left: 851px; width: 10px; }
 .imports {
   background: #fff;
   height: 20px;
-  left: 0px;
+  left: -320px;
   position: absolute;
-
+  
       -ms-transition: all 300ms ease-in;
   -webkit-transition: all 300ms ease-in;
      -moz-transition: all 300ms ease-in;
@@ -489,14 +557,14 @@ i.geothermal[data-value="5"] { bottom: 126px; left: 851px; width: 10px; }
 }
 
 .electricity-imports:after {
-  background-image: url(/svgs/electric.svg);
+  background-image: url(./svgs/electric.svg);
 }
 
 .electricity-imports[data-value="1"] { width: 0px; }
 .electricity-imports[data-value="2"] { width: 0px; }
-.electricity-imports[data-value="3"] { width: 90px; }
-.electricity-imports[data-value="4"] { width: 180px; }
-.electricity-imports[data-value="5"] { width: 360px; }
+.electricity-imports[data-value="3"] { width: 410px; }
+.electricity-imports[data-value="4"] { width: 500px; }
+.electricity-imports[data-value="5"] { width: 680px; }
 
 /* Bioenergy Imports */
 
@@ -505,14 +573,14 @@ i.geothermal[data-value="5"] { bottom: 126px; left: 851px; width: 10px; }
 }
 
 .bioenergy-imports:after {
-  background-image: url(/svgs/bioenergy.svg);
+  background-image: url(./svgs/bioenergy.svg);
 }
 
 .bioenergy-imports[data-value="1"] { width: 0px; }
 .bioenergy-imports[data-value="2"] { width: 0px; }
-.bioenergy-imports[data-value="3"] { width: 90px; }
-.bioenergy-imports[data-value="4"] { width: 180px; }
-.bioenergy-imports[data-value="5"] { width: 360px; }
+.bioenergy-imports[data-value="3"] { width: 410px; }
+.bioenergy-imports[data-value="4"] { width: 500px; }
+.bioenergy-imports[data-value="5"] { width: 680px; }
 
 
 
