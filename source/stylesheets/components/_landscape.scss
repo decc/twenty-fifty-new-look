@@ -44,6 +44,17 @@
   background-size: auto 428px;
 }
 
+#landscape-label {
+  background: rgba(90, 99, 120, 0.9);
+  bottom: 0;
+  color: #fff;
+  font-size: 120%;
+  font-weight: 400;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+}
+
 
 
 
@@ -83,6 +94,11 @@ i {
 }
 
 
+
+
+
+
+
 /* === Airplanes === */
 
 i.airplane {
@@ -97,6 +113,20 @@ i.airplane[data-value="5"] { bottom: 263px; left: 390px; width: 16px; }
 
 
 
+/* === Algae === */
+
+i.algae {
+  background-image: url(/svgs/algae.svg);
+  bottom: 179px;
+  left: 385px;
+}
+
+i.algae[data-value="1"] { width: 28px; }
+i.algae[data-value="2"] { width: 31px; }
+i.algae[data-value="3"] { bottom: 173px; width: 45px; }
+
+
+
 /* === Bikes === */
 
 i.bike {
@@ -107,9 +137,8 @@ i.bike {
 
 i.bike[data-value="1"] { bottom: 60px; left: 566px; }
 i.bike[data-value="2"] { left: 260px; }
-i.bike[data-value="3"] { bottom: 56px; left: 732px; }
+i.bike[data-value="3"] { bottom: 55px; left: 760px; }
 i.bike[data-value="4"] { left: 216px; }
-i.bike[data-value="5"] { left: 450px; }
 
 
 
@@ -120,12 +149,12 @@ i.bike[data-value="5"] { left: 450px; }
 }
 
 #biocrops-layer-3 {
-  bottom: 93px;
+  bottom: 96px;
   left: 760px;
 }
 
 #biocrops-layer-4 {
-  bottom: 17px;
+  bottom: 21px;
   left: 152px;
 }
 
@@ -195,6 +224,47 @@ i.boat[data-value="5"] { left: 430px; }
 
 
 
+/* === Boiler === */
+
+i.boiler {  
+  background-size: 30% auto;
+  bottom: 140px;
+  left: 922px;
+  width: 34px;
+}
+
+i.boiler.electric { background-image: url(/svgs/electric_white.svg); }
+i.boiler.gas { background-image: url(/svgs/gas_white.svg); }
+
+
+
+/* === Buses === */
+
+i.bus {
+  background-image: url(/svgs/bus.svg);
+  bottom: 61px;
+  width: 44px;
+}
+
+i.bus.electric:after {
+  background-image: url(/svgs/electric.svg);
+  background-size: 30% auto;
+  margin-bottom: 2px;
+}
+
+i.bus.hydrogen:after {
+  background-image: url(/svgs/hydrogen.svg);
+  background-size: 45% auto;
+  margin-bottom: 2px;
+  margin-left: 1px;
+}
+
+i.bus[data-value="1"] { left: 452px; }
+i.bus[data-value="2"] { left: 377px; }
+i.bus[data-value="3"] { bottom: 55px; left: 713px; }
+i.bus[data-value="4"] { bottom: 50px; left: 875px; }
+
+
 /* === Cars === */
 
 i.car {
@@ -217,15 +287,14 @@ i.car.hydrogen:after {
 }
 
 i.car[data-value="1"] { left: 285px; }
-i.car[data-value="2"] { bottom: 56px; left: 696px; }
+i.car[data-value="2"] { bottom: 57px; left: 674px; }
 i.car[data-value="3"] { bottom: 58px; left: 607px; }
 i.car[data-value="4"] { left: 103px; }
-i.car[data-value="5"] { left: 372px; }
+i.car[data-value="5"] { left: 426px; }
 i.car[data-value="6"] { left: 43px; }
 i.car[data-value="7"] { bottom: 52px; left: 837px; }
 i.car[data-value="8"] { bottom: 60px; left: 538px; }
 i.car[data-value="9"] { left: 314px; }
-i.car[data-value="10"] { left: 402px; }
 
 
 
@@ -248,22 +317,34 @@ i.ccs[data-value="4"] { bottom: 174px; left: 1057px; width: 49px; }
 
 
 
-/* === Commercial Turbines === */
+/* === Commercial Fans === */
 
-.commercial-turbines {
-
+i.commercial-fan {
+  background-image: url(/svgs/commercial_fan.svg);
 }
 
-.commercial-turbines i.turbine {
+i.commercial-fan[data-value="1"] { bottom: 244px; left: 114px; width: 13px; }
+i.commercial-fan[data-value="2"] { bottom: 249px; left: 198px; width: 18px; }
+i.commercial-fan[data-value="3"] { bottom: 185px; left: 155px; width: 20px; }
+i.commercial-fan[data-value="4"] { bottom: 182px; left: 278px; width: 15px; }
+i.commercial-fan[data-value="5"] { bottom: 209px; left: 237px; width: 17px; }
+i.commercial-fan[data-value="6"] { bottom: 200px; left: 50px; width: 16px; }
+
+
+
+
+/* === Commercial Turbines === */
+
+i.commercial-turbine {
   background-image: url(/svgs/turbine_land.svg);
 }
 
-.commercial-turbines i.turbine[data-value="1"] { bottom: 244px; left: 114px; width: 13px; }
-.commercial-turbines i.turbine[data-value="2"] { bottom: 249px; left: 198px; width: 18px; }
-.commercial-turbines i.turbine[data-value="3"] { bottom: 185px; left: 155px; width: 20px; }
-.commercial-turbines i.turbine[data-value="4"] { bottom: 182px; left: 278px; width: 15px; }
-.commercial-turbines i.turbine[data-value="5"] { bottom: 209px; left: 237px; width: 17px; }
-.commercial-turbines i.turbine[data-value="6"] { bottom: 200px; left: 50px; width: 16px; }
+i.commercial-turbine[data-value="1"] { bottom: 244px; left: 114px; width: 13px; }
+i.commercial-turbine[data-value="2"] { bottom: 249px; left: 198px; width: 18px; }
+i.commercial-turbine[data-value="3"] { bottom: 185px; left: 155px; width: 20px; }
+i.commercial-turbine[data-value="4"] { bottom: 182px; left: 278px; width: 15px; }
+i.commercial-turbine[data-value="5"] { bottom: 209px; left: 237px; width: 17px; }
+i.commercial-turbine[data-value="6"] { bottom: 200px; left: 50px; width: 16px; }
 
 
 
@@ -289,6 +370,17 @@ i.cow[data-value="2"], i.cow[data-value="4"], i.cow[data-value="5"] {
              filter: FlipH;
          -ms-filter: "FlipH";
 }
+
+
+
+/* === Dams === */
+
+i.dam {
+  background-image: url(/svgs/hydo_dam.svg);
+}
+
+i.dam[data-value="1"] { bottom: 176px; left: 666px; width: 133px; }
+i.dam[data-value="2"] { bottom: 176px; left: 966px; width: 133px; }
 
 
 
@@ -336,6 +428,28 @@ i.geothermal[data-value="5"] { bottom: 126px; left: 851px; width: 10px; }
 
 
 
+/* === Heating Pipe === */
+
+.heating-pipe {
+  background-image: url(/svgs/heating_pipe.svg);
+  bottom: 46px;
+  left: 1097px;
+  width: 32px;
+}
+
+
+
+/* === Home Fan === */
+
+.home-fan {
+  background-image: url(/svgs/home_fan.svg);
+  bottom: 23px;
+  left: 862px;
+  width: 36px;
+}
+
+
+
 /* === Imports === */
 
 .imports {
@@ -343,7 +457,7 @@ i.geothermal[data-value="5"] { bottom: 126px; left: 851px; width: 10px; }
   height: 20px;
   left: 0px;
   position: absolute;
-
+  
       -ms-transition: all 300ms ease-in;
   -webkit-transition: all 300ms ease-in;
      -moz-transition: all 300ms ease-in;
@@ -381,9 +495,9 @@ i.geothermal[data-value="5"] { bottom: 126px; left: 851px; width: 10px; }
 
 .electricity-imports[data-value="1"] { width: 0px; }
 .electricity-imports[data-value="2"] { width: 0px; }
-.electricity-imports[data-value="3"] { width: 150px; }
-.electricity-imports[data-value="4"] { width: 300px; }
-.electricity-imports[data-value="5"] { width: 600px; }
+.electricity-imports[data-value="3"] { width: 90px; }
+.electricity-imports[data-value="4"] { width: 180px; }
+.electricity-imports[data-value="5"] { width: 360px; }
 
 /* Bioenergy Imports */
 
@@ -397,9 +511,9 @@ i.geothermal[data-value="5"] { bottom: 126px; left: 851px; width: 10px; }
 
 .bioenergy-imports[data-value="1"] { width: 0px; }
 .bioenergy-imports[data-value="2"] { width: 0px; }
-.bioenergy-imports[data-value="3"] { width: 100px; }
-.bioenergy-imports[data-value="4"] { width: 200px; }
-.bioenergy-imports[data-value="5"] { width: 400px; }
+.bioenergy-imports[data-value="3"] { width: 90px; }
+.bioenergy-imports[data-value="4"] { width: 180px; }
+.bioenergy-imports[data-value="5"] { width: 360px; }
 
 
 
@@ -414,8 +528,8 @@ i.geothermal[data-value="5"] { bottom: 126px; left: 851px; width: 10px; }
   height: 136px;
   left: 896px;
   position: absolute;
-  width: 190px;
-
+  width: 201px;
+  
       -ms-transition: all 300ms ease-in;
   -webkit-transition: all 300ms ease-in;
      -moz-transition: all 300ms ease-in;
@@ -423,10 +537,23 @@ i.geothermal[data-value="5"] { bottom: 126px; left: 851px; width: 10px; }
 }
 
 .insulation[data-value="1"] { }
-.insulation[data-value="2"] { border-width: 10px; width: 182px; }
-.insulation[data-value="3"] { border-width: 10px; width: 182px; }
-.insulation[data-value="4"] { border-width: 10px; width: 182px; }
-.insulation[data-value="5"] { border-width: 16px; width: 170px; }
+.insulation[data-value="2"] { border-width: 10px; }
+.insulation[data-value="3"] { border-width: 10px; }
+.insulation[data-value="4"] { border-width: 10px; }
+.insulation[data-value="5"] { border-width: 16px; }
+
+
+
+/* === Light Bulb === */
+
+.bulb {
+  background-image: url(/svgs/bulb.svg);
+  bottom: 142px;
+  left: 983px;
+  width: 27px;
+}
+
+.bulb.led { background-image: url(/svgs/bulb_led.svg); }
 
 
 
@@ -456,12 +583,11 @@ i.lorry {
 }
 
 i.lorry[data-value="1"] { left: 341px; }
-i.lorry[data-value="2"] { left: 486px; }
+i.lorry[data-value="2"] { bottom: 60px; left: 503px; }
 i.lorry[data-value="3"] { bottom: 58px; left: 636px; }
 i.lorry[data-value="4"] { left: 141px; }
 i.lorry[data-value="5"] { left: 180px; }
 i.lorry[data-value="6"] { bottom: 54px; left: 785px; }
-i.lorry[data-value="7"] { left: 70px; }
 
 
 
@@ -469,12 +595,12 @@ i.lorry[data-value="7"] { left: 70px; }
 
 i.commercial-meter, i.home-meter {
   background-image: url(/svgs/dial.svg);
-
+  
       -ms-transition: all 300ms ease-in;
   -webkit-transition: all 300ms ease-in;
      -moz-transition: all 300ms ease-in;
           transition: all 300ms ease-in;
-
+  
       -ms-transform-origin: 50%;
   -webkit-transform-origin: 50%;
      -moz-transform-origin: 50%;
@@ -492,35 +618,35 @@ i.commercial-meter {
 
 i.commercial-meter[data-value="1"] {
       -ms-transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);    
      -moz-transform: rotate(90deg);
           transform: rotate(90deg);
 }
 
 i.commercial-meter[data-value="2"] {
       -ms-transform: rotate(112.5deg);
-  -webkit-transform: rotate(112.5deg);
+  -webkit-transform: rotate(112.5deg);    
      -moz-transform: rotate(112.5deg);
           transform: rotate(112.5deg);
 }
 
 i.commercial-meter[data-value="3"] {
       -ms-transform: rotate(99deg);
-  -webkit-transform: rotate(99deg);
+  -webkit-transform: rotate(99deg);    
      -moz-transform: rotate(99deg);
           transform: rotate(99deg);
 }
 
 i.commercial-meter[data-value="4"] {
       -ms-transform: rotate(81deg);
-  -webkit-transform: rotate(81deg);
+  -webkit-transform: rotate(81deg);    
      -moz-transform: rotate(81deg);
           transform: rotate(81deg);
 }
 
 i.commercial-meter[data-value="5"] {
       -ms-transform: rotate(63deg);
-  -webkit-transform: rotate(63deg);
+  -webkit-transform: rotate(63deg);    
      -moz-transform: rotate(63deg);
           transform: rotate(63deg);
 }
@@ -537,35 +663,35 @@ i.home-meter {
 
 i.home-meter[data-value="1"] {
       -ms-transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);    
      -moz-transform: rotate(180deg);
           transform: rotate(180deg);
 }
 
 i.home-meter[data-value="2"] {
       -ms-transform: rotate(144deg);
-  -webkit-transform: rotate(144deg);
+  -webkit-transform: rotate(144deg);    
      -moz-transform: rotate(144deg);
           transform: rotate(144deg);
 }
 
 i.home-meter[data-value="3"] {
       -ms-transform: rotate(119deg);
-  -webkit-transform: rotate(119deg);
+  -webkit-transform: rotate(119deg);    
      -moz-transform: rotate(119deg);
           transform: rotate(119deg);
 }
 
 i.home-meter[data-value="4"] {
       -ms-transform: rotate(70deg);
-  -webkit-transform: rotate(70deg);
+  -webkit-transform: rotate(70deg);    
      -moz-transform: rotate(70deg);
           transform: rotate(70deg);
 }
 
 i.home-meter[data-value="5"] {
       -ms-transform: rotate(49deg);
-  -webkit-transform: rotate(49deg);
+  -webkit-transform: rotate(49deg);    
      -moz-transform: rotate(49deg);
           transform: rotate(49deg);
 }
@@ -630,8 +756,8 @@ i.nuclear[data-value="4"] { bottom: 190px; left: 880px; width: 28px; }
   width: 18px;
 }
 
-.commercial-oven.gas { background-image: url(/svgs/gas.svg); }
-.commercial-oven.electric { background-image: url(/svgs/electric.svg); }
+.commercial-oven.gas { background-image: url(/svgs/gas_white.svg); }
+.commercial-oven.electric { background-image: url(/svgs/electric_white.svg); }
 
 .commercial-hob {
   background-size: 60% auto;
@@ -643,8 +769,27 @@ i.nuclear[data-value="4"] { bottom: 190px; left: 880px; width: 28px; }
 .commercial-hob.left { left: 76px; }
 .commercial-hob.right { left: 85px; }
 
-.commercial-hob.gas { background-image: url(/svgs/gas.svg); }
-.commercial-hob.electric { background-image: url(/svgs/electric.svg); }
+.commercial-hob.gas { background-image: url(/svgs/gas_white.svg); }
+.commercial-hob.electric { background-image: url(/svgs/electric_white.svg); }
+
+
+
+/* === Recycling === */
+
+.recycling {
+  bottom: 45px;
+  left: 1218px;
+}
+
+.recycling i {
+  display: inline-block;
+  position: relative;
+}
+
+.recycling .bin {
+  background-image: url(/svgs/recycling.svg);
+  width: 27px;
+}
 
 
 
@@ -706,7 +851,7 @@ i.nuclear[data-value="4"] { bottom: 190px; left: 880px; width: 28px; }
 }
 
 .solar-field i.solar {
-  background-image: url(/svgs/home_solar.svg);
+  background-image: url(/svgs/field_solar.svg);
   display: inline-block;
   position: relative;
   width: 17px;
@@ -721,7 +866,7 @@ i.nuclear[data-value="4"] { bottom: 190px; left: 880px; width: 28px; }
 /* === Trains === */
 
 .train {
-  bottom: 96px;
+  bottom: 99px;
   left: 476px;
   position: absolute;
 }
@@ -828,4 +973,6 @@ i.thermometer[data-value="5"] { background-image: url(/svgs/thermometer_5.svg); 
   background-image: url(/svgs/turbine_sea.svg);
   width: 12px;
 }
+
+
 
