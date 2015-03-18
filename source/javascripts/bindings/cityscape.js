@@ -331,7 +331,7 @@ define(['knockout'], function(ko) {
           fn: function() {
             var value = Helpers.setDataValue.call(this);
 
-            var aircon = document.getElementById('home-aircon');
+            var aircon = document.getElementById('home-fan');
 
             if(value >=3) {
               aircon.classList.add('is-active');

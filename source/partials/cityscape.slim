@@ -1,8 +1,4 @@
 header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: currentPathway, landscape"
-  #algae
-  #home-aircon
-  #bulb
-
   #landscape-layer-1.layer
     /! Airplanes
     i.airplane data-key="airplane" data-value="1"
@@ -11,7 +7,7 @@ header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: curr
     i.airplane data-key="airplane" data-value="4"
     i.airplane data-key="airplane" data-value="5"
     /! Algae
-    i.algae data-key="algae" data-value="1"
+    i#algae.algae data-key="algae" data-value="1"
     /! Bioenergy
     .bioenergy-layer-1
       i.bioenergy data-key="bioenergy" data-value="1"
@@ -35,8 +31,8 @@ header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: curr
     i.dam data-key="dam" data-value="1"
     i.dam data-key="dam" data-value="2"
     /! Imports
-    .electricity-imports.imports.persist data-key="imports" data-value="5"
-    .bioenergy-imports.imports.persist data-key="imports" data-value="5"
+    #electricity-imports.electricity-imports.imports.persist data-key="imports" data-value="5"
+    #bioenergy-imports.bioenergy-imports.imports.persist data-key="imports" data-value="5"
     /! Geothermal
     #geothermal-layer-1
       i.geothermal data-key="geothermal" data-value="2"
@@ -100,7 +96,7 @@ header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: curr
       i.geothermal data-key="geothermal" data-value="3"
       i.geothermal data-key="geothermal" data-value="5"
     /! Landfill
-    i.landfill.persist data-key="landfill" data-value="1"
+    i#landfill.landfill.persist data-key="landfill" data-value="1"
     /! Nuclear
     #nuclear-layer-2
       i.nuclear data-key="nuclear" data-value="2"
@@ -114,7 +110,7 @@ header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: curr
       i.solar data-key="solar-field" data-value="5"
       i.solar data-key="solar-field" data-value="6"
     /! Factory
-    .factory.persist data-key="factory" data-value="1"
+    #factory.factory.persist data-key="factory" data-value="1"
       i.factory-building
       i.factory-building
   #landscape-layer-3.layer
@@ -179,7 +175,7 @@ header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: curr
     i.lorry data-key="lorry" data-value="5"
     i.lorry data-key="lorry" data-value="6"
     /! Commercial Meter
-    i.commercial-meter.persist data-key="commercial-meter" data-value="1"
+    i#commercial-meter.commercial-meter.persist data-key="commercial-meter" data-value="1"
     /! Oven / Hob
     i.commercial-hob.left.electric.persist data-key="commercial-hob-left" data-value="1"
     i.commercial-hob.right.gas.persist data-key="commercial-hob-right" data-value="1"
@@ -238,17 +234,18 @@ header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: curr
     /! Heating Pipe
     i.heating-pipe data-key="heating-pipe" data-value="1"
     /! Home Fan
-    i.home-fan data-key="home-fan" data-value="1"
+    i#home-fan.home-fan data-key="home-fan" data-value="1"
     /! Home Meter
-    i.home-meter.persist data-key="home-meter" data-value="1"
+    i#home-meter.home-meter.persist data-key="home-meter" data-value="1"
     /! Insulation
-    .insulation.persist data-key="insulation" data-value="1"
+    #insulation.insulation.persist data-key="insulation" data-value="1"
     /! Light Bulb
-    i.bulb.led.persist data-key="bulb" data-value="1"
+    i#bulb.bulb.led.persist data-key="bulb" data-value="1"
     /! Oven / Hob
-    i.home-hob.left.electric data-key="home-hob-left" data-value="1"
-    i.home-hob.right.gas data-key="home-hob-right" data-value="1"
-    i.home-oven.gas data-key="home-oven" data-value="1"
+    #home-cooker data-value="1"
+      i.home-hob.left.electric data-key="home-hob-left" data-value="1"
+      i.home-hob.right.gas data-key="home-hob-right" data-value="1"
+      i.home-oven.gas data-key="home-oven" data-value="1"
     /! Recycling
     .recycling
       i.bin data-key="recycling" data-value="1"
@@ -262,7 +259,7 @@ header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: curr
       i.solar data-key="home-solar-right" data-value="1"
       i.solar data-key="home-solar-right" data-value="2"
     /! Thermostat
-    i.thermometer.persist data-key="thermometer" data-value="1"
+    i#thermometer.thermometer.persist data-key="thermometer" data-value="1"
     /! Underground Heating
     .underground-heating
       i.heating-unit data-key="underground-heating" data-value="1"
