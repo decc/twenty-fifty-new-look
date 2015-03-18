@@ -12,6 +12,10 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     var dataNested = [];
     var data = [];
 
+    if(typeof dataObjects === "undefined") {
+      return 1;
+    }
+
     if(typeof dataObjects.comparison()["CostsSensitivityComponentsChart"] === "undefined") {
       return 1;
     }
