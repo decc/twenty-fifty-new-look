@@ -9,17 +9,19 @@
   @include transform(translatex(0))
   @include transition(transform .3s ease-in-out)
   @include omega
+  height: 100%
   &.with-nav
     @include transform(translatex($nav-width / 2))
   &.with-subnav
     @include transform(translatex($nav-width))
+
 
 .cityscape
   height: $cityscape-height
   position: absolute
   top: 0
   left: 0
-  width: calc(100% - 308px)
+  width: calc(100% - #{$right-col-width})
 
   @media screen and (max-height: $device-height-small)
     top: 0
@@ -29,15 +31,16 @@
 .content-wrapper
   @include col(100%)
   @include omega
+  height: 100%
 
 .content
   @include col
   @include omega
   position: relative
-  height: 100 - $header-height
+  height: calc(100% - #{$header-height})
 
 .bit
-  width: calc(100% - 308px)
+  width: calc(100% - #{$right-col-width})
   // padding-right:
   position: relative
   height: 100%
