@@ -8,6 +8,7 @@ require 'rdiscount'
 #
 # With no layout
 page "/components/*", layout: false
+
 #
 # With alternative layout
 # page "/path/to/file.html", :layout => :otherlayout

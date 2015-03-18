@@ -28,12 +28,15 @@ define([], function() {
 
         AirQualityChart: this.airQuality(),
 
+        EnergySecurity: this.energySecurity(),
+
         CostsContextChart: this.costsContext(),
         CostsComparedChart: this.costsCompared(),
-        CostsSensitivityChart: this.costsSensitivity(),
+        CostsSensitivityChart: this.costsSensitivityComponents(),
         CostsSensitivityComponentsChart: this.costsSensitivityComponents(),
       }
     },
+
 
     energyDemandUnused: function() {
       return ["Total Use", "Food consumption [UNUSED]"];
@@ -290,6 +293,31 @@ define([], function() {
       var data = this.data.air_quality;
 
       return data;
+    },
+
+    energySecurity: function() {
+      var data = this.data;
+
+      var out = {
+        imports: [],
+        diversity: []
+      };
+
+      var a;
+      var value;
+
+      ['imports', 'diversity'].forEach(function(importType) {
+        a = data[importType];
+
+        for(var prop in a) {
+          if(a.hasOwnProperty(prop)) {
+            value = a[prop];
+            out[importType].push({ name: prop, t2007: value[2007], t2050: value[2050] });
+          }
+        }
+      });
+
+      return out;
     },
 
     costsContext: function() {

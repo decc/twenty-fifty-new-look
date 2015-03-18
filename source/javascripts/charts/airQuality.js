@@ -9,7 +9,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
   AirQualityChart.prototype.draw = function(data, width, height){
     var self = this;
-    console.log(data)
+
     if(typeof data === "undefined") {
       return 1;
     }
@@ -50,72 +50,89 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     var lowData = [];
     var highData = [];
 
-    for(var bar in data) {
-      lowData.push(data[bar].low)
-      highData.push(data[bar].high)
-    }
+    data.key = "2050 - Your pathway"
 
-    console.log(lowData)
+    var comparison1 = {key: "2010", low: 100, high: 100};
+    var comparison2 = {key: "2050 - Doesn't tackle climate change (All at level 1)", low: 23.027647092933996, high: 60.550259470292204};
+
+    [comparison1, comparison2, data].forEach(function(d) {
+      lowData.push({ key: d.key, value: d.low })
+      highData.push({ key: d.key, value: d.high, y1: d.low })
+    });
+
     var bars = self.svg.selectAll(".bar")
         .data(lowData)
 
     bars.enter().append("rect")
         .attr("class", "bar")
-        .attr('fill', self.colours(1))
+        .attr('fill', function(d, i) { return self.colours(i); })
         .attr('opacity', '0.6')
-        .attr("x", function(d, i) { return x("2010"); })
+        .attr("x", function(d, i) { return x(d.key); })
         .attr("width", x.rangeBand())
-        .attr("y", function(d) { return y(d); })
-        .attr("height", function(d) { return y(d); });
+        .attr("y", function(d) { return y(d.value); })
+        .attr("height", function(d) { return y(0) - y(d.value); });
 
     bars.transition()
-        .attr("y", function(d) { return y(d); })
-        .attr("height", function(d) { return y(d); });
+        .attr("x", function(d, i) { return x(d.key); })
+        .attr("width", x.rangeBand())
+        .attr("y", function(d) { return y(d.value); })
+        .attr("height", function(d) { return y(0) - y(d.value); });
 
+    var rangeBars = self.svg.selectAll(".rangeBar")
+        .data(highData)
 
-    // self.svg.selectAll("line.horizontalGrid").remove();
-    // self.svg.selectAll("line.horizontalGrid").data(self.x.ticks(nTicks)).enter()
-    //   .append("line")
-    //     .attr({
-    //       "class":"horizontalGrid",
-    //       "x1" : function(d){ return self.x(d);},
-    //       "x2" : function(d){ return self.x(d);},
-    //       "y1" : 0,
-    //       "y2" : self.height,
-    //       "fill" : "none",
-    //       "shape-rendering" : "crispEdges",
-    //       "stroke" : "rgba(255, 255, 255, 0.2)",
-    //       "stroke-width" : "1px"
-    //     });
+    rangeBars.enter().append("rect")
+        .attr("class", "rangeBar")
+        .attr('fill', function(d, i) { return self.colours(i); })
+        .attr('opacity', '0.4')
+        .attr("x", function(d, i) { return x(d.key); })
+        .attr("width", x.rangeBand())
+        .attr("y", function(d) { return y(d.value); })
+        .attr("height", function(d) { return y(d.value - d.y1); });
+
+    rangeBars.transition()
+        .attr("x", function(d, i) { return x(d.key); })
+        .attr("width", x.rangeBand())
+        .attr("y", function(d) { return y(d.value); })
+        .attr("height", function(d) { return y(d.y1) - y(d.value); });
 
     self.svg.selectAll('.axis').remove();
 
     self.svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + self.height + ")")
-        // .attr("shape-rendering", "crispEdges")
         .call(self.xAxis)
-      .append("text")
-        .attr("class", "label")
-        .attr("x", self.width / 2)
-        .attr("y", self.margin.bottom / 2)
-        .attr("dy", "1em")
-        .text("Date");
+
+    var insertLinebreaks = function (d) {
+        var el = d3.select(this);
+        var words = d.split(' ');
+        el.text('');
+
+        for (var i = 0; i < words.length; i+=2) {
+            if(typeof words[i+1] !== "undefined") {
+                var tspan = el.append('tspan').text(words[i] + ' ' + words[i+1]);
+            } else {
+                var tspan = el.append('tspan').text(words[i]);
+            }
+            if (i > 0)
+                tspan.attr('x', 0).attr('dy', '15');
+        }
+    };
+
+    self.svg.selectAll('g.x.axis g text').each(insertLinebreaks)
+        .attr('font-size', '0.7em');
 
     self.svg.append("g")
         .attr("class", "y axis")
         .attr("transform", "translate(0, 0)")
-        // .attr("shape-rendering", "crispEdges")
         .call(self.yAxis)
       .append("text")
         .attr("class", "label")
         .attr("transform", "rotate(-90)")
-        // X and Y are swapped because it's rotated! ! ! ! ! ! !!!!!!!!!!!! !!
-        // !!!!!!!!! ! ! !!!!!
         .attr("x", -self.height / 2)
         .attr("y", -self.margin.left / 2)
         .attr("dy", "-1em")
-        .text("Energy (J)");
+        .text("Air pollution impact index");
 
   };
 

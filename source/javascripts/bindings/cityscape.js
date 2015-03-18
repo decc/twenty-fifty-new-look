@@ -690,6 +690,26 @@ define(['knockout'], function(ko) {
         },
 
         {
+          // Home cooker
+          elementId: 'home-cooker',
+          levelAction: 'Electrification of home cooking',
+
+          fn: function() {
+            Helpers.setDataValue.call(this);
+          }
+        },
+
+        {
+          // Commercial cooker
+          elementId: 'commercial-cooker',
+          levelAction: 'Electrification of commercial cooking',
+
+          fn: function() {
+            Helpers.setDataValue.call(this);
+          }
+        },
+
+        {
           // nuculear power
           levels: {
             0: 0,
@@ -742,6 +762,7 @@ define(['knockout'], function(ko) {
         },
 
         {
+          // blob in sea
           levelAction: 'Marine algae',
           elementId: 'algae',
 
@@ -751,6 +772,7 @@ define(['knockout'], function(ko) {
         },
 
         {
+          // arrow in sea
           levelAction: 'Bioenergy imports',
           elementId: 'bioenergy-imports',
 
@@ -758,9 +780,9 @@ define(['knockout'], function(ko) {
             Helpers.setDataValue.call(this);
           }
         }
-
       ];
 
+      // Kick it off
       // call all shower functions in elements (elements[i].fn)
       for(var i = 0, l = elements.length; i < l; i++) {
         var value = elements[i];

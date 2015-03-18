@@ -19,10 +19,12 @@
   position: absolute
   top: 0
   left: 0
-  right: 0
+  width: calc(100% - 308px)
 
   @media screen and (max-height: $device-height-small)
     top: 0
+    height: 0
+    display: none
 
 .content-wrapper
   @include col(100%)
@@ -35,18 +37,20 @@
   height: 100 - $header-height
 
 .bit
-  @include col((100%-$right-col-width))
+  width: calc(100% - 308px)
+  // padding-right:
   position: relative
   height: 100%
   @include omega
 
 .controls-sidebar
-  @include col($right-col-width)
-  @include omega
+  width: $right-col-width
   height: 100%
   margin-bottom: 100px
   overflow: hidden
-  position: relative
+  position: absolute
+  top: 0
+  right: 0
   background: #F5F5F5
 
   .tabs
@@ -86,9 +90,16 @@
       .value-label
         float: right
         padding: 1em
-        background-color: $color-highlight
-        color: $color-button-text
+        background-color: #ccc
         margin-left: 1em
+
+        &.high
+          background: #D53980
+          color: #fff
+
+        &.med
+          background: #E394B8
+          color: #fff
 
       .option
         width: 100%
@@ -97,10 +108,15 @@
         input
           width: 100%
 
+        input[type=range]
+          padding: 0 7px
+
         input[type=radio]
           width: auto
-          margin: 0vw 4vw 0vw 0vw
+          margin: 0vw 46px 0vw 0vw
 
+        .radios
+          padding: 0 6px
 
         .tooltip
           padding: 1em
@@ -114,17 +130,18 @@
           transition: all 0.2s linear
           opacity: 0
           z-index: -1
-          &:after
+
+          .arrow
             content: ""
             position: absolute
             top: -10px
-            left: 0vw
             border-style: solid
-            border-width: 0 15px 18px
+            border-width: 0 10px 10px
             border-color: #464d5e transparent
             display: block
             width: 0
             z-index: 1
+            transition: left 0.3s
 
 
 .toggle-nav

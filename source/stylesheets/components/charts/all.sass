@@ -1,12 +1,16 @@
 .double-size
   height: 100%
-  overflow: scroll
+  overflow-y: scroll
 
   .chart.full-size
-    width: 200%
     height: 200%
 
+h2, .title
+  font-size: 1.4em
+  text-align: center
+
 .chart
+  position: relative
 
   &.full-size
     padding: 20px
@@ -17,9 +21,11 @@
     stroke-width: 1
 
   .domain,
-  .tick,
   .axis
     stroke: #fcfdfd
+
+  .tick
+    fill: #fcfdfd
 
   .label
     stroke: none
@@ -54,4 +60,15 @@
 
       .bar-label
         display: block
-        stroke: #fff
+        fill: #fff
+
+.bar-title,
+.select-title
+  position: absolute
+  top: 50%
+  left: 0
+  color: #fff
+  width: 150px
+  padding-right: 1em
+  font-weight: normal
+  font-size: 1em

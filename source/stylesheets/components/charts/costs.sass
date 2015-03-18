@@ -1,22 +1,22 @@
 .chart-component .tab
 
-  .bar-title
-    position: absolute
-    top: 50%
-    left: 0
-    color: #fff
-    width: 150px
-    padding-right: 1em
-    font-weight: normal
-    font-size: 1em
-
   .example-selector
+    width: 100%
+
+    .select-title
+      color: #fff
+      font-size: 1em
+      top: 50%
+      transform: translateY(-50%)
+      margin: 0
+
     select
       color: #fff
       display: table-cell
       vertical-align: middle
-      padding: 0.5em 1em
-      height: 46px
+      padding: 0.5em
+      margin-left: 150px
+      height: 42px
       background: none
       border: 1px solid #fff
 
@@ -27,32 +27,33 @@
     position: relative
     height: 100%
 
-    .chart
-      position: relative
+    .bar-title
+      transform: translateY(-50%)
 
     .compare
-      height: 42.8%
+      height: 200px
 
-      &.top
-        margin-top: 6%
-        padding-bottom: 20px
+    .top
+      padding-bottom: 20px
 
-      &.bottom
-        padding-top: 20px
+    .bottom
+      padding-top: 0
+      margin-top: -20px
 
     .example-selector
-      position: absolute
-      left: 20px
-      top: 46%
-      margin-top: -23px
+      position: relative
       display: table
       z-index: 10
 
-  .costs-chartset-scroll
-    overflow-y: scroll
+    &.sensitivity
+      .bar-title,
+      .select-title
+        width: 315px
 
-    .chart
-      position: relative
+      .example-selector
+        select
+          margin-left: 315px
+
 
     .sensitivity-summary
       height: 100px
@@ -61,15 +62,59 @@
         height: 100px
         margin-bottom: 20px
 
-    .example-selector
-      margin-top: 20px
-      margin-bottom: -20px
+    .chart-key
+      @include clearfix
+      margin: 0 0 34px
+      padding: 0
+      list-style-type: none
+      color: #fff
+      font-size: 0.7em
+      line-height: 1.4
+
+      li
+        position: relative
+        float: left
+        width: 25%
+        padding-right: 1em
+
+        .colour
+          position: absolute
+          left: 0
+          top: 0.15em
+          width: 1em
+          height: 1em
+          background: #FFF
+
+        .name
+          display: block
+          padding-left: 1.5em
+
 
     .sensitivity-components
-      height: 2400px
+      height: 1950px
 
       .bar-label
+        display: block
         text-anchor: end
         fill: #FFF
+        font-size: 0.7em
 
+      foreignobject
+        margin-left: -97px
+
+      .select
+        background: none
+        border: 1px solid #fff
+        font-size: 0.7em
+        color: #fff
+        height: 32px
+        width: 90px
+
+        option
+          background: #5A6378
+
+      .ie-select
+        position: absolute
+        left: 0
+        margin-left: -97px
 

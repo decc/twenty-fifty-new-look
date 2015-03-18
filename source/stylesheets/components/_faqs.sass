@@ -1,0 +1,42 @@
+.faqs
+  width: 100%
+  overflow: auto
+
+  article
+    width: 48%
+    margin-bottom: 2em
+
+    &:nth-child(odd)
+      float: left
+    &:nth-child(even)
+      float: right
+
+    &.active
+      section
+        display: block
+
+    header
+      overflow: auto
+
+      h5
+        margin: 0
+        padding: 1em
+        font-size: 1.3em
+        background: #666
+        color: 000
+        float: left
+        width: 85%
+
+      span
+        float: right
+        width: 15%
+        background: #666
+        padding: 1em
+        font-size: 1.3em
+        text-align: center
+        font-weight: bold
+
+    section
+      background: #000
+      padding: 2em
+      display: none

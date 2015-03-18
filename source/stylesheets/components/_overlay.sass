@@ -1,5 +1,5 @@
 .modal-overlay
-  background: $color-background
+  background: rgba(44, 49, 59, 0.95)
   position: absolute
   left: 0
   right: 0
@@ -12,8 +12,12 @@
   opacity: 0
   @include transition(opacity .3s, z-index 0s .3s)
 
+  &.white
+    background: #fff
+    color: #000
+
   &.is-active
-    z-index: 10
+    z-index: 13
     opacity: 1
     @include transition(opacity .3s)
 
@@ -23,6 +27,9 @@
     a
       color: #ffffff
       text-decoration: none
+    &.black
+      a
+        color: #000
 
   .closer
     position: absolute
@@ -30,4 +37,3 @@
     right: 1em
     cursor: pointer
     font-size: 50px
-

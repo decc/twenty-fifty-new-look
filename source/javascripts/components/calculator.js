@@ -23,23 +23,65 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/cit
     self.faqVisible = ko.observable(false);
     self.mainViewVisible = ko.observable(true);
 
+    self.pinkButton = ko.observable(true);
+    self.blueButton = ko.observable(false);
+    self.whiteButton = ko.observable(false);
+    self.greyButton = ko.observable(false);
+
+    // OPTIMIZE: Button colour function
+    self.buttonColor =  function(color){
+      if(color == 'pink'){
+        self.blueButton(false);
+        self.whiteButton(false);
+        self.greyButton(false);
+        self.pinkButton(true);
+      } else if(color == 'white'){
+        self.blueButton(false);
+        self.pinkButton(false);
+        self.greyButton(false);
+        self.whiteButton(true);
+      } else if(color == 'blue'){
+        self.whiteButton(false);
+        self.pinkButton(false);
+        self.greyButton(false);
+        self.blueButton(true);
+      } else if(color == 'grey'){
+        self.whiteButton(false);
+        self.pinkButton(false);
+        self.blueButton(false);
+        self.greyButton(true);
+      }
+    }
+
     window.onresize = function () {
       self.cityspaceVisible(window.innerWidth > 768);
     };
 
     self.cityscapeVisible = ko.observable(window.innerWidth > 768);
+    self.fullscreenVisible = ko.observable(false);
     self.overlayVisible = ko.observable(false);
     self.overlayContent = ko.observable();
+
+    self.faqCloseMode = ko.observable(false);
 
     self.overlayAction = ko.observable({});
 
     self.showOverlay = function(action) {
-      self.overlayVisible(true);
-      self.overlayAction(action);
+      if(self.overlayVisible()) {
+        self.faqCloseMode(false);
+        self.overlayVisible(false);
+      } else {
+        self.faqCloseMode(true);
+        self.overlayVisible(true);
+        self.overlayAction(action);
+      }
+
+      self.buttonColor('white');
     };
 
     self.hideOverlay = function() {
       self.overlayVisible(false);
+      self.buttonColor('pink');
     };
 
     self.currentPathway = params.pathway;
@@ -64,23 +106,40 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/cit
 
     /** toggle share page visibility */
     self.toggleShare = function() {
-      if(!self.faqVisible()){
-        toggleObservableBool(self, 'shareVisible');
-        toggleObservableBool(self, 'mainViewVisible');
+      if(self.shareVisible()) {
+        self.faqCloseMode(false);
+        self.mainViewVisible(true);
+        self.shareVisible(false);
+
+        self.buttonColor('pink');
+
       } else {
-        toggleObservableBool(self, 'faqVisible');
-        toggleObservableBool(self, 'shareVisible');
-        toggleObservableBool(self, 'mainViewVisible');
+        self.faqCloseMode(true);
+        self.faqVisible(false);
+        self.overlayVisible(false);
+        self.mainViewVisible(false);
+        self.shareVisible(true);
+
+        self.buttonColor('grey');
       }
     }
 
     /** toggle faq page visibility */
     self.toggleFaq = function() {
-      if(!self.shareVisible()){
-        toggleObservableBool(self, 'faqVisible');
+      if(self.faqCloseMode()){
+        self.faqCloseMode(false);
+        self.mainViewVisible(true);
+        self.overlayVisible(false);
+        self.shareVisible(false);
+        self.faqVisible(false);
+
+        self.buttonColor('pink');
+
       } else {
-        toggleObservableBool(self, 'shareVisible');
-        toggleObservableBool(self, 'faqVisible');
+        self.faqCloseMode(true);
+        self.faqVisible(true);
+
+        self.buttonColor('blue');
       }
     }
 
@@ -101,4 +160,3 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/cit
     template: html,
   };
 });
-

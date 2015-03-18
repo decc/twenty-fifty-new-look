@@ -11,7 +11,7 @@ aside.controls-sidebar data-bind="tabs"
       .item
         div
           label data-bind="text: name"
-          span.value-label
+          span.value-label data-bind="text: value, css: { high: value() == 4 || value() == 'D', med: value() == 3 || value() == 'D' }"
           button.info-button data-bind="click: $parents[2].showOverlay"
 
         div.option
@@ -24,9 +24,11 @@ aside.controls-sidebar data-bind="tabs"
           <!-- /ko -->
 
           <!-- ko if: getTypeName() === 'radio' -->
-            span data-bind="radio: value, params: { name: name, tooltips: tooltips, max: max }"
+            span.radios data-bind="radio: value, params: { name: name, tooltips: tooltips, max: max }"
           <!-- /ko -->
 
           span.tooltip
+            .arrow
+            .text
 
   button.show-overview data-bind="click: $parent.toggleOverview"= I18n.t('calculator.all.show')
