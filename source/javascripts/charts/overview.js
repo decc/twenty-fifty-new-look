@@ -82,11 +82,13 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       .data(stack(data))
       .transition()
       .attr("x", function(d) { return x(d.x0); })
-      .attr("width", function(d) { return x(d.value); });
+      .attr("width", function(d) { return x(d.value); })
+      .attr("height", self.height);
 
     self.svg.selectAll(".bar-label")
       .data(stack(data))
       .attr("x", function(d) { return x(d.x0 + d.value/2); })
+      .attr("y", y(0.5))
       .text(function(d) { return d.key + " (" + parseInt(d.value, 10) + ")"; })
 
     self.svg.selectAll("line.horizontalGrid").remove();

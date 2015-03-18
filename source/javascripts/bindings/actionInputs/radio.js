@@ -66,7 +66,7 @@ define(['knockout'], function(ko) {
       tooltipText.innerHTML = text;
 
       var endValue = 3;
-      var endPosition = 172;
+      var endPosition = 177;
       var arrowPosition = Math.round(((value - 1) / endValue * endPosition) + 2)
       var tooltipArrow = element.parentNode.querySelector('.tooltip .arrow');
       tooltipArrow.style.left = arrowPosition + "px";
