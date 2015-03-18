@@ -7,7 +7,7 @@ header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: curr
     i.airplane data-key="airplane" data-value="4"
     i.airplane data-key="airplane" data-value="5"
     /! Algae
-    i#algae.algae data-key="algae" data-value="1"
+    i#algae.algae.persist data-key="algae" data-value="1"
     /! Bioenergy
     .bioenergy-layer-1
       i.bioenergy data-key="bioenergy" data-value="1"
@@ -16,13 +16,13 @@ header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: curr
       i.bioenergy data-key="bioenergy" data-value="7"
       i.bioenergy data-key="bioenergy" data-value="9"
       i.bioenergy data-key="bioenergy" data-value="10"
-    /! Boats
-    i.boat data-key="boat" data-value="1"
-    i.boat data-key="boat" data-value="2"
-    i.boat data-key="boat" data-value="3"
-    i.boat data-key="boat" data-value="4"
-    i.boat data-key="boat" data-value="5"
-    /! CCS
+
+    i.boat data-value="1"
+    i.boat data-value="2"
+    i.boat data-value="3"
+    i.boat data-value="4"
+    i.boat data-value="5"
+
     .ccs-layer-1
       i.ccs data-key="ccs" data-value="1"
       i.ccs data-key="ccs" data-value="3"
@@ -110,9 +110,9 @@ header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: curr
       i.solar data-key="solar-field" data-value="5"
       i.solar data-key="solar-field" data-value="6"
     /! Factory
-    #factory.factory.persist data-key="factory" data-value="1"
-      i.factory-building
-      i.factory-building
+    #factory.factory data-key="factory" data-value="1"
+      i.factory-building.persist
+      i.factory-building.persist
   #landscape-layer-3.layer
     /! Bikes
     i.bike data-key="bike" data-value="1"
@@ -143,16 +143,17 @@ header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: curr
     i.bus data-key="bus" data-value="2"
     i.bus.electric data-key="bus" data-value="3"
     i.bus.hydrogen data-key="bus" data-value="4"
-    /! Cars
-    i.car data-key="car" data-value="1"
-    i.car data-key="car" data-value="2"
-    i.car data-key="car" data-value="3"
-    i.car data-key="car" data-value="4"
-    i.car data-key="car" data-value="5"
-    i.car data-key="car" data-value="6"
-    i.car data-key="car" data-value="7"
-    i.car.hydrogen data-key="car" data-value="8"
-    i.car.electric data-key="car" data-value="9"
+
+    i.car data-value="1"
+    i.car data-value="2"
+    i.car data-value="3"
+    i.car data-value="4"
+    i.car data-value="5"
+    i.car data-value="6"
+    i.car data-value="7"
+    i.car data-value="8"
+    i.car data-value="9"
+
     /! Commercial Fans
     i.commercial-fan data-key="commercial-fan" data-value="1"
     i.commercial-fan data-key="commercial-fan" data-value="2"
@@ -198,12 +199,12 @@ header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: curr
       i.solar data-key="commercial-solar-right" data-value="6"
     /! Trains
     .train
-      i.train-left.electric.persist
-      i.carriage data-key="carriage" data-value="1"
-      i.carriage data-key="carriage" data-value="2"
-      i.carriage data-key="carriage" data-value="3"
-      i.carriage data-key="carriage" data-value="4"
-      i.train-right.electric.persist
+      i.train-left.persist
+      i.carriage data-value="1"
+      i.carriage data-value="2"
+      i.carriage data-value="3"
+      i.carriage data-value="4"
+      i.train-right.persist
   #landscape-layer-4.layer
     /! Biocrops
     #biocrops-layer-4.biocrops

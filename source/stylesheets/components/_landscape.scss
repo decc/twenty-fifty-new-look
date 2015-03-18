@@ -69,6 +69,7 @@
   position: absolute;
 
   height: 300px; /* default height (landscape height) */
+  margin-right: 4px;//silly fix for thing
 }
 
 i {
@@ -111,9 +112,6 @@ i.airplane[data-value="4"] { bottom: 243px; left: 176px; width: 18px; }
 i.airplane[data-value="5"] { bottom: 263px; left: 390px; width: 16px; }
 
 
-
-/* === Algae === */
-
 i.algae {
   background-image: url(/svgs/algae.svg);
   bottom: 179px;
@@ -121,8 +119,10 @@ i.algae {
 }
 
 i.algae[data-value="1"] { width: 28px; }
-i.algae[data-value="2"] { width: 31px; }
-i.algae[data-value="3"] { bottom: 173px; width: 45px; }
+i.algae[data-value="2"] { width: 28px; }
+i.algae[data-value="3"] { width: 31px; }
+i.algae[data-value="4"] { bottom: 173px; width: 45px; }
+i.algae[data-value="5"] { bottom: 173px; width: 45px; }
 
 
 
@@ -381,9 +381,6 @@ i.dam {
 i.dam[data-value="1"] { bottom: 176px; left: 666px; width: 133px; }
 i.dam[data-value="2"] { bottom: 176px; left: 966px; width: 133px; }
 
-
-
-/* === Factory === */
 
 .factory {
   bottom: 104px;
@@ -901,7 +898,15 @@ i.nuclear[data-value="4"] { bottom: 190px; left: 880px; width: 28px; }
 
 .train i.carriage {
   background-image: url(/svgs/carriage.svg);
-  width: 34px;
+  width: 0;
+  margin: 0;
+  @include transition(opacity .2s, width .2s .2s, margin .2s .2s);
+
+  &.is-active {
+    width: 34px;
+    margin: 0 4px 0 0;
+    @include transition(opacity .2s .2s, width .2s, margin .2s);
+  }
 }
 
 
