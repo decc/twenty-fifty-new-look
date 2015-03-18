@@ -3,7 +3,6 @@
   height: 300px;
   max-width: 1200px;
   overflow: hidden;
-  width: 75%;
 }
 
 .layer {
@@ -226,7 +225,7 @@ i.boat[data-value="5"] { left: 430px; }
 
 /* === Boiler === */
 
-i.boiler {  
+i.boiler {
   background-size: 30% auto;
   bottom: 140px;
   left: 922px;
@@ -457,7 +456,7 @@ i.geothermal[data-value="5"] { bottom: 126px; left: 851px; width: 10px; }
   height: 20px;
   left: 0px;
   position: absolute;
-  
+
       -ms-transition: all 300ms ease-in;
   -webkit-transition: all 300ms ease-in;
      -moz-transition: all 300ms ease-in;
@@ -529,7 +528,7 @@ i.geothermal[data-value="5"] { bottom: 126px; left: 851px; width: 10px; }
   left: 896px;
   position: absolute;
   width: 201px;
-  
+
       -ms-transition: all 300ms ease-in;
   -webkit-transition: all 300ms ease-in;
      -moz-transition: all 300ms ease-in;
@@ -595,12 +594,12 @@ i.lorry[data-value="6"] { bottom: 54px; left: 785px; }
 
 i.commercial-meter, i.home-meter {
   background-image: url(/svgs/dial.svg);
-  
+
       -ms-transition: all 300ms ease-in;
   -webkit-transition: all 300ms ease-in;
      -moz-transition: all 300ms ease-in;
           transition: all 300ms ease-in;
-  
+
       -ms-transform-origin: 50%;
   -webkit-transform-origin: 50%;
      -moz-transform-origin: 50%;
@@ -618,35 +617,35 @@ i.commercial-meter {
 
 i.commercial-meter[data-value="1"] {
       -ms-transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);    
+  -webkit-transform: rotate(90deg);
      -moz-transform: rotate(90deg);
           transform: rotate(90deg);
 }
 
 i.commercial-meter[data-value="2"] {
       -ms-transform: rotate(112.5deg);
-  -webkit-transform: rotate(112.5deg);    
+  -webkit-transform: rotate(112.5deg);
      -moz-transform: rotate(112.5deg);
           transform: rotate(112.5deg);
 }
 
 i.commercial-meter[data-value="3"] {
       -ms-transform: rotate(99deg);
-  -webkit-transform: rotate(99deg);    
+  -webkit-transform: rotate(99deg);
      -moz-transform: rotate(99deg);
           transform: rotate(99deg);
 }
 
 i.commercial-meter[data-value="4"] {
       -ms-transform: rotate(81deg);
-  -webkit-transform: rotate(81deg);    
+  -webkit-transform: rotate(81deg);
      -moz-transform: rotate(81deg);
           transform: rotate(81deg);
 }
 
 i.commercial-meter[data-value="5"] {
       -ms-transform: rotate(63deg);
-  -webkit-transform: rotate(63deg);    
+  -webkit-transform: rotate(63deg);
      -moz-transform: rotate(63deg);
           transform: rotate(63deg);
 }
@@ -663,35 +662,35 @@ i.home-meter {
 
 i.home-meter[data-value="1"] {
       -ms-transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);    
+  -webkit-transform: rotate(180deg);
      -moz-transform: rotate(180deg);
           transform: rotate(180deg);
 }
 
 i.home-meter[data-value="2"] {
       -ms-transform: rotate(144deg);
-  -webkit-transform: rotate(144deg);    
+  -webkit-transform: rotate(144deg);
      -moz-transform: rotate(144deg);
           transform: rotate(144deg);
 }
 
 i.home-meter[data-value="3"] {
       -ms-transform: rotate(119deg);
-  -webkit-transform: rotate(119deg);    
+  -webkit-transform: rotate(119deg);
      -moz-transform: rotate(119deg);
           transform: rotate(119deg);
 }
 
 i.home-meter[data-value="4"] {
       -ms-transform: rotate(70deg);
-  -webkit-transform: rotate(70deg);    
+  -webkit-transform: rotate(70deg);
      -moz-transform: rotate(70deg);
           transform: rotate(70deg);
 }
 
 i.home-meter[data-value="5"] {
       -ms-transform: rotate(49deg);
-  -webkit-transform: rotate(49deg);    
+  -webkit-transform: rotate(49deg);
      -moz-transform: rotate(49deg);
           transform: rotate(49deg);
 }
