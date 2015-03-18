@@ -76,7 +76,7 @@ i {
   @include transition(opacity .3s);
 
   &.is-active,
-  &.persistant {
+  &.persist {
     opacity: 1;
   }
 

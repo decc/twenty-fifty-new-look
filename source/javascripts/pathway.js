@@ -362,7 +362,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
 
       actions.forEach(function(action) {
         if(action.name === slug) {
-          found = action;
+          return found = action;
         }
       });
 

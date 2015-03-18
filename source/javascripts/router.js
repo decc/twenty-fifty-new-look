@@ -17,7 +17,7 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
         var pathway;
 
         if(pathway = Pathway.find(slug)) {
-          app.examplePathway(pathway)
+          app.examplePathway(pathway);
 
           app.pathway('example');
         } else {
