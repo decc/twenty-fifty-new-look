@@ -2,9 +2,6 @@ define(['knockout'], function(ko) {
   'use strict';
 
   ko.bindingHandlers.cityscape = {
-    init: function(element, valueAccessor, allBindings) {
-    },
-
     update: function(element, valueAccessor, allBindings) {
       var pathway = valueAccessor()();
 
@@ -39,7 +36,7 @@ define(['knockout'], function(ko) {
         },
 
         findLevel: function(levels, levelAction) {
-          console.log(levelAction)
+          // console.log(levelAction)
           return levels[Helpers.getValue(levelAction)];
         },
 
@@ -261,7 +258,7 @@ define(['knockout'], function(ko) {
             // first numEcoCars cars get class eco
             // first numHydrogenCars ecoCars get class hydrogen
             for(var i = 0; i < numEcoBusses; i++) {
-              var car = carEls[i];
+              var car = busEls[i];
 
               car.classList.add('eco');
 
@@ -507,7 +504,7 @@ define(['knockout'], function(ko) {
           },
 
           levelAction: 'Land dedicated to bioenergy',
-          selector: '.crop'
+          selector: '.biocrop'
         },
 
         // cows

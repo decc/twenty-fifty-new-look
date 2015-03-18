@@ -1,20 +1,18 @@
 define(['knockout'], function(ko) {
   'use strict';
 
-  ko.bindingHandlers.cityscape = {
+  ko.bindingHandlers.landscape = {
     init: function(el) {
-      
+
       var landscape = el;
-      
+
       var parallaxLandscape = function(e) {
 
         var landscapeWidth = landscape.clientWidth,
             landscapeHeight = landscape.clientHeight,
             xOffset = -( (landscapeWidth / 2) - (e.pageX - landscape.offsetLeft) ), // adjust for offsetLeft
             yOffset = ((landscapeHeight + landscape.offsetParent.offsetTop) - e.pageY); // adjust for offsetTop - for some reason I needed to use offsetParent
-        
-        console.log(landscape.offsetTop)
-        
+
         var layers = [
           {
             el: document.getElementById('landscape-layer-1'),
@@ -23,7 +21,7 @@ define(['knockout'], function(ko) {
           },
           {
             el: document.getElementById('landscape-layer-2'),
-            width: 1220,      
+            width: 1220,
             yThreshold: 0.08
           },
           {
@@ -53,11 +51,11 @@ define(['knockout'], function(ko) {
 
             layer.el.style[transform] = 'translate(' + parallaxOffset + 'px, ' + (yOffset * layer.yThreshold) + 'px)';
 
-          });    
+          });
         });
 
       };
-      
+
       console.log(landscape)
 
       landscape.addEventListener("mousemove", parallaxLandscape);
