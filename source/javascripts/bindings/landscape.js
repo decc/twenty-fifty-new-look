@@ -10,9 +10,11 @@ define(['knockout'], function(ko) {
 
         var landscapeWidth = landscape.clientWidth,
             landscapeHeight = landscape.clientHeight,
-            xOffset = -( (landscapeWidth / 2) - (e.pageX - landscape.offsetLeft) ),
-            yOffset = (landscapeHeight - e.pageY);
-
+            xOffset = -( (landscapeWidth / 2) - (e.pageX - landscape.offsetLeft) ), // adjust for offsetLeft
+            yOffset = ((landscapeHeight + landscape.offsetParent.offsetTop) - e.pageY); // adjust for offsetTop - for some reason I needed to use offsetParent
+        
+        console.log(landscape.offsetTop)
+        
         var layers = [
           {
             el: document.getElementById('landscape-layer-1'),
@@ -55,6 +57,8 @@ define(['knockout'], function(ko) {
         });
 
       };
+      
+      console.log(landscape)
 
       landscape.addEventListener("mousemove", parallaxLandscape);
     }
