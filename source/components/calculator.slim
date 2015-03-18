@@ -9,7 +9,7 @@
       .content
         section#share.share data-bind="css: { 'is-active': shareVisible() }, component: { name: 'share', params: { pathway: currentPathway } }"
 
-        header.cityscape data-bind="visible: cityscapeVisible"
+        = partial "partials/cityscape"
 
         .bit data-bind="visible: mainViewVisible"
           div

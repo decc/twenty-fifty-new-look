@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/factsheet'],
+define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/cityscape', 'bindings/landscape'],
   function(ko, html, Pathway) {
 
   'use strict';
@@ -28,6 +28,7 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/fac
     self.whiteButton = ko.observable(false);
     self.greyButton = ko.observable(false);
 
+    // OPTIMIZE: Button colour function
     self.buttonColor =  function(color){
       if(color == 'pink'){
         self.blueButton(false);
