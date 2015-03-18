@@ -7,7 +7,7 @@ define(['knockout', 'pathway'], function(ko, Pathway) {
     self.pageComponent = ko.observable('splash');
     self.pageParams = ko.observable();
 
-    self.userPathway = ko.observable(new Pathway({ name: 'You', values: Pathway.defaultValues() }));
+    self.userPathway = ko.observable(new Pathway({ name: 'Your Pathway', values: Pathway.defaultValues() }));
     self.examplePathway = ko.observable();
 
     self.pathway = ko.observable('user')
