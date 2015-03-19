@@ -4,6 +4,30 @@
   overflow: hidden
   position: relative
 
+.loading
+  position: absolute
+  z-index: 100
+  width: 100%
+  height: 100%
+  background: #4A5163
+  
+  &.hidden
+    z-index: -100
+    display: none
+    
+  img
+    border: 0
+    display: block
+    margin: auto
+    margin-top: calc(50% - 350px)
+    
+  h5
+    text-align: center
+    color: #fff
+    font-size: 4em
+    padding: 0
+    margin: 0
+
 .wrapper
   @include col(100%)
   @include transform(translatex(0))
