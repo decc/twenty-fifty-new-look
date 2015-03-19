@@ -13,6 +13,9 @@ define(['knockout', 'text!/components/chartViews/energySecurity.html'],
     self.knowsBalance = ko.computed(function() {
       return true;
     });
+
+    self.auto = ko.computed(function() { return self.data().electricity.auto || 0; });
+    self.peak = ko.computed(function() { return self.data().electricity.peak || 0; });
   };
 
   return {

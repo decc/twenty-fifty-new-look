@@ -300,7 +300,11 @@ define([], function() {
 
       var out = {
         imports: [],
-        diversity: []
+        diversity: [],
+        electricity: {
+          auto: Math.round(data.electricity.automatically_built),
+          peak: Math.round(data.electricity.peaking)
+        }
       };
 
       var a;
