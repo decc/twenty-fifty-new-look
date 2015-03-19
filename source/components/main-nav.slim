@@ -3,11 +3,11 @@ nav.main-nav
   .top-level
     = image_tag "/images/logo.png", class: :logo
 
-    = link_to I18n.t('calculator.menu.mine.link'), calculator_path, class: "tab-button", :'data-bind' => "click: closeSubnav"
+    = link_to I18n.t('calculator.menu.mine.link'), calculator_path, class: "tab-button", :'data-bind' => "click: closeNav"
 
     button class="tab-button" data-bind="click: toggleSubnav, css: { active: navState() === 2 }"= I18n.t('calculator.menu.examples.link')
 
-    = link_to I18n.t('calculator.menu.guide'), home_path, class: "tab-button exit"
+    = link_to I18n.t('calculator.menu.guide'), home_path, class: "tab-button exit", :"data-bind" => "click: closeNav"
 
   .secondary
     = I18n.t('calculator.menu.examples.body')
@@ -18,5 +18,5 @@ nav.main-nav
 
         ul data-bind="foreach: $parent.pathway.examples($data)"
           li
-            a data-bind="text: name, attr: { href: '/#/calculator/' + slug }"
+            a data-bind="text: name, click: $parents[1].closeNav, attr: { href: '/#/calculator/' + slug }"
 

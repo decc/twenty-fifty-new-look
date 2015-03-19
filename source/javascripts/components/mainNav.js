@@ -9,7 +9,6 @@ define(['knockout', 'text!/components/main-nav.html', 'ajax', 'pathway', 'bindin
     self.exampleCategories = Pathway.exampleCategories();
     self.pathway = Pathway;
 
-
     self.toggleSubnav = function() {
       var state = (self.navState() === 2) ? 1 : 2;
       self.navState(state);
@@ -17,6 +16,11 @@ define(['knockout', 'text!/components/main-nav.html', 'ajax', 'pathway', 'bindin
 
     self.closeSubnav = function() {
       self.navState(1);
+      return true;
+    }
+
+    self.closeNav = function() {
+      self.navState(0);
       return true;
     }
   };
