@@ -31,6 +31,6 @@
 
     section
       h2= t('calculator.charts.security.balance.title')
-      span data-bind="visible: knowsBalance"= m('calculator.charts.security.balance.known')
-      span data-bind="visible: !knowsBalance"= m('calculator.charts.security.balance.not')
+      span data-bind="visible: auto > 0"= m('calculator.charts.security.balance.known')
+      span= m('calculator.charts.security.balance.not')
 

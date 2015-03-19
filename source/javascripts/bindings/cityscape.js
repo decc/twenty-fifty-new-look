@@ -17,6 +17,7 @@ define(['knockout'], function(ko) {
          * @example Helpers.showEls.call(this)
          * @returns {array} active els
          */
+        // OPTIMIZE: cache results
         showEls: function() {
           var count = Helpers.findLevel(this.levels, this.levelAction);
           var levelEls = element.querySelectorAll(this.selector);
@@ -35,20 +36,36 @@ define(['knockout'], function(ko) {
           return out;
         },
 
+        /** @returns {integer} - level value for levelAction value */
         findLevel: function(levels, levelAction) {
-          // console.log(levelAction)
           return levels[Helpers.getValue(levelAction)];
         },
 
+        /** @returns {integer} - pathway action value */
+        // OPTIMIZE: cache results
         getValue: function(levelAction) {
-          return Math.round(pathway.findAction(levelAction).value());
+          var value = pathway.findAction(levelAction).value();
+          var vals = [null, 'A', 'B', 'C', 'D'];
+
+          if(value*1 === value) {
+            value = Math.round(value);
+          } else {
+            value = vals.indexOf(value);
+          }
+
+          return value;
         },
 
+        /**
+         * Sets data-value attribute based on level and levelAction value
+         * to be used within elements[key]
+         *
+         * @example Helpers.setDataValue.call(elements.key)
+         * @returns {integer} level value
+         */
         setDataValue: function() {
           var el = document.getElementById(this.elementId);
-
           var levels = (this.levels) ? this.levels : Helpers.defaultLevels;
-
           var value = Helpers.findLevel(levels, this.levelAction);
 
           el.setAttribute('data-value', value);
@@ -56,6 +73,7 @@ define(['knockout'], function(ko) {
           return value;
         },
 
+        // used in .setDataValues
         defaultLevels: {
           0: 1,
           1: 2,
@@ -70,7 +88,7 @@ define(['knockout'], function(ko) {
        *
        * elements.key: is element type e.g. 'cars'
        *
-       * element.key.levels: element count / value at each level.
+       * elements.key.levels: element count / value at each level.
        *   0 = 2015 (default)
        *   1..4 = action values 1..4
        *
@@ -80,7 +98,7 @@ define(['knockout'], function(ko) {
        * elements.key.selector {string} - selector for elements in cityscape
        * required to use Helpers.showEls
        *
-       * element.key.fn: updater method. Sets elements states in cityscape
+       * elements.key.fn: updater method. Sets elements states in cityscape
        * if !fn then Helpers.showEls is used
        *
        * elements.key can have other properties depending on variations.
@@ -88,6 +106,8 @@ define(['knockout'], function(ko) {
        */
       var elements = [
         {
+          //cars
+
           levels: {
             0: 9,
             1: 10,
@@ -129,32 +149,24 @@ define(['knockout'], function(ko) {
             var percentHydrogen = Helpers.findLevel(this.hydrogen, 'Choice of fuel cells or batteries');
             var numHydrogenCars = Math.round(numEcoCars * percentHydrogen);
 
-            // first numEcoCars cars get class eco
-            // first numHydrogenCars ecoCars get class hydrogen
-            for(var i = 0; i < numEcoCars; i++) {
+            // make some cars eco
+            for(var i = 0, l = carEls.length; i < l; i++) {
               var car = carEls[i];
 
-              car.classList.add('eco');
+              car.classList.remove('electric');
+              car.classList.remove('hydrogen');
 
-              if(i < numHydrogenCars) {
-                car.classList.add('hydrogen');
+              if(i < numEcoCars) {
+                // eco of some type
+                if(i < numHydrogenCars) {
+                  car.classList.add('hydrogen');
+                } else {
+                  car.classList.add('electric');
+                }
               }
+
             }
           }
-        },
-
-        {
-          // rail pylons
-          levels: {
-            0: 0,
-            1: 0,
-            2: 1,
-            3: 3,
-            4: 4
-          },
-
-          levelAction: 'Shift to zero emission transport',
-          selector: '.railway-pylon'
         },
 
         // domestic freight
@@ -243,6 +255,7 @@ define(['knockout'], function(ko) {
             4: 1
           },
 
+          // OPTIMIZE: same as cars
           fn: function() {
             // domestic transport behaviour
             var busEls = Helpers.showEls.call(this);
@@ -257,14 +270,22 @@ define(['knockout'], function(ko) {
 
             // first numEcoCars cars get class eco
             // first numHydrogenCars ecoCars get class hydrogen
-            for(var i = 0; i < numEcoBusses; i++) {
+            // make some cars eco
+            for(var i = 0, l = busEls.length; i < l; i++) {
               var car = busEls[i];
 
-              car.classList.add('eco');
+              car.classList.remove('electric');
+              car.classList.remove('hydrogen');
 
-              if(i < numHydrogenCars) {
-                car.classList.add('hydrogen');
+              if(i < numEcoBusses) {
+                // eco of some type
+                if(i < numHydrogenCars) {
+                  car.classList.add('hydrogen');
+                } else {
+                  car.classList.add('electric');
+                }
               }
+
             }
           }
         },
@@ -278,7 +299,7 @@ define(['knockout'], function(ko) {
             4: 4
           },
 
-          selector: '.plane',
+          selector: '.airplane',
           levelAction: 'International aviation'
         },
 
@@ -321,7 +342,7 @@ define(['knockout'], function(ko) {
         },
 
         {
-          // home temp
+          // home temp + aircon
           elementId: 'thermometer',
           levelAction: 'Average temperature of homes',
 
@@ -365,7 +386,7 @@ define(['knockout'], function(ko) {
             4: 1
           },
 
-          selector: '.commercial-aircon',
+          selector: '.commercial-fan',
           levelAction: 'Commercial demand for heating and cooling'
         },
 
@@ -382,6 +403,7 @@ define(['knockout'], function(ko) {
           // factory growth
           elementId: 'factory',
           levelAction: 'Growth in industry',
+
           fn: function() {
             Helpers.setDataValue.call(this);
           }
@@ -476,6 +498,7 @@ define(['knockout'], function(ko) {
             }
           }
         },
+
         {
           // solar water home
           levelAction: 'Solar panels for hot water',
@@ -559,20 +582,6 @@ define(['knockout'], function(ko) {
 
           levelAction: 'Onshore wind',
           selector: '.windfarm.land .turbine'
-        },
-
-        // tidal stream
-        {
-          levels: {
-            0: 0,
-            1: 0,
-            2: 1,
-            3: 3,
-            4: 5
-          },
-
-          levelAction: 'Tidal Stream',
-          selector: '.tidal-stream'
         },
 
         // tidal range
@@ -744,7 +753,6 @@ define(['knockout'], function(ko) {
 
           fn: function() {
             var ccs = Helpers.showEls.call(this);
-
             var percentCoal = Helpers.findLevel(this.fuel, 'CCS power station fuel mix');
             var numCoal = Math.round(ccs.length * percentCoal);
 
@@ -786,7 +794,7 @@ define(['knockout'], function(ko) {
         if(value.fn) {
           value.fn();
         } else {
-          // if value.function not set, call default on value
+          // if value.fn not set, call default function on value
           Helpers.showEls.call(value);
         }
       }
