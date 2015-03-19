@@ -18,7 +18,6 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
 
         if(pathway = Pathway.find(slug)) {
           app.examplePathway(pathway);
-
           app.pathway('example');
         } else {
           app.pathway('user');
@@ -36,6 +35,16 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
         if(oldHash.split('/')[0] !== 'calculator') {
           app.getPage('calculator', { pathway: app.currentPathway });
         }
+      });
+
+      crossroads.addRoute('share/:code:', function(lastRoute, pathwayString) {
+        app.userPathway(
+          new Pathway({ name: 'Your Pathway', values: pathwayString })
+        );
+        app.pathway('user');
+        app.getPage('calculator', { pathway: app.currentPathway });
+
+        hasher.replaceHash('calculator');
       });
 
       crossroads.addRoute('not-found', function() {

@@ -5,7 +5,7 @@
 
     p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum feugiat elementum sapien, a lobortis nisl suscipit vitae. Vestibulum egestas risus in ipsum semper, quis interdum nunc tincidunt.
 
-    p Etiam ac ullamcorper mi. Vestibulum lobortis quam purus, quis pellentesque purus accumsan et. Cras quis purus magna. Mauris non posuere velit, at aliquam ante. Integer sagittis ante quis semper tempor.
+    textarea#share-string rows="3" readonly="readonly" data-bind="text: shareString, event: { focus: highlightText }"
 
   .share-chart
     .overview-chartset data-bind="foreach: chartKeys"
@@ -17,14 +17,12 @@
 
     ul.social-links
       li
-        a.icon.icon-facebook-before href="/" Facebook
+        a.icon.icon-facebook-before data-bind="attr: { href: 'https://www.facebook.com/sharer/sharer.php?u=' + shareString() }" target="_blank" Facebook
       li
-        a.icon.icon-twitter-before href="/"  Twitter
+        a.icon.icon-twitter-before data-bind="attr: { href: 'http://twitter.com/share?text=' + shareTitle + '&url=' + shareString() }" target="_blank" Twitter
       li
-        a.icon.icon-linkedin-before href="/" LinkedIn
+        a.icon.icon-linkedin-before data-bind="attr: { href: 'https://www.linkedin.com/shareArticle?mini=true&url=' + shareString() + '&title=' + shareTitle + '&summary=' + shareSummary + '&source=' }" target="_blank" LinkedIn
       li
-        a.icon.icon-google-plus-before href="/"  Google+
+        a.icon.icon-google-plus-before data-bind="attr: { href: 'https://plus.google.com/share?url=' + shareString() }" target="_blank" Google+
       li
-        a.icon.icon-envelope-before href="/" Email
-      li
-        a.icon.icon-share-alt-before href="/" Other
+        a.icon.icon-envelope-before data-bind="attr: { href: 'mailto:?subject=' + shareTitle + '&body=' + shareSummary + '%0D%0A%0D%0A' + shareString() }" target="_blank" Email
