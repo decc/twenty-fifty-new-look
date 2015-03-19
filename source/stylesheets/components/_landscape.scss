@@ -27,7 +27,7 @@
   bottom: 0;
   top: 0;
   width: 100%;
-
+  
      -moz-transform: scaleX(-1);
        -o-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
@@ -37,17 +37,17 @@
 }
 
 .layer:before {
-  left: -100%;
+  left: -1319px; /* avoid stitching errors */
 }
 
 .layer:after {
-  right: -100%;
+  right: -1319px; /* avoid stitching errors */
 }
 
 #landscape-layer-1,
 #landscape-layer-1:before,
 #landscape-layer-1:after {
-  background-image: url('/layers/layer1.svg');
+  background-image: url('../layers/layer1.svg');
   background-position: 50% -23px;
   background-size: auto 428px;
 }
@@ -55,7 +55,7 @@
 #landscape-layer-2,
 #landscape-layer-2:before,
 #landscape-layer-2:after {
-  background-image: url('/layers/layer2.svg');
+  background-image: url('../layers/layer2.svg');
   background-position: 124% -23px; /* new adjustment for landfill */
   background-size: auto 434px;
 }
@@ -78,7 +78,7 @@
 #landscape-layer-3,
 #landscape-layer-3:before,
 #landscape-layer-3:after {
-  background-image: url('/layers/layer3.svg');
+  background-image: url('../layers/layer3.svg');
   background-position: 0 -56px;
   background-size: auto 434px;
 }
@@ -96,7 +96,7 @@
 #landscape-layer-4,
 #landscape-layer-4:before,
 #landscape-layer-4:after {
-  background-image: url('/layers/layer4.svg');
+  background-image: url('../layers/layer4.svg');
   background-position: 0 -41px;
   background-size: auto 428px;
 }
@@ -108,6 +108,20 @@
 #landscape-layer-4:after {
   background-position: -300px -41px;
 }
+
+/* === set z-indexing === */
+
+#landscape-layer-1 { z-index: 1; }
+#landscape-layer-1 * { z-index: 2; }
+#landscape-layer-2 { z-index: 3; }
+#landscape-layer-2 * { z-index: 4; }
+#landscape-layer-3 { z-index: 5; }
+#landscape-layer-3 * { z-index: 6; }
+#landscape-layer-4 { z-index: 7; }
+#landscape-layer-4 * { z-index: 8; }
+
+
+
 
 #landscape-label {
   background: rgba(90, 99, 120, 0.9);
@@ -136,7 +150,6 @@
 
   height: 300px; /* default height (landscape height) */
   margin-right: 4px; // fix icon spacing
-  z-index: 1;
 }
 
 i {
@@ -1047,3 +1060,13 @@ i.thermometer[data-value="5"] { background-image: url(/svgs/thermometer_5.svg); 
 
 
 
+/* === IE Fixes === */
+
+.ie #landscape-layer-2,
+.ie #landscape-layer-2:before {
+  background-position: 108% -23px;
+}
+
+.ie #landscape-layer-2:after {
+  background-position: -396px -153px;
+}
