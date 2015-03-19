@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/cityscape', 'bindings/landscape'],
+define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/cityscape', 'bindings/landscape', 'bindings/factsheet'],
   function(ko, html, Pathway) {
 
   'use strict';
