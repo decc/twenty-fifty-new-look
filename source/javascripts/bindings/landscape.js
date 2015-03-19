@@ -22,7 +22,7 @@ define(['knockout'], function(ko) {
           },
           {
             el: document.getElementById('landscape-layer-2'),
-            width: (landscapeWidth > layerWidth ? landscapeWidth + 20 : layerWidth + 20),      
+            width: (landscapeWidth > layerWidth ? landscapeWidth + 20 : layerWidth + 20),
             yThreshold: 0.08
           },
           {
@@ -56,8 +56,6 @@ define(['knockout'], function(ko) {
         });
 
       };
-
-      console.log(landscape)
 
       landscape.addEventListener("mousemove", parallaxLandscape);
     }
