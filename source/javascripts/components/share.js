@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/share.html', 'bindings/chart'], function(ko, html) {
+define(['knockout', 'text!/components/share.html', 'config', 'bindings/chart'], function(ko, html, config) {
   'use strict';
 
   var ViewModel = function(params) {
@@ -14,11 +14,28 @@ define(['knockout', 'text!/components/share.html', 'bindings/chart'], function(k
 
     self.date = ko.observable(maxDate);
 
+    self.shareTitle = "My DECC 2050 Pathway";
+    self.shareSummary = "My DECC 2050 Pathway";
+    self.shareString = ko.computed(function() {
+      return config.siteUrl + "/share/" + params.pathway().values
+    })
+
     self.rangeAttributes = ko.observable({
       min: minDate,
       max: maxDate,
       step: 5
     });
+
+    self.highlightText = function(element) {
+      var textBox = document.getElementById("share-string");
+      textBox.select();
+
+      textBox.onmouseup = function() {
+          // Prevent further mouseup intervention
+          textBox.onmouseup = null;
+          return false;
+      };
+    }
   };
 
   return {

@@ -1,20 +1,7 @@
 .modal-overlay.white data-bind="css: { 'is-active': overlayVisible() }"
   / .closer data-bind="click: hideOverlay" &times;
   h2 data-bind="text: overlayAction().name"
-  ul.social.black
-    li
-      a.icon-download-before target="_blank" data-bind="attr: { href: overlayAction().pdf }" Download pdf
 
-    li
-      a.icon-facebook-before data-bind="attr: {href: 'https://www.facebook.com/sharer/sharer.php?u=' + overlayAction().pdf }" target="_blank"
-
-    li
-      a.icon-twitter-before data-bind="attr: { href: 'http://twitter.com/share?text=' + overlayAction().name + '&url=' + overlayAction().pdf }" target="_blank"
-
-    li
-      a.icon-google-plus-before data-bind="attr: { href: 'https://plus.google.com/share?url=' + overlayAction().pdf }" target="_blank"
-
-    li
-      a.icon-envelope-before data-bind="attr: { href: 'mailto:?subject=' + overlayAction().name + '&body=' + overlayAction().pdf }" target="_blank"
+  a.icon-download-before target="_blank" data-bind="attr: { href: overlayAction().pdf }" Download PDF
 
   div data-bind="factsheet: overlayAction().info"
