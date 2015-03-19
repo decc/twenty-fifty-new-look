@@ -43,13 +43,13 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         // .attr("x2", function(d) { return x(xMax); }).attr("y2", 0)
       .selectAll("stop")
         .data([
-          { offset: "0%", color: "#fff", opacity: 0 },
-          { offset: "100%", color: "#fff", opacity: 1 }
+          { offset: "0%", color: "#fff" },
+          { offset: "100%", color: "#fff" }
         ])
       .enter().append("stop")
         .attr("offset", function(d) { return d.offset; })
         .attr("stop-color", function(d) { return d.color; })
-        .attr("stop-opacity", function(d) { return d.opacity; });
+        .attr("stop-opacity", function(d, i) { console.log(data); return i === 0 ? (1 - (data / 100)) : "1"; });
 
     var bars = self.svg.selectAll(".bar")
         .data([data])
@@ -95,7 +95,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         "width" : x(20),
         "y" : 0,
         "height" : self.height,
-        "fill": function(d) { return d > 80 ? "#95cfca" : "none"; },
+        "fill": function(d) { return d >= 80 ? "#95cfca" : "none"; },
         "fill-opacity": "0.3"
       });
 
