@@ -1,19 +1,18 @@
 define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
   'use strict';
 
-  var EnergySupplyChart = function() {
+  var ElectricityEmissionsChart = function() {
 
   };
 
-  EnergySupplyChart.prototype = new Chart();
+  ElectricityEmissionsChart.prototype = new Chart();
 
-  EnergySupplyChart.prototype.draw = function(data, width, height){
+  ElectricityEmissionsChart.prototype.draw = function(data, width, height){
       var self = this;
 
       if(typeof data === "undefined") {
         return 1;
       }
-
 
       var chartLayers = data.chartLayers;
       var chartLine = data.chartLine;
@@ -32,7 +31,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
           .range([0, self.width]);
 
       var y = d3.scale.linear()
-          // .domain([0, d3.max(chartLayers, function(d) { return d.value; })])
           .domain([yMin, yMax])
           .range([self.height, 0]);
 
@@ -101,48 +99,9 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
             return "translate(" + x(end.date) + "," + y(end.y0 + end.y / 2) + ")";
           });
 
-      // Secondary data
-      var lineContainer = self.svg.selectAll(".line-container")
-          .data([chartLine])
-
-      lineContainer.enter().append("g")
-          .attr("class", "line-container")
-          .each(function(d, i) {
-            d3.select(this).append("path")
-              .attr("class", "line")
-              .attr("d", line)
-
-            var label =  d3.select(this).append("g")
-              .attr("class", "line-label")
-              .attr("fill", "#fff")
-
-            label.append("rect")
-              .attr("width", self.margin.right)
-              .attr("height", 24);
-
-            label.append("text")
-              .text("Demand")
-              .attr("dx", "6px")
-              .attr("dy", "1.05em");
-          });
-
-      self.svg.selectAll('.line').data([chartLine])
-          .transition()
-          .attr("d", line)
-
-      self.svg.selectAll('.line-label').data([chartLine])
-          .transition()
-            .attr("transform", function(d) {
-              var end = d[d.length - 1];
-              var textHeight = 12;
-              return "translate(" + x(end.date) + "," + (y(end.value) - textHeight)+ ")";
-            })
-            // console.log(self.svg.selectAll('.line-label').select('.line-label text').node().getBBox())
-
-
-      self.setupLineAxes("Date", "Energy (TWh/yr)");
+      self.setupLineAxes("Date", "Greenhouse Gas Emissions (MtCO2e/yr)");
   };
 
-  return EnergySupplyChart;
+  return ElectricityEmissionsChart;
 });
 

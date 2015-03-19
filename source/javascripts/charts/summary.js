@@ -49,7 +49,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       .enter().append("stop")
         .attr("offset", function(d) { return d.offset; })
         .attr("stop-color", function(d) { return d.color; })
-        .attr("stop-opacity", function(d, i) { console.log(data); return i === 0 ? (1 - (data / 100)) : "1"; });
+        .attr("stop-opacity", function(d, i) { return i === 0 ? (1 - (data / 100)) : "1"; });
 
     var bars = self.svg.selectAll(".bar")
         .data([data])

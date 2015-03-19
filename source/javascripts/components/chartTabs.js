@@ -23,9 +23,9 @@ define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartP
           { "id": 2, "name": "ElectricitySupplyChart", "title": "Supply vs Demand" }
         ]
       },
-      { "id": 3, "name": "emissions", "icon": "emissions", "title": "Emissions", "charts": [
-          { "id": 1, "name": "EnergyEmissionsChart", "title": "Energy" }
-          // { "id": 1, "name": "ElectricityEmissionsChart", "title": "Electricity" }
+      { "id": 3, "name": "emissions", "icon": "emissions", "title": "Emissions", "viewmodel": "tabbed", "charts": [
+          { "id": 1, "name": "EnergyEmissionsChart", "title": "Energy" },
+          { "id": 2, "name": "ElectricityEmissionsChart", "title": "Electricity" }
         ]
       },
       { "id": 4, "name": "flows", "icon": "flows", "title": "Flows", "charts": [
