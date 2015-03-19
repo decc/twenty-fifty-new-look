@@ -9,7 +9,9 @@ define(['knockout', 'text!/components/chartViews/map.html'],
     self.data = args.data;
 
     self.thermalData = ko.computed(function() {
-      return args.data()[args.charts[0].name]["thermal"];
+      var chartData = args.data()[args.charts[0].name]
+
+      return (chartData)? chartData["thermal"] : [];
     });
   };
 
