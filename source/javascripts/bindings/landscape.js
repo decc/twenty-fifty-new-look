@@ -8,30 +8,31 @@ define(['knockout'], function(ko) {
 
       var parallaxLandscape = function(e) {
 
-        var landscapeWidth = landscape.clientWidth,
+        var layerWidth = 1200, // could set dynamically?
+            landscapeWidth = landscape.clientWidth,
             landscapeHeight = landscape.clientHeight,
             xOffset = -( (landscapeWidth / 2) - (e.pageX - landscape.offsetLeft) ), // adjust for offsetLeft
-            yOffset = ((landscapeHeight + landscape.offsetParent.offsetTop) - e.pageY); // adjust for offsetTop - for some reason I needed to use offsetParent
+            yOffset = ((landscapeHeight + landscape.offsetParent.offsetTop) - e.pageY); // adjust for offsetTop - for some reason
 
         var layers = [
           {
             el: document.getElementById('landscape-layer-1'),
-            width: 1200,
+            width: (landscapeWidth > layerWidth ? landscapeWidth : layerWidth),
             yThreshold: 0.04
           },
           {
             el: document.getElementById('landscape-layer-2'),
-            width: 1220,
+            width: (landscapeWidth > layerWidth ? landscapeWidth + 20 : layerWidth + 20),      
             yThreshold: 0.08
           },
           {
             el: document.getElementById('landscape-layer-3'),
-            width: 1260,
+            width: (landscapeWidth > layerWidth ? landscapeWidth + 60 : layerWidth + 60),
             yThreshold: 0.15
           },
           {
             el: document.getElementById('landscape-layer-4'),
-            width: 1315,
+            width: (landscapeWidth > layerWidth ? landscapeWidth + 115 : layerWidth + 115),
             yThreshold: 0.3
           }
         ];

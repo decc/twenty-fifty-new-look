@@ -119,7 +119,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
               .attr("height", 24);
 
             label.append("text")
-              .text("Supply")
+              .text("Demand")
               .attr("dx", "6px")
               .attr("dy", "1.05em");
           });
