@@ -113,21 +113,13 @@ en:
 
 
             To go some way to addressing this flaw, the tool applies a simulated stress test to your pathway of five cold, almost windless, days. This is described in more detail here.
-            In this case, the stress test implies that 0 GW of additional peaking plant may be required for supply to meet demand over that period.
+            In this case, the stress test implies that <span data-bind=\"text: peak\"></span>GW of additional peaking plant may be required for supply to meet demand over that period.
 
 
             You can influence the amount of peaking plant by changing your choice level of 'storage, demand shifting & interconnection' below right, or by reducing the amount of intermittent renewable generation, or by reducing the demand for electricity"
-          known: "GW of conventional gas electricity generation plant has been assumed to have been built by 2050, to cover the gap between average electricity demand and the amount of low carbon generation selected in this pathway.
 
+          known: "<span data-bind=\"text: auto\"></span>GW of conventional gas electricity generation plant has been assumed to have been built by 2050, to cover the gap between average electricity demand and the amount of low carbon generation selected in this pathway."
 
-                  This tool does not model the hourly, daily or even seasonal operation of the electricity grid. It presents annual averages. Therefore it does not correctly represent the peaks and troughs of electricity demand.
-
-
-          To go some way to addressing this flaw, the tool applies a simulated stress test to your pathway of five cold, almost windless, days. This is described in more detail here.
-          In this case, the stress test implies that 0 GW of additional peaking plant may be required for supply to meet demand over that period.
-
-
-          You can influence the amount of peaking plant by changing your choice level of 'storage, demand shifting & interconnection' below right, or by reducing the amount of intermittent renewable generation, or by reducing the demand for electricity"
       costs:
         link: "Costs"
       overview:
