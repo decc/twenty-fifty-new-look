@@ -120,7 +120,7 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/cit
         self.mainViewVisible(false);
         self.shareVisible(true);
 
-        self.buttonColor('grey');
+        self.buttonColor('white');
       }
     }
 
