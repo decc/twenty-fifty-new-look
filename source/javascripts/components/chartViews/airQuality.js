@@ -9,29 +9,28 @@ define(['knockout', 'text!/components/chartViews/airQuality.html'],
 
     self.chart = args.charts[0];
     self.data = args.data
+    self.comparison1 = ko.observable({});
+    self.comparison2 = ko.observable({});
 
     self.example = args.Pathway.examples()[0];
 
-    self.deferDrawing = ko.observable(true);
+    // self.deferDrawing = ko.observable(true);
+    self.deferDrawing = ko.observable(false);
 
+    // TODO: request data
     // Request comparison chart data
-    (function(args) {
-      self.calculator.pathwayUpdating(true);
-      args.DataRequester.pathway(self.example.values, function(data) {
-        var data = JSON.parse(data.response);
-        var chartParser = new args.ChartParser(data);
+    // (function(args) {
+    //   self.calculator.pathwayUpdating(true);
+    //   args.DataRequester.pathway(self.example.values, function(data) {
+    //     var data = JSON.parse(data.response);
+    //     var chartParser = new args.ChartParser(data);
 
-        var d = args.data();
-        d["AirQualityChart"] = {
-          you: d["AirQualityChart"],
-          comparison: chartParser.airQuality()
-        }
-        self.deferDrawing(false);
-        self.data(d);
+    //     self.comparison1(chartParser.airQuality());
+    //     self.deferDrawing(false);
 
-        self.calculator.pathwayUpdating(false);
-      });
-    })(args);
+    //     self.calculator.pathwayUpdating(false);
+    //   });
+    // })(args);
 
   };
 

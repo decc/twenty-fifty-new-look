@@ -12,6 +12,48 @@
   opacity: 0
   @include transition(opacity .3s, z-index 0s .3s)
 
+  &.white
+    background: #fff
+    color: #000
+
+    img
+      display: inherit
+      margin: auto
+      padding-top: 10px
+      padding-bottom: 10px
+
+    .figure
+      font-size: 12px
+      width: 100%
+      text-align: center
+
+    .subtitle
+      font-weight: bold
+
+    table
+      width: 100%
+
+      td
+        padding: 0.4em
+        vertical-align: middle
+        text-align: center
+
+      th
+        padding: 1em
+
+      tr
+        &:nth-child(2)
+          font-weight: bold
+
+        &:nth-child(odd)
+          background: #f2f2f2
+
+        td
+          &:first-child
+            font-weight: bold
+            text-align: left
+
+
   &.is-active
     z-index: 10
     opacity: 1
@@ -23,6 +65,9 @@
     a
       color: #ffffff
       text-decoration: none
+    &.black
+      a
+        color: #000
 
   .closer
     position: absolute
@@ -30,4 +75,3 @@
     right: 1em
     cursor: pointer
     font-size: 50px
-

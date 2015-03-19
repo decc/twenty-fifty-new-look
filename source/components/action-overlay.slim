@@ -1,7 +1,93 @@
 .modal-overlay data-bind="visible: overlayVisible"
   .closer data-bind="click: hideOverlay" &times;
-  h2 hi am overlay
-  ul
-    li Download pdf
+  h1 Domestic transport behaviour
+  | In the base year 2007 in the 2050 Calculator, each of us travelled about 14 000 km per year, excluding trips abroad. 83% of this distance was by car, van or motorcycle, 7% by rail, 6% by bus, 2% on foot, 1% by air and 0.5% by bike.
+  p.subtitle Level 1
+  | Level 1 assumes that by 2050 each of us travels 1300 km per year more than in 2007, with a slight shift from road and rail to bus and air: 82% road, 6% rail, 7% bus, 2% foot, 2% air and 0.7% bike.
+  p.subtitle Level 2
+  | Level 2 assumes that by 2050, each of us travels 900 km per year more than in 2007. Slightly less travel is by road and slightly more by bus: 80% road, 6% rail, 9% bus, 2% foot, 2% air and 0.7% bike. Passenger distance by bus will be 20% higher than in Level 1.
+  p.subtitle Level 3
+  | Level 3 assumes that by 2050, each of us travels an extra 900 km per year more than in 2007 and with a substantial shift away from cars towards buses, rail and bikes: 74% road, 8% rail, 13% bus, 2% foot, 2% air and 1% bike. 1 in 20 car trips are shared with one extra person.
+  p.subtitle Level 4
+  | Level 4 assumes that in 2050 each of us travels the same distance per year as today. There is a big shift away from the car: 62% road, 10% rail, 19% bus, 2% foot, 2% air and 5% bike. There is an increase in alternatives to travel such as teleconferencing or more flexible working arrangements. 1 in 10 car trips are shared with one extra person, cycle use will increase 10-fold compared to today, passenger distance by bus will be 220% higher; rail passenger distance will be 40% higher.
+  p.subtitle Interaction with other choices
+  | We can power the UKâ€™s cars, buses and trains by biofuel rather than diesel or petrol, or rely on electricity or hydrogen fuel cells. In the 2050 Calculator, the technology used and hence the emissions created are influenced by how much transport is electrified, how much electricity is decarbonised, and how much bioenergy is available for transport.
+  img.aligncenter alt=("Domestic transport behaviour") src="img/domestic-transport-behaviour-img.png" /
+  p.figure Figure 1. In 2007, 0.5% of distance travelled was by bicycle. Level 4 assumes that this increases to 4.7% by 2050.
+  p Table 1. The assumptions about distance travelled and the split of how that distance is travelled.
+  table
+    tbody
+      tr
+        th
+        th
+        th 2050
+        th 2050
+        th 2050
+        th 2050
+      tr
+        td
+        td 2007
+        td Level 1
+        td Level 2
+        td Level 3
+        td Level 4
+      tr
+        td Â km travelled/person/y
+        td 14 104
+        td 15 363
+        td 15 023
+        td 15 023
+        td 14 076
+      tr
+        td Â % of km by:
+        td
+        td
+        td
+        td
+        td
+      tr
+        td Car, van or motorcycle
+        td 83%
+        td 82%
+        td 80%
+        td 74%
+        td 62%
+      tr
+        td Rail
+        td 7%
+        td 6%
+        td 6%
+        td 8%
+        td 10%
+      tr
+        td Bus
+        td 6%
+        td 7%
+        td 9%
+        td 13%
+        td 19%
+      tr
+        td Foot
+        td 2%
+        td 2%
+        td 2%
+        td 2%
+        td 2%
+      tr
+        td Domestic air
+        td 1%
+        td 2%
+        td 2%
+        td 2%
+        td 2%
+      tr
+        td Bicycle
+        td 1%
+        td 1%
+        td 1%
+        td 1%
+        td 5%
+  img.aligncenter alt=("Domestic transport behaviour") src="img/domestic-transport-behaviour-chart.png" /
+
 
   p data-bind="text: overlayContent"
