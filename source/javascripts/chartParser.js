@@ -31,7 +31,7 @@ define([], function() {
 
         EnergySecurity: this.energySecurity(),
 
-        CostsContextChart: this.costsContext(),
+        CostsContextChart: this.costsSensitivityComponents(),
         CostsComparedChart: this.costsCompared(),
         CostsSensitivityChart: this.costsSensitivityComponents(),
         CostsSensitivityComponentsChart: this.costsSensitivityComponents(),
