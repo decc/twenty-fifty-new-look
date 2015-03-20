@@ -14,6 +14,9 @@ define(['knockout', 'text!/components/chartViews/overview.html'],
     self.chartKeys = Object.keys(self.data()[self.chart.name]);
     self.date = ko.observable(maxDate);
 
+    // This is only here because it's the last component loaded
+    document.querySelector('.loading').classList.add('hidden')
+
     self.rangeAttributes = ko.observable({
       min: minDate,
       max: maxDate,
