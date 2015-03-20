@@ -7,9 +7,7 @@ define(['ajax', 'config'], function(Ajax, config) {
     Ajax.request({
       url: config.apiUrl + '/pathways/' + pathwayString + '/data',
       onSuccess: function(xhr) {
-        setTimeout(function() {
-          callback(xhr)
-        }, 5000);
+        callback(xhr)
       },
       onError: function(){
         alert("Sorry, there was an error connecting to the server.")
