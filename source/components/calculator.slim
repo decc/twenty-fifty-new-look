@@ -11,7 +11,7 @@
 
         = partial "partials/cityscape"
 
-        .bit data-bind="visible: mainViewVisible"
+        .inner-content
           div
             section#charts.charts data-bind="css: { noTop: !cityscapeVisible() }"
               / span.toggle-city data-bind="click: toggleCity"
