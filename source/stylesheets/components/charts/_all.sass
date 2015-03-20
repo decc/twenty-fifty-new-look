@@ -9,11 +9,21 @@ h2, .title
   font-size: 1.4em
   text-align: center
 
+.fixed-note
+  position: absolute
+  top: calc(#{$chart-tab-padding-top / 2} + #{percentage(1/9)})
+  right: $chart-tab-padding-right
+  font-size: 0.7em
+  color: #FFF
+
 .chart
   position: relative
 
+  svg
+    overflow: visible
+
   &.full-size
-    padding: 20px
+    padding: 40px 20px
     height: 100%
 
   .domain

@@ -1,5 +1,5 @@
-define(['knockout', 'text!/components/chartViews/costs.html', 'charts/costsSensitivity'],
-  function(ko, html, CostsSensitivityChart) {
+define(['knockout', 'text!/components/chartViews/costs.html', 'charts/costsContext', 'charts/costsCompared', 'charts/costsSensitivity'],
+  function(ko, html, CostsContextChart, CostsComparedChart, CostsSensitivityChart) {
   'use strict';
 
   var ViewModel = function(args) {
@@ -12,6 +12,8 @@ define(['knockout', 'text!/components/chartViews/costs.html', 'charts/costsSensi
     self.comparedTab = self.tabs[1];
     self.sensitivityTab = self.tabs[2];
 
+    self.costsContextChart = new CostsContextChart();
+    self.costsComparedChart = new CostsComparedChart();
     self.yourCostsSensitivityChart = new CostsSensitivityChart();
     self.comparisonCostsSensitivityChart = new CostsSensitivityChart();
 
@@ -38,13 +40,13 @@ define(['knockout', 'text!/components/chartViews/costs.html', 'charts/costsSensi
           // Only parse data for charts in this chart view
           var contextData = chartParser.costsContext()
           var comparedData = chartParser.costsCompared()
-          var sensitivityData = chartParser.costsSensitivity()
+          var sensitivityData = chartParser.costsSensitivityComponents()
           var sensitivityComponentsData = chartParser.costsSensitivityComponents()
 
           self.comparisonData({
             CostsContextChart: contextData,
             CostsComparedChart: comparedData,
-            CostsSensitivityChart: sensitivityComponentsData,
+            CostsSensitivityChart: sensitivityData,
             CostsSensitivityComponentsChart: sensitivityComponentsData
           });
 

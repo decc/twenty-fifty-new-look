@@ -103,12 +103,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
           .attr("class", "x axis")
           .attr("shape-rendering", "crispEdges")
           .call(self.xAxis)
-        .append("text")
-          .attr("class", "label")
-          .attr("x", self.width / 2)
-          .attr("y", -self.margin.top / 2)
-          .attr("dy", "-1.5em")
-          .text("Cost (£)");
     } else {
       self.svg.append("line")
       .attr({

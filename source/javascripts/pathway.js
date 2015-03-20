@@ -334,7 +334,6 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
     self.updating = ko.observable(false);
 
     self.actions = ko.observableArray(self.getActions());
-
     self.chartData = ko.observable({});
 
     ko.computed(function() {

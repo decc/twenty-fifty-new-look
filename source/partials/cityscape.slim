@@ -1,4 +1,4 @@
-header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: currentPathway, landscape"
+header.cityscape#landscape data-bind="css: { fullWidth: shareVisible() }, visible: cityscapeVisible, cityscape: currentPathway, landscape "
   #landscape-layer-1.layer
     /! Airplanes
     i.airplane data-key="airplane" data-value="1"
@@ -275,5 +275,4 @@ header.cityscape#landscape data-bind="visible: cityscapeVisible, cityscape: curr
       i.heating-unit data-key="underground-heating" data-value="9"
       i.heating-unit data-key="underground-heating" data-value="10"
 
-  label#landscape-label Your 2050 Landscape
 

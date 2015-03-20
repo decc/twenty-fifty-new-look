@@ -1,19 +1,28 @@
 .chart
   .layer-label
     fill: #c7ced9
+    font-size: 0.7em
 
     &[data-state="inactive"]
       display: none
 
   .line-label
     fill: #5a6378
+    font-size: 0.7em
 
     text
       fill: #fff
 
   .d3-chart[data-state="graph-hover"]
+    .line-label
+      display: none
+
     .layer-label
       display: none
+
+    .line-container[data-state="active"]
+      .line-label
+        display: block
 
     .layer-container[data-state="active"]
       .layer

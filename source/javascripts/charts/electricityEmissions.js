@@ -1,19 +1,18 @@
 define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
   'use strict';
 
-  var EnergySupplyChart = function() {
+  var ElectricityEmissionsChart = function() {
 
   };
 
-  EnergySupplyChart.prototype = new Chart();
+  ElectricityEmissionsChart.prototype = new Chart();
 
-  EnergySupplyChart.prototype.draw = function(data, width, height){
+  ElectricityEmissionsChart.prototype.draw = function(data, width, height){
       var self = this;
 
       if(typeof data === "undefined") {
         return 1;
       }
-
 
       var chartLayers = data.chartLayers;
       var chartLine = data.chartLine;
@@ -24,15 +23,14 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       self.width = self.outerWidth - self.margin.left - self.margin.right;
       self.height = self.outerHeight - self.margin.top - self.margin.bottom;
 
-      var yMin = 0;
-      var yMax = 4000;
+      var yMin = -500;
+      var yMax = 1500;
 
       var x = d3.scale.linear()
           .domain(d3.extent(chartLayers, function(d) { return d.date; }))
           .range([0, self.width]);
 
       var y = d3.scale.linear()
-          // .domain([0, d3.max(chartLayers, function(d) { return d.value; })])
           .domain([yMin, yMax])
           .range([self.height, 0]);
 
@@ -45,7 +43,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       var yAxis = d3.svg.axis()
           .scale(y)
           .orient("left")
-          .tickValues([0, 1000, 2000, 3000, 4000]);
+          .ticks(4);
 
       self.x = x;
       self.y = y;
@@ -56,7 +54,16 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       var nest = self.nest();
       var area = self.area();
       var line = self.line();
-      var layers = stack(nest.entries(chartLayers));
+
+      var layers = nest.entries(chartLayers);
+
+      var positiveLayers = layers.filter(function(d) { return d.values[d.values.length-1].value > 0; })
+      var negativeLayers = layers.filter(function(d) { return d.values[d.values.length-1].value < 0; })
+
+      var positiveLayers = stack(positiveLayers);
+      var negativeLayers = stack(negativeLayers);
+
+      var layers = positiveLayers.concat(negativeLayers);
 
       // Primary data
       var demand = self.svg.selectAll(".layer-container")
@@ -94,7 +101,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
           .attr("data-state", function(d){
             // Hide label if layer too small at x1
             var end = d.values[d.values.length - 1];
-            return (y(0) - y(end.y) > self.minimumHeightForLabel) ? "active" : "inactive";
+            return (Math.abs(y(0) - y(end.y)) > self.minimumHeightForLabel) ? "active" : "inactive";
           })
           .attr("transform", function(d) {
             var end = d.values[d.values.length - 1];
@@ -129,7 +136,12 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
               .attr("height", 17);
 
             label.append("text")
-              .text("Demand")
+              .text(function(d) {
+                var start = d[0].value
+                var end = d[d.length - 1].value;
+                // var percentageReduction = Math.round(end / start * 100)
+                return "Total";
+              })
               .attr("dx", "6px")
               .attr("dy", "1.05em");
           });
@@ -145,12 +157,10 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
               var textHeight = 12;
               return "translate(" + x(end.date) + "," + (y(end.value) - textHeight)+ ")";
             })
-            // console.log(self.svg.selectAll('.line-label').select('.line-label text').node().getBBox())
 
-
-      self.setupLineAxes("Date", "Energy (TWh/yr)");
+      self.setupLineAxes("Date", "Greenhouse Gas Emissions (MtCO2e/yr)");
   };
 
-  return EnergySupplyChart;
+  return ElectricityEmissionsChart;
 });
 

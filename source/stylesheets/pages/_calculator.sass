@@ -4,6 +4,40 @@
   overflow: hidden
   position: relative
 
+.loading
+  position: absolute
+  z-index: 100
+  width: 100%
+  height: 100%
+  background: #4A5163
+  display: table
+  
+  &.hidden
+    z-index: -100
+    display: none
+
+  &.hidden
+    z-index: -100
+    opacity: 0
+    transition: z-index 0.8s linear 0s, opacity 0.8s
+
+  .inner
+    display: table-cell
+    vertical-align: middle
+
+  img
+    border: 0
+    display: block
+    margin: auto
+    width: 90px // halved for retina support
+    
+  h5
+    text-align: center
+    color: #fff
+    font-size: 4vh
+    padding: 0
+    margin: 0
+
 .wrapper
   @include col(100%)
   @include transform(translatex(0))
@@ -107,7 +141,7 @@
 
       .option
         width: 100%
-        padding: 1em 0em 0em 0em
+        padding: 1em 0em 0.25em 0em
 
         input
           width: 100%
@@ -159,17 +193,22 @@
   bottom: 0px
   width: 100%
   line-height: 4em
-  box-shadow: 0px -5px 5px 0px #888
+  background: #eee
+  box-shadow: 0px -2px 15px 0px rgba(0, 0, 0, 0.2)
+  border-top: 1px solid #ccc
+  font-weight: 600
   &:before
     margin-right: 0.5em
 
 .hide-overview
   @extend %button, %icon-arrow-right-before
   width: 100%
-  background: #f5f5f5
+  background: #eee
   text-transform: capitalize
-  box-shadow: 0px -5px 5px 0px #888
-  line-height: 4em
+  box-shadow: 0px -2px 15px 0px rgba(0, 0, 0, 0.2)
+  border-top: 1px solid #ccc
+  font-weight: 600
+  height: 60px
   &:before
     margin-right: 0.5em
 
@@ -191,7 +230,7 @@
 
   .pathway-actions-wrapper
     overflow: auto
-    height: 87vh
+    height: calc(100% - 60px)
     padding: 1em
 
 

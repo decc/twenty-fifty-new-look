@@ -11,40 +11,59 @@ en:
 
       To do this we must decarbonise the UK economy while ensuring secure and affordable energy supplies."
 
-    '2': "How should this be done? The 2050 Calculator lets you take control and propose your own energy pathway for the country."
+    '2': "How should this be done? The 2050 Calculator lets you take control and create your own energy pathway for the country.
 
-    '3': "The calculator allows you to consider the choices and trade-offs we face. It covers all parts of the economy and all greenhouse gas emissions released in the UK."
 
-    '4': "The calculator models what is thought to be physically and technically possible in forty-two different sectors. It is based on scientific and engineering data and was built in collaboration with a wide range of organisations from inside and outside of government."
+      The calculator allows you to consider the choices and trade-offs we face. It covers all parts of the economy and all greenhouse gas emissions released in the UK."
 
-    '5': "The model, all its assumptions and the code for this interface are all available open source.
+    '3': "The calculator models what is thought to be physically and technically possible in forty-two different sectors. It is based on scientific and engineering data and was built in collaboration with a wide range of organisations from inside and outside of government.
+
+
+      The model, all its assumptions and the code for this interface are all available open source.
       [http://github.com/decc/twenty-fifty](http://github.com/decc/twenty-fifty)
 
 
       For more information go to:
       [https://www.gov.uk/2050-pathways-analysis](https://www.gov.uk/2050-pathways-analysis)"
 
-    '6': "### Let's get started...
+    '4': "### Let's get started...
 
-      When you open the calculator for the first time you'll notice the 80% CO<sub>2</sub> emission reduction target at the top of the page."
+      The purpose of the calculator is to build an energy pathway for the UK that hits the 80% CO<sub>2</sub> emission reduction target at the top of the page. As you get closer to achieving this the white arrow will move to the right."
 
-    '7': "The sliders on the right hand side of the page can be used to adjust the emphasis and effort on choices and trade-offs for energy demand, supply and other factors. As these sliders are adjusted, the calculator will update it's forecast and update your progress in the reduction target bar.
-
-
-      Use the \"Demand\", \"Supply\" and \"Other\" tabs to toggle between the available sliders."
-
-    '8': "On the left hand side of the page there are 8 distinct areas representing various indicators that will be affected by your choices and trade-offs. These represent the effect on the supply and demand of energy and electricity as well as environmental and economical impacts.
+    '5': "The sliders represent each sector of the UK energy system. Moving the sliders allows you to cut emissions by adjusting the level of change for energy demand, supply and other factors such as storage. Use the \"Demand\", \"Supply\" and \"Other\" tabs to toggle between the different groups of sliders.
 
 
-      Click through each tab to see how your pathway affects these."
+      To use a slider, select a number from 1 (minimal effort) to 4 (pushes limits of what is technically feasible).  When the choice is A to D, this describes different scenarios rather than changes in effort. 
 
-    '9': "For example pathways, use the menu button in the top left of the page to reveal the main menu, and click on \"Example Pathways\" to reveal a set of example pathways you are able to load into the calculator."
 
-    '10': "Once you've hit the 80% reduction target use the \"Finish & Share\" button for an overview of your pathway results and options to to share your pathway with friends and colleagues."
+      For more information on each sector simply click the <span class=\"info-button\"></span> icon."
+
+    '6': "As the sliders are adjusted your progress towards achieving the 80% target is updated. At the same time, the picture near the top of the screen changes to reflect the choices you’ve made.
+
+
+      There are eight ways to see the impact of your choices, which include: supply and demand of energy and electricity, total emissions, energy flows, area of land required, impact on air quality, energy security and cost."
+
+    '7': "If you experience any problems creating a pathway that achieves an 80% cut in emissions it’s worth considering the following factors:
+
+
+• You need to reduce energy demand and decarbonise energy supply
+
+
+• Have you electrified transport, heat or industry? If not, these sectors will be consuming fossil fuels.
+
+
+• Look at the ‘Electricity’ tab – are you oversupplying electricity? Excess electricity supply will not help achieve an 80% cut.
+
+
+• Despite big increases in electricity use, liquid fuel, such as bioenergy, will still be needed in 2050."
+
+    '8': "There are many different ways to create a pathway that hits the 80% target. To see some example pathways go to the menu button on the top left of the page and click on \"Example Pathways\"."
+    
+    '9': "Once you've hit the target use the \"Finish & Share\" button for an overview of your pathway results and share with friends and colleagues."
 
     done:
       title: "You're all set to go!"
-      body: 'lorem'
+      body: ''
       button: 'Start'
     button: "Skip guide"
 
