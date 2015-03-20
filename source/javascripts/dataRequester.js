@@ -9,7 +9,7 @@ define(['ajax', 'config'], function(Ajax, config) {
       onSuccess: function(xhr) {
         setTimeout(function() {
           callback(xhr)
-        }, 0);
+        }, 5000);
       },
       onError: function(){
         alert("Sorry, there was an error connecting to the server.")

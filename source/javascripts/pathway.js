@@ -346,6 +346,8 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
 
           self.chartData(self.chartParser.all());
 
+          console.dir(self.chartData())
+
           self.updating(false);
         });
       }
