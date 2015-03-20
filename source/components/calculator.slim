@@ -21,7 +21,7 @@
 
           section#charts.charts data-bind="css: { noTop: !cityscapeVisible() }"
 
-            div#landscape-label
+            div#landscape-label data-bind="click: toggleCity"
               label Your 2050 Landscape
               span.toggle-city data-bind="click: toggleCity, css: { up: cityscapeVisible(), down: !cityscapeVisible() }"
             

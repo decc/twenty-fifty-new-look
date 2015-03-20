@@ -15,11 +15,16 @@
   &.hidden
     z-index: -100
     display: none
-  
+
+  &.hidden
+    z-index: -100
+    opacity: 0
+    transition: z-index 0.8s linear 0s, opacity 0.8s
+
   .inner
     display: table-cell
     vertical-align: middle
-  
+
   img
     border: 0
     display: block
