@@ -160,3 +160,4 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/cit
     template: html,
   };
 });
+

@@ -566,7 +566,7 @@ i.geothermal[data-value="5"] { bottom: 126px; left: 851px; width: 10px; }
 }
 
 .electricity-imports:after {
-  background-image: url(./svgs/electric.svg);
+  background-image: url(/svgs/electric.svg);
 }
 
 .electricity-imports[data-value="1"] { width: 0px; }
@@ -582,7 +582,7 @@ i.geothermal[data-value="5"] { bottom: 126px; left: 851px; width: 10px; }
 }
 
 .bioenergy-imports:after {
-  background-image: url(./svgs/bioenergy.svg);
+  background-image: url(/svgs/bioenergy.svg);
 }
 
 .bioenergy-imports[data-value="1"] { width: 0px; }
