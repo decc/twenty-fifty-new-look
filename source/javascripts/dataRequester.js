@@ -6,7 +6,11 @@ define(['ajax', 'config'], function(Ajax, config) {
   DataRequester.pathway = function(pathwayString, callback) {
     Ajax.request({
       url: config.apiUrl + '/pathways/' + pathwayString + '/data',
-      onSuccess: callback,
+      onSuccess: function(xhr) {
+        setTimeout(function() {
+          callback(xhr)
+        }, 0);
+      },
       onError: function(){
         alert("Sorry, there was an error connecting to the server.")
       }
