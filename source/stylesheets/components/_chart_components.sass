@@ -52,13 +52,13 @@
       left: 0
 
     .inner
-      padding: $chart-tab-padding-top $chart-tab-padding-right $chart-tab-padding-bottom $chart-tab-padding-left
+      padding: #{(100/9)}vh $chart-tab-padding-right $chart-tab-padding-bottom $chart-tab-padding-left
       height: 100%
 
     .outer
       overflow-y: scroll
       height: 100%
-      border-top: $chart-tab-padding-top solid transparent
+      border-top: #{(100/9)}vh solid transparent
 
       .scroll
         overflow: visible
@@ -71,6 +71,7 @@
     .title
       color: #fff
       font-size: 1.1em
+      margin-top: 0
 
     .note
       color: #fff

@@ -92,7 +92,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
       self.svg.selectAll('.layer').data(layers)
         .transition()
-          .attr("d", function(d) { console.log(d.values[d.values.length - 1]); return area(d.values); });
+          .attr("d", function(d) { return area(d.values); });
 
       self.svg.selectAll('.layer-label').data(layers)
         .transition()

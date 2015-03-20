@@ -6,8 +6,16 @@ define(['knockout', 'text!/components/chartViews/emissions.html'],
   var ViewModel = function(params) {
     var self = this;
 
-    self.chart = params.charts[0];
+    self.charts = params.charts;
     self.data = params.data;
+
+
+    self.currentTabId = ko.observable(1);
+
+    /** Sets visible tab */
+    self.setActiveTab = function(chart) {
+      self.currentTabId(chart.id);
+    };
   };
 
   return {

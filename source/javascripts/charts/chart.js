@@ -137,18 +137,17 @@ define(['d3'], function(d3) {
       var self = this;
 
       self.svg.selectAll('.axis').remove();
-
       // X Axis, can handle negative Y values
-      self.svg.append("g")
+      var xAxis = self.svg.append("g")
           .attr("class", "x axis")
           .attr("transform", "translate(0," + self.y(0) + ")")
           .call(self.xAxis)
-        .selectAll('.tick text')
+      xAxis.selectAll('.tick text')
           .attr("transform", "translate(0," + (self.height - self.y(0)) + ")")
           .attr("dy", "1em")
           .attr("stroke", "none")
           .attr("fill", "#fff")
-        .append("text")
+      xAxis.append("text")
           .attr("class", "label")
           .attr("transform", "translate(0," + (self.height - self.y(0)) + ")")
           .attr("x", self.width / 2)
@@ -157,14 +156,14 @@ define(['d3'], function(d3) {
           .text(xLabel);
 
       // Y Axis
-      self.svg.append("g")
+      var yAxis = self.svg.append("g")
           .attr("class", "y axis")
           .attr("transform", "translate(0, 0)")
           .call(self.yAxis)
-        .selectAll('.tick text')
+      yAxis.selectAll('.tick text')
           .attr("stroke", "none")
           .attr("fill", "#fff")
-        .append("text")
+      yAxis.append("text")
           .attr("class", "label")
           .attr("transform", "rotate(-90)")
           .attr("x", -self.height / 2)
