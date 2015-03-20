@@ -14,7 +14,7 @@
         .bit data-bind="visible: mainViewVisible"
           div
             section#charts.charts data-bind="css: { noTop: !cityscapeVisible() }"
-              / span.toggle-city data-bind="click: toggleCity"
+              span.toggle-city data-bind="click: toggleCity, css: { up: cityscapeVisible(), down: !cityscapeVisible() }"
               .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway } }"
 
         = partial "partials/pathway-overlay"
