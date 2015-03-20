@@ -136,8 +136,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
               return "translate(" + x(end.date) + "," + (y(end.value) - textHeight)+ ")";
             })
 
-
-      self.setupLineAxes();
+      self.setupLineAxes("Date", "Energy (TWh/yr)");
   };
 
   return EnergyDemandChart;

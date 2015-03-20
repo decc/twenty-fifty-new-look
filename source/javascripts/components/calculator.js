@@ -54,10 +54,10 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/cit
     }
 
     window.onresize = function () {
-      self.cityspaceVisible(window.innerWidth > 799);
+      self.cityspaceVisible(window.innerWidth > 720);
     };
 
-    self.cityscapeVisible = ko.observable(window.innerWidth > 799);
+    self.cityscapeVisible = ko.observable(window.innerWidth > 720);
     self.fullscreenVisible = ko.observable(false);
     self.overlayVisible = ko.observable(false);
     self.overlayContent = ko.observable();

@@ -6,8 +6,19 @@ define(['knockout', 'text!/components/chartViews/emissions.html'],
   var ViewModel = function(params) {
     var self = this;
 
-    self.chart = params.charts[0];
+    self.charts = params.charts;
     self.data = params.data;
+
+    self.charts[0].note = "1990-2050 Target Reduction is 80%.";
+    self.charts[1].note = "";
+
+
+    self.currentTabId = ko.observable(1);
+
+    /** Sets visible tab */
+    self.setActiveTab = function(chart) {
+      self.currentTabId(chart.id);
+    };
   };
 
   return {
