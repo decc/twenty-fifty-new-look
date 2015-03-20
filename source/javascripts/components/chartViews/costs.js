@@ -38,7 +38,7 @@ define(['knockout', 'text!/components/chartViews/costs.html', 'charts/costsConte
           var chartParser = new args.ChartParser(data);
 
           // Only parse data for charts in this chart view
-          var contextData = chartParser.costsSensitivityComponents()
+          var contextData = chartParser.costsContext()
           var comparedData = chartParser.costsCompared()
           var sensitivityData = chartParser.costsSensitivityComponents()
           var sensitivityComponentsData = chartParser.costsSensitivityComponents()
