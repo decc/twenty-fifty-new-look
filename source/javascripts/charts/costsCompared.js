@@ -14,6 +14,33 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       return 1;
     }
 
+    var readSelects = function() {
+      var selects = document.querySelectorAll(".select");
+      var sensitivitySelection = [];
+
+      for(var i = 0; i < selects.length; i++) {
+        sensitivitySelection.push(selects[i].value);
+      }
+
+      return sensitivitySelection;
+    };
+
+    var selects = readSelects();
+    var totalSelection = 0;
+    var totalRange = 0;
+
+    for(var i = 0; i < data.length; i++) {
+      var key = Object.keys(data);
+      if(typeof selects[i] === "undefined") {
+        totalSelection += data[key[i]].value.point;
+      } else if(selects[i] === "range") {
+        totalSelection += data[key[i]].value.low;
+        totalRange += data[key[i]].value.range;
+      } else {
+        totalSelection += data[key[i]].value[selects[i]];
+      }
+    }
+
     self.outerWidth = width || self.outerWidth;
     self.outerHeight = height || self.outerHeight;
 
@@ -136,12 +163,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
           .attr("class", "x axis")
           .attr("shape-rendering", "crispEdges")
           .call(self.xAxis)
-        .append("text")
-          .attr("class", "label")
-          .attr("x", self.width / 2)
-          .attr("y", -self.margin.top / 2)
-          .attr("dy", "-1.5em")
-          .text("Cost (£)");
     } else {
       self.svg.append("line")
       .attr({

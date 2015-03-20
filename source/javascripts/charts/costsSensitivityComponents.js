@@ -73,9 +73,9 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     var componentHeight = barHeight * 4;
     var bars = [
       { color: "#e9d", opacity: 0.7 },
-      { color: "#e9d", opacity: 0.4 },
+      { color: "#e9d", opacity: 0.7 },
       { color: "lightgoldenrodyellow", opacity: 0.7 },
-      { color: "lightgoldenrodyellow", opacity: 0.4 }
+      { color: "lightgoldenrodyellow", opacity: 0.7 }
     ]
 
     var cost_component_key = ["low", "point", "high", "range"];
@@ -101,8 +101,9 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
     var selectChange = function(e) {
       self.transitionBars();
-      self.drawParams.updateChart1.draw(self.drawParams.updateChart1.data)
-      self.drawParams.updateChart2.draw(self.drawParams.updateChart2.data)
+      self.drawParams.updateCharts.forEach(function(updateChart) {
+        updateChart.draw(updateChart.data);
+      });
     };
 
     var optionValues = [];
@@ -189,7 +190,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
     componentsEnter.append("rect")
       .attr("class", "bar bar-"+0+"-range")
-      .attr('stroke', self.colours(0))
+      .attr('fill', self.colours(0))
       .attr('opacity', 0.4)
       .attr("y", 0)
       .attr("height", barHeight)
@@ -197,7 +198,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
     componentsEnter.append("rect")
       .attr("class", "bar bar-"+2+"-range")
-      .attr('stroke', self.colours(2))
+      .attr('fill', self.colours(2))
       .attr('opacity', 0.4)
       .attr("y", (2 * barHeight))
       .attr("height", barHeight)
@@ -217,7 +218,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       .attr('fill', 'none')
       .attr('stroke', self.colours(3))
       .attr('stroke-width', '2px')
-      .attr("stroke-dasharray", function(d) { return "0 " + Math.abs(x(d.current.value.range)) + " " + barHeight + " " + Math.abs(x(d.current.value.range)) + " " + barHeight; });
+      .attr("stroke-dasharray", function(d) { return "0 " + Math.abs(x(d.comparison.value.range)) + " " + barHeight + " " + Math.abs(x(d.comparison.value.range)) + " " + barHeight; });
 
     self.transitionBars = function() {
       var components = self.svg.selectAll(".component")

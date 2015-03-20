@@ -2,7 +2,7 @@
   .tab.fixed data-bind="css: { 'active': $parent.currentTabId() === id }"
     .inner
       .fixed-note data-bind="text: note"
-      .chart data-bind="chart: name, data: $parent.data, params: { margin: { top: 20, right: 160, bottom: 70, left: 100 } }"
+      .chart data-bind="chart: name, data: $parent.data, params: { margin: { top: 20, right: 185, bottom: 70, left: 100 } }"
 
 ul.tab-nav.chart-component-tabs data-bind="foreach: charts"
   li data-bind="attr: { class: ($parent.currentTabId() === id ? 'active' : '') + ' one-of-'+$parent.charts.length }"

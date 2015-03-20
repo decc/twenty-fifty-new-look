@@ -14,6 +14,33 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       return 1;
     }
 
+    var readSelects = function() {
+      var selects = document.querySelectorAll(".select");
+      var sensitivitySelection = [];
+
+      for(var i = 0; i < selects.length; i++) {
+        sensitivitySelection.push(selects[i].value);
+      }
+
+      return sensitivitySelection;
+    };
+
+    var selects = readSelects();
+    var totalSelection = 0;
+    var totalRange = 0;
+
+    for(var i = 0; i < data.length; i++) {
+      var key = Object.keys(data);
+      if(typeof selects[i] === "undefined") {
+        totalSelection += data[key[i]].value.point;
+      } else if(selects[i] === "range") {
+        totalSelection += data[key[i]].value.low;
+        totalRange += data[key[i]].value.range;
+      } else {
+        totalSelection += data[key[i]].value[selects[i]];
+      }
+    }
+
     self.outerWidth = width || self.outerWidth;
     self.outerHeight = height ||self.outerHeight;
 
@@ -38,11 +65,11 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     self.xAxis = xAxis;
 
 
-    var bars = self.svg.selectAll(".bar")
-        .data([data])
+    var selectionBar = self.svg.selectAll(".selection-bar")
+        .data([totalSelection])
 
-    bars.enter().append("rect")
-        .attr("class", "bar")
+    selectionBar.enter().append("rect")
+        .attr("class", "bar selection-bar")
         .attr('fill', self.colours(1))
         .attr('opacity', '0.6')
         .attr("y", 0)
@@ -50,9 +77,36 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         .attr("x", x(0))
         .attr("width", function(d) { return x(d); });
 
-    bars.transition()
-        .attr("x", function(d) { return x(0); })
+    var rangeBar = self.svg.selectAll(".range-bar")
+        .data([totalRange])
+
+    rangeBar.enter().append("rect")
+        .attr("class", "bar range-bar")
+        .attr('fill', self.colours(1))
+        .attr('opacity', '0.3')
+        .attr("y", 0)
+        .attr("height", self.height)
+        .attr("x", function(d) { return x(totalSelection); })
         .attr("width", function(d) { return x(d); });
+
+    self.transitionBars = function() {
+      var selectionBar = self.svg.selectAll(".selection-bar")
+        .data([totalSelection])
+
+      var rangeBar = self.svg.selectAll(".range-bar")
+        .data([totalRange])
+
+      var selects = readSelects();
+
+      selectionBar.transition()
+          .attr("x", function(d) { return x(0); })
+          .attr("width", function(d) { return x(d); });
+
+      rangeBar.transition()
+          .attr("x", function(d) { return x(totalSelection); })
+          .attr("width", function(d) { return x(d); });
+    };
+    self.transitionBars();
 
 
     self.svg.selectAll("line.horizontalGrid").remove();
@@ -103,12 +157,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
           .attr("class", "x axis")
           .attr("shape-rendering", "crispEdges")
           .call(self.xAxis)
-        .append("text")
-          .attr("class", "label")
-          .attr("x", self.width / 2)
-          .attr("y", -self.margin.top / 2)
-          .attr("dy", "-1.5em")
-          .text("Cost (£)");
     } else {
       self.svg.append("line")
       .attr({
