@@ -12,6 +12,7 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/cit
 
     var self = this;
 
+    self.pathway = params.pathway
     // Main navigation state.
     // 0: closed, 1: primary, 2: secondary
     self.navState = ko.observable(0);
@@ -155,6 +156,8 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/cit
     /** toggle city scape */
     self.toggleCity = function(){
       toggleObservableBool(self, 'cityscapeVisible');
+      // Redraw charts by touching data
+      self.pathway().chartData.notifySubscribers();
     }
 
   };
