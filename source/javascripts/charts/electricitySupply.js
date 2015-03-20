@@ -109,6 +109,14 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
             d3.select(this).append("path")
               .attr("class", "line")
               .attr("d", line)
+              .on('mouseover', function(d) {
+                d3.select(this.parentNode).attr("data-state", "active")
+                d3.select(this.parentNode.parentNode).attr("data-state", "graph-hover")
+              })
+              .on('mouseout', function(d) {
+                d3.select(this.parentNode).attr("data-state", "inactive")
+                d3.select(this.parentNode.parentNode).attr("data-state", "inactive")
+              })
 
             var label =  d3.select(this).append("g")
               .attr("class", "line-label")
@@ -116,7 +124,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
             label.append("rect")
               .attr("width", self.margin.right)
-              .attr("height", 24);
+              .attr("height", 17);
 
             label.append("text")
               .text("Demand")
