@@ -124,18 +124,18 @@
 
 
 #landscape-label {
-  background: rgba(90, 99, 120, 0.9);
-  bottom: 0;
+  background: rgba(129, 147, 173, 1);
+  top: 0;
   color: #fff;
   font-size: 120%;
   font-weight: 400;
   padding: 10px;
   position: absolute;
   right: 0;
+  z-index: 9;
+  width: 100%;
+  height:45px;
 }
-
-
-
 
 
 
@@ -1067,6 +1067,5 @@ i.thermometer[data-value="5"] { background-image: url(/svgs/thermometer_5.svg); 
   background-position: 108% -23px;
 }
 
-.ie #landscape-layer-2:after {
-  background-position: -396px -153px;
-}
+/*.ie #landscape-layer-2:after {
+  background-position: -396px -*/
