@@ -1,7 +1,7 @@
 .tabs.chart-component data-bind="foreach: charts"
   .tab.fixed data-bind="css: { 'active': $parent.currentTabId() === id }"
     .inner
-      .fixed-note 1990-2050 Target Reduction is 80%.
+      .fixed-note data-bind="text: note"
       .chart data-bind="chart: name, data: $parent.data, params: { margin: { top: 20, right: 160, bottom: 70, left: 100 } }"
 
 ul.tab-nav.chart-component-tabs data-bind="foreach: charts"
