@@ -66,25 +66,25 @@ define(['d3'], function(d3) {
       self.minimumHeightForLabel = 12;
 
       self.colours = function(index, key) {
-        
+
         var colors = [
-        
+
           '#C23474',
           '#A12B61',
           '#782048',
           '#531632',
-        
+
           "#D53980",
           "#28A197",
           '#5A6378',
-          
+
           '#3867AF',
           "#C96E79",
           "#9E1946",
           "#710627",
           "#A04668",
           "#9A275A",
-          
+
           "#A7CECB",
           "#8BA6A9",
           "#2D3E5B",
@@ -102,13 +102,13 @@ define(['d3'], function(d3) {
           '#68BDB6',
           '#8ACCC7',
           '#B3DEDB',
-          
+
           '#D6EDEB',
           "#95CFCA",
           "#8193AD",
-          "#F75FA4"          
+          "#F75FA4"
         ];
-        
+
         var keys = {
           "0.01 gw geothermal stations": 0,
           "1 gw gas standby power stations": 0,
@@ -205,20 +205,20 @@ define(['d3'], function(d3) {
           "wave and tidal": 0,
           "wind": 0
         };
-        
+
         if (typeof key != 'undefined') {
-          
+
           var lowerCaseKey = key.toLowerCase();
-          
+
           if (typeof keys[lowerCaseKey] != 'undefined')
             return colors[keys[lowerCaseKey]];
-          
+
         }
-        
+
         var randomOffset = Math.floor(Math.random() * colors.length) + 1;
-        
+
         return colors[(index + randomOffset) % colors.length];
-        
+
       };
 
       self.width = self.outerWidth - self.margin.left - self.margin.right;
