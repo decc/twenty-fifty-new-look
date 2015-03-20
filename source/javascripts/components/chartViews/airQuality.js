@@ -8,7 +8,7 @@ define(['knockout', 'text!/components/chartViews/airQuality.html'],
     self.calculator = args.calculator;
 
     self.chart = args.charts[0];
-    self.data = args.data
+    self.data = args.data || {};
     self.comparison1 = ko.observable({});
     self.comparison2 = ko.observable({});
 

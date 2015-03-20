@@ -12,10 +12,11 @@ define(['knockout', 'text!/components/chartViews/overview.html'],
     self.chart = params.charts[0];
     self.data = params.data;
 
-    self.chartKeys = ko.computed(function() {
-      var cd = self.data()[self.chart.name];
-      return (cd) ? Object.keys(cd) : [];
-    });
+    self.chartKeys = [
+      'Demand',
+      'Supply',
+      'Emissions'
+    ];
 
     self.date = ko.observable(maxDate);
 

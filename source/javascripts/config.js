@@ -4,6 +4,7 @@ define([],
 
   return {
     'apiUrl': "https://obscure-sierra-8645.herokuapp.com",
-    'siteUrl': "http://localhost:4567",
+    // 'apiUrl': "http://2050-calculator-tool.decc.gov.uk",
+    'siteUrl': "https://decc-2050.herokuapp.com",
   };
 });
