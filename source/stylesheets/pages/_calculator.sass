@@ -10,21 +10,26 @@
   width: 100%
   height: 100%
   background: #4A5163
+  display: table
   
   &.hidden
     z-index: -100
     display: none
-    
+  
+  .inner
+    display: table-cell
+    vertical-align: middle
+  
   img
     border: 0
     display: block
     margin: auto
-    margin-top: calc(50% - 350px)
+    width: 90px // halved for retina support
     
   h5
     text-align: center
     color: #fff
-    font-size: 4em
+    font-size: 4vh
     padding: 0
     margin: 0
 
