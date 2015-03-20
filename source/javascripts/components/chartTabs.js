@@ -12,7 +12,8 @@ define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartP
 
     self.pathway = params.pathway;
 
-    self.CHART_TABS = [
+
+    self.CHART_TABS = ko.observableArray([
       { "id": 1, "name": "energy", "icon": "energy", "title": "Energy", "viewmodel": "tabbed", "charts": [
           { "id": 1, "name": "EnergyDemandChart", "title": "Demand vs Supply" },
           { "id": 2, "name": "EnergySupplyChart", "title": "Supply vs Demand" }
@@ -53,7 +54,7 @@ define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartP
           { "id": 1, "name": "OverviewChart", "title": "Overview" }
         ]
       }
-    ];
+    ]);
 
     self.currentTabId = ko.observable(1);
 

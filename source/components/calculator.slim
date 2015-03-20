@@ -1,7 +1,7 @@
 .loading
-  img src='/images/spinner_blue.gif'
-  h5 Loading...
-
+  .inner
+    img src='/images/spinner_blue.gif'
+    h5 loading...
 
 .viewport
   main-nav params="navState: navState"
@@ -16,15 +16,13 @@
 
         = partial "partials/cityscape"
 
-        .bit data-bind="visible: mainViewVisible"
+        .inner-content data-bind="visible: mainViewVisible"
 
-          div#landscape-label
-            label Your 2050 Landscape
-            span.toggle-city data-bind="click: toggleCity, css: { up: cityscapeVisible(), down: !cityscapeVisible() }"
+            div#landscape-label data-bind="click: toggleCity, css: { full: !cityscapeVisible() }"
+              label Your 2050 Landscape
+              span.toggle-city data-bind="css: { up: cityscapeVisible(), down: !cityscapeVisible() }"
 
-          section#charts.charts data-bind="css: { noTop: !cityscapeVisible() }"
-
-            .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway } }"
+            .chart-tabs-container data-bind="visible: !shareVisible(), css: { full: !cityscapeVisible() }, component: { name: 'chart-tabs', params: { pathway: currentPathway } }"
 
         = partial "partials/pathway-overlay"
 

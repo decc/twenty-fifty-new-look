@@ -136,6 +136,15 @@
   z-index: 9;
   width: 100%;
   height: $cityscape-bar-height;
+  cursor: pointer;
+
+  &.full {
+    top: 0;
+  }
+
+  label {
+    cursor: pointer;
+  }
 }
 
 
