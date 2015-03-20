@@ -334,6 +334,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
     self.updating = ko.observable(false);
 
     self.actions = ko.observableArray(self.getActions());
+
     self.chartData = ko.observable({});
 
     ko.computed(function() {
@@ -342,10 +343,9 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
         self.updating(true);
         DataRequester.pathway(pathwayString, function(data){
           var data = JSON.parse(data.response);
+
           self.chartParser = new ChartParser(data);
-
           self.chartData(self.chartParser.all());
-
           self.updating(false);
         });
       }
@@ -374,7 +374,6 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
     },
 
     toggle: function(data, event){
-      console.log(event.target);
     },
 
     unlock: function() {

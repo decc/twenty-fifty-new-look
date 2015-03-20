@@ -85,6 +85,10 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/cit
     };
 
     self.currentPathway = params.pathway;
+
+    console.dir(self.currentPathway)
+    console.dir(self.currentPathway().chartData())
+
     self.pathwayUpdating = self.currentPathway().updating;
 
     self.pathwayCategories = Pathway.categories();
