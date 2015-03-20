@@ -4,19 +4,25 @@
 
   article
     width: 48%
-    margin-bottom: 2em
-
-    &:nth-child(odd)
-      float: left
-    &:nth-child(even)
-      float: right
+    margin-right: 1em
+    margin-bottom: 1em
+    display: inline-block
+    vertical-align: top
 
     &.active
       section
-        display: block
+        font-size: 16px
+        transition-property: all
+        transition-duration: .75s
+        transition-timing-function: cubic-bezier(0, 1, 0.5, 1)
+        
+      header
+        span
+          color: #fff
 
     header
       overflow: auto
+      cursor: pointer
 
       h5
         margin: 0
@@ -35,8 +41,12 @@
         font-size: 1.3em
         text-align: center
         font-weight: bold
+        color: #666
 
     section
       background: #000
       padding: 2em
-      display: none
+      font-size: 0px
+      transition-property: all
+      transition-duration: .5s
+      transition-timing-function: cubic-bezier(0, 1, 0.5, 1)
