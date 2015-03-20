@@ -21,6 +21,7 @@ define([], function() {
         ElectricitySupplyChart: this.electricitySupply(),
 
         EnergyEmissionsChart: this.energyEmissions(),
+        ElectricityEmissionsChart: this.electricityEmissions(),
 
         FlowsChart: this.flows(),
 
@@ -47,6 +48,10 @@ define([], function() {
     },
 
     energyEmissionsUnused: function() {
+      return ["Total"];
+    },
+
+    electricityEmissionsUnused: function() {
       return ["Total"];
     },
 
@@ -109,7 +114,7 @@ define([], function() {
             var value = layerData[layerName][i];
             var date = 2010 + i * 5;
 
-            chartLayers.push({ key: layerName, date: date, value: Math.abs(value) });
+            chartLayers.push({ key: layerName, date: date, value: value });
           }
         }
       }
@@ -119,7 +124,7 @@ define([], function() {
         var value = lineData[i];
         var date = 2010 + i * 5;
 
-        chartLine.push({ date: date, value: Math.abs(value) });
+        chartLine.push({ date: date, value: value });
       }
 
       return {
@@ -168,10 +173,18 @@ define([], function() {
 
     energyEmissions: function() {
       var primaryData = this.data.ghg;
-      var secondaryData = this.data.final_energy_demand;
+      var secondaryData = this.data.ghg["Total"];
 
       var skipLayers = this.energyEmissionsUnused();
-      return this.areaVsLine(primaryData, [], skipLayers);
+      return this.areaVsLine(primaryData, secondaryData, skipLayers);
+    },
+
+    electricityEmissions: function() {
+      var primaryData = this.data.electricity.emissions;
+      var secondaryData = this.data.electricity.emissions["Total"];
+
+      var skipLayers = this.energyEmissionsUnused();
+      return this.areaVsLine(primaryData, secondaryData, skipLayers);
     },
 
 

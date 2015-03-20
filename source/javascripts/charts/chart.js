@@ -102,7 +102,7 @@ define(['d3'], function(d3) {
 
       // Create array mapping order of sizes
       var sortable = endValues.map(function(value, i){ return [i, value] });
-      sortable.sort(function(a, b) { return a[1] - b[1] });
+      sortable.sort(function(a, b) { return a[1] > b[1] ? -1 : 1 });
       var positions = sortable.map(function(valueArr) { return valueArr[0] });
 
       return positions;
@@ -133,37 +133,43 @@ define(['d3'], function(d3) {
           .interpolate("monotone");
     },
 
-    setupLineAxes: function() {
+    setupLineAxes: function(xLabel, yLabel) {
       var self = this;
 
       self.svg.selectAll('.axis').remove();
-
-      self.svg.append("g")
+      // X Axis, can handle negative Y values
+      var xAxis = self.svg.append("g")
           .attr("class", "x axis")
-          .attr("transform", "translate(0," + self.height + ")")
-          // .attr("shape-rendering", "crispEdges")
+          .attr("transform", "translate(0," + self.y(0) + ")")
           .call(self.xAxis)
-        .append("text")
+      xAxis.selectAll('.tick text')
+          .attr("transform", "translate(0," + (self.height - self.y(0)) + ")")
+          .attr("dy", "1em")
+          .attr("stroke", "none")
+          .attr("fill", "#fff")
+      xAxis.append("text")
           .attr("class", "label")
+          .attr("transform", "translate(0," + (self.height - self.y(0)) + ")")
           .attr("x", self.width / 2)
           .attr("y", self.margin.bottom / 2)
           .attr("dy", "1em")
-          .text("Date");
+          .text(xLabel);
 
-      self.svg.append("g")
+      // Y Axis
+      var yAxis = self.svg.append("g")
           .attr("class", "y axis")
           .attr("transform", "translate(0, 0)")
-          // .attr("shape-rendering", "crispEdges")
           .call(self.yAxis)
-        .append("text")
+      yAxis.selectAll('.tick text')
+          .attr("stroke", "none")
+          .attr("fill", "#fff")
+      yAxis.append("text")
           .attr("class", "label")
           .attr("transform", "rotate(-90)")
-          // X and Y are swapped because it's rotated! ! ! ! ! ! !!!!!!!!!!!! !!
-          // !!!!!!!!! ! ! !!!!!
           .attr("x", -self.height / 2)
           .attr("y", -self.margin.left / 2)
           .attr("dy", "-1em")
-          .text("Energy (TWh/yr)");
+          .text(yLabel);
 
       self.svg.selectAll("line.horizontalGrid").remove();
       self.svg.selectAll("line.horizontalGrid").data(self.x.ticks(4)).enter()

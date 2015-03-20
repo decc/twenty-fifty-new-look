@@ -137,7 +137,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
             })
 
 
-      self.setupLineAxes();
+      self.setupLineAxes("Date", "Energy (TWh/yr)");
   };
 
   return ElectricitySupplyChart;
