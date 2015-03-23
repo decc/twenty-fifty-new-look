@@ -102,6 +102,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     var selectChange = function(e) {
       self.transitionBars();
       self.drawParams.updateCharts.forEach(function(updateChart) {
+        console.log(updateChart)
         updateChart.draw(updateChart.data);
       });
     };

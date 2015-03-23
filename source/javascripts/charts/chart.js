@@ -66,7 +66,7 @@ define(['d3'], function(d3) {
       self.minimumHeightForLabel = 12;
 
       self.colours = function(index, key) {
-        
+
         var colors = [
         
           // pinks
@@ -110,26 +110,26 @@ define(['d3'], function(d3) {
           "#2978A0",
           "#2D3E5B",
           "#8193AD",
-          "#253031"         
+          "#253031"
         ];
-        
+
         var keys = {
           "0.01 gw geothermal stations": 9,
-          //"1 gw gas standby power stations": 0,
-          //"1.2 gw coal gas or biomass power stations with ccs": 0,
-          //"2 gw coal gas or biomass power stations without ccs": 0,
-          //"215 kt/y waste to energy conversion facilities": 0,
+          "1 gw gas standby power stations": 25,
+          "1.2 gw coal gas or biomass power stations with ccs": 0,
+          "2 gw coal gas or biomass power stations without ccs": 14,
+          "215 kt/y waste to energy conversion facilities": 32,
           "3 gw nuclear power station": 7,
           "agriculture": 19,
           "agriculture and land use": 19,
-          //"bikes": 0,
+          "bikes": 6,
           "biocrops": 4,
           "bioenergy": 27,
           "bioenergy credit": 27,
           "bioenergy imports": 27,
           "biomass/coal power stations": 14,
-          //"biomatter to fuel conversion": 0,
-          //"buildings": 0,
+          "biomatter to fuel conversion": 12,
+          "buildings": 23,
           "carbon capture": 0,
           "carbon capture storage (ccs)": 0,
           "coal": 5,
@@ -153,22 +153,22 @@ define(['d3'], function(d3) {
           "electricity grid distribution": 31,
           "electricity imports": 31,
           "energy crops": 4,
-          //"energy from waste": 0,
-          //"environmental heat": 0,
+          "energy from waste": 32,
+          "environmental heat": 1,
           "finance": 21,
           "finance cost": 21,
           "forest": 18,
           "fossil fuel transfers": 33,
           "fossil fuels": 33,
-          //"fuel cell cars and buses": 0,
-          //"fuel combustion": 0,
+          "fuel cell cars and buses": 2,
+          "fuel combustion": 33,
           "gas": 25,
-          //"geosequestration": 0,
+          "geosequestration": 10,
           "geothermal": 9,
           "geothermal electricity": 9,
-          //"h2 production": 0,
+          "h2 production": 16,
           //"heating and cooling": 0,
-          //"hybrid cars and buses": 0,
+          "hybrid cars and buses": 11,
           "hydro": 8,
           "hydroelectric": 8,
           "hydroelectric power stations": 8,
@@ -180,7 +180,7 @@ define(['d3'], function(d3) {
           "land use, land-use change and forestry": 18,
           //"lighting & appliances": 0,
           "marine algae": 22,
-          //"micro wind": 0,
+          "micro wind": 17,
           "natural gas": 25,
           //"non-thermal renewable generation": 0,
           "nuclear fission": 7,
@@ -190,18 +190,18 @@ define(['d3'], function(d3) {
           "onshore wind": 28,
           //"other": 0,
           "petroleum refineries": 33,
-          //"rail": 0,
+          "rail": 16,
           "solar": 20,
           "solar pv": 20,
           "solar thermal": 24,
           //"solvent and other product use": 0,
-          //"storage of captured co2": 0,
-          //"storage, demand shifting, backup": 0,
+          "storage of captured co2": 0,
+          "storage, demand shifting, backup": 0,
           "tidal": 29,
           "tidal and wave": 29,
           "tidal range": 29,
           "tidal stream": 29,
-          //"transport": 0,
+          "transport": 26,
           //"unabated thermal generation": 0,
           "waste": 32,
           "waste arising": 32,
@@ -209,20 +209,20 @@ define(['d3'], function(d3) {
           "wave and tidal": 29,
           "wind": 17
         };
-        
+
         if (typeof key != 'undefined') {
-          
+
           var lowerCaseKey = key.toLowerCase();
-          
+
           if (typeof keys[lowerCaseKey] != 'undefined')
             return colors[keys[lowerCaseKey]];
-          
+
         }
-        
+
         var randomOffset = Math.floor(Math.random() * colors.length) + 1;
-        
+
         return colors[(index + randomOffset) % colors.length];
-        
+
       };
 
       self.width = self.outerWidth - self.margin.left - self.margin.right;
