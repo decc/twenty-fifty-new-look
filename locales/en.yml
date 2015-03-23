@@ -66,7 +66,7 @@ en:
       body: ''
       button: 'Start'
     button: "Skip guide"
-
+  
   calculator:
     header:
       reduction: "C02 Reduction"
@@ -148,3 +148,19 @@ en:
       show: "View all pathway actions"
       hide: "Hide all pathway actions"
 
+  faqs:
+    q1:
+      question: "How does the calculator work?"
+      answer: "For a re-cap of the introduction slides click <a href=\"/#/home\">here</a>."
+    q2:
+      question: "Why won't the emissions change when I move the supply sliders?"
+      answer: "Take a look at the 'Electricity' tab. Are you oversupplying electricity? Excess electricity supply will not help achieve an 80% cut."
+    q3:
+      question: "Why can't I hit the 80% target?"
+      answer: "You must reduce energy demand and decarbonise energy supply - so make sure you change both demand and supply levers. Have you electrified transport, heat or industry? If not, these sectors will be consuming fossil fuels and could stop you from meeting the target. Despite big increases in electricity use, liquid fuel, such as biofuel, will still be needed in 2050. So take a look at the 'flow' view to make sure you have enough low carbon liquid fuel."
+    q4:
+      question: "What does the animation do?"
+      answer: "As you make changes to each slider, the image will change to reflect the decision you take. For example, if you increase the level of offshore wind, more turbines at sea will appear."
+    q5:
+      question: "Where do the figures come from?"
+      answer: "The data behind the calculator is rooted in scientific and engineering realities, looking at what is thought to be physically and technically possible in each sector. To do this, a broad range of experts were consulted from inside and outside government. For more background on the calculator go to: <a href=\"https://www.gov.uk/2050-pathways-analysis\" target=\"_blank\">https://www.gov.uk/2050-pathways-analysis</a>."
