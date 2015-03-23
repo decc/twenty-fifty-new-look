@@ -5,13 +5,18 @@
   left: 0
   right: 0
   background: #5A6378
-  @media screen and (max-height: $device-height-small)
-    top: 0
-    margin-top: 0px
 
   &.full
     top: $cityscape-bar-height
     height: calc(100% - #{$cityscape-bar-height})
+
+  @media screen and (max-height: $device-height-small)
+    top: 0
+    height: 100%
+
+    &.full
+      top: 0
+      height: 100%
 
   &.noTop
     top: 0px

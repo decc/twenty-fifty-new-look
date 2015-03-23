@@ -14,6 +14,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       return 1;
     }
 
+    self.data = data;
+
     var readSelects = function() {
       var selects = document.querySelectorAll(".select");
       var sensitivitySelection = [];
@@ -42,7 +44,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     }
 
     self.outerWidth = width || self.outerWidth;
-    self.outerHeight = height ||self.outerHeight;
+    self.outerHeight = height || self.outerHeight;
 
     self.width = self.outerWidth - self.margin.left - self.margin.right;
     self.height = self.outerHeight - self.margin.top - self.margin.bottom;
@@ -64,7 +66,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     self.x = x;
     self.xAxis = xAxis;
 
-
     var selectionBar = self.svg.selectAll(".selection-bar")
         .data([totalSelection])
 
@@ -74,8 +75,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         .attr('opacity', '0.6')
         .attr("y", 0)
         .attr("height", self.height)
-        .attr("x", x(0))
-        .attr("width", function(d) { return x(d); });
+        .attr("x", function(d) { return x(0); })
+        .attr("width", function(d) { return self.width - x(d); });
 
     var rangeBar = self.svg.selectAll(".range-bar")
         .data([totalRange])

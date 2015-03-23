@@ -68,6 +68,7 @@ define(['d3'], function(d3) {
       self.colours = function(index, key) {
 
         var colors = [
+          // pinks
 
           '#C23474',
           '#A12B61',
@@ -339,6 +340,8 @@ define(['d3'], function(d3) {
             "stroke-width" : "1px"
           });
     }
+
+
 
   };
 

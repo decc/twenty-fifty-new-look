@@ -14,6 +14,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       return 1;
     }
 
+    self.data = data;
+
     var readSelects = function() {
       var selects = document.querySelectorAll(".select");
       var sensitivitySelection = [];
@@ -26,20 +28,92 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     };
 
     var selects = readSelects();
+    var dataSelectionObject = {};
+    var dataRangeObject = {};
     var totalSelection = 0;
-    var totalRange = 0;
 
-    for(var i = 0; i < data.length; i++) {
-      var key = Object.keys(data);
+    // Map of cost to category
+    var cost_categories = {
+      "Conventional thermal plant": "Electricity",
+      "Combustion + CCS": "Electricity",
+      "Nuclear power": "Electricity",
+      "Onshore wind": "Electricity",
+      "Offshore wind": "Electricity",
+      "Hydroelectric": "Electricity",
+      "Wave and Tidal": "Electricity",
+      "Geothermal": "Electricity",
+      "Distributed solar PV": "Electricity",
+      "Distributed solar thermal": "Buildings",
+      "Micro wind": "Electricity",
+      "Biomatter to fuel conversion": "Bioenergy",
+      "Bioenergy imports": "Bioenergy",
+      "Agriculture and land use": "Bioenergy",
+      "Energy from waste": "Bioenergy",
+      "Waste arising": "Bioenergy",
+      "Marine algae": "Bioenergy",
+      "Electricity imports": "Electricity",
+      "Electricity Exports": "Electricity",
+      "Electricity grid distribution": "Electricity",
+      "Storage, demand shifting, backup": "Electricity",
+      "H2 Production": "Transport",
+      "Domestic heating": "Buildings",
+      "Domestic insulation": "Buildings",
+      "Commercial heating and cooling": "Buildings",
+      "Domestic lighting, appliances, and cooking": "Buildings",
+      "Commercial lighting, appliances, and catering": "Buildings",
+      "Industrial processes": "Industry",
+      "Conventional cars and buses": "Transport",
+      "Hybrid cars and buses": "Transport",
+      "Electric cars and buses": "Transport",
+      "Fuel cell cars and buses": "Transport",
+      "Bikes": "Transport",
+      "Rail": "Transport",
+      "Domestic aviation": "Transport",
+      "Domestic freight": "Transport",
+      "International aviation": "Transport",
+      "International shipping (maritime bunkers)": "Transport",
+      "Geosequestration": "Other",
+      "Petroleum refineries": "Industry",
+      "Coal": "Fossil fuels",
+      "Oil": "Fossil fuels",
+      "Gas": "Fossil fuels",
+      "Fossil fuel transfers": "Fossil fuels",
+      "District heating effective demand": "Buildings",
+      "Power Carbon Capture": "Electricity",
+      "Industry Carbon Capture": "Industry",
+      "Storage of captured CO2": "Other",
+      "Finance cost": "Finance"
+    };
+
+    // Populate categories object
+    var keys = Object.keys(data);
+    for (var i = 0; i < keys.length; i++) {
+      // Lookup cost's category
+      var categoryName = cost_categories[keys[i]];
+
+      // Initialise object if first encounter with category
+      if(!dataSelectionObject[categoryName]) {
+        dataSelectionObject[categoryName] = { key: categoryName, value: 0 };
+        dataRangeObject[categoryName] = { key: categoryName, value: 0 };
+      }
+
+      // Populate object using current selects state
       if(typeof selects[i] === "undefined") {
-        totalSelection += data[key[i]].value.point;
+        dataSelectionObject[categoryName].value += data[keys[i]].point;
+        totalSelection += data[keys[i]].point;
       } else if(selects[i] === "range") {
-        totalSelection += data[key[i]].value.low;
-        totalRange += data[key[i]].value.range;
+        dataSelectionObject[categoryName].value += data[keys[i]].low;
+        totalSelection += data[keys[i]].low;
+        dataRangeObject[categoryName].value += data[keys[i]].range;
       } else {
-        totalSelection += data[key[i]].value[selects[i]];
+        dataSelectionObject[categoryName].value += data[keys[i]][selects[i]];
+        totalSelection += data[keys[i]][selects[i]];
       }
     }
+
+    // Flatten
+    var dataSelection = Object.keys(dataSelectionObject).map(function(key) { return { key: key, value: dataSelectionObject[key].value }; });
+    var dataRange = Object.keys(dataRangeObject).map(function(key) { return { key: key, value: dataRangeObject[key].value }; });
 
     self.outerWidth = width || self.outerWidth;
     self.outerHeight = height || self.outerHeight;
@@ -76,43 +150,115 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     self.x = x;
     self.xAxis = xAxis;
 
-    var bars = self.svg.selectAll(".bar-container")
-        .data(stack(data))
+    var selectionBars = self.svg.selectAll(".bar-selection-container")
+        .data(stack(dataSelection))
 
-    bars.enter().append("g")
-      .attr("class", "bar-container")
+    selectionBars.enter().append("g")
+      .attr("class", "bar-container bar-selection-container")
       .each(function(d, i) {
         d3.select(this).append("rect")
-          .attr("class", "bar")
-          .attr('fill', function(d) { return d.colour; })
+          .attr("class", "bar bar-selection")
+          .attr('fill', d.colour)
           .attr('opacity', '0.6')
           .attr("y", 0)
           .attr("height", self.height)
-          .attr("x", function(d) { return x(d.x0); })
-          .attr("width", function(d) { return x(d.value); })
-          .on('mouseover', function(d) {
+          .attr("x", x(d.x0))
+          .attr("width", x(d.value))
+          .on('mouseover', function() {
             d3.select(this.parentNode).attr("data-state", "active")
             d3.select(this.parentNode.parentNode).attr("data-state", "graph-hover")
+            self.svg.selectAll("#bar-label-selection-" + i).attr("data-state", "active")
           })
-          .on('mouseout', function(d) {
+          .on('mouseout', function() {
             d3.select(this.parentNode).attr("data-state", "inactive")
             d3.select(this.parentNode.parentNode).attr("data-state", "inactive")
+            self.svg.selectAll("#bar-label-selection-" + i).attr("data-state", "inactive")
           });
-        d3.select(this).append("text")
-          .attr("class", "bar-label")
-          .attr("y", y(0.5))
-      })
+      });
 
-    self.svg.selectAll(".bar")
-      .data(stack(data))
-      .transition()
-      .attr("x", function(d) { return x(d.x0); })
-      .attr("width", function(d) { return x(d.value); });
+    selectionBars.enter().append("text")
+      .attr("class", "bar-label bar-selection-label")
+      .attr("id", function(d, i) { return "bar-label-selection-" + i; })
+      .attr("y", y(0.5));
 
-    self.svg.selectAll(".bar-label")
-      .data(stack(data))
-      .attr("x", function(d) { return x(d.x0 + d.value/2); })
-      .text(function(d) { return d.key + " (" + parseInt(d.value, 10) + ")"; })
+    var rangeBars = self.svg.selectAll(".bar-range-container")
+        .data(stack(dataRange))
+
+    rangeBars.enter().append("g")
+      .attr("class", "bar-container bar-range-container")
+      .each(function(d, i) {
+        // Pattern
+        d3.select(this).append("pattern")
+          .attr({
+            "id": "bar-pattern-" + i,
+            "x": "0" ,
+            "y": "0" ,
+            "width": "5" ,
+            "height": "5" ,
+            "patternUnits": "userSpaceOnUse"
+          }).append("line")
+            .attr({
+              x1: "0",
+              y1: "0",
+              x2: "5",
+              y2: "5",
+              stroke: d.colour
+            });
+        d3.select(this).append("rect")
+          .attr("class", "bar bar-range")
+          .attr('fill', "url(#bar-pattern-" + i + ")")
+          .attr('opacity', '0.6')
+          .attr("y", 0)
+          .attr("height", self.height)
+          .attr("x", x(totalSelection + d.x0))
+          .attr("width", x(d.value))
+          .on('mouseover', function() {
+            d3.select(this.parentNode).attr("data-state", "active")
+            d3.select(this.parentNode.parentNode).attr("data-state", "graph-hover")
+            self.svg.selectAll("#bar-label-range-" + i).attr("data-state", "active")
+          })
+          .on('mouseout', function() {
+            d3.select(this.parentNode).attr("data-state", "inactive")
+            d3.select(this.parentNode.parentNode).attr("data-state", "inactive")
+            self.svg.selectAll("#bar-label-range-" + i).attr("data-state", "inactive")
+          });
+      });
+
+    rangeBars.enter().append("text")
+      .attr("class", "bar-label bar-range-label")
+      .attr("id", function(d, i) { return "bar-label-range-" + i; })
+      .attr("y", y(0.5));
+
+    self.transitionBars = function() {
+      self.svg.selectAll(".bar-selection")
+        .data(stack(dataSelection))
+        .transition()
+        .attr("x", function(d) { return x(d.x0); })
+        .attr("width", function(d) { return x(d.value); })
+        .attr("height", self.height);
+
+      self.svg.selectAll(".bar-selection-label")
+        .data(stack(dataSelection))
+        .attr("x", function(d) { return x(d.x0 + d.value/2); })
+        .attr("y", y(0.5))
+        .text(function(d) { return d.key + " (" + parseInt(d.value, 10) + ")"; });
+
+      self.svg.selectAll(".bar-range")
+        .data(stack(dataRange))
+        .transition()
+        .attr("x", function(d) { return x(totalSelection + d.x0); })
+        .attr("width", function(d) { return x(d.value); })
+        .attr("height", self.height);
+
+      self.svg.selectAll(".bar-range-label")
+        .data(stack(dataRange))
+        .attr("x", function(d) { return x(totalSelection + d.x0 + d.value/2); })
+        .attr("y", y(0.5))
+        .text(function(d) { return d.key + " (" + parseInt(d.value, 10) + ")"; });
+
+    }
+    self.transitionBars();
+
 
     self.svg.selectAll("line.horizontalGrid").remove();
     self.svg.selectAll("line.horizontalGrid").data(self.x.ticks(nTicks)).enter()
