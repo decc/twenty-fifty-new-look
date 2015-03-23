@@ -140,7 +140,15 @@
     return xhr;
   },
 
-  bindEvents = function(ajax, xhr){
+  bindEvents = function(ajax, xhr) {
+    if(ajax.XDomainRequest && window.XDomainRequest) {
+      bindXdrEvents(ajax, xhr)
+    } else {
+      bindXhrEvents(ajax, xhr)
+    }
+  },
+
+  bindXhrEvents = function(ajax, xhr){
     xhr.ontimeout = ajax.onTimeout(xhr);
 
     ajax.onStart(xhr);
@@ -154,6 +162,14 @@
         }
         ajax.onFinish(this);
       }
+    };
+  },
+
+  bindXdrEvents = function(ajax, xdr){
+    xdr.ontimeout = ajax.onTimeout(xdr);
+    // xdr.onerror = ajax.onError(xdr);
+    xdr.onload = function(){
+      ajax.onSuccess(this);
     };
   },
 

@@ -19,11 +19,11 @@
   });
 
   require(['app', 'vendor/modernizr', 'componentLoader', 'customElements'], function(app) {
-  //     Modernizr.load({
-  //   test : Modernizr.geolocation,
-  //   yep  : 'normal.js',
-  //   nope : ['polyfill.js', 'wrapper.js']
-  // });
+    // TODO: create test for polyfills e.g.
+    // Modernizr.load({
+    //   test : Modernizr.geolocation,
+    //   nope : ['/javascripts/vendor/polyfills/classList.js']
+    // });
 
     Modernizr.load({load: ['/javascripts/vendor/polyfills/classList.js']});
     Modernizr.load({load: ['/javascripts/vendor/polyfills/es5.js']});
