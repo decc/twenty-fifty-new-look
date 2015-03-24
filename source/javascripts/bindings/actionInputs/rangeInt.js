@@ -1,4 +1,4 @@
-define(['knockout', 'bindings/range'], function(ko) {
+define(['knockout', 'bindings/range', 'bindings/actionInputs/tooltip'], function(ko) {
   'use strict';
 
   ko.bindingHandlers.rangeInt = {
@@ -34,7 +34,9 @@ define(['knockout', 'bindings/range'], function(ko) {
         ko.bindingHandlers.rangeInt.setLabelClass(element, max, valueLabel);
 
         valueLabel.innerHTML = element.value;
-        ko.bindingHandlers.rangeInt.setTooltip(element, element.value);
+
+
+        ko.bindingHandlers.tooltip.update(element, element.value);
       })
 
       if(element.parentNode.previousSibling.querySelector(element.label) == null){
@@ -63,7 +65,7 @@ define(['knockout', 'bindings/range'], function(ko) {
       valueLabel.innerHTML = element.value;
 
       ko.bindingHandlers.rangeInt.setLabelClass(element, max, valueLabel);
-      ko.bindingHandlers.rangeInt.setTooltip(element, element.value);
+      ko.bindingHandlers.tooltip.update(element, element.value);
       ko.bindingHandlers.range.update(element);
     },
 
@@ -87,9 +89,12 @@ define(['knockout', 'bindings/range'], function(ko) {
     setTooltip: function(element, value) {
       var val = Math.round(element.value);
 
+      var parent = element.parentNode;
+
       var text = element.getAttribute("tip"+val);
-      var tooltip = element.parentNode.querySelector('.tooltip');
-      var tooltipText = element.parentNode.querySelector('.tooltip .text');
+      var tooltip = parent.querySelector('.tooltip');
+      var tooltipText = parent.querySelector('.tooltip .text');
+
       tooltipText.innerHTML = text;
 
       var classmap = {
@@ -102,10 +107,14 @@ define(['knockout', 'bindings/range'], function(ko) {
       tooltip.className = "tooltip "+classmap[val];
 
       var endValue = 3;
-      var endPosition = 233;
-      var arrowPosition = Math.round(((element.value - 1) / endValue * endPosition) + 2)
-      var tooltipArrow = element.parentNode.querySelector('.tooltip .arrow');
-      tooltipArrow.style.left = arrowPosition + "px";
+      var endPosition = 250;
+      var arrowPosition = Math.round(((element.value - 1) / endValue * endPosition) + 2);
+
+      var tooltipArrow = parent.querySelector('.tooltip .arrow');
+      var w = tooltipArrow.offsetWidth / 2;
+      var limited = Math.min(Math.max(arrowPosition, w), 255);
+
+      tooltipArrow.style.left = [limited - w, "px"].join('');
     }
   };
 
