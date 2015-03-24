@@ -101,11 +101,13 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
       selectionBar.transition()
           .attr("x", function(d) { return x(0); })
-          .attr("width", function(d) { return x(d); });
+          .attr("width", function(d) { return x(d); })
+          .attr("height", self.height);
 
       rangeBar.transition()
           .attr("x", function(d) { return x(totalSelection); })
-          .attr("width", function(d) { return x(d); });
+          .attr("width", function(d) { return x(d); })
+          .attr("height", self.height);
     };
     self.transitionBars();
 
