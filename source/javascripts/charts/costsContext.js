@@ -14,6 +14,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       return 1;
     }
 
+    self.data = data;
+
     var readSelects = function() {
       var selects = document.querySelectorAll(".select");
       var sensitivitySelection = [];
@@ -42,7 +44,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     }
 
     self.outerWidth = width || self.outerWidth;
-    self.outerHeight = height ||self.outerHeight;
+    self.outerHeight = height || self.outerHeight;
 
     self.width = self.outerWidth - self.margin.left - self.margin.right;
     self.height = self.outerHeight - self.margin.top - self.margin.bottom;
@@ -64,6 +66,24 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     self.x = x;
     self.xAxis = xAxis;
 
+    // Gridlines
+    self.drawVerticalGridlines();
+
+    // Selection and range bar options
+    // var bars = [
+    //   {
+    //     "name": "selection",
+    //     "data": [totalSelection]
+    //   },
+    //   {
+    //     "name": "range",
+    //     "data": [totalRange],
+    //     "offset": totalSelection
+    //   }
+    // ];
+
+    // // Draw bars
+    // self.drawStackedBars(bars);
 
     var selectionBar = self.svg.selectAll(".selection-bar")
         .data([totalSelection])
@@ -74,8 +94,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         .attr('opacity', '0.6')
         .attr("y", 0)
         .attr("height", self.height)
-        .attr("x", x(0))
-        .attr("width", function(d) { return x(d); });
+        .attr("x", function(d) { return x(0); })
+        .attr("width", function(d) { return self.width - x(d); });
 
     var rangeBar = self.svg.selectAll(".range-bar")
         .data([totalRange])
@@ -108,65 +128,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     };
     self.transitionBars();
 
-
-    self.svg.selectAll("line.horizontalGrid").remove();
-    self.svg.selectAll("line.horizontalGrid").data(self.x.ticks(nTicks)).enter()
-      .append("line")
-        .attr({
-          "class":"horizontalGrid",
-          "x1" : function(d){ return self.x(d);},
-          "x2" : function(d){ return self.x(d);},
-          "y1" : 0,
-          "y2" : self.height,
-          "fill" : "none",
-          "shape-rendering" : "crispEdges",
-          "stroke" : "rgba(255, 255, 255, 0.2)",
-          "stroke-width" : "1px"
-        });
-
-    self.svg.selectAll('.border').remove();
-    self.svg.append("line")
-      .attr({
-        "class":"border",
-        "x1" : 0,
-        "x2" : 0,
-        "y1" : 0,
-        "y2" : self.height,
-      });
-    self.svg.append("line")
-      .attr({
-        "class":"border",
-        "x1" : self.width,
-        "x2" : self.width,
-        "y1" : 0,
-        "y2" : self.height,
-      });
-    self.svg.append("line")
-      .attr({
-        "class":"border",
-        "x1" : 0,
-        "x2" : self.width,
-        "y1" : self.height,
-        "y2" : self.height,
-      });
-
-    if(self.hasAxis) {
-      self.svg.selectAll('.axis').remove();
-
-      self.svg.append("g")
-          .attr("class", "x axis")
-          .attr("shape-rendering", "crispEdges")
-          .call(self.xAxis)
-    } else {
-      self.svg.append("line")
-      .attr({
-        "class":"border",
-        "x1" : 0,
-        "x2" : self.width,
-        "y1" : 0,
-        "y2" : 0,
-      });
-    }
+    self.drawBorders();
   };
 
   return CostsContextChart;

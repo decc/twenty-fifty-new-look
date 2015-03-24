@@ -1,11 +1,11 @@
 .overview-chartset
   .date-range
     span.min data-bind="text: rangeAttributes().min"
-    input type="range" value="2050" min="2015" max="2050" data-bind="value: date, attr: { min: rangeAttributes().min, max: rangeAttributes().max, step: rangeAttributes().step }"
+    input type="range" value="2050" min="2015" max="2050" data-bind="value: date, attr: { min: rangeAttributes().min, max: rangeAttributes().max, step: rangeAttributes().step }, range"
     span.max data-bind="text: rangeAttributes().max"
 
   h2.title data-bind="text: 'Snapshot ' + date() + ' outlook'"
 
-  .charts data-bind="foreach: chartKeys"
-      .chart data-bind="chart: $parent.chart.name, data: $parent.data, params: { title: $data, drawParams: { date: $parent.date }, margin: { top: 20, right: 20, bottom: 20, left: 100 } }"
-        h3.bar-title data-bind="text: $data"
+  .charts data-bind="foreach: chartOptions"
+      .chart data-bind="chart: $parent.chart.name, data: $parent.data, params: { title: name, xMin: xMin, xMax: xMax, hasAxis: true, drawParams: { date: $parent.date }, margin: { top: 20, right: 40, bottom: 20, left: 100 } }"
+        h3.bar-title data-bind="text: name"

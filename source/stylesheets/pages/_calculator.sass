@@ -11,7 +11,7 @@
   height: 100%
   background: #4A5163
   display: table
-  
+
   &.hidden
     z-index: -100
     display: none
@@ -30,7 +30,7 @@
     display: block
     margin: auto
     width: 90px // halved for retina support
-    
+
   h5
     text-align: center
     color: #fff
@@ -40,14 +40,14 @@
 
 .wrapper
   @include col(100%)
-  @include transform(translatex(0))
+  @include transform(translateX(0))
   @include transition(transform .3s ease-in-out)
   @include omega
   height: 100%
   &.with-nav
-    @include transform(translatex($nav-width / 2))
+    @include transform(translateX($nav-width / 2))
   &.with-subnav
-    @include transform(translatex($nav-width))
+    @include transform(translateX($nav-width))
 
 
 .cityscape
@@ -98,13 +98,15 @@
 
   .tab
     padding: 1em
-    position: relative
+    height: 0
+
     &.active
       background-color: $color-background-light
+      height: auto
 
     .item
       padding: 1em 0em
-      width: 100%
+      width: 260px
       font-size: 70%
       border-bottom: 1px dashed #ccc
       &:hover
@@ -130,6 +132,9 @@
         padding: 1em
         background-color: #ccc
         margin-left: 1em
+        min-width: 40px
+        text-align: center
+        @include transition(background-color .3s)
 
         &.high
           background: #D53980
@@ -181,7 +186,6 @@
             z-index: 1
             transition: left 0.3s
 
-
 .toggle-nav
   @extend %icon-menu-before
   .with-nav &
@@ -226,19 +230,10 @@
   z-index:  50
 
   &.active
-    @include transform(translatex(-100%))
+    @include transform(translateX(-100%))
 
   .pathway-actions-wrapper
     overflow: auto
     height: calc(100% - 60px)
     padding: 1em
 
-
-
-
-.tabs
-  .tab
-    display: none
-
-    &.active
-      display: block

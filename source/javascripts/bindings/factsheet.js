@@ -8,13 +8,17 @@ define(['knockout', 'ajax', 'config'], function(ko, Ajax, config) {
     update: function(el, valueAccessor) {
       var factsheet = valueAccessor();
 
-      Ajax.request({
-        method: 'GET',
-        url: config.siteUrl + '/components/factsheets/' + factsheet + '.html',
-        onSuccess: function(data) {
-          el.innerHTML = data.responseText;
-        }
-      });
+      // TODO: remove delay once on same domain
+      setTimeout(function() {
+        Ajax.request({
+          method: 'GET',
+          XDomainRequest: true,
+          url: config.siteUrl + '/components/factsheets/' + factsheet + '.html',
+          onSuccess: function(data) {
+            el.innerHTML = data.responseText;
+          }
+        });
+      }, 4000);
     }
   };
 });

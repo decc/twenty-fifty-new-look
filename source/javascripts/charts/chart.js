@@ -17,6 +17,7 @@ define(['d3'], function(d3) {
     self.outerHeight;
 
     self.hasAxis;
+    self.nTicks;
 
     self.drawParams = {};
   };
@@ -68,7 +69,6 @@ define(['d3'], function(d3) {
       self.colours = function(index, key) {
         
         var colors = [
-        
           // pinks
 
           "#C23474",
@@ -338,6 +338,174 @@ define(['d3'], function(d3) {
             "stroke" : "rgba(255, 255, 255, 0.2)",
             "stroke-width" : "1px"
           });
+    },
+
+    drawVerticalGridlines: function() {
+      var self = this;
+
+      self.svg.selectAll("line.horizontalGrid").remove();
+      self.svg.selectAll("line.horizontalGrid").data(self.x.ticks(self.nTicks)).enter()
+        .append("line")
+          .attr({
+            "class":"horizontalGrid",
+            "x1" : function(d){ return self.x(d);},
+            "x2" : function(d){ return self.x(d);},
+            "y1" : 0,
+            "y2" : self.height,
+            "fill" : "none",
+            "shape-rendering" : "crispEdges",
+            "stroke" : "rgba(255, 255, 255, 0.2)",
+            "stroke-width" : "1px"
+          });
+    },
+
+    /**************************************************************************************************
+      Single bar charts
+    **************************************************************************************************/
+
+    // Draw borders around entire chart
+    // Top border is axis if hasAxis true
+    drawBorders: function() {
+      var self = this;
+
+      self.svg.selectAll('.border').remove();
+      self.svg.append("line")
+        .attr({
+          "class":"border",
+          "x1" : 0,
+          "x2" : 0,
+          "y1" : 0,
+          "y2" : self.height,
+        });
+      self.svg.append("line")
+        .attr({
+          "class":"border",
+          "x1" : self.width,
+          "x2" : self.width,
+          "y1" : 0,
+          "y2" : self.height,
+        });
+      self.svg.append("line")
+        .attr({
+          "class":"border",
+          "x1" : 0,
+          "x2" : self.width,
+          "y1" : self.height,
+          "y2" : self.height,
+        });
+
+      if(self.hasAxis) {
+        self.svg.selectAll('.axis').remove();
+
+        self.svg.append("g")
+            .attr("class", "x axis")
+            .attr("shape-rendering", "crispEdges")
+            .call(self.xAxis)
+      } else {
+        self.svg.append("line")
+        .attr({
+          "class":"border",
+          "x1" : 0,
+          "x2" : self.width,
+          "y1" : 0,
+          "y2" : 0,
+        });
+      }
+    },
+
+    stackBars: function(data) {
+      var self = this;
+
+      var previousX = 0;
+
+      data.sort(function(a, b) { return a.value - b.value });
+
+      return data.map(function(d, i) { return { key: d.key, colour: self.colours(i, d.key), value: d.value, x0: previousX, x1: previousX += d.value }; });
+    },
+
+    // Draw and update stacked or single bars for single bar charts
+    drawStackedBars: function(bars) {
+      var self = this;
+
+      // Each bar options object arg
+      bars.forEach(function(bar) {
+        var offset = bar.offset || 0;
+        var labelPaddingX = bar.labelPadding || 4;
+        var labelPaddingY = bar.labelPadding || 2;
+        var containerName = bar.name ? "bar-container-" + bar.name : "bar-container";
+        var barName = bar.name ? "bar-" + bar.name : "bar";
+        var labelName = bar.name ? "bar-label-" + bar.name : "bar-label";
+
+        self.barContainers = self.svg.selectAll("." + containerName)
+          .data(bar.data);
+
+        // Enter bar rects
+        self.barContainers.enter().append("g")
+          .attr("class", "bar-container " + containerName)
+          .each(function(d, i) {
+            d3.select(this).append("rect")
+              .attr("class", "bar " + barName)
+              .attr('fill', d.colour)
+              .attr('opacity', '0.6')
+              .attr("y", 0)
+              .attr("height", self.height)
+              .attr("x", self.x(d.x0))
+              .attr("width", self.x(d.value))
+              .on('mouseover', function() {
+                d3.select(this.parentNode).attr("data-state", "active")
+                d3.select(this.parentNode.parentNode).attr("data-state", "graph-hover")
+                self.svg.selectAll("#" + labelName + "-" + i).attr("data-state", "active")
+              })
+              .on('mouseout', function() {
+                d3.select(this.parentNode).attr("data-state", "inactive")
+                d3.select(this.parentNode.parentNode).attr("data-state", "inactive")
+                self.svg.selectAll("#" + labelName + "-" + i).attr("data-state", "inactive")
+              });
+          });
+
+        // Enter labels
+        var labelContainers = self.barContainers.enter().append("g")
+          .attr("class", "bar-label " + labelName)
+          .attr("id", function(d, i) { return labelName + "-" + i; })
+          .attr("transform", function(d) { return "translate(" + self.x(offset + d.x0 + d.value/2) + " " + self.y(0.5) + ")"; })
+
+        // Enter label backgrounds
+        labelContainers.append("rect")
+          .attr("x", 0)
+          .attr("y", 0)
+
+        // Enter label text
+        labelContainers.append("text")
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr("dy", "0.35em")
+
+        // Update everything
+        self.transitionBars = function() {
+          // Transition bar rects
+          self.barContainers.select("." + barName)
+            .transition()
+              .attr("x", function(d) { return self.x(offset + d.x0); })
+              .attr("width", function(d) { return self.x(d.value); })
+              .attr("height", self.height);
+
+          // Transition labels.
+          // Data must be reapplied because they are not inside container elements (z-indexing)
+          var labelContainers = self.svg.selectAll("." + labelName)
+            .data(self.barContainers.data())
+              .attr("transform", function(d) { return "translate(" + self.x(offset + d.x0 + d.value/2) + " " + self.y(0.5) + ")"; })
+
+          labelContainers.select("text")
+            .text(function(d) { return d.key + " (" + parseInt(d.value, 10) + ")"; });
+
+          labelContainers.select("rect")
+            .attr("x", function(d) { return -(this.parentNode.querySelector("text").getBBox().width + labelPaddingX*2) / 2; })
+            .attr("width", function(d) { return this.parentNode.querySelector("text").getBBox().width + labelPaddingX*2; })
+            .attr("y", function(d) { return -(this.parentNode.querySelector("text").getBBox().height + labelPaddingY*2) / 2; })
+            .attr("height", function(d) { return this.parentNode.querySelector("text").getBBox().height + labelPaddingY*2; })
+        }
+        self.transitionBars();
+      });
     }
 
   };

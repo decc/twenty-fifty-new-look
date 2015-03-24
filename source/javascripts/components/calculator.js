@@ -1,5 +1,5 @@
-define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/cityscape', 'bindings/landscape', 'bindings/factsheet'],
-  function(ko, html, Pathway) {
+define(['knockout', 'text!/components/calculator.html', 'pathway', 'range', 'bindings/cityscape', 'bindings/landscape', 'bindings/factsheet'],
+  function(ko, html, Pathway, Range) {
 
   'use strict';
 
@@ -11,6 +11,10 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/cit
     var params = params || {};
 
     var self = this;
+
+    self.rendered = function() {
+      Range.init();
+    };
 
     self.pathway = params.pathway
     // Main navigation state.
@@ -55,10 +59,10 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/cit
     }
 
     window.onresize = function () {
-      self.cityspaceVisible(window.innerWidth > 720);
+      self.cityscapeVisible(window.innerHeight > 760);
     };
 
-    self.cityscapeVisible = ko.observable(window.innerWidth > 720);
+    self.cityscapeVisible = ko.observable(window.innerWidth > 760);
     self.fullscreenVisible = ko.observable(false);
     self.overlayVisible = ko.observable(false);
     self.overlayContent = ko.observable();
@@ -86,9 +90,6 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'bindings/cit
     };
 
     self.currentPathway = params.pathway;
-
-    console.dir(self.currentPathway)
-    console.dir(self.currentPathway().chartData())
 
     self.pathwayUpdating = self.currentPathway().updating;
 

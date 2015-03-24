@@ -11,7 +11,8 @@ aside.controls-sidebar data-bind="tabs"
       .item
         div
           label data-bind="text: name"
-          span.value-label data-bind="text: value, css: { high: value() == getMaxValue(), med: value() == getMedValue() }"
+          span.value-label data-bind="text: value"
+
           button.info-button data-bind="click: $parents[2].showOverlay"
 
         div.option
