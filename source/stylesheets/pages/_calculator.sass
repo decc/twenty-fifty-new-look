@@ -40,14 +40,14 @@
 
 .wrapper
   @include col(100%)
-  @include transform(translatex(0))
+  @include transform(translateX(0))
   @include transition(transform .3s ease-in-out)
   @include omega
   height: 100%
   &.with-nav
-    @include transform(translatex($nav-width / 2))
+    @include transform(translateX($nav-width / 2))
   &.with-subnav
-    @include transform(translatex($nav-width))
+    @include transform(translateX($nav-width))
 
 
 .cityscape
@@ -132,6 +132,9 @@
         padding: 1em
         background-color: #ccc
         margin-left: 1em
+        min-width: 40px
+        text-align: center
+        @include transition(background-color .3s)
 
         &.high
           background: #D53980
@@ -227,7 +230,7 @@
   z-index:  50
 
   &.active
-    @include transform(translatex(-100%))
+    @include transform(translateX(-100%))
 
   .pathway-actions-wrapper
     overflow: auto

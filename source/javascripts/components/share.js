@@ -6,10 +6,11 @@ define(['knockout', 'text!/components/share.html', 'config', 'bindings/chart'], 
 
     // TODO: get this from a mutual source with charttabs
     self.chart = { "id": 1, "name": "OverviewChart", "title": "Overview" };
-    self.chartKeys = [
-      'Demand',
-      'Supply',
-      'Emissions'
+
+    self.chartOptions = [
+      { name: 'Demand', xMin: 0, xMax: 5000 },
+      { name: 'Supply', xMin: 0, xMax: 5000 },
+      { name: 'Emissions', xMin: 0, xMax: 1500 }
     ];
 
     var minDate = 2015;
