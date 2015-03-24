@@ -39,7 +39,7 @@ define(['knockout', 'bindings/range'], function(ko) {
       element.addEventListener('input', function(){
         var valueLabel = element.parentNode.previousSibling.querySelector(element.label);
         valueLabel.innerHTML = element.value;
-        ko.bindingHandlers.rangeFloat.setTooltip(element, element.value);
+        ko.bindingHandlers.tooltip.update(element, element.value);
       })
 
       if(element.parentNode.previousSibling.querySelector(element.label) == null){
@@ -64,7 +64,7 @@ define(['knockout', 'bindings/range'], function(ko) {
       var valueLabel = element.parentNode.previousSibling.querySelector(element.label);
       valueLabel.innerHTML = element.value;
 
-      ko.bindingHandlers.rangeFloat.setTooltip(element, element.value);
+      ko.bindingHandlers.tooltip.update(element, element.value);
       ko.bindingHandlers.range.update(element);
     },
 
