@@ -21,8 +21,6 @@ define(['knockout', 'text!/components/pathway-sidebar.html', 'pathway', 'binding
       action.value = e.target.value;
       self.pathway.updateAction(action);
     };
-
-
   };
 
   return {
