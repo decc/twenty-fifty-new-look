@@ -37,24 +37,27 @@ define(['knockout', 'text!/components/chartViews/costs.html', 'charts/costsConte
       if(self.selectedExample()) {
         self.calculator.pathwayUpdating(true);
 
-        args.DataRequester.pathway(self.selectedExample(), function(data) {
-          var data = JSON.parse(data.responseText)
+        // TODO: remove delay once on same domain
+        setTimeout(function() {
+          args.DataRequester.pathway(self.selectedExample(), function(data) {
+            var data = JSON.parse(data.responseText);
 
-          var chartParser = new args.ChartParser(data);
+            var chartParser = new args.ChartParser(data);
 
-          // Only parse data for charts in this chart view
-          var comparedData = chartParser.costsCompared();
-          var sensitivityData = chartParser.costsSensitivity();
+            // Only parse data for charts in this chart view
+            var comparedData = chartParser.costsCompared();
+            var sensitivityData = chartParser.costsSensitivity();
 
-          self.comparisonData({
-            CostsContextChart: sensitivityData,
-            CostsComparedChart: comparedData,
-            CostsSensitivityChart: sensitivityData,
-            CostsSensitivityComponentsChart: sensitivityData
+            self.comparisonData({
+              CostsContextChart: sensitivityData,
+              CostsComparedChart: comparedData,
+              CostsSensitivityChart: sensitivityData,
+              CostsSensitivityComponentsChart: sensitivityData
+            });
+
+            self.calculator.pathwayUpdating(false);
           });
-
-          self.calculator.pathwayUpdating(false);
-        });
+        }, 2000);
       }
     });
 
