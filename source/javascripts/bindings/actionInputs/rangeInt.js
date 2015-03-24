@@ -1,4 +1,4 @@
-define(['knockout'], function(ko) {
+define(['knockout', 'bindings/range'], function(ko) {
   'use strict';
 
   ko.bindingHandlers.rangeInt = {
@@ -42,6 +42,7 @@ define(['knockout'], function(ko) {
         element.parentNode.previousSibling.querySelector(element.label).innerHTML = '1';
       }
 
+      ko.bindingHandlers.range.init(element);
     },
 
     update: function(element, valueAccessor, allBindings, vm, context) {
@@ -54,6 +55,7 @@ define(['knockout'], function(ko) {
       valueLabel.innerHTML = element.value;
 
       ko.bindingHandlers.rangeInt.setTooltip(element, element.value);
+      ko.bindingHandlers.range.update(element);
     },
 
     setTooltip: function(element, value) {

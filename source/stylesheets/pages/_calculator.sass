@@ -11,7 +11,7 @@
   height: 100%
   background: #4A5163
   display: table
-  
+
   &.hidden
     z-index: -100
     display: none
@@ -30,7 +30,7 @@
     display: block
     margin: auto
     width: 90px // halved for retina support
-    
+
   h5
     text-align: center
     color: #fff
@@ -98,13 +98,15 @@
 
   .tab
     padding: 1em
-    position: relative
+    height: 0
+
     &.active
       background-color: $color-background-light
+      height: auto
 
     .item
       padding: 1em 0em
-      width: 100%
+      width: 260px
       font-size: 70%
       border-bottom: 1px dashed #ccc
       &:hover
@@ -181,7 +183,6 @@
             z-index: 1
             transition: left 0.3s
 
-
 .toggle-nav
   @extend %icon-menu-before
   .with-nav &
@@ -233,12 +234,3 @@
     height: calc(100% - 60px)
     padding: 1em
 
-
-
-
-.tabs
-  .tab
-    display: none
-
-    &.active
-      display: block
