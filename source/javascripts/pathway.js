@@ -341,8 +341,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
       if(!self.locked()) {
         self.updating(true);
         DataRequester.pathway(pathwayString, function(data){
-          var data = JSON.parse(data.response);
-
+          var data = JSON.parse(data.responseText);
           self.chartParser = new ChartParser(data);
           self.chartData(self.chartParser.all());
           self.updating(false);
