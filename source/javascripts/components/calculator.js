@@ -59,10 +59,10 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'range', 'bin
     }
 
     window.onresize = function () {
-      self.cityspaceVisible(window.innerWidth > 720);
+      self.cityscapeVisible(window.innerHeight > 760);
     };
 
-    self.cityscapeVisible = ko.observable(window.innerWidth > 720);
+    self.cityscapeVisible = ko.observable(window.innerWidth > 760);
     self.fullscreenVisible = ko.observable(false);
     self.overlayVisible = ko.observable(false);
     self.overlayContent = ko.observable();
@@ -90,9 +90,6 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'range', 'bin
     };
 
     self.currentPathway = params.pathway;
-
-    console.dir(self.currentPathway)
-    console.dir(self.currentPathway().chartData())
 
     self.pathwayUpdating = self.currentPathway().updating;
 

@@ -12,8 +12,12 @@ define(['knockout', 'text!/components/chartViews/costs.html', 'charts/costsConte
     self.comparedTab = self.tabs[1];
     self.sensitivityTab = self.tabs[2];
 
-    self.costsContextChart = new CostsContextChart();
-    self.costsComparedChart = new CostsComparedChart();
+    // Build all charts in this view
+    // They are passed in to costs sensitivity components chart for redrawing
+    self.yourCostsContextChart = new CostsContextChart();
+    self.comparisonCostsContextChart = new CostsContextChart();
+    self.yourCostsComparedChart = new CostsComparedChart();
+    self.comparisonCostsComparedChart = new CostsComparedChart();
     self.yourCostsSensitivityChart = new CostsSensitivityChart();
     self.comparisonCostsSensitivityChart = new CostsSensitivityChart();
 
@@ -34,20 +38,19 @@ define(['knockout', 'text!/components/chartViews/costs.html', 'charts/costsConte
         self.calculator.pathwayUpdating(true);
 
         args.DataRequester.pathway(self.selectedExample(), function(data) {
-          var data = JSON.parse(data.response)
+          var data = JSON.parse(data.responseText)
+
           var chartParser = new args.ChartParser(data);
 
           // Only parse data for charts in this chart view
-          var contextData = chartParser.costsSensitivityComponents()
-          var comparedData = chartParser.costsCompared()
-          var sensitivityData = chartParser.costsSensitivityComponents()
-          var sensitivityComponentsData = chartParser.costsSensitivityComponents()
+          var comparedData = chartParser.costsCompared();
+          var sensitivityData = chartParser.costsSensitivity();
 
           self.comparisonData({
-            CostsContextChart: contextData,
+            CostsContextChart: sensitivityData,
             CostsComparedChart: comparedData,
             CostsSensitivityChart: sensitivityData,
-            CostsSensitivityComponentsChart: sensitivityComponentsData
+            CostsSensitivityComponentsChart: sensitivityData
           });
 
           self.calculator.pathwayUpdating(false);

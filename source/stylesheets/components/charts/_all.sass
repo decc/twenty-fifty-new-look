@@ -20,6 +20,7 @@ h2, .title
   position: relative
 
   svg
+    position: relative
     overflow: visible
 
   &.full-size
@@ -59,6 +60,13 @@ h2, .title
     text-anchor: middle
     pointer-events: none
 
+    text
+      text-anchor: middle
+
+    rect
+      fill: #8193ad
+
+
   .d3-chart[data-state="graph-hover"]
     .layer-label
       display: none
@@ -68,9 +76,9 @@ h2, .title
       .bar
         opacity: 1
 
-      .bar-label
-        display: block
-        fill: #fff
+    .bar-label[data-state="active"]
+      display: block
+      fill: #fff
 
 .bar-title,
 .select-title

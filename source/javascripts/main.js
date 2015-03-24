@@ -14,11 +14,21 @@
       text: 'vendor/text',
       d3: 'vendor/d3',
       tabber: 'vendor/tabber',
-      range: 'vendor/ranges'
+      range: 'vendor/ranges',
+      modernizr: 'vendor/modernizr'
     }
   });
 
-  require(['app', 'componentLoader', 'customElements'], function(app) {
+  require(['app', 'vendor/modernizr', 'componentLoader', 'customElements'], function(app) {
+    // TODO: create test for polyfills e.g.
+    // Modernizr.load({
+    //   test : Modernizr.geolocation,
+    //   nope : ['/javascripts/vendor/polyfills/classList.js']
+    // });
+
+    Modernizr.load({load: ['/javascripts/vendor/polyfills/classList.js']});
+    Modernizr.load({load: ['/javascripts/vendor/polyfills/es5.js']});
+
     app.init();
   });
 })(require, define);
