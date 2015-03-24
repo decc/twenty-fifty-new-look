@@ -13,7 +13,8 @@
       scroller: 'vendor/scroller',
       text: 'vendor/text',
       d3: 'vendor/d3',
-      tabber: 'vendor/tabber'
+      tabber: 'vendor/tabber',
+      range: 'vendor/ranges'
     }
   });
 

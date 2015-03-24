@@ -57,10 +57,10 @@ define(['knockout', 'config'], function(ko, config) {
       });
       return action.name
     },
-    
+
     getMaxValue: function(){
       var self = this;
-      
+
       // if we're a radio we're A-D
       if(self.getTypeName() == 'radio'){
         var map = { 1 : "A", 2: "B", 3: "C", 4: "D" }
@@ -69,12 +69,12 @@ define(['knockout', 'config'], function(ko, config) {
         return self.max;
       }
     },
-    
+
     getMedValue: function(){
       var self = this;
-      
+
       if(self.max > 2){
-        
+
         if(self.getTypeName() == 'radio'){
           return self.max < 4 ? "B" : "C";
         } else {
@@ -82,7 +82,7 @@ define(['knockout', 'config'], function(ko, config) {
         }
       } else { return false; }
     }
-    
+
   };
 
   return Action;

@@ -1,4 +1,4 @@
-define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
+define(['knockout', 'd3', 'charts/chart', 'bindings/range'], function(ko, d3, Chart) {
   'use strict';
 
   var OverviewChart = function() {};
