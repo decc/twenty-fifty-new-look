@@ -503,10 +503,10 @@ define(['d3'], function(d3) {
             .text(function(d) { return d.key + " (" + parseInt(d.value, 10) + ")"; });
 
           labelContainers.select("rect")
-            .attr("x", function(d) { return -(this.parentElement.querySelector("text").getBBox().width + labelPaddingX*2) / 2; })
-            .attr("width", function(d) { return this.parentElement.querySelector("text").getBBox().width + labelPaddingX*2; })
-            .attr("y", function(d) { return -(this.parentElement.querySelector("text").getBBox().height + labelPaddingY*2) / 2; })
-            .attr("height", function(d) { return this.parentElement.querySelector("text").getBBox().height + labelPaddingY*2; })
+            .attr("x", function(d) { return -(this.parentNode.querySelector("text").getBBox().width + labelPaddingX*2) / 2; })
+            .attr("width", function(d) { return this.parentNode.querySelector("text").getBBox().width + labelPaddingX*2; })
+            .attr("y", function(d) { return -(this.parentNode.querySelector("text").getBBox().height + labelPaddingY*2) / 2; })
+            .attr("height", function(d) { return this.parentNode.querySelector("text").getBBox().height + labelPaddingY*2; })
         }
         self.transitionBars();
       });
