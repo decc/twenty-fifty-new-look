@@ -16,7 +16,7 @@
       if (elements instanceof Object) {
         for (_i = 0, _len = elements.length; _i < _len; _i++) {
           element = elements[_i];
-          this.selects.push(new this(element, this.selects.length));
+          StyledSelects.selects.push(new StyledSelects(element, StyledSelects.selects.length));
         }
       } else {
         this.selects.push(new this(elements, this.selects.length));

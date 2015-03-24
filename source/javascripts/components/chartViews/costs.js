@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/chartViews/costs.html', 'charts/costsContext', 'charts/costsCompared', 'charts/costsSensitivity'],
+define(['knockout', 'text!/components/chartViews/costs.html', 'charts/costsContext', 'charts/costsCompared', 'charts/costsSensitivity', 'bindings/select'],
   function(ko, html, CostsContextChart, CostsComparedChart, CostsSensitivityChart) {
   'use strict';
 

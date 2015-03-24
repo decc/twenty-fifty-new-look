@@ -14,7 +14,8 @@
       text: 'vendor/text',
       d3: 'vendor/d3',
       tabber: 'vendor/tabber',
-      range: 'vendor/ranges'
+      range: 'vendor/ranges',
+      selects: 'vendor/styled-selects'
     }
   });
 

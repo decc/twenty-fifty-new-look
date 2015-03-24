@@ -4,7 +4,7 @@ define(['knockout', 'selects'], function(ko, Selects) {
   ko.bindingHandlers.select = {
     init: function(el, valueAccessor) {
       // value accessor is callback function. called on tab change
-      new Tabber(el, valueAccessor());
+      Selects.init([el]);
     }
   };
 });

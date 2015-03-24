@@ -9,7 +9,7 @@
 
           .example-selector
             h3.select-title Choose a comparison
-            select data-bind="options: $parent.examples, optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample, event: { change: $parent.changeSelectedExampleName }"
+            select data-bind="options: $parent.examples, optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample, event: { change: $parent.changeSelectedExampleName }, select"
 
           .chart.compare.bottom data-bind="chart: name, data: $parent.comparisonData, object: $parent.costsContextChart, params: { margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
             h3.bar-title data-bind="text: $parent.selectedExampleName"
