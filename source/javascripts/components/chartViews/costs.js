@@ -38,7 +38,8 @@ define(['knockout', 'text!/components/chartViews/costs.html', 'charts/costsConte
         self.calculator.pathwayUpdating(true);
 
         args.DataRequester.pathway(self.selectedExample(), function(data) {
-          var data = JSON.parse(data.response);
+          var data = JSON.parse(data.responseText)
+
           var chartParser = new args.ChartParser(data);
 
           // Only parse data for charts in this chart view
