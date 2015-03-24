@@ -134,7 +134,7 @@
   createRequest = function(ajax, xhrClass){
     var xhr = new window[xhrClass[0]](xhrClass[1]);
     
-    xhr.open(ajax.method, ajax.url);
+    xhr.open(ajax.method, ajax.url, true);
     xhr.timeout = ajax.timeout;
 
     return xhr;
