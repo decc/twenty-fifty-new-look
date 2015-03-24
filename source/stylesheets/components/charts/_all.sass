@@ -20,6 +20,7 @@ h2, .title
   position: relative
 
   svg
+    position: relative
     overflow: visible
 
   &.full-size
@@ -58,6 +59,13 @@ h2, .title
     display: none
     text-anchor: middle
     pointer-events: none
+
+    text
+      text-anchor: middle
+
+    rect
+      fill: #8193ad
+
 
   .d3-chart[data-state="graph-hover"]
     .layer-label

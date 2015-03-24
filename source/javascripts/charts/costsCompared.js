@@ -124,7 +124,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     var xMin = 0;
     var xMax = 10000;
 
-    var nTicks = 5;
+    self.nTicks = 5;
 
     var x = d3.scale.linear()
         .domain([xMin, xMax])
@@ -133,192 +133,58 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("top")
-        .ticks(nTicks);
+        .ticks(self.nTicks);
 
     var y = d3.scale.linear()
         .domain([0, 1])
         .range([0, self.height]);
 
-    var stack = function(data) {
-      var previousX = 0;
-
-      data.sort(function(a, b) { return a.value - b.value });
-
-      return data.map(function(d, i) { return { key: d.key, colour: self.colours(i, d.key), value: d.value, x0: previousX, x1: previousX += d.value }; });
-    };
-
     self.x = x;
+    self.y = y;
     self.xAxis = xAxis;
 
-    var selectionBars = self.svg.selectAll(".bar-selection-container")
-        .data(stack(dataSelection))
+    // Grid
+    self.drawVerticalGridlines();
 
-    selectionBars.enter().append("g")
-      .attr("class", "bar-container bar-selection-container")
-      .each(function(d, i) {
-        d3.select(this).append("rect")
-          .attr("class", "bar bar-selection")
-          .attr('fill', d.colour)
-          .attr('opacity', '0.6')
-          .attr("y", 0)
-          .attr("height", self.height)
-          .attr("x", x(d.x0))
-          .attr("width", x(d.value))
-          .on('mouseover', function() {
-            d3.select(this.parentNode).attr("data-state", "active")
-            d3.select(this.parentNode.parentNode).attr("data-state", "graph-hover")
-            self.svg.selectAll("#bar-label-selection-" + i).attr("data-state", "active")
-          })
-          .on('mouseout', function() {
-            d3.select(this.parentNode).attr("data-state", "inactive")
-            d3.select(this.parentNode.parentNode).attr("data-state", "inactive")
-            self.svg.selectAll("#bar-label-selection-" + i).attr("data-state", "inactive")
-          });
-      });
+    // Selection and range bar options
+    var selectionBars = [
+      {
+        "name": "selection",
+        "data": self.stackBars(dataSelection)
+      },
+      {
+        "name": "range",
+        "data": self.stackBars(dataRange),
+        "offset": totalSelection
+      }
+    ];
 
-    selectionBars.enter().append("text")
-      .attr("class", "bar-label bar-selection-label")
-      .attr("id", function(d, i) { return "bar-label-selection-" + i; })
-      .attr("y", y(0.5));
+    // Draw bars
+    self.drawStackedBars(selectionBars);
 
-    var rangeBars = self.svg.selectAll(".bar-range-container")
-        .data(stack(dataRange))
-
-    rangeBars.enter().append("g")
-      .attr("class", "bar-container bar-range-container")
-      .each(function(d, i) {
-        // Pattern
-        d3.select(this).append("pattern")
-          .attr({
-            "id": "bar-pattern-" + i,
-            "x": "0" ,
-            "y": "0" ,
-            "width": "5" ,
-            "height": "5" ,
-            "patternUnits": "userSpaceOnUse"
-          }).append("line")
-            .attr({
-              x1: "0",
-              y1: "0",
-              x2: "5",
-              y2: "5",
-              stroke: d.colour
-            });
-        d3.select(this).append("rect")
-          .attr("class", "bar bar-range")
-          .attr('fill', "url(#bar-pattern-" + i + ")")
-          .attr('opacity', '0.6')
-          .attr("y", 0)
-          .attr("height", self.height)
-          .attr("x", x(totalSelection + d.x0))
-          .attr("width", x(d.value))
-          .on('mouseover', function() {
-            d3.select(this.parentNode).attr("data-state", "active")
-            d3.select(this.parentNode.parentNode).attr("data-state", "graph-hover")
-            self.svg.selectAll("#bar-label-range-" + i).attr("data-state", "active")
-          })
-          .on('mouseout', function() {
-            d3.select(this.parentNode).attr("data-state", "inactive")
-            d3.select(this.parentNode.parentNode).attr("data-state", "inactive")
-            self.svg.selectAll("#bar-label-range-" + i).attr("data-state", "inactive")
-          });
-      });
-
-    rangeBars.enter().append("text")
-      .attr("class", "bar-label bar-range-label")
-      .attr("id", function(d, i) { return "bar-label-range-" + i; })
-      .attr("y", y(0.5));
-
-    self.transitionBars = function() {
-      self.svg.selectAll(".bar-selection")
-        .data(stack(dataSelection))
-        .transition()
-        .attr("x", function(d) { return x(d.x0); })
-        .attr("width", function(d) { return x(d.value); })
-        .attr("height", self.height);
-
-      self.svg.selectAll(".bar-selection-label")
-        .data(stack(dataSelection))
-        .attr("x", function(d) { return x(d.x0 + d.value/2); })
-        .attr("y", y(0.5))
-        .text(function(d) { return d.key + " (" + parseInt(d.value, 10) + ")"; });
-
-      self.svg.selectAll(".bar-range")
-        .data(stack(dataRange))
-        .transition()
-        .attr("x", function(d) { return x(totalSelection + d.x0); })
-        .attr("width", function(d) { return x(d.value); })
-        .attr("height", self.height);
-
-      self.svg.selectAll(".bar-range-label")
-        .data(stack(dataRange))
-        .attr("x", function(d) { return x(totalSelection + d.x0 + d.value/2); })
-        .attr("y", y(0.5))
-        .text(function(d) { return d.key + " (" + parseInt(d.value, 10) + ")"; });
-
-    }
-    self.transitionBars();
-
-
-    self.svg.selectAll("line.horizontalGrid").remove();
-    self.svg.selectAll("line.horizontalGrid").data(self.x.ticks(nTicks)).enter()
-      .append("line")
+    // Add pattern to range bars
+    self.svg.selectAll(".bar-container-range")
+      .append("pattern")
         .attr({
-          "class":"horizontalGrid",
-          "x1" : function(d){ return self.x(d);},
-          "x2" : function(d){ return self.x(d);},
-          "y1" : 0,
-          "y2" : self.height,
-          "fill" : "none",
-          "shape-rendering" : "crispEdges",
-          "stroke" : "rgba(255, 255, 255, 0.2)",
-          "stroke-width" : "1px"
-        });
+          "id": function(d, i) { return "bar-pattern-" + i; },
+          "x": "0" ,
+          "y": "0" ,
+          "width": "5" ,
+          "height": "5" ,
+          "patternUnits": "userSpaceOnUse"
+        }).append("line")
+          .attr({
+            x1: "0",
+            y1: "0",
+            x2: "5",
+            y2: "5",
+            stroke: function(d, i) { return d.colour; }
+          });
+    self.svg.selectAll(".bar-range")
+      .attr('fill', function(d, i) { return "url(#bar-pattern-" + i + ")"; });
 
     // Borders
-    self.svg.selectAll('.border').remove();
-    self.svg.append("line")
-      .attr({
-        "class":"border",
-        "x1" : 0,
-        "x2" : 0,
-        "y1" : 0,
-        "y2" : self.height,
-      });
-    self.svg.append("line")
-      .attr({
-        "class":"border",
-        "x1" : self.width,
-        "x2" : self.width,
-        "y1" : 0,
-        "y2" : self.height,
-      });
-    self.svg.append("line")
-      .attr({
-        "class":"border",
-        "x1" : 0,
-        "x2" : self.width,
-        "y1" : self.height,
-        "y2" : self.height,
-      });
-
-    if(self.hasAxis) {
-      self.svg.selectAll('.axis').remove();
-
-      self.svg.append("g")
-          .attr("class", "x axis")
-          .attr("shape-rendering", "crispEdges")
-          .call(self.xAxis)
-    } else {
-      self.svg.append("line")
-      .attr({
-        "class":"border",
-        "x1" : 0,
-        "x2" : self.width,
-        "y1" : 0,
-        "y2" : 0,
-      });
-    }
+    self.drawBorders();
   };
 
   return CostsComparedChart;

@@ -17,6 +17,7 @@ define(['d3'], function(d3) {
     self.outerHeight;
 
     self.hasAxis;
+    self.nTicks;
 
     self.drawParams = {};
   };
@@ -70,141 +71,143 @@ define(['d3'], function(d3) {
         var colors = [
           // pinks
 
-          '#C23474',
-          '#A12B61',
-          '#782048',
-          '#531632',
-
+          "#C23474",
+          "#A12B61",
+          "#782048",
+          "#531632",
           "#D53980",
-          "#28A197",
-          '#5A6378',
-
-          '#3867AF',
           "#C96E79",
           "#9E1946",
           "#710627",
           "#A04668",
           "#9A275A",
+          "#F75FA4",
 
+          // greens
+
+          "#28A197",
           "#A7CECB",
           "#8BA6A9",
-          "#2D3E5B",
+          "#2D7883",
           "#028090",
           "#85BDBF",
           "#C9FBFF",
-          "#253031",
-          "#2978A0",
-          "#2D7883",
-          "#29827E",
           "#037171",
           "#00B9AE",
           "#26A197",
-          '#40ACA4',
-          '#68BDB6',
-          '#8ACCC7',
-          '#B3DEDB',
-
-          '#D6EDEB',
+          "#40ACA4",
+          "#68BDB6",
+          "#8ACCC7",
+          "#B3DEDB",
+          "#D6EDEB",
           "#95CFCA",
+          "#29827E",
+
+          // blues
+
+          "#5A6378",
+          "#3867AF",
+          "#2978A0",
+          "#2D3E5B",
           "#8193AD",
-          "#F75FA4"
+          "#253031"
         ];
 
         var keys = {
-          "0.01 gw geothermal stations": 0,
-          "1 gw gas standby power stations": 0,
+          "0.01 gw geothermal stations": 9,
+          "1 gw gas standby power stations": 25,
           "1.2 gw coal gas or biomass power stations with ccs": 0,
-          "2 gw coal gas or biomass power stations without ccs": 0,
-          "215 kt/y waste to energy conversion facilities": 0,
-          "3 gw nuclear power station": 0,
-          "agriculture": 0,
-          "agriculture and land use": 0,
-          "bikes": 0,
-          "biocrops": 0,
-          "bioenergy": 0,
-          "bioenergy credit": 0,
-          "bioenergy imports": 0,
-          "biomass/coal power stations": 0,
-          "biomatter to fuel conversion": 0,
-          "buildings": 0,
+          "2 gw coal gas or biomass power stations without ccs": 14,
+          "215 kt/y waste to energy conversion facilities": 32,
+          "3 gw nuclear power station": 7,
+          "agriculture": 19,
+          "agriculture and land use": 19,
+          "bikes": 6,
+          "biocrops": 4,
+          "bioenergy": 27,
+          "bioenergy credit": 27,
+          "bioenergy imports": 27,
+          "biomass/coal power stations": 14,
+          "biomatter to fuel conversion": 12,
+          "buildings": 23,
           "carbon capture": 0,
           "carbon capture storage (ccs)": 0,
-          "coal": 0,
+          "coal": 5,
           "combustion + ccs": 0,
-          "commercial heating and cooling": 0,
-          "commercial lighting, appliances, and catering": 0,
-          "conventional cars and buses": 0,
-          "conventional thermal plant": 0,
-          "distributed solar pv": 0,
-          "distributed solar thermal": 0,
-          "district heating effective demand": 0,
-          "domestic aviation": 0,
-          "domestic freight": 0,
-          "domestic heating": 0,
-          "domestic insulation": 0,
-          "domestic lighting, appliances, and cooking": 0,
-          "domestic space heating and hot water": 0,
-          "electric cars and buses": 0,
-          "electricity": 0,
-          "electricity exports": 0,
-          "electricity grid distribution": 0,
-          "electricity imports": 0,
-          "energy crops": 0,
-          "energy from waste": 0,
-          "environmental heat": 0,
-          "finance": 0,
-          "finance cost": 0,
-          "forest": 0,
-          "fossil fuel transfers": 0,
-          "fossil fuels": 0,
-          "fuel cell cars and buses": 0,
-          "fuel combustion": 0,
-          "gas": 0,
-          "geosequestration": 0,
-          "geothermal": 0,
-          "geothermal electricity": 0,
-          "h2 production": 0,
-          "heating and cooling": 0,
-          "hybrid cars and buses": 0,
-          "hydro": 0,
-          "hydroelectric": 0,
-          "hydroelectric power stations": 0,
-          "industrial processes": 0,
-          "industry": 0,
-          "international aviation": 0,
-          "international aviation and shipping": 0,
-          "international shipping (maritime bunkers)": 0,
-          "land use, land-use change and forestry": 0,
-          "lighting & appliances": 0,
-          "marine algae": 0,
-          "micro wind": 0,
-          "natural gas": 0,
-          "non-thermal renewable generation": 0,
-          "nuclear fission": 0,
-          "nuclear power": 0,
-          "offshore wind": 0,
-          "oil": 0,
-          "onshore wind": 0,
-          "other": 0,
-          "petroleum refineries": 0,
-          "rail": 0,
-          "solar": 0,
-          "solar pv": 0,
-          "solar thermal": 0,
-          "solvent and other product use": 0,
+          //"commercial heating and cooling": 0,
+          //"commercial lighting, appliances, and catering": 0,
+          //"conventional cars and buses": 0,
+          //"conventional thermal plant": 0,
+          "distributed solar pv": 20,
+          "distributed solar thermal": 24,
+          //"district heating effective demand": 0,
+          //"domestic aviation": 0,
+          //"domestic freight": 0,
+          //"domestic heating": 0,
+          //"domestic insulation": 0,
+          //"domestic lighting, appliances, and cooking": 0,
+          //"domestic space heating and hot water": 0,
+          "electric cars and buses": 30,
+          "electricity": 31,
+          "electricity exports": 31,
+          "electricity grid distribution": 31,
+          "electricity imports": 31,
+          "energy crops": 4,
+          "energy from waste": 32,
+          "environmental heat": 1,
+          "finance": 21,
+          "finance cost": 21,
+          "forest": 18,
+          "fossil fuel transfers": 33,
+          "fossil fuels": 33,
+          "fuel cell cars and buses": 2,
+          "fuel combustion": 33,
+          "gas": 25,
+          "geosequestration": 10,
+          "geothermal": 9,
+          "geothermal electricity": 9,
+          "h2 production": 16,
+          //"heating and cooling": 0,
+          "hybrid cars and buses": 11,
+          "hydro": 8,
+          "hydroelectric": 8,
+          "hydroelectric power stations": 8,
+          "industrial processes": 13,
+          "industry": 13,
+          "international aviation": 3,
+          "international aviation and shipping": 3,
+          "international shipping (maritime bunkers)": 3,
+          "land use, land-use change and forestry": 18,
+          //"lighting & appliances": 0,
+          "marine algae": 22,
+          "micro wind": 17,
+          "natural gas": 25,
+          //"non-thermal renewable generation": 0,
+          "nuclear fission": 7,
+          "nuclear power": 7,
+          "offshore wind": 15,
+          "oil": 33,
+          "onshore wind": 28,
+          //"other": 0,
+          "petroleum refineries": 33,
+          "rail": 16,
+          "solar": 20,
+          "solar pv": 20,
+          "solar thermal": 24,
+          //"solvent and other product use": 0,
           "storage of captured co2": 0,
           "storage, demand shifting, backup": 0,
-          "tidal": 0,
-          "tidal and wave": 0,
-          "tidal range": 0,
-          "tidal stream": 0,
-          "transport": 0,
-          "unabated thermal generation": 0,
-          "waste": 0,
-          "waste arising": 0,
-          "wave": 0,
-          "wave and tidal": 0,
-          "wind": 0
+          "tidal": 29,
+          "tidal and wave": 29,
+          "tidal range": 29,
+          "tidal stream": 29,
+          "transport": 26,
+          //"unabated thermal generation": 0,
+          "waste": 32,
+          "waste arising": 32,
+          "wave": 29,
+          "wave and tidal": 29,
+          "wind": 17
         };
 
         if (typeof key != 'undefined') {
@@ -339,9 +342,175 @@ define(['d3'], function(d3) {
             "stroke" : "rgba(255, 255, 255, 0.2)",
             "stroke-width" : "1px"
           });
+    },
+
+    drawVerticalGridlines: function() {
+      var self = this;
+
+      self.svg.selectAll("line.horizontalGrid").remove();
+      self.svg.selectAll("line.horizontalGrid").data(self.x.ticks(self.nTicks)).enter()
+        .append("line")
+          .attr({
+            "class":"horizontalGrid",
+            "x1" : function(d){ return self.x(d);},
+            "x2" : function(d){ return self.x(d);},
+            "y1" : 0,
+            "y2" : self.height,
+            "fill" : "none",
+            "shape-rendering" : "crispEdges",
+            "stroke" : "rgba(255, 255, 255, 0.2)",
+            "stroke-width" : "1px"
+          });
+    },
+
+    /**************************************************************************************************
+      Single bar charts
+    **************************************************************************************************/
+
+    // Draw borders around entire chart
+    // Top border is axis if hasAxis true
+    drawBorders: function() {
+      var self = this;
+
+      self.svg.selectAll('.border').remove();
+      self.svg.append("line")
+        .attr({
+          "class":"border",
+          "x1" : 0,
+          "x2" : 0,
+          "y1" : 0,
+          "y2" : self.height,
+        });
+      self.svg.append("line")
+        .attr({
+          "class":"border",
+          "x1" : self.width,
+          "x2" : self.width,
+          "y1" : 0,
+          "y2" : self.height,
+        });
+      self.svg.append("line")
+        .attr({
+          "class":"border",
+          "x1" : 0,
+          "x2" : self.width,
+          "y1" : self.height,
+          "y2" : self.height,
+        });
+
+      if(self.hasAxis) {
+        self.svg.selectAll('.axis').remove();
+
+        self.svg.append("g")
+            .attr("class", "x axis")
+            .attr("shape-rendering", "crispEdges")
+            .call(self.xAxis)
+      } else {
+        self.svg.append("line")
+        .attr({
+          "class":"border",
+          "x1" : 0,
+          "x2" : self.width,
+          "y1" : 0,
+          "y2" : 0,
+        });
+      }
+    },
+
+    stackBars: function(data) {
+      var self = this;
+
+      var previousX = 0;
+
+      data.sort(function(a, b) { return a.value - b.value });
+
+      return data.map(function(d, i) { return { key: d.key, colour: self.colours(i, d.key), value: d.value, x0: previousX, x1: previousX += d.value }; });
+    },
+
+    // Draw and update stacked or single bars for single bar charts
+    drawStackedBars: function(bars) {
+      var self = this;
+
+      // Each bar options object arg
+      bars.forEach(function(bar) {
+        var offset = bar.offset || 0;
+        var labelPaddingX = bar.labelPadding || 4;
+        var labelPaddingY = bar.labelPadding || 2;
+        var containerName = bar.name ? "bar-container-" + bar.name : "bar-container";
+        var barName = bar.name ? "bar-" + bar.name : "bar";
+        var labelName = bar.name ? "bar-label-" + bar.name : "bar-label";
+
+        self.barContainers = self.svg.selectAll("." + containerName)
+          .data(bar.data);
+
+        // Enter bar rects
+        self.barContainers.enter().append("g")
+          .attr("class", "bar-container " + containerName)
+          .each(function(d, i) {
+            d3.select(this).append("rect")
+              .attr("class", "bar " + barName)
+              .attr('fill', d.colour)
+              .attr('opacity', '0.6')
+              .attr("y", 0)
+              .attr("height", self.height)
+              .attr("x", self.x(d.x0))
+              .attr("width", self.x(d.value))
+              .on('mouseover', function() {
+                d3.select(this.parentNode).attr("data-state", "active")
+                d3.select(this.parentNode.parentNode).attr("data-state", "graph-hover")
+                self.svg.selectAll("#" + labelName + "-" + i).attr("data-state", "active")
+              })
+              .on('mouseout', function() {
+                d3.select(this.parentNode).attr("data-state", "inactive")
+                d3.select(this.parentNode.parentNode).attr("data-state", "inactive")
+                self.svg.selectAll("#" + labelName + "-" + i).attr("data-state", "inactive")
+              });
+          });
+
+        // Enter labels
+        var labelContainers = self.barContainers.enter().append("g")
+          .attr("class", "bar-label " + labelName)
+          .attr("id", function(d, i) { return labelName + "-" + i; })
+          .attr("transform", function(d) { return "translate(" + self.x(offset + d.x0 + d.value/2) + " " + self.y(0.5) + ")"; })
+
+        // Enter label backgrounds
+        labelContainers.append("rect")
+          .attr("x", 0)
+          .attr("y", 0)
+
+        // Enter label text
+        labelContainers.append("text")
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr("dy", "0.35em")
+
+        // Update everything
+        self.transitionBars = function() {
+          // Transition bar rects
+          self.barContainers.select("." + barName)
+            .transition()
+              .attr("x", function(d) { return self.x(offset + d.x0); })
+              .attr("width", function(d) { return self.x(d.value); })
+              .attr("height", self.height);
+
+          // Transition labels.
+          // Data must be reapplied because they are not inside container elements (z-indexing)
+          var labelContainers = self.svg.selectAll("." + labelName)
+            .data(self.barContainers.data())
+              .attr("transform", function(d) { return "translate(" + self.x(offset + d.x0 + d.value/2) + " " + self.y(0.5) + ")"; })
+
+          labelContainers.select("text")
+            .text(function(d) { return d.key + " (" + parseInt(d.value, 10) + ")"; });
+
+          labelContainers.select("rect")
+            .attr("x", function(d) { return -(this.parentElement.querySelector("text").getBBox().width + labelPaddingX*2) / 2; })
+            .attr("width", function(d) { return this.parentElement.querySelector("text").getBBox().width + labelPaddingX*2; })
+            .attr("y", function(d) { return -(this.parentElement.querySelector("text").getBBox().height + labelPaddingY*2) / 2; })
+            .attr("height", function(d) { return this.parentElement.querySelector("text").getBBox().height + labelPaddingY*2; })
+        }
+        self.transitionBars();
+      });
     }
-
-
 
   };
 
