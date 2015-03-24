@@ -66,7 +66,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
             .each(function(d, i) {
               d3.select(this).append('path')
                 .attr("class", function(d) { return "layer layer-" + d.key.replace(/ +/g, '-').replace(/[^\w|-]/g, '').toLowerCase(); })
-                .attr('fill', self.colours(i))
+                .attr('fill', function(d, i) { return self.colours(i, d.key); })
                 .attr('opacity', '0.6')
                 .on('mouseover', function(d) {
                   d3.select(this.parentNode).attr("data-state", "active")

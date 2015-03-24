@@ -65,7 +65,165 @@ define(['d3'], function(d3) {
 
       self.minimumHeightForLabel = 12;
 
-      self.colours = d3.scale.category20();
+      self.colours = function(index, key) {
+
+        var colors = [
+        
+          // pinks
+
+          "#C23474",
+          "#A12B61",
+          "#782048",
+          "#531632",
+          "#D53980",
+          "#C96E79",
+          "#9E1946",
+          "#710627",
+          "#A04668",
+          "#9A275A",
+          "#F75FA4",
+
+          // greens
+
+          "#28A197",
+          "#A7CECB",
+          "#8BA6A9",
+          "#2D7883",
+          "#028090",
+          "#85BDBF",
+          "#C9FBFF",
+          "#037171",
+          "#00B9AE",
+          "#26A197",
+          "#40ACA4",
+          "#68BDB6",
+          "#8ACCC7",
+          "#B3DEDB",
+          "#D6EDEB",
+          "#95CFCA",
+          "#29827E",
+
+          // blues
+
+          "#5A6378",
+          "#3867AF",
+          "#2978A0",
+          "#2D3E5B",
+          "#8193AD",
+          "#253031"
+        ];
+
+        var keys = {
+          "0.01 gw geothermal stations": 9,
+          "1 gw gas standby power stations": 25,
+          "1.2 gw coal gas or biomass power stations with ccs": 0,
+          "2 gw coal gas or biomass power stations without ccs": 14,
+          "215 kt/y waste to energy conversion facilities": 32,
+          "3 gw nuclear power station": 7,
+          "agriculture": 19,
+          "agriculture and land use": 19,
+          "bikes": 6,
+          "biocrops": 4,
+          "bioenergy": 27,
+          "bioenergy credit": 27,
+          "bioenergy imports": 27,
+          "biomass/coal power stations": 14,
+          "biomatter to fuel conversion": 12,
+          "buildings": 23,
+          "carbon capture": 0,
+          "carbon capture storage (ccs)": 0,
+          "coal": 5,
+          "combustion + ccs": 0,
+          //"commercial heating and cooling": 0,
+          //"commercial lighting, appliances, and catering": 0,
+          //"conventional cars and buses": 0,
+          //"conventional thermal plant": 0,
+          "distributed solar pv": 20,
+          "distributed solar thermal": 24,
+          //"district heating effective demand": 0,
+          //"domestic aviation": 0,
+          //"domestic freight": 0,
+          //"domestic heating": 0,
+          //"domestic insulation": 0,
+          //"domestic lighting, appliances, and cooking": 0,
+          //"domestic space heating and hot water": 0,
+          "electric cars and buses": 30,
+          "electricity": 31,
+          "electricity exports": 31,
+          "electricity grid distribution": 31,
+          "electricity imports": 31,
+          "energy crops": 4,
+          "energy from waste": 32,
+          "environmental heat": 1,
+          "finance": 21,
+          "finance cost": 21,
+          "forest": 18,
+          "fossil fuel transfers": 33,
+          "fossil fuels": 33,
+          "fuel cell cars and buses": 2,
+          "fuel combustion": 33,
+          "gas": 25,
+          "geosequestration": 10,
+          "geothermal": 9,
+          "geothermal electricity": 9,
+          "h2 production": 16,
+          //"heating and cooling": 0,
+          "hybrid cars and buses": 11,
+          "hydro": 8,
+          "hydroelectric": 8,
+          "hydroelectric power stations": 8,
+          "industrial processes": 13,
+          "industry": 13,
+          "international aviation": 3,
+          "international aviation and shipping": 3,
+          "international shipping (maritime bunkers)": 3,
+          "land use, land-use change and forestry": 18,
+          //"lighting & appliances": 0,
+          "marine algae": 22,
+          "micro wind": 17,
+          "natural gas": 25,
+          //"non-thermal renewable generation": 0,
+          "nuclear fission": 7,
+          "nuclear power": 7,
+          "offshore wind": 15,
+          "oil": 33,
+          "onshore wind": 28,
+          //"other": 0,
+          "petroleum refineries": 33,
+          "rail": 16,
+          "solar": 20,
+          "solar pv": 20,
+          "solar thermal": 24,
+          //"solvent and other product use": 0,
+          "storage of captured co2": 0,
+          "storage, demand shifting, backup": 0,
+          "tidal": 29,
+          "tidal and wave": 29,
+          "tidal range": 29,
+          "tidal stream": 29,
+          "transport": 26,
+          //"unabated thermal generation": 0,
+          "waste": 32,
+          "waste arising": 32,
+          "wave": 29,
+          "wave and tidal": 29,
+          "wind": 17
+        };
+
+        if (typeof key != 'undefined') {
+
+          var lowerCaseKey = key.toLowerCase();
+
+          if (typeof keys[lowerCaseKey] != 'undefined')
+            return colors[keys[lowerCaseKey]];
+
+        }
+
+        var randomOffset = Math.floor(Math.random() * colors.length) + 1;
+
+        return colors[(index + randomOffset) % colors.length];
+
+      };
 
       self.width = self.outerWidth - self.margin.left - self.margin.right;
       self.height = self.outerHeight - self.margin.top - self.margin.bottom;

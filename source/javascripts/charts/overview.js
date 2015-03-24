@@ -45,7 +45,7 @@ define(['knockout', 'd3', 'charts/chart', 'bindings/range'], function(ko, d3, Ch
 
       data.sort(function(a, b) { return a.value - b.value });
 
-      return data.map(function(d, i) { return { key: d.key, colour: self.colours(i), value: d.value, x0: previousX, x1: previousX += d.value }; });
+      return data.map(function(d, i) { return { key: d.key, colour: self.colours(i, d.key), value: d.value, x0: previousX, x1: previousX += d.value }; });
     };
 
     self.x = x;

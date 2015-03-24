@@ -70,7 +70,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
     selectionBar.enter().append("rect")
         .attr("class", "bar selection-bar")
-        .attr('fill', self.colours(1))
+        .attr('fill', function(d, i) { return self.colours(i); })
         .attr('opacity', '0.6')
         .attr("y", 0)
         .attr("height", self.height)
@@ -82,7 +82,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
     rangeBar.enter().append("rect")
         .attr("class", "bar range-bar")
-        .attr('fill', self.colours(1))
+        .attr('fill', function(d, i) { return self.colours(i); })
         .attr('opacity', '0.3')
         .attr("y", 0)
         .attr("height", self.height)

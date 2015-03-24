@@ -43,7 +43,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
       return data.map(function(d, i) {
         var edge = Math.sqrt(d.value);
-        return { key: d.key, colour: self.colours(i), value: edge, y0: previousY, y1: previousY += (edge + spacing) };
+        return { key: d.key, colour: self.colours(i, d.key), value: edge, y0: previousY, y1: previousY += (edge + spacing) };
       });
     };
 
