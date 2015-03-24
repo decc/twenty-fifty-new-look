@@ -133,8 +133,8 @@
 
   createRequest = function(ajax, xhrClass){
     var xhr = new window[xhrClass[0]](xhrClass[1]);
-
-    xhr.open(ajax.method, ajax.url, true);
+    
+    xhr.open(ajax.method, ajax.url);
     xhr.timeout = ajax.timeout;
 
     return xhr;
@@ -167,7 +167,6 @@
 
   bindXdrEvents = function(ajax, xdr){
     xdr.ontimeout = ajax.onTimeout(xdr);
-    // xdr.onerror = ajax.onError(xdr);
     xdr.onload = function(){
       ajax.onSuccess(this);
     };
