@@ -498,11 +498,22 @@ define(['d3'], function(d3) {
           labelContainers.select("text")
             .text(function(d) { return d.key + " (" + parseInt(d.value, 10) + ")"; });
 
-          labelContainers.select("rect")
-            .attr("x", function(d) { return -(this.parentNode.querySelector("text").getBBox().width + labelPaddingX*2) / 2; })
-            .attr("width", function(d) { return this.parentNode.querySelector("text").getBBox().width + labelPaddingX*2; })
-            .attr("y", function(d) { return -(this.parentNode.querySelector("text").getBBox().height + labelPaddingY*2) / 2; })
-            .attr("height", function(d) { return this.parentNode.querySelector("text").getBBox().height + labelPaddingY*2; })
+          labelContainers.select("rect").each(function(d) {
+            try {
+              var textWidth = this.parentNode.querySelector("text").getBBox().width;
+              var textHeight = this.parentNode.querySelector("text").getBBox().height;
+              if(textWidth > 0) {
+                d3.select(this).attr({
+                  "x": -(textWidth + labelPaddingX*2) / 2,
+                  "width": textWidth + labelPaddingX*2,
+                  "y": -(textHeight + labelPaddingY*2) / 2,
+                  "height": textHeight + labelPaddingY*2
+                });
+              }
+            } catch(e) {
+
+            }
+          });
         }
         self.transitionBars();
       });
