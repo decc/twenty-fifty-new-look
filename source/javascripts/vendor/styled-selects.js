@@ -11,12 +11,12 @@
 
     StyledSelects.selects = [];
 
-    StyledSelects.init = function(elements) {
+    StyledSelects.init = function(elements, keepStyle) {
       var element, _i, _len;
       if (elements instanceof Object) {
         for (_i = 0, _len = elements.length; _i < _len; _i++) {
           element = elements[_i];
-          StyledSelects.selects.push(new StyledSelects(element, StyledSelects.selects.length));
+          StyledSelects.selects.push(new StyledSelects(element, StyledSelects.selects.length, keepStyle));
         }
       } else {
         this.selects.push(new this(elements, this.selects.length));
@@ -59,7 +59,8 @@
       return _results;
     };
 
-    function StyledSelects(el, instanceId) {
+    function StyledSelects(el, instanceId, keepStyle) {
+      this.keepStyle = keepStyle;
       this.optionClicked = __bind(this.optionClicked, this);
       this.documnentClicked = __bind(this.documnentClicked, this);
       this.selectClicked = __bind(this.selectClicked, this);
@@ -131,10 +132,18 @@
 
     StyledSelects.prototype.render = function() {
       this.self = document.createElement('div');
+
       this.self.id = "styled_select_" + this.el.id;
       this.self.className = "styled_select_wrapper";
       this.self.innerHTML = this.template();
-      this.self.style.width = '100%';
+
+      if(this.keepStyle) {
+        this.self.setAttribute('style', this.el.getAttribute('style'));
+        this.self.style.opacity = 1;
+        this.self.style.height = 'auto';
+        this.self.style.width = 'auto';
+      }
+
       return this.el.parentNode.appendChild(this.self);
     };
 

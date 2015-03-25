@@ -1,6 +1,6 @@
 .styled_select
   background: $color-background-dark
-  padding: .25em 0 .25em 1em
+  // padding: .25em 0 .25em 1em
   position: absolute
   z-index: 1
   color: #fff
@@ -25,7 +25,7 @@
 
 .styled_select_selected
   position: relative
-  padding: .25em 0
+  padding: .25em
   display: block
   cursor: pointer
   @extend %icon-chevron-after
@@ -41,7 +41,9 @@
   max-height: 0px
   width: 100%
   overflow: hidden
+  padding: .25em
   @include transition(max-height .2s ease-in-out)
+  background: $color-background-dark
 
 .styled_select_option
   border-top: 1px dotted #fff

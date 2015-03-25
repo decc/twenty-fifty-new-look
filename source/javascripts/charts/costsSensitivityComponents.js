@@ -1,4 +1,4 @@
-define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
+define(['knockout', 'd3', 'selects', 'charts/chart'], function(ko, d3, Select, Chart) {
   'use strict';
 
   var CostsSensitivityComponentsChart = function() {};
@@ -120,7 +120,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         select.className = 'ie-select select'
         select.setAttribute('data-component', d.current.key);
         select.style.top = (componentOrder[d.id] * (componentHeight + spacing)) + "px";
-        select.style.left = self.margin.left + "px";
+        select.style.left = (self.margin.left - 100) + "px";
         select.id = d.id;
 
         // Get options for this cost component
@@ -143,6 +143,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         });
 
         self.element.appendChild(select);
+        Select.init([select], true);
       });
     }
 
