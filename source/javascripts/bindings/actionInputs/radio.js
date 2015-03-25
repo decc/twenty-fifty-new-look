@@ -10,10 +10,21 @@ define(['knockout'], function(ko) {
       element.label = '.value-label';
       var tooltips = params.tooltips;
 
+      console.dir(params)
 
       // Create radio elements
       for (var i = 0; i < params.max; i++) {
+
+        var label = document.createElement('label');
         var radio = document.createElement('input');
+
+        var id = 'radio-' + params.name.toLowerCase().replace(/ /g, '-') + '-' + i;
+
+        radio.id = id;
+
+        label.setAttribute('for', id);
+        label.className = 'r'
+
 
         radio.setAttribute('type', 'radio');
         radio.setAttribute('name', params.name);
@@ -28,6 +39,7 @@ define(['knockout'], function(ko) {
         });
 
         element.appendChild(radio);
+        element.appendChild(label);
       };
 
       element.childNodes[0].checked = true;
