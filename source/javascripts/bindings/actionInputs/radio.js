@@ -56,6 +56,7 @@ define(['knockout'], function(ko) {
       ko.bindingHandlers.radio.setTooltip(element, val, value());
     },
 
+    // TODO: this should be shared with tooltip binding
     setTooltip: function(element, value, className) {
       var text = element.querySelector('input[value="' + className + '"]').getAttribute("tip"+value);
 

@@ -20,13 +20,13 @@ define(['knockout', 'bindings/range'], function(ko) {
         "4":"d"
       }
 
-      tooltip.className = "tooltip "+classmap[val];
+      tooltip.className = "tooltip " + classmap[val];
 
       var endValue = 3;
       var endPosition = 250;
       var arrowPosition = Math.round(((element.value - 1) / endValue * endPosition) + 2);
 
-      var tooltipArrow = parent.querySelector('.tooltip .arrow');
+      var tooltipArrow = tooltip.querySelector('.arrow');
       var w = tooltipArrow.offsetWidth / 2;
       var limited = Math.min(Math.max(arrowPosition, w), 255);
 

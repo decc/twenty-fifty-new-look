@@ -67,7 +67,7 @@ define(['d3'], function(d3) {
       self.minimumHeightForLabel = 12;
 
       self.colours = function(index, key) {
-
+        
         var colors = [
           // pinks
 
@@ -209,20 +209,16 @@ define(['d3'], function(d3) {
           "wave and tidal": 29,
           "wind": 17
         };
-
+        
         if (typeof key != 'undefined') {
 
           var lowerCaseKey = key.toLowerCase();
-
+          
           if (typeof keys[lowerCaseKey] != 'undefined')
             return colors[keys[lowerCaseKey]];
-
         }
-
-        var randomOffset = Math.floor(Math.random() * colors.length) + 1;
-
-        return colors[(index + randomOffset) % colors.length];
-
+        
+        return colors[index];
       };
 
       self.width = self.outerWidth - self.margin.left - self.margin.right;

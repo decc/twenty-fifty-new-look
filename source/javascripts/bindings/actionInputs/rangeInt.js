@@ -82,7 +82,10 @@ define(['knockout', 'bindings/range', 'bindings/actionInputs/tooltip'], function
         klass = "low";
       }
 
-      valueLabel.classList.remove('high', 'med', 'low');
+      valueLabel.classList.remove('high');
+      valueLabel.classList.remove('med');
+      valueLabel.classList.remove('low');
+
       valueLabel.classList.add(klass);
     },
 
