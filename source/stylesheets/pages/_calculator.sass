@@ -97,10 +97,13 @@
     height: calc(100% - 14vh)
 
   .tab
-    padding: 1em
+    padding: 0
     height: 0
+    position: relative
+    overflow: hidden
 
     &.active
+      padding: 1em
       background-color: $color-background-light
       height: auto
 
