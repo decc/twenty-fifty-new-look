@@ -1,5 +1,5 @@
 define(['knockout', 'text!../../components/calculator.html', 'pathway'],
-  function(ko, html, Pathway) {c
+  function(ko, html, Pathway) {
 
   'use strict';
 
