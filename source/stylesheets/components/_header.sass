@@ -1,6 +1,7 @@
 .calculator-header
   position: relative
   height: $header-height
+  z-index: 15
   min-height: 65px
   @include row
   background: $color-background-dark
@@ -55,6 +56,24 @@
         bottom: 0
         border-bottom: 40px solid $color-background-dark
         border-left: 40px solid transparent
+
+  .target-reached-tooltip
+    padding: 25px 20px 20px
+    margin-left: 50%
+    background-color: rgba(70, 77, 94, 0.9)
+
+    .arrow
+      right: 10%
+      border-color: rgba(70, 77, 94, 0.9) transparent
+
+    .close
+      position: absolute
+      top: 4px
+      right: 7px
+      line-height: 1
+      font-size: 25px
+      cursor: pointer
+
 
   .controls
     @include col($right-col-width)
