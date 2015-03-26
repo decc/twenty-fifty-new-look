@@ -14,7 +14,6 @@ Licence: MIT Open Source licence http://www.opensource.org/licenses/mit-license.
   Sankey = (function() {
     function Sankey(display_in_element) {
       this.display_in_element = display_in_element || 'sankey';
-      console.log(this.display_in_element)
       this.display_width = document.getElementById(this.display_in_element).clientWidth;
       this.display_height = document.getElementById(this.display_in_element).clientHeight;
       this.r = Raphael(this.display_in_element);

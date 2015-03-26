@@ -122,6 +122,7 @@ define(['d3'], function(d3) {
           "3 gw nuclear power station": 7,
           "agriculture": 19,
           "agriculture and land use": 19,
+          "agricultural 'waste'": 19,
           "bikes": 6,
           "biocrops": 4,
           "bioenergy": 27,
@@ -232,16 +233,18 @@ define(['d3'], function(d3) {
 
       self.drawParams = args.drawParams || false;
 
-      self.svg = d3.select(self.element).append('svg')
-          // .attr("preserveAspectRatio", "xMinYMin meet")
-          // .attr("viewBox", "0 0 "+self.outerWidth+" "+self.outerHeight)
-          .attr('width', '100%')
-          .attr('height', '100%')
-        .append("g")
-          .attr("class", "d3-chart")
-          .attr("transform", "translate(" + self.margin.left + "," + self.margin.top + ")")
-          .attr('width', '100%')
-          .attr('height', '100%');
+      if(args.initElement !== false) {
+        self.svg = d3.select(self.element).append('svg')
+            // .attr("preserveAspectRatio", "xMinYMin meet")
+            // .attr("viewBox", "0 0 "+self.outerWidth+" "+self.outerHeight)
+            .attr('width', '100%')
+            .attr('height', '100%')
+          .append("g")
+            .attr("class", "d3-chart")
+            .attr("transform", "translate(" + self.margin.left + "," + self.margin.top + ")")
+            .attr('width', '100%')
+            .attr('height', '100%');
+      }
 
       return self;
     },

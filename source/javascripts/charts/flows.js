@@ -26,7 +26,6 @@ define(['knockout', 'd3', 'charts/chart', 'raphael', 'sankey'], function(ko, d3,
         self.element.removeChild(self.element.firstChild);
       }
     }
-console.log(self.element.id)
     self.sankey = new Sankey(self.element.id);
 
     self.sankey.stack(0,[
@@ -104,106 +103,55 @@ console.log(self.element.id)
 
     // Colours
     self.sankey.setColors({
-      "Coal reserves":"#8F6F38",
-      "Coal":"#8F6F38",
-      "Coal imports":"#8F6F38",
+      "Coal reserves": self.colours(0),
+      "Coal": self.colours(0),
+      "Coal imports": self.colours(0),
 
-      "Oil reserves":"#A99268",
-      "Oil":"#A99268",
-      "Oil imports":"#A99268",
+      "Oil reserves": self.colours(1),
+      "Oil": self.colours(1),
+      "Oil imports": self.colours(1),
 
-      "Gas reserves":"#DDD4C4",
-      "Ngas":"#DDD4C4",
-      "Gas imports":"#DDD4C4",
+      "Gas reserves": self.colours(2),
+      "Natural Gas": self.colours(2),
+      "Gas imports": self.colours(2),
 
-      "Solar":"#F6FF00",
-      "Solar Thermal":"#F6FF00",
-      "Solar PV":"#F6FF00",
+      "Solar": self.colours(3),
+      "Solar Thermal": self.colours(3),
+      "Solar PV": self.colours(3),
 
-      "UK land based bioenergy":"#30FF00",
-      "Bio-conversion":"#30FF00",
-      "Marine algae":"#30FF00",
-      "Agricultural 'waste'":"#30FF00",
-      "Other waste":"#30FF00",
-      "Biomass imports":"#30FF00",
-      "Biofuel imports":"#30FF00",
+      "UK land based bioenergy": self.colours(4),
+      "Bio-conversion": self.colours(4),
+      "Marine algae": self.colours(4),
+      "Agricultural 'waste'": self.colours(4),
+      "Other waste": self.colours(4),
+      "Biomass imports": self.colours(4),
+      "Biofuel imports": self.colours(4),
 
-      "Solid":"#557731",
-      "Liquid":"#7D9763",
-      "Gas":"#BCC2AD",
+      "Solid": self.colours(5),
+      "Liquid": self.colours(6),
+      "Gas": self.colours(7),
 
-      "Electricity grid":"#0000FF",
-      "Thermal generation":"#0000FF",
-      "CHP":"#FF0000",
-      "Nuclear":"#E2ABDB",
+      "Electricity grid": self.colours(8),
+      "Thermal generation": self.colours(8),
+      "CHP": self.colours(9),
+      "Nuclear": self.colours(10),
 
-      "District heating":"#FF0000",
-      "Pumped heat":"#FF0000",
-      "Useful district heat":"#FF0000",
-      "CHP Heat":"#FF0000",
+      "District heating": self.colours(9),
+      "Pumped heat": self.colours(9),
+      "Useful district heat": self.colours(9),
+      "CHP Heat": self.colours(9),
 
-      "Electricity imports":"#0000FF",
-      "Wind":"#C7E7E6",
-      "Tidal":"#C7E7E6",
-      "Wave":"#C7E7E6",
-      "Geothermal":"#C7E7E6",
-      "Hydro":"#C7E7E6",
+      "Electricity imports": self.colours(8),
+      "Wind": self.colours(11),
+      "Tidal": self.colours(11),
+      "Wave": self.colours(11),
+      "Geothermal": self.colours(11),
+      "Hydro": self.colours(11),
 
-      "H2 conversion":"#FF6FCF",
-      "Final electricity":"#0000FF",
-      "Over generation / exports":"#0000FF",
-      "H2":"#FF6FCF"
-    });
-    self.sankey.setColors({
-      "Coal reserves":"#8F6F38",
-      "Coal":"#8F6F38",
-      "Coal imports":"#8F6F38",
-
-      "Oil reserves":"#A99268",
-      "Oil":"#A99268",
-      "Oil imports":"#A99268",
-
-      "Gas reserves":"#DDD4C4",
-      "Ngas":"#DDD4C4",
-      "Gas imports":"#DDD4C4",
-
-      "Solar":"#F6FF00",
-      "Solar Thermal":"#F6FF00",
-      "Solar PV":"#F6FF00",
-
-      "UK land based bioenergy":"#30FF00",
-      "Bio-conversion":"#30FF00",
-      "Marine algae":"#30FF00",
-      "Agricultural 'waste'":"#30FF00",
-      "Other waste":"#30FF00",
-      "Biomass imports":"#30FF00",
-      "Biofuel imports":"#30FF00",
-
-      "Solid":"#557731",
-      "Liquid":"#7D9763",
-      "Gas":"#BCC2AD",
-
-      "Electricity grid":"#0000FF",
-      "Thermal generation":"#0000FF",
-      "CHP":"#FF0000",
-      "Nuclear":"#E2ABDB",
-
-      "District heating":"#FF0000",
-      "Pumped heat":"#FF0000",
-      "Useful district heat":"#FF0000",
-      "CHP Heat":"#FF0000",
-
-      "Electricity imports":"#0000FF",
-      "Wind":"#C7E7E6",
-      "Tidal":"#C7E7E6",
-      "Wave":"#C7E7E6",
-      "Geothermal":"#C7E7E6",
-      "Hydro":"#C7E7E6",
-
-      "H2 conversion":"#FF6FCF",
-      "Final electricity":"#0000FF",
-      "Over generation / exports":"#0000FF",
-      "H2":"#FF6FCF"
+      "H2 conversion": self.colours(12),
+      "Final electricity": self.colours(8),
+      "Over generation / exports": self.colours(8),
+      "H2": self.colours(12)
     });
 
     // Add the emissions
@@ -214,22 +162,25 @@ console.log(self.element.id)
 
     // Fix some of the colours
     self.sankey.nudge_colours_callback = function() {
-      this.recolour(this.boxes["Losses"].left_lines,"#AAAAAA");
-      this.recolour(this.boxes["District heating"].left_lines,"#FF0000");
-      this.recolour(this.boxes["Electricity grid"].left_lines,"#0000FF");
+      this.recolour(this.boxes["Losses"].left_lines, self.colours(13));
+      this.recolour(this.boxes["District heating"].left_lines, self.colours(9));
+      this.recolour(this.boxes["Electricity grid"].left_lines, self.colours(8));
     };
 
     self.sankey.y_space = 20;
     self.sankey.right_margin = 210;
     self.sankey.left_margin = 120;
-    self.sankey.box_width = 30;
+    self.sankey.box_width = self.drawParams.boxWidth || 30;
     self.sankey.flow_edge_width = 0;
     self.sankey.flow_curve = 0.2;
-    self.sankey.opacity = 0.7;
+    self.sankey.opacity = 1.0;
     self.sankey.opacity_hover = 0.2;
 
+    var pixels_per_TWh = self.element.clientHeight / 6000;
+    self.sankey.y_space = Math.round(100 * pixels_per_TWh);
+
     self.sankey.convert_flow_values_callback = function(flow) {
-      return flow * 0.05; // Pixels per TWh
+      return flow * pixels_per_TWh; // Pixels per TWh
     };
 
     self.sankey.convert_flow_labels_callback = function(flow) {
