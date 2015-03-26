@@ -1,7 +1,7 @@
 .calculator-header
   position: relative
   height: $header-height
-  z-index: 15
+  z-index: 12
   min-height: 65px
   @include row
   background: $color-background-dark
@@ -24,7 +24,9 @@
   .total-co2-reduction
     @include col(77.4%)
     @include omega
-    padding-right: $right-col-width !important
+    position: relative
+    width: calc(77.4% - 308px)
+    padding-right: 0 !important
     height: 100%
     color: $color-background-dark
     border-left: 1px solid #333
@@ -58,18 +60,23 @@
         border-left: 40px solid transparent
 
   .target-reached-tooltip
-    padding: 25px 20px 20px
-    margin-left: 50%
-    background-color: rgba(111, 119, 123, 0.95)
+    position: absolute
+    left: 50%
+    right: 20px
+    top: 100%
+    margin-top: 20px
+    padding: 20px 20px 20px
+    background-color: rgba(45, 49, 60, 0.95)
 
     .arrow
-      right: 10%
-      border-color: rgba(111, 119, 123, 0.95) transparent
+      left: 60%
+      margin-left: 2px
+      border-color: rgba(45, 49, 60, 0.95) transparent
 
     .close
       position: absolute
-      top: 4px
-      right: 7px
+      top: 2px
+      right: 8px
       line-height: 1
       font-size: 25px
       cursor: pointer

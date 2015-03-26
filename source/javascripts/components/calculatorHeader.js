@@ -12,12 +12,16 @@ define(['knockout', 'text!/components/calculator-header.html', 'bindings/chart']
     self.pathway = params.pathway;
 
     self.targetReachedVisible = ko.observable(false);
-    self.targetReachedOnce = false;
+    self.targetDismissed = false;
     ko.computed(function() {
-      // Show target reached tooltip once if target reached
-      if(!self.targetReachedOnce && self.pathway().chartData()["SummaryChart"] >= 80) {
-        self.targetReachedOnce = true;
+      // Show target reached tooltip if target reached; do not show if user has closed it before
+      if(!self.targetDismissed && self.pathway().chartData()["SummaryChart"] >= 80) {
         self.targetReachedVisible(true);
+      }
+
+      // Hide if user drops below target
+      if(self.pathway().chartData()["SummaryChart"] < 80) {
+        self.targetReachedVisible(false);
       }
     });
 
@@ -27,7 +31,10 @@ define(['knockout', 'text!/components/calculator-header.html', 'bindings/chart']
     };
 
     self.closeTargetReached = function() {
-      self.targetReachedVisible(false);
+      if(self.targetReachedVisible) {
+        self.targetDismissed = true;
+        self.targetReachedVisible(false);
+      }
     }
   };
 

@@ -11,7 +11,7 @@ header.calculator-header
       span = I18n.t('calculator.header.target_reached')
 
   .controls
-    button.finish-share data-bind="click: $parent.toggleShare"
+    button.finish-share data-bind="click: function() { $parent.toggleShare(); closeTargetReached() }"
       span data-bind="visible: $parent.shareVisible()" = I18n.t('calculator.share.hide')
       span data-bind="visible: !$parent.shareVisible()" = I18n.t('calculator.share.show')
 
