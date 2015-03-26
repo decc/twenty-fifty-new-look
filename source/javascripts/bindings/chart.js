@@ -14,6 +14,7 @@ define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySuppl
       } else {
         self.chart = object;
       }
+
       self.chart.init(element, element.params);
       element.chart = self.chart;
 

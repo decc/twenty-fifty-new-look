@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/calculator.html', 'pathway', 'range', 'bindings/cityscape', 'bindings/landscape', 'bindings/factsheet'],
+define(['knockout', 'text!/components/calculator.html', 'pathway', 'range', 'bindings/cityscape', 'bindings/landscape', 'bindings/factsheet', 'bindings/chart'],
   function(ko, html, Pathway, Range) {
 
   'use strict';
@@ -25,6 +25,7 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'range', 'bin
     self.mainNavVisible = ko.observable(false);
     self.subNavVisible = ko.observable(false);
     self.shareVisible = ko.observable(false);
+    self.fullscreenVisible = ko.observable(false);
     self.faqVisible = ko.observable(false);
     self.mainViewVisible = ko.observable(true);
 
@@ -124,6 +125,7 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'range', 'bin
         self.faqVisible(false);
         self.overlayVisible(false);
         self.mainViewVisible(false);
+        self.fullscreenVisible(false);
         self.shareVisible(true);
 
         self.buttonColor('white');
@@ -137,6 +139,7 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'range', 'bin
         self.mainViewVisible(true);
         self.overlayVisible(false);
         self.shareVisible(false);
+        self.fullscreenVisible(false);
         self.faqVisible(false);
 
         self.buttonColor('pink');
@@ -147,6 +150,14 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'range', 'bin
 
         self.buttonColor('blue');
       }
+    }
+
+    /** toggle faq page visibility */
+    self.toggleFullscreen = function() {
+      self.faqCloseMode(true);
+      self.fullscreenVisible(true);
+
+      self.buttonColor('blue');
     }
 
     /** set active tab */

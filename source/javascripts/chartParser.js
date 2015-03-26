@@ -23,7 +23,7 @@ define([], function() {
         EnergyEmissionsChart: this.energyEmissions(),
         ElectricityEmissionsChart: this.electricityEmissions(),
 
-        FlowsChart: this.flows(),
+        FlowsChart: this.flowsBasic(),
 
         MapChart: this.map(),
 
@@ -201,6 +201,11 @@ define([], function() {
       return this.areaVsLine(primaryData, secondaryData, skipLayers);
     },
 
+    flowsBasic: function() {
+      var data = this.data.sankey;
+
+      return data;
+    },
 
     flows: function() {
       var data = this.data.sankey;

@@ -17,6 +17,10 @@
       range: 'vendor/ranges',
       modernizr: 'vendor/modernizr',
       selects: 'vendor/styled-selects'
+
+      // For sankey
+      raphael: 'vendor/raphael.min',
+      sankey: 'vendor/sankey'
     }
   });
 
