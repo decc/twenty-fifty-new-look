@@ -48,7 +48,19 @@ define([], function() {
     },
 
     energyEmissionsUnused: function() {
-      return ["Total"];
+      return ["Total", "percent_reduction_from_1990"];
+    },
+
+    overviewDemandUnused: function() {
+      return ["Total Use", "Food consumption [UNUSED]"];
+    },
+
+    overviewSupplyUnused: function() {
+      return ["Total Primary Supply", "Electricity oversupply (imports)"];
+    },
+
+    overviewEmissionsUnused: function() {
+      return ["percent_reduction_from_1990"];
     },
 
     electricityEmissionsUnused: function() {
@@ -82,8 +94,8 @@ define([], function() {
 
 
       for(var topicName in data) {
-        var skipLayers = this["energy" + topicName + "Unused"]();
-        var topic = data[topicName]
+        var skipLayers = this["overview" + topicName + "Unused"]();
+        var topic = data[topicName];
 
         for(var item in topic) {
           // Don't parse unused/total layers
@@ -92,8 +104,10 @@ define([], function() {
             for(var i = 0; i < topic[item].length; i++) {
               var value = topic[item][i];
               var date = 2010 + i * 5;
-              overviewYearlyData[topicName][date].push({ key: item, value: Math.abs(value) });
+              overviewYearlyData[topicName][date].push({ key: item, value: value });
             }
+          } else if (item === "percent_reduction_from_1990") {
+            overviewYearlyData[topicName].percentageReduction = topic[item]
           }
         }
       }

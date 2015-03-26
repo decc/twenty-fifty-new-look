@@ -64,6 +64,11 @@ define(['d3'], function(d3) {
 
       self.title = args.title || 'Chart';
 
+      self.xMin = args.xMin || 0;
+      self.xMax = args.xMax || 5000;
+      self.yMin = args.yMin || 0;
+      self.yMax = args.yMax || 1;
+
       self.minimumHeightForLabel = 12;
 
       self.colours = function(index, key) {
@@ -394,6 +399,7 @@ define(['d3'], function(d3) {
           "y2" : self.height,
         });
 
+      // Use x Axis as top border or not
       if(self.hasAxis) {
         self.svg.selectAll('.axis').remove();
 
@@ -410,6 +416,18 @@ define(['d3'], function(d3) {
           "y1" : 0,
           "y2" : 0,
         });
+      }
+
+      // Add x=0 line if scale goes negative
+      if(self.xMin < 0) {
+        self.svg.append("line")
+          .attr({
+            "class":"border",
+            "x1" : self.x(0),
+            "x2" : self.x(0),
+            "y1" : 0,
+            "y2" : self.height,
+          });
       }
     },
 
@@ -430,6 +448,7 @@ define(['d3'], function(d3) {
       // Each bar options object arg
       bars.forEach(function(bar) {
         var offset = bar.offset || 0;
+        var negative = bar.negative || false;
         var labelPaddingX = bar.labelPadding || 4;
         var labelPaddingY = bar.labelPadding || 2;
         var containerName = bar.name ? "bar-container-" + bar.name : "bar-container";
@@ -449,8 +468,8 @@ define(['d3'], function(d3) {
               .attr('opacity', '0.6')
               .attr("y", 0)
               .attr("height", self.height)
-              .attr("x", self.x(d.x0))
-              .attr("width", self.x(d.value))
+              .attr("x", function(d) { return negative ? self.x(offset + d.x1) : self.x(offset + d.x0); })
+              .attr("width", function(d) { return negative ? self.x(0) - self.x(d.value) : self.x(d.value) - self.x(0); })
               .on('mouseover', function() {
                 d3.select(this.parentNode).attr("data-state", "active")
                 d3.select(this.parentNode.parentNode).attr("data-state", "graph-hover")
@@ -485,8 +504,8 @@ define(['d3'], function(d3) {
           // Transition bar rects
           self.barContainers.select("." + barName)
             .transition()
-              .attr("x", function(d) { return self.x(offset + d.x0); })
-              .attr("width", function(d) { return self.x(d.value); })
+              .attr("x", function(d) { return negative ? self.x(offset + d.x1) : self.x(offset + d.x0); })
+              .attr("width", function(d) { return negative ? self.x(0) - self.x(d.value) : self.x(d.value) - self.x(0); })
               .attr("height", self.height);
 
           // Transition labels.
