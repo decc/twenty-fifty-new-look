@@ -1,0 +1,42 @@
+input[type=radio]
+  display: none
+
+  & + .r:before
+    width: 5px
+    height: 5px
+    background: #cccccc
+    display: inline-block
+    border-radius: 5px
+    content: ''
+    position: absolute
+    top: 50%
+    left: 50%
+    @include transform(translate(-3px, -2px))
+    opacity: 0
+
+  &:checked + .r:before
+    opacity: 1
+
+label
+  cursor: pointer
+
+.r
+  margin-top: 0!important
+  position: relative
+  content: ''
+  width: 15px
+  height: 15px
+  background: #fff
+  display: inline-block
+  border-radius: 10px
+  margin: 0 44px 0 0
+  border: 1px solid #ccc
+
+  &:before
+    @include transition(opacity 0.2s ease-in-out)
+
+  &:last-of-type
+    margin-right: 0px
+
+  &:first-of-type
+    margin-left: 5px

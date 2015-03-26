@@ -15,7 +15,8 @@
       d3: 'vendor/d3',
       tabber: 'vendor/tabber',
       range: 'vendor/ranges',
-      modernizr: 'vendor/modernizr'
+      modernizr: 'vendor/modernizr',
+      selects: 'vendor/styled-selects'
     }
   });
 

@@ -8,7 +8,7 @@ header.calculator-header
     .target-reached-tooltip.tooltip data-bind="visible: targetReachedVisible"
       .arrow
       .close data-bind="click: closeTargetReached" &times;
-      span Congratulations! Your have reached the UK's target to reduce our greenhouse gas emissions by at least 80% (from the 1990 baseline) by 2050. Use the tabs below to see the consequences of your plan and then press 'Finish & Share'.
+      span = I18n.t('calculator.header.target_reached')
 
   .controls
     button.finish-share data-bind="click: $parent.toggleShare"

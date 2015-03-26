@@ -1,12 +1,13 @@
 .tabs
   position: relative
+  @include clearfix
 
   .tab
     opacity: 0
     z-index: -10
-    position: absolute
     width: 100%
     top: 0
+    float: left
 
     &.active
       opacity: 1

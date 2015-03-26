@@ -146,9 +146,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     // Grid
     self.drawVerticalGridlines();
 
-    // Borders
-    self.drawBorders();
-
     // Selection and range bar options
     var selectionBars = [
       {
@@ -185,6 +182,10 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
           });
     self.svg.selectAll(".bar-range")
       .attr('fill', function(d, i) { return "url(#bar-pattern-" + i + ")"; });
+
+
+    // Borders
+    self.drawBorders();
   };
 
   return CostsComparedChart;

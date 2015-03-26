@@ -63,11 +63,11 @@ define(['knockout', 'd3', 'charts/chart', 'bindings/range'], function(ko, d3, Ch
       }
     ];
 
-    // Borders
-    self.drawBorders();
-
     // Draw bars
     self.drawStackedBars(bars);
+
+    // Borders
+    self.drawBorders();
 
     // Total indicator
     if(total) {
