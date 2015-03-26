@@ -5,6 +5,10 @@ header.calculator-header
 
   .total-co2-reduction
     .chart.compare.top data-bind="chart: 'SummaryChart', data: pathway().chartData, params: { text: '#{I18n.t("calculator.header.reduction")}', margin: { top: 0, right: 0, bottom: 0, left: 0 } }" style="height: 100%"
+    .target-reached-tooltip.tooltip data-bind="visible: targetReachedVisible"
+      .arrow
+      .close data-bind="click: closeTargetReached" &times;
+      span Congratulations! Your have reached the UK's target to reduce our greenhouse gas emissions by at least 80% (from the 1990 baseline) by 2050. Use the tabs below to see the consequences of your plan and then press 'Finish & Share'.
 
   .controls
     button.finish-share data-bind="click: $parent.toggleShare"
