@@ -1,4 +1,4 @@
-@include font-face(icons, '/fonts/icons_d79fbb776d9d2e9a58d6f77476391dab', normal, normal, false, eot woff ttf svg)
+@include font-face(icons, '/fonts/icons_639582ba06bc309df7541a5f4ec3db58', normal, normal, false, eot woff ttf svg)
 
 %icon
   font-family: "icons" !important
@@ -314,6 +314,25 @@
 
 .icon-flows-before
   @extend %icon-flows-before
+
+
+
+
+
+%icon-content-full-screen
+  @extend %icon
+  content: '\f11f'
+
+%icon-full-screen-after
+  &:after
+    @extend %icon-content-full-screen
+
+%icon-full-screen-before
+  &:before
+    @extend %icon-content-full-screen
+
+.icon-full-screen-before
+  @extend %icon-full-screen-before
 
 
 
