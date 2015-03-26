@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/pathway-sidebar.html', 'pathway', 'bindings/tabs', 'bindings/actionInputs/rangeInt', 'bindings/actionInputs/rangeFloat', 'bindings/actionInputs/radio'],
+define(['knockout', 'text!../../components/pathway-sidebar.html', 'pathway'],
   function(ko, html, Pathway) {
 
   'use strict';

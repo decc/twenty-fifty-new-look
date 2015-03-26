@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/actionModal.html'], funciton(ko, html) {
+define(['knockout', 'text!../../components/actionModal.html'], funciton(ko, html) {
   'use strict';
 
   var ViewModel = function(params) {

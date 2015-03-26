@@ -3,7 +3,6 @@
 
   require.config({
     urlArgs: 'bust=' + (new Date()).getTime(), // Cache busting for dev only
-    deps: ['main'],
     paths: {
       knockout: 'vendor/knockout-3.2.0.min',
       crossroads: 'vendor/crossroads',
@@ -20,7 +19,23 @@
     }
   });
 
-  require(['app', 'vendor/modernizr', 'componentLoader', 'customElements'], function(app) {
+  require([
+    'componentLoader',
+    'customElements',
+    'bindings/cityscape',
+    'bindings/landscape',
+    'bindings/factsheet',
+    'bindings/chart',
+    'bindings/faqs',
+    'bindings/scrolls',
+    'bindings/tabs',
+    'bindings/actionInputs/rangeInt',
+    'bindings/actionInputs/rangeFloat',
+    'bindings/actionInputs/radio',
+    'bindings/select'
+  ]);
+
+  require(['app', 'vendor/modernizr', 'componentLoader'], function(app) {
     // TODO: create test for polyfills e.g.
     // Modernizr.load({
     //   test : Modernizr.geolocation,

@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/chart-tabs.html', 'dataRequester', 'chartParser', 'pathway', 'bindings/chart'], function(ko, html, DataRequester, ChartParser, Pathway) {
+define(['knockout', 'text!../../components/chart-tabs.html', 'dataRequester', 'chartParser', 'pathway'], function(ko, html, DataRequester, ChartParser, Pathway) {
   'use strict';
 
   var ViewModel = function(params) {

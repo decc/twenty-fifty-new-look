@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/share.html', 'config', 'bindings/chart'], function(ko, html, config) {
+define(['knockout', 'text!../../components/share.html', 'config'], function(ko, html, config) {
   'use strict';
 
   var ViewModel = function(params) {

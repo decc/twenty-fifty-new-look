@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/all-pathway-actions.html', 'pathway'],
+define(['knockout', 'text!../../components/all-pathway-actions.html', 'pathway'],
   function(ko, html, Pathway) {
 
   'use strict';
