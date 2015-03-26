@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/calculator-header.html', 'bindings/chart'],
+define(['knockout', 'text!../../components/calculator-header.html'],
   function(ko, html) {
 
   'use strict';

@@ -1,5 +1,5 @@
-define(['knockout', 'text!/components/calculator.html', 'pathway', 'range', 'bindings/cityscape', 'bindings/landscape', 'bindings/factsheet', 'bindings/chart'],
-  function(ko, html, Pathway, Range) {
+define(['knockout', 'text!../../components/calculator.html', 'pathway'],
+  function(ko, html, Pathway) {c
 
   'use strict';
 
@@ -11,10 +11,6 @@ define(['knockout', 'text!/components/calculator.html', 'pathway', 'range', 'bin
     var params = params || {};
 
     var self = this;
-
-    self.rendered = function() {
-      Range.init();
-    };
 
     self.pathway = params.pathway
     // Main navigation state.

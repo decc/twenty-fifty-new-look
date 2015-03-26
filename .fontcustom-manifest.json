@@ -1,13 +1,13 @@
 {
   "checksum": {
-    "previous": "d79fbb776d9d2e9a58d6f77476391dabbbc05fc4dca639a56e785e5749c6eb40",
-    "current": "d79fbb776d9d2e9a58d6f77476391dabbbc05fc4dca639a56e785e5749c6eb40"
+    "previous": "639582ba06bc309df7541a5f4ec3db582f7d4266d6a7eb18f2c5ebad9b7dec42",
+    "current": "639582ba06bc309df7541a5f4ec3db582f7d4266d6a7eb18f2c5ebad9b7dec42"
   },
   "fonts": [
-    "source/fonts/icons_d79fbb776d9d2e9a58d6f77476391dab.ttf",
-    "source/fonts/icons_d79fbb776d9d2e9a58d6f77476391dab.svg",
-    "source/fonts/icons_d79fbb776d9d2e9a58d6f77476391dab.woff",
-    "source/fonts/icons_d79fbb776d9d2e9a58d6f77476391dab.eot"
+    "source/fonts/icons_639582ba06bc309df7541a5f4ec3db58.ttf",
+    "source/fonts/icons_639582ba06bc309df7541a5f4ec3db58.svg",
+    "source/fonts/icons_639582ba06bc309df7541a5f4ec3db58.woff",
+    "source/fonts/icons_639582ba06bc309df7541a5f4ec3db58.eot"
   ],
   "glyphs": {
     "air": {
@@ -73,6 +73,10 @@
     "flows": {
       "codepoint": 61707,
       "source": "source/icons/flows.svg"
+    },
+    "full-screen": {
+      "codepoint": 61727,
+      "source": "source/icons/full-screen.svg"
     },
     "gas-power-stations": {
       "codepoint": 61721,

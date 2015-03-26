@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/chartViews/energySecurity.html'],
+define(['knockout', 'text!../../../components/chartViews/energySecurity.html'],
   function(ko, html) {
 
   'use strict';
