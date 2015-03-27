@@ -10,8 +10,6 @@ define(['knockout'], function(ko) {
       element.label = '.value-label';
       var tooltips = params.tooltips;
 
-      console.dir(params)
-
       // Create radio elements
       for (var i = 0; i < params.max; i++) {
 

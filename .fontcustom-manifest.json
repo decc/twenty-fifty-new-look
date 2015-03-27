@@ -1,13 +1,13 @@
 {
   "checksum": {
-    "previous": "639582ba06bc309df7541a5f4ec3db582f7d4266d6a7eb18f2c5ebad9b7dec42",
-    "current": "639582ba06bc309df7541a5f4ec3db582f7d4266d6a7eb18f2c5ebad9b7dec42"
+    "previous": "63a7d865582f169997bfdb2077ef47169ea8274b2750bcd44572496e0616c2c5",
+    "current": "63a7d865582f169997bfdb2077ef47169ea8274b2750bcd44572496e0616c2c5"
   },
   "fonts": [
-    "source/fonts/icons_639582ba06bc309df7541a5f4ec3db58.ttf",
-    "source/fonts/icons_639582ba06bc309df7541a5f4ec3db58.svg",
-    "source/fonts/icons_639582ba06bc309df7541a5f4ec3db58.woff",
-    "source/fonts/icons_639582ba06bc309df7541a5f4ec3db58.eot"
+    "source/fonts/icons_63a7d865582f169997bfdb2077ef4716.ttf",
+    "source/fonts/icons_63a7d865582f169997bfdb2077ef4716.svg",
+    "source/fonts/icons_63a7d865582f169997bfdb2077ef4716.woff",
+    "source/fonts/icons_63a7d865582f169997bfdb2077ef4716.eot"
   ],
   "glyphs": {
     "air": {
@@ -97,6 +97,10 @@
     "landscape_down": {
       "codepoint": 61726,
       "source": "source/icons/landscape_down.svg"
+    },
+    "landscape_up": {
+      "codepoint": 61728,
+      "source": "source/icons/landscape_up.svg"
     },
     "linkedin": {
       "codepoint": 61717,

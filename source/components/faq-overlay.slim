@@ -6,7 +6,8 @@ div.faqs
     article
       header data-bind="faq"
         h5 = t "faqs.q#{faq}.question"
-        span.toggle &times;
+        span.close &times;
+        span.open
 
       section
         div = m "faqs.q#{faq}.answer"
