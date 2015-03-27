@@ -236,6 +236,7 @@
         var that = this;
 
         document.addEventListener(this._mouseWheelEvent, function(e){
+          e.preventDefault();
           that._onMouseWheel(e);
         });
 
