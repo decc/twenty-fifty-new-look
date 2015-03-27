@@ -14,6 +14,9 @@ input[type=radio]
     @include transform(translate(-3px, -2px))
     opacity: 0
 
+    @include media($media-webkit-only)
+      @include transform(translate(-3px, -3px))
+
   &:checked + .r:before
     opacity: 1
 
@@ -40,3 +43,4 @@ label
 
   &:first-of-type
     margin-left: 5px
+
