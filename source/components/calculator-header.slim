@@ -17,4 +17,4 @@ header.calculator-header
 
     button.help data-bind="click: $parent.toggleFaq, css: { pink: $parent.pinkButton, white: $parent.whiteButton, blue: $parent.blueButton, grey: $parent.greyButton }"
       span data-bind="visible: !$parent.pathwayUpdating(), text: $parent.faqCloseMode() ? '&times;' : '?'"
-      img data-bind="visible: $parent.pathwayUpdating" src="/images/spinner.gif"
+      div.spinner.pink data-bind="visible: $parent.pathwayUpdating"
