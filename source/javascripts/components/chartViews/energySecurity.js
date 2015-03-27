@@ -9,11 +9,10 @@ define(['knockout', 'text!../../../components/chartViews/energySecurity.html'],
     self.data = ko.computed(function() {
       // TODO: why is chartData null sometimes
       var chartData = args.data()[args.charts[0].name] || { imports: [], diversity: [], electricity: {}};
-console.log("sdia"); console.log(args.data())
       return chartData;
     });
 
-    self.auto = ko.computed(function() { console.log("asi"); console.log(self.data().electricity); return self.data().electricity.auto || 0; });
+    self.auto = ko.computed(function() { return self.data().electricity.auto || 0; });
     self.peak = ko.computed(function() { return self.data().electricity.peak || 0; });
   };
 

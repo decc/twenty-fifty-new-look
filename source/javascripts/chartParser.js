@@ -352,8 +352,7 @@ define([], function() {
           }
         }
       });
-      console.log("eoo")
-console.log(out)
+
       return out;
     },
 

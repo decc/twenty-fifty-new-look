@@ -168,7 +168,7 @@
   bindXdrEvents = function(ajax, xdr){
     xdr.ontimeout = ajax.onTimeout(xdr);
     xdr.onerror = function(){ ajax.onError(xdr); }
-    xdr.onprogress = function(){ console.log("XDR progress"); }
+    xdr.onprogress = function(){}
     xdr.onload = function(){
       ajax.onSuccess(xdr);
       ajax.onFinish(xdr);
