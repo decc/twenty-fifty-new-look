@@ -26,6 +26,7 @@
   });
 
   require([
+    'http://cdn.polyfill.io/v1/polyfill.min.js',
     'componentLoader',
     'customElements',
     'bindings/cityscape',
@@ -41,16 +42,7 @@
     'bindings/select'
   ]);
 
-  require(['app', 'vendor/modernizr', 'componentLoader', 'customElements'], function(app) {
-    // TODO: create test for polyfills e.g.
-    // Modernizr.load({
-    //   test : Modernizr.geolocation,
-    //   nope : ['/javascripts/vendor/polyfills/classList.js']
-    // });
-
-    Modernizr.load({load: ['/javascripts/vendor/polyfills/classList.js']});
-    Modernizr.load({load: ['/javascripts/vendor/polyfills/es5.js']});
-
+  require(['app'], function(app) {
     app.init();
   });
 })(require, define);
