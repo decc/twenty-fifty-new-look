@@ -17,7 +17,7 @@
       tabber: 'vendor/tabber',
       range: 'vendor/ranges',
       modernizr: 'vendor/modernizr',
-      selects: 'vendor/styled-selects'
+      selects: 'vendor/styled-selects',
 
       // For sankey
       raphael: 'vendor/raphael.min',
@@ -41,7 +41,7 @@
     'bindings/select'
   ]);
 
-  require(['app', 'vendor/modernizr', 'componentLoader'], function(app) {
+  require(['app', 'vendor/modernizr', 'componentLoader', 'customElements'], function(app) {
     // TODO: create test for polyfills e.g.
     // Modernizr.load({
     //   test : Modernizr.geolocation,
