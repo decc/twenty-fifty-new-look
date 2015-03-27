@@ -1,4 +1,4 @@
-define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
+define(['knockout', 'd3', 'charts/chart', 'raphael', 'sankey'], function(ko, d3, Chart) {
   'use strict';
 
   var FlowsChart = function() {};
@@ -20,392 +20,179 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     self.width = self.outerWidth - self.margin.left - self.margin.right;
     self.height = self.outerHeight - self.margin.top - self.margin.bottom;
 
-    // TODO: move to vendor
-    d3.sankey = function() {
-      var sankey = {},
-          nodeWidth = 24,
-          nodePadding = 8,
-          size = [1, 1],
-          nodes = [],
-          links = [];
-
-      sankey.nodeWidth = function(_) {
-        if (!arguments.length) return nodeWidth;
-        nodeWidth = +_;
-        return sankey;
-      };
-
-      sankey.nodePadding = function(_) {
-        if (!arguments.length) return nodePadding;
-        nodePadding = +_;
-        return sankey;
-      };
-
-      sankey.nodes = function(_) {
-        if (!arguments.length) return nodes;
-        nodes = _;
-        return sankey;
-      };
-
-      sankey.links = function(_) {
-        if (!arguments.length) return links;
-        links = _;
-        return sankey;
-      };
-
-      sankey.size = function(_) {
-        if (!arguments.length) return size;
-        size = _;
-        return sankey;
-      };
-
-      sankey.layout = function(iterations) {
-        computeNodeLinks();
-        computeNodeValues();
-        computeNodeBreadths();
-        computeNodeDepths(iterations);
-        computeLinkDepths();
-        return sankey;
-      };
-
-      sankey.relayout = function() {
-        computeLinkDepths();
-        return sankey;
-      };
-
-      sankey.link = function() {
-        var curvature = .5;
-
-        function link(d) {
-          var x0 = d.source.x + d.source.dx,
-              x1 = d.target.x,
-              xi = d3.interpolateNumber(x0, x1),
-              x2 = xi(curvature),
-              x3 = xi(1 - curvature),
-              y0 = d.source.y + d.sy + d.dy / 2,
-              y1 = d.target.y + d.ty + d.dy / 2;
-          return "M" + x0 + "," + y0
-               + "C" + x2 + "," + y0
-               + " " + x3 + "," + y1
-               + " " + x1 + "," + y1;
-        }
-
-        link.curvature = function(_) {
-          if (!arguments.length) return curvature;
-          curvature = +_;
-          return link;
-        };
-
-        return link;
-      };
-
-      // Populate the sourceLinks and targetLinks for each node.
-      // Also, if the source and target are not objects, assume they are indices.
-      function computeNodeLinks() {
-        nodes.forEach(function(node) {
-          node.sourceLinks = [];
-          node.targetLinks = [];
-        });
-        links.forEach(function(link) {
-          var source = link.source,
-              target = link.target;
-          if (typeof source === "number") source = link.source = nodes[link.source];
-          if (typeof target === "number") target = link.target = nodes[link.target];
-          source.sourceLinks.push(link);
-          target.targetLinks.push(link);
-        });
+    // Clear
+    if(self.sankey) {
+      while (self.element.firstChild) {
+        self.element.removeChild(self.element.firstChild);
       }
+    }
+    self.sankey = new Sankey(self.element.id);
 
-      // Compute the value (size) of each node by summing the associated links.
-      function computeNodeValues() {
-        nodes.forEach(function(node) {
-          node.value = Math.max(
-            d3.sum(node.sourceLinks, value),
-            d3.sum(node.targetLinks, value)
-          );
-        });
-      }
+    self.sankey.stack(0,[
+    "Pumped heat",
+    "Solar",
+    "Wind",
+    "Tidal",
+    "Wave",
+    "Geothermal",
+    "Hydro",
+    "Electricity imports",
+    "Nuclear",
+    "Coal reserves",
+    "Coal imports",
+    "Biomass imports",
+    "Oil reserves",
+    "Oil imports",
+    "Biofuel imports",
+    "Gas reserves",
+    "Gas imports",
+    "UK land based bioenergy",
+    "Agricultural 'waste'",
+    "Other waste",
+    "Marine algae"
+    ]);
 
-      // Iteratively assign the breadth (x-position) for each node.
-      // Nodes are assigned the maximum breadth of incoming neighbors plus one;
-      // nodes with no incoming links are assigned breadth zero, while
-      // nodes with no outgoing links are assigned the maximum breadth.
-      function computeNodeBreadths() {
-        var remainingNodes = nodes,
-            nextNodes,
-            x = 0;
+    self.sankey.stack(1,["Coal"],"Coal reserves");
+    self.sankey.stack(1,["Oil"],"Oil reserves");
+    self.sankey.stack(1,["Natural Gas"],"Gas reserves");
+    self.sankey.stack(1,["Bio-conversion"],"UK land based bioenergy");
 
-        while (remainingNodes.length) {
-          nextNodes = [];
-          remainingNodes.forEach(function(node) {
-            node.x = x;
-            node.dx = nodeWidth;
-            node.sourceLinks.forEach(function(link) {
-              nextNodes.push(link.target);
-            });
-          });
-          remainingNodes = nextNodes;
-          ++x;
-        }
+    self.sankey.stack(2,["Solar Thermal", "Solar PV"],"Solar");
+    self.sankey.stack(2,[
+    "Solid",
+    "Liquid",
+    "Gas"
+    ],"Coal");
 
-        //
-        moveSinksRight(x);
-        scaleNodeBreadths((width - nodeWidth) / (x - 1));
-      }
+    self.sankey.stack(3,[
+    "Thermal generation",
+    "CHP"
+    ],"Nuclear");
 
-      function moveSourcesRight() {
-        nodes.forEach(function(node) {
-          if (!node.targetLinks.length) {
-            node.x = d3.min(node.sourceLinks, function(d) { return d.target.x; }) - 1;
-          }
-        });
-      }
+    self.sankey.stack(4,["Electricity grid","District heating"],"Wind");
 
-      function moveSinksRight(x) {
-        nodes.forEach(function(node) {
-          if (!node.sourceLinks.length) {
-            node.x = x - 1;
-          }
-        });
-      }
+    self.sankey.stack(5,["H2 conversion"],"Electricity grid");
 
-      function scaleNodeBreadths(kx) {
-        nodes.forEach(function(node) {
-          node.x *= kx;
-        });
-      }
+    self.sankey.stack(6,["H2"],"H2 conversion");
 
-      function computeNodeDepths(iterations) {
-        var nodesByBreadth = d3.nest()
-            .key(function(d) { return d.x; })
-            .sortKeys(d3.ascending)
-            .entries(nodes)
-            .map(function(d) { return d.values; });
+    self.sankey.stack(7,[
+    "Heating and cooling - homes",
+    "Heating and cooling - commercial",
+    "Lighting & appliances - homes",
+    "Lighting & appliances - commercial",
+    "Industry",
+    "Road transport",
+    "Rail transport",
+    "Domestic aviation",
+    "International aviation",
+    "National navigation",
+    "International shipping",
+    "Agriculture",
+    "Geosequestration",
+    "Over generation / exports",
+    //"Exports",
+    "Losses"
+    ]);
 
-        //
-        initializeNodeDepth();
-        resolveCollisions();
-        for (var alpha = 1; iterations > 0; --iterations) {
-          relaxRightToLeft(alpha *= .99);
-          resolveCollisions();
-          relaxLeftToRight(alpha);
-          resolveCollisions();
-        }
+    // Nudge
+    self.sankey.nudge_boxes_callback = function() {
+      self.sankey.boxes["Losses"].y = (self.sankey.boxes["Marine algae"].b() - self.sankey.boxes["Losses"].size());
+      // self.sankey.boxes["Exports"].y = (self.sankey.boxes["Losses"].y - self.sankey.boxes["Exports"].size() - y_space);
+      // self.sankey.boxes["Over generation / exports"].y = (self.sankey.boxes["Exports"].y - self.sankey.boxes["Over generation / exports"].size() - y_space);
+    }
 
-        function initializeNodeDepth() {
-          var ky = d3.min(nodesByBreadth, function(nodes) {
-            return (size[1] - (nodes.length - 1) * nodePadding) / d3.sum(nodes, value);
-          });
+    // Colours
+    self.sankey.setColors({
+      "Coal reserves": self.colours(0),
+      "Coal": self.colours(0),
+      "Coal imports": self.colours(0),
 
-          nodesByBreadth.forEach(function(nodes) {
-            nodes.forEach(function(node, i) {
-              node.y = i;
-              node.dy = node.value * ky;
-            });
-          });
+      "Oil reserves": self.colours(1),
+      "Oil": self.colours(1),
+      "Oil imports": self.colours(1),
 
-          links.forEach(function(link) {
-            link.dy = link.value * ky;
-          });
-        }
+      "Gas reserves": self.colours(2),
+      "Natural Gas": self.colours(2),
+      "Gas imports": self.colours(2),
 
-        function relaxLeftToRight(alpha) {
-          nodesByBreadth.forEach(function(nodes, breadth) {
-            nodes.forEach(function(node) {
-              if (node.targetLinks.length) {
-                var y = d3.sum(node.targetLinks, weightedSource) / d3.sum(node.targetLinks, value);
-                node.y += (y - center(node)) * alpha;
-              }
-            });
-          });
+      "Solar": self.colours(3),
+      "Solar Thermal": self.colours(3),
+      "Solar PV": self.colours(3),
 
-          function weightedSource(link) {
-            return center(link.source) * link.value;
-          }
-        }
+      "UK land based bioenergy": self.colours(4),
+      "Bio-conversion": self.colours(4),
+      "Marine algae": self.colours(4),
+      "Agricultural 'waste'": self.colours(4),
+      "Other waste": self.colours(4),
+      "Biomass imports": self.colours(4),
+      "Biofuel imports": self.colours(4),
 
-        function relaxRightToLeft(alpha) {
-          nodesByBreadth.slice().reverse().forEach(function(nodes) {
-            nodes.forEach(function(node) {
-              if (node.sourceLinks.length) {
-                var y = d3.sum(node.sourceLinks, weightedTarget) / d3.sum(node.sourceLinks, value);
-                node.y += (y - center(node)) * alpha;
-              }
-            });
-          });
+      "Solid": self.colours(5),
+      "Liquid": self.colours(6),
+      "Gas": self.colours(7),
 
-          function weightedTarget(link) {
-            return center(link.target) * link.value;
-          }
-        }
+      "Electricity grid": self.colours(8),
+      "Thermal generation": self.colours(8),
+      "CHP": self.colours(9),
+      "Nuclear": self.colours(10),
 
-        function resolveCollisions() {
-          nodesByBreadth.forEach(function(nodes) {
-            var node,
-                dy,
-                y0 = 0,
-                n = nodes.length,
-                i;
+      "District heating": self.colours(9),
+      "Pumped heat": self.colours(9),
+      "Useful district heat": self.colours(9),
+      "CHP Heat": self.colours(9),
 
-            // Push any overlapping nodes down.
-            nodes.sort(ascendingDepth);
-            for (i = 0; i < n; ++i) {
-              node = nodes[i];
-              dy = y0 - node.y;
-              if (dy > 0) node.y += dy;
-              y0 = node.y + node.dy + nodePadding;
-            }
+      "Electricity imports": self.colours(8),
+      "Wind": self.colours(11),
+      "Tidal": self.colours(11),
+      "Wave": self.colours(11),
+      "Geothermal": self.colours(11),
+      "Hydro": self.colours(11),
 
-            // If the bottommost node goes outside the bounds, push it back up.
-            dy = y0 - nodePadding - size[1];
-            if (dy > 0) {
-              y0 = node.y -= dy;
+      "H2 conversion": self.colours(12),
+      "Final electricity": self.colours(8),
+      "Over generation / exports": self.colours(8),
+      "H2": self.colours(12)
+    });
 
-              // Push any overlapping nodes back up.
-              for (i = n - 2; i >= 0; --i) {
-                node = nodes[i];
-                dy = node.y + node.dy + nodePadding - y0;
-                if (dy > 0) node.y -= dy;
-                y0 = node.y;
-              }
-            }
-          });
-        }
+    // Add the emissions
+    // self.sankey.boxes["Thermal generation"].ghg = 100;
+    // self.sankey.boxes["CHP"].ghg = 10;
+    // self.sankey.boxes["UK land based bioenergy"].ghg = -100;
+    // self.sankey.boxes["Heating and cooling - homes"].ghg = 20;
 
-        function ascendingDepth(a, b) {
-          return a.y - b.y;
-        }
-      }
-
-      function computeLinkDepths() {
-        nodes.forEach(function(node) {
-          node.sourceLinks.sort(ascendingTargetDepth);
-          node.targetLinks.sort(ascendingSourceDepth);
-        });
-        nodes.forEach(function(node) {
-          var sy = 0, ty = 0;
-          node.sourceLinks.forEach(function(link) {
-            link.sy = sy;
-            sy += link.dy;
-          });
-          node.targetLinks.forEach(function(link) {
-            link.ty = ty;
-            ty += link.dy;
-          });
-        });
-
-        function ascendingSourceDepth(a, b) {
-          return a.source.y - b.source.y;
-        }
-
-        function ascendingTargetDepth(a, b) {
-          return a.target.y - b.target.y;
-        }
-      }
-
-      function center(node) {
-        return node.y + node.dy / 2;
-      }
-
-      function value(link) {
-        return link.value;
-      }
-
-      return sankey;
+    // Fix some of the colours
+    self.sankey.nudge_colours_callback = function() {
+      this.recolour(this.boxes["Losses"].left_lines, self.colours(13));
+      this.recolour(this.boxes["District heating"].left_lines, self.colours(9));
+      this.recolour(this.boxes["Electricity grid"].left_lines, self.colours(8));
     };
 
-    var formatNumber = d3.format(",.0f"),
-        format = function(d) { return formatNumber(d) + " TWh"; },
-        color = d3.scale.category20();
+    self.sankey.y_space = 20;
+    self.sankey.right_margin = 210;
+    self.sankey.left_margin = 120;
+    self.sankey.box_width = self.drawParams.boxWidth || 30;
+    self.sankey.flow_edge_width = 0;
+    self.sankey.flow_curve = 0.2;
+    self.sankey.opacity = 1.0;
+    self.sankey.opacity_hover = 0.2;
 
-    var nodes = JSON.parse(JSON.stringify(data.nodes))
-    var links = JSON.parse(JSON.stringify(data.links))
+    var pixels_per_TWh = self.element.clientHeight / 6000;
+    self.sankey.y_space = Math.round(100 * pixels_per_TWh);
 
-    var sankey = d3.sankey()
-        .nodeWidth(15)
-        .nodePadding(30)
-        .size([width, height]);
+    self.sankey.convert_flow_values_callback = function(flow) {
+      return flow * pixels_per_TWh; // Pixels per TWh
+    };
 
-    var path = sankey.link();
+    self.sankey.convert_flow_labels_callback = function(flow) {
+      return Math.round(flow);
+    };
 
-    sankey
-        .nodes(nodes)
-        .links(links)
-        .layout(32);
+    self.sankey.convert_box_value_labels_callback = function(flow) {
+      return (""+Math.round(flow)+" TWh/y");
+    };
 
-    var link = self.svg.selectAll(".link")
-        .data(links)
-
-    link.enter().append("path")
-        .attr("class", "link")
-        .attr("d", path)
-        .style("stroke-width", function(d) { return Math.max(1, d.dy); })
-        .sort(function(a, b) { return b.dy - a.dy; });
-
-    link.data(links).transition()
-        .attr("d", path)
-        .style("stroke-width", function(d) { return Math.max(1, d.dy); })
-        .sort(function(a, b) { return b.dy - a.dy; });
-
-
-    link.append("title")
-        .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
-
-    var node = self.svg.selectAll(".node")
-        .data(nodes)
-
-    var nodeEnter = node.enter().append("g")
-        .attr("class", "node")
-        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-      .call(d3.behavior.drag()
-        .origin(function(d) { return d; })
-        .on("dragstart", function() { this.parentNode.appendChild(this); })
-        .on("drag", dragmove))
-      .each(function() {
-
-        d3.select(this).append("rect")
-            .attr("height", function(d) { return d.dy; })
-            .attr("width", sankey.nodeWidth())
-            .style("fill", function(d) { return d.color = color(d.name.replace(/ .*/, "")); })
-            .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
-          .append("title")
-            .text(function(d) { return d.name + "\n" + format(d.value); });
-
-        d3.select(this).append("text")
-            .attr("x", -6)
-            .attr("y", function(d) { return d.dy / 2; })
-            .attr("dy", ".35em")
-            .attr("text-anchor", "end")
-            .attr("transform", null)
-            .text(function(d) { return d.name; })
-          .filter(function(d) { return d.x < width / 2; })
-            .attr("x", 6 + sankey.nodeWidth())
-            .attr("text-anchor", "start");
-
-      });
-
-    node.data(nodes).transition()
-        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-
-    node.select("rect")
-            .attr("height", function(d) { return d.dy; })
-            .attr("width", sankey.nodeWidth())
-
-    node.select("text")
-            .attr("x", -6)
-            .attr("y", function(d) { return d.dy / 2; })
-            .attr("dy", ".35em")
-            .attr("text-anchor", "end")
-          .filter(function(d) { return d.x < width / 2; })
-            .attr("x", 6 + sankey.nodeWidth())
-            .attr("text-anchor", "start");
-
-
-    function dragmove(d) {
-      d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
-      sankey.relayout();
-      link.attr("d", path);
-    }
+    self.sankey.setData(data);
+    self.sankey.draw();
 
 
   };

@@ -24,7 +24,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       self.height = self.outerHeight - self.margin.top - self.margin.bottom;
 
       var yMin = 0;
-      var yMax = 4000;
+      var yMax = 5000;
 
       var x = d3.scale.linear()
           .domain(d3.extent(chartLayers, function(d) { return d.date; }))
@@ -44,7 +44,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       var yAxis = d3.svg.axis()
           .scale(y)
           .orient("left")
-          .tickValues([0, 1000, 2000, 3000, 4000]);
+          .ticks(6);
 
       self.x = x;
       self.y = y;

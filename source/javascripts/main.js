@@ -2,9 +2,8 @@
   'use strict';
 
   require.config({
-    <% if  environment == :development %>
     urlArgs: 'bust=' + (new Date()).getTime(), // Cache busting for dev only
-    <% end %>
+    deps: ['main'],
     paths: {
       knockout: 'vendor/knockout-3.2.0.min',
       crossroads: 'vendor/crossroads',
@@ -17,7 +16,7 @@
       tabber: 'vendor/tabber',
       range: 'vendor/ranges',
       modernizr: 'vendor/modernizr',
-      selects: 'vendor/styled-selects'
+      selects: 'vendor/styled-selects',
 
       // For sankey
       raphael: 'vendor/raphael.min',
@@ -25,23 +24,7 @@
     }
   });
 
-  require([
-    'componentLoader',
-    'customElements',
-    'bindings/cityscape',
-    'bindings/landscape',
-    'bindings/factsheet',
-    'bindings/chart',
-    'bindings/faqs',
-    'bindings/scrolls',
-    'bindings/tabs',
-    'bindings/actionInputs/rangeInt',
-    'bindings/actionInputs/rangeFloat',
-    'bindings/actionInputs/radio',
-    'bindings/select'
-  ]);
-
-  require(['app', 'vendor/modernizr', 'componentLoader'], function(app) {
+  require(['app', 'vendor/modernizr', 'componentLoader', 'customElements'], function(app) {
     // TODO: create test for polyfills e.g.
     // Modernizr.load({
     //   test : Modernizr.geolocation,
