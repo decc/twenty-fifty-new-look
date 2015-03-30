@@ -9,7 +9,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
   CostsSensitivityChart.prototype.draw = function(data, width, height){
     var self = this;
-console.log(data)
+
     if(typeof data === "undefined") {
       return 1;
     }

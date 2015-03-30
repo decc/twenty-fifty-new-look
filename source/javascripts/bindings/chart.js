@@ -31,12 +31,20 @@ define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySuppl
     update: function(element, valueAccessor, allBindings) {
       var name = valueAccessor();
       var data = allBindings.get('data');
+      var call = allBindings.get('call');
 
       var deferDrawing = element.params.deferDrawing;
       var autoSize = element.params.autoSize;
 
       element.name = name;
       element.data = data;
+
+      // Call anything in call array for update
+      if(call) {
+        call.forEach(function(f) {
+          f.call();
+        });
+      }
 
       // TODO: map needs data to be evaluated so update called?
       if(typeof data !== "object") {

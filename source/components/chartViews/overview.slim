@@ -7,5 +7,5 @@
   h2.title data-bind="text: 'Snapshot ' + date() + ' outlook'"
 
   .charts data-bind="foreach: chartOptions"
-      .chart data-bind="chart: $parent.chart.name, data: $parent.data, params: { title: name, xMin: xMin, xMax: xMax, hasAxis: true, drawParams: { date: $parent.date }, margin: { top: 20, right: 40, bottom: 20, left: 135 } }"
+      .chart data-bind="chart: $parent.chart.name, data: $parent.data, call: [$parent.date], params: { title: name, xMin: xMin, xMax: xMax, hasAxis: true, drawParams: { date: $parent.date }, margin: { top: 20, right: 40, bottom: 20, left: 135 } }"
         h3.bar-title data-bind="text: title"
