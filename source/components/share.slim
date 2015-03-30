@@ -9,8 +9,8 @@
 
   .share-chart
     .overview-chartset data-bind="foreach: chartOptions"
-      .chart data-bind="visible: $parents[1].shareVisible(), chart: 'OverviewChart', data: data, params: { title: name, xMin: xMin, xMax: xMax, hasAxis: true, drawParams: { date: date }, margin: { top: 20, right: 40, bottom: 20, left: 100 } }"
-        h3.bar-title data-bind="text: name"
+      .chart data-bind="visible: $parents[1].shareVisible(), chart: 'OverviewChart', data: data, params: { title: name, xMin: xMin, xMax: xMax, hasAxis: true, drawParams: { date: date }, margin: { top: 20, right: 40, bottom: 20, left: 135 } }"
+        h3.bar-title data-bind="text: title"
 
 
   .social

@@ -7,23 +7,21 @@ define(['knockout', 'd3', 'selects', 'charts/chart'], function(ko, d3, Select, C
 
   CostsSensitivityComponentsChart.prototype.constructor = CostsSensitivityComponentsChart
 
-  CostsSensitivityComponentsChart.prototype.draw = function(dataObjects, width, height){
+  CostsSensitivityComponentsChart.prototype.draw = function(comparison, width, height){
     var self = this;
     var dataNested = [];
     var data = [];
 
-    if(typeof dataObjects === "undefined") {
-      return 1;
-    }
+    // Comparison data is passed in inside data so chart updates upon request completion
+    // Current data passed in through extra draw params
+    var current = self.drawParams.currentData()["CostsSensitivityComponentsChart"];
 
-    if(typeof dataObjects.comparison()["CostsSensitivityComponentsChart"] === "undefined") {
+    if(typeof comparison === "undefined" || typeof current === "undefined") {
       return 1;
     }
 
     // Combine arrays into nested
-    var current = dataObjects.current()["CostsSensitivityComponentsChart"];
-    var comparison = dataObjects.comparison()["CostsSensitivityComponentsChart"];
-    for (var i = 0; i < dataObjects.current()["CostsSensitivityComponentsChart"].length; i++) {
+    for (var i = 0; i < current.length; i++) {
       var component = {
         id: i,
         current: current[i],
