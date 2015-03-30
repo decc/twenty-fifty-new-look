@@ -15,7 +15,7 @@
         section#share.share data-bind="css: { 'is-active': shareVisible() }, component: { name: 'share', params: { pathway: currentPathway } }"
 
         section#flows-fullscreen.modal-overlay data-bind="css: { 'is-active': fullscreenVisible() }"
-          = partial "partials/fullscreen"
+          = partial "partials/flows-fullscreen"
 
         = partial "partials/cityscape"
 
@@ -25,7 +25,7 @@
               label Your 2050 Landscape
               span.toggle-city data-bind="css: { up: cityscapeVisible(), down: !cityscapeVisible() }"
 
-            .chart-tabs-container data-bind="visible: !shareVisible(), css: { full: !cityscapeVisible() }, component: { name: 'chart-tabs', params: { pathway: currentPathway } }"
+            .chart-tabs-container data-bind="visible: !shareVisible(), css: { full: !cityscapeVisible() }, component: { name: 'chart-tabs', params: { pathway: currentPathway, pathwayUpdating: pathwayUpdating } }"
 
         = partial "partials/pathway-overlay"
 

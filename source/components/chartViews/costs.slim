@@ -65,7 +65,7 @@
               span.colour#costs-sensitivity-colour-4
               span.name data-bind="text: 'The range of cost estimates in \''  + $parent.selectedExampleName() +'\''"
 
-          .chart.sensitivity-components data-bind="chart: 'CostsSensitivityComponentsChart', data: { current: $parent.data, comparison: $parent.comparisonData }, params: { margin: { top: 0, right: 40, bottom: 0, left: 315 }, drawParams: { updateCharts: [$parent.yourCostsContextChart, $parent.comparisonCostsContextChart, $parent.yourCostsComparedChart, $parent.comparisonCostsComparedChart, $parent.yourCostsSensitivityChart, $parent.comparisonCostsSensitivityChart] } }"
+          .chart.sensitivity-components data-bind="chart: $parent.sensitivityComponents.name, data: { current: $parent.data, comparison: $parent.comparisonData }, params: { margin: { top: 0, right: 40, bottom: 0, left: 315 }, drawParams: { updateCharts: [$parent.yourCostsContextChart, $parent.comparisonCostsContextChart, $parent.yourCostsComparedChart, $parent.comparisonCostsComparedChart, $parent.yourCostsSensitivityChart, $parent.comparisonCostsSensitivityChart] } }"
 
 
 ul.tab-nav.chart-component-tabs data-bind="foreach: tabs"

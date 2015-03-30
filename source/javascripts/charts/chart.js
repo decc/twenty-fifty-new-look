@@ -72,7 +72,7 @@ define(['d3'], function(d3) {
       self.minimumHeightForLabel = 12;
 
       self.colours = function(index, key) {
-        
+
         var colors = [
           // pinks
 
@@ -215,15 +215,15 @@ define(['d3'], function(d3) {
           "wave and tidal": 29,
           "wind": 17
         };
-        
+
         if (typeof key != 'undefined') {
 
           var lowerCaseKey = key.toLowerCase();
-          
+
           if (typeof keys[lowerCaseKey] != 'undefined')
             return colors[keys[lowerCaseKey]];
         }
-        
+
         return colors[index];
       };
 
@@ -365,6 +365,112 @@ define(['d3'], function(d3) {
             "stroke" : "rgba(255, 255, 255, 0.2)",
             "stroke-width" : "1px"
           });
+    },
+
+    /**************************************************************************************************
+      Stacked area charts
+    **************************************************************************************************/
+
+    drawStackedArea: function() {
+      var self = this;
+
+      var demand = self.svg.selectAll(".layer-container")
+        .data(this.stackedAreaData)
+
+      demand.enter().append("g")
+            .attr("class", "layer-container")
+            .each(function(d, i) {
+              d3.select(this).append('path')
+                .attr("class", function(d) { return "layer layer-" + d.key.replace(/ +/g, '-').replace(/[^\w|-]/g, '').toLowerCase(); })
+                .attr('fill', function(d, i) { return self.colours(i, d.key); })
+                .attr('opacity', '0.6')
+                .on('mouseover', function(d) {
+                  d3.select(this.parentNode).attr("data-state", "active")
+                  d3.select(this.parentNode.parentNode).attr("data-state", "graph-hover")
+                })
+                .on('mouseout', function(d) {
+                  d3.select(this.parentNode).attr("data-state", "inactive")
+                  d3.select(this.parentNode.parentNode).attr("data-state", "inactive")
+                })
+              d3.select(this).append("text")
+                .attr("class", "layer-label")
+                .text(function(d) { return d.key; })
+                .attr("transform", function(d) {
+                  var end = d.values[d.values.length - 1];
+                  return "translate(" + self.x(end.date) + "," + self.y(end.y0 + end.y / 2) + ")";
+                });
+            })
+
+      self.svg.selectAll('.layer').data(self.stackedAreaData)
+        .transition()
+          .attr("d", function(d) { return self.area()(d.values); });
+
+      self.svg.selectAll('.layer-label').data(self.stackedAreaData)
+        .transition()
+          .attr("x", 6)
+          .attr("dy", "0.35em")
+          .attr("data-state", function(d){
+            // Hide label if layer too small at x1
+            var end = d.values[d.values.length - 1];
+            return (self.y(0) - self.y(end.y) > self.minimumHeightForLabel) ? "active" : "inactive";
+          })
+          .attr("transform", function(d) {
+            var end = d.values[d.values.length - 1];
+            return "translate(" + self.x(end.date) + "," + self.y(end.y0 + end.y / 2) + ")";
+          });
+    },
+
+    drawLine: function(labelText) {
+      var self = this;
+
+      var lineContainer = self.svg.selectAll(".line-container")
+        .data([self.lineData])
+
+      lineContainer.enter().append("g")
+          .attr("class", "line-container")
+          .each(function(d, i) {
+            d3.select(this).append("path")
+              .attr("class", "line")
+              .attr("d", self.line())
+              .on('mouseover', function(d) {
+                d3.select(this.parentNode).attr("data-state", "active")
+                d3.select(this.parentNode.parentNode).attr("data-state", "graph-hover")
+              })
+              .on('mouseout', function(d) {
+                d3.select(this.parentNode).attr("data-state", "inactive")
+                d3.select(this.parentNode.parentNode).attr("data-state", "inactive")
+              })
+
+            var label =  d3.select(this).append("g")
+              .attr("class", "line-label")
+              .attr("fill", "#fff")
+              .attr("transform", function(d) {
+                var end = d[d.length - 1];
+                var textHeight = 12;
+                return "translate(" + self.x(end.date) + "," + (self.y(end.value) - textHeight)+ ")";
+              });
+
+            label.append("rect")
+              .attr("width", self.margin.right)
+              .attr("height", 17);
+
+            label.append("text")
+              .text(labelText)
+              .attr("dx", "6px")
+              .attr("dy", "1.05em");
+          });
+
+      self.svg.selectAll('.line').data([self.lineData])
+          .transition()
+          .attr("d", self.line())
+
+      self.svg.selectAll('.line-label').data([self.lineData])
+          .transition()
+            .attr("transform", function(d) {
+              var end = d[d.length - 1];
+              var textHeight = 12;
+              return "translate(" + self.x(end.date) + "," + (self.y(end.value) - textHeight)+ ")";
+            });
     },
 
     /**************************************************************************************************

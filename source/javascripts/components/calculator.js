@@ -125,6 +125,10 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway'],
         self.shareVisible(true);
 
         self.buttonColor('white');
+
+        // Explicitly draw charts now they are visible
+        var shareCharts = document.querySelectorAll('.share .OverviewChart');
+        ko.bindingHandlers.chart.redrawElements(shareCharts);
       }
     }
 
@@ -154,6 +158,10 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway'],
       self.fullscreenVisible(true);
 
       self.buttonColor('blue');
+
+      // Explicitly draw chart now it's visible
+      var flowsFullscreen = document.querySelectorAll('#sankey-fullscreen');
+      ko.bindingHandlers.chart.redrawElements(flowsFullscreen);
     }
 
     /** set active tab */
