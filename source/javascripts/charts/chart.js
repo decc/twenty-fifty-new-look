@@ -423,6 +423,8 @@ define(['d3'], function(d3) {
     drawLine: function(labelText) {
       var self = this;
 
+      var labelLineHeight = 17;
+
       var lineContainer = self.svg.selectAll(".line-container")
         .data([self.lineData])
 
@@ -441,23 +443,25 @@ define(['d3'], function(d3) {
                 d3.select(this.parentNode.parentNode).attr("data-state", "inactive")
               })
 
-            var label =  d3.select(this).append("g")
+            var label = d3.select(this).append("g")
               .attr("class", "line-label")
               .attr("fill", "#fff")
               .attr("transform", function(d) {
                 var end = d[d.length - 1];
-                var textHeight = 12;
-                return "translate(" + self.x(end.date) + "," + (self.y(end.value) - textHeight)+ ")";
+                return "translate(" + self.x(end.date) + "," + (self.y(end.value) - labelLineHeight / 2)+ ")";
               });
 
             label.append("rect")
-              .attr("width", self.margin.right)
-              .attr("height", 17);
+              .attr("height", labelLineHeight);
 
             label.append("text")
               .text(labelText)
               .attr("dx", "6px")
               .attr("dy", "1.05em");
+
+            var labelWidth = label.select("text")[0][0].getBBox().width + 12;
+            label.select("rect")
+              .attr("width", labelWidth)
           });
 
       self.svg.selectAll('.line').data([self.lineData])
@@ -468,8 +472,7 @@ define(['d3'], function(d3) {
           .transition()
             .attr("transform", function(d) {
               var end = d[d.length - 1];
-              var textHeight = 12;
-              return "translate(" + self.x(end.date) + "," + (self.y(end.value) - textHeight)+ ")";
+              return "translate(" + self.x(end.date) + "," + (self.y(end.value) - labelLineHeight / 2)+ ")";
             });
     },
 
