@@ -88,6 +88,10 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
               d3.select(this).append("text")
                 .attr("class", "layer-label")
                 .text(function(d) { return d.key; })
+                .attr("transform", function(d) {
+                  var end = d.values[d.values.length - 1];
+                  return "translate(" + self.x(end.date) + "," + self.y(end.y0 + end.y / 2) + ")";
+                });
             })
 
       self.svg.selectAll('.layer').data(layers)
@@ -130,6 +134,11 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
             var label =  d3.select(this).append("g")
               .attr("class", "line-label")
               .attr("fill", "#fff")
+              .attr("transform", function(d) {
+                var end = d[d.length - 1];
+                var textHeight = 12;
+                return "translate(" + self.x(end.date) + "," + (self.y(end.value) - textHeight)+ ")";
+              });
 
             label.append("rect")
               .attr("width", self.margin.right)

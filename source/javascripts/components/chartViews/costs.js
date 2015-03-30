@@ -7,10 +7,11 @@ define(['knockout', 'text!../../../components/chartViews/costs.html', 'charts/co
 
     self.calculator = args.calculator;
 
-    self.tabs = args.charts;
+    self.tabs = args.charts.slice(0, 3);
     self.contextTab = self.tabs[0];
     self.comparedTab = self.tabs[1];
     self.sensitivityTab = self.tabs[2];
+    self.sensitivityComponents = args.charts[3];
 
     // Build all charts in this view
     // They are passed in to costs sensitivity components chart for redrawing
