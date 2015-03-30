@@ -9,7 +9,6 @@ define(['knockout', 'text!../../../components/chartViews/energySecurity.html'],
     self.data = ko.computed(function() {
       // TODO: why is chartData null sometimes
       var chartData = args.data()[args.charts[0].name] || { imports: [], diversity: [], electricity: {}};
-
       return chartData;
     });
 

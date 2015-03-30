@@ -177,7 +177,7 @@ define(['knockout', 'd3', 'charts/chart', 'raphael', 'sankey'], function(ko, d3,
     self.sankey.opacity_hover = 0.2;
 
     var pixels_per_TWh = self.element.clientHeight / 6000;
-    self.sankey.y_space = Math.round(100 * pixels_per_TWh);
+    self.sankey.y_space = Math.round(1.5 * 100 * pixels_per_TWh);
 
     self.sankey.convert_flow_values_callback = function(flow) {
       return flow * pixels_per_TWh; // Pixels per TWh
