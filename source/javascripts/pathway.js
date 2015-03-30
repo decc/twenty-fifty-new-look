@@ -499,10 +499,9 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
     } else {
       // Search by category
       var examples = EXAMPLES;
-      examples.filter(function(example) {
-        example.category === category
+      return examples.filter(function(example) {
+        return (example.category === category)
       });
-      return examples;
     }
   };
 
