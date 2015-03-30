@@ -183,6 +183,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     self.svg.selectAll(".bar-range")
       .attr('fill', function(d, i) { return "url(#bar-pattern-" + i + ")"; });
 
+
     // Borders
     self.drawBorders();
   };

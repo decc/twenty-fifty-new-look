@@ -97,10 +97,13 @@
     height: calc(100% - 14vh)
 
   .tab
-    padding: 1em
+    padding: 0
     height: 0
+    position: relative
+    overflow: hidden
 
     &.active
+      padding: 1em 1em 5em 1em
       background-color: $color-background-light
       height: auto
 
@@ -115,7 +118,7 @@
             opacity: 1
             z-index: 10
 
-      div
+      > div
         overflow: auto
 
       .info-button
@@ -162,28 +165,14 @@
           padding: 0 6px
 
         .tooltip
-          padding: 1em
-          background-color: #464d5e
-          color: #fff
-          margin-top: 1em
           margin-bottom: 1em
           position: absolute
-          display: block
           width: 90%
-          transition: all 0.2s linear
           opacity: 0
           z-index: -1
+          transition: all 0.2s linear
 
           .arrow
-            content: ""
-            position: absolute
-            top: -10px
-            border-style: solid
-            border-width: 0 10px 10px
-            border-color: #464d5e transparent
-            display: block
-            width: 0
-            z-index: 1
             transition: left 0.3s
 
 .toggle-nav

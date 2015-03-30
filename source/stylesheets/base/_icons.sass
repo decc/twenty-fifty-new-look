@@ -1,4 +1,4 @@
-@include font-face(icons, '/fonts/icons_d79fbb776d9d2e9a58d6f77476391dab', normal, normal, false, eot woff ttf svg)
+@include font-face(icons, '/fonts/icons_63a7d865582f169997bfdb2077ef4716', normal, normal, false, eot woff ttf svg)
 
 %icon
   font-family: "icons" !important
@@ -319,6 +319,25 @@
 
 
 
+%icon-content-full-screen
+  @extend %icon
+  content: '\f11f'
+
+%icon-full-screen-after
+  &:after
+    @extend %icon-content-full-screen
+
+%icon-full-screen-before
+  &:before
+    @extend %icon-content-full-screen
+
+.icon-full-screen-before
+  @extend %icon-full-screen-before
+
+
+
+
+
 %icon-content-gas-power-stations
   @extend %icon
   content: '\f119'
@@ -409,6 +428,25 @@
 
 .icon-landscape_down-before
   @extend %icon-landscape_down-before
+
+
+
+
+
+%icon-content-landscape_up
+  @extend %icon
+  content: '\f120'
+
+%icon-landscape_up-after
+  &:after
+    @extend %icon-content-landscape_up
+
+%icon-landscape_up-before
+  &:before
+    @extend %icon-content-landscape_up
+
+.icon-landscape_up-before
+  @extend %icon-landscape_up-before
 
 
 

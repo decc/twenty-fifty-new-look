@@ -1,13 +1,13 @@
 {
   "checksum": {
-    "previous": "d79fbb776d9d2e9a58d6f77476391dabbbc05fc4dca639a56e785e5749c6eb40",
-    "current": "d79fbb776d9d2e9a58d6f77476391dabbbc05fc4dca639a56e785e5749c6eb40"
+    "previous": "63a7d865582f169997bfdb2077ef47169ea8274b2750bcd44572496e0616c2c5",
+    "current": "63a7d865582f169997bfdb2077ef47169ea8274b2750bcd44572496e0616c2c5"
   },
   "fonts": [
-    "source/fonts/icons_d79fbb776d9d2e9a58d6f77476391dab.ttf",
-    "source/fonts/icons_d79fbb776d9d2e9a58d6f77476391dab.svg",
-    "source/fonts/icons_d79fbb776d9d2e9a58d6f77476391dab.woff",
-    "source/fonts/icons_d79fbb776d9d2e9a58d6f77476391dab.eot"
+    "source/fonts/icons_63a7d865582f169997bfdb2077ef4716.ttf",
+    "source/fonts/icons_63a7d865582f169997bfdb2077ef4716.svg",
+    "source/fonts/icons_63a7d865582f169997bfdb2077ef4716.woff",
+    "source/fonts/icons_63a7d865582f169997bfdb2077ef4716.eot"
   ],
   "glyphs": {
     "air": {
@@ -74,6 +74,10 @@
       "codepoint": 61707,
       "source": "source/icons/flows.svg"
     },
+    "full-screen": {
+      "codepoint": 61727,
+      "source": "source/icons/full-screen.svg"
+    },
     "gas-power-stations": {
       "codepoint": 61721,
       "source": "source/icons/gas-power-stations.svg"
@@ -93,6 +97,10 @@
     "landscape_down": {
       "codepoint": 61726,
       "source": "source/icons/landscape_down.svg"
+    },
+    "landscape_up": {
+      "codepoint": 61728,
+      "source": "source/icons/landscape_up.svg"
     },
     "linkedin": {
       "codepoint": 61717,

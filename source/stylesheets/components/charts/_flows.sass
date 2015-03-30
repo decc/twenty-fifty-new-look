@@ -3,7 +3,16 @@
   padding: 20px
   color: #fff
 
-  .flows
+  .chart-fullscreen-button
+    cursor: pointer
+    margin-bottom: 1em
+
+    &:before
+      padding-right: 0.5em
+
+
+  .chart.flows
+    height: 800px
     padding: 0
     -webkit-backface-visibility: hidden
 
@@ -25,3 +34,16 @@
   .link:hover
     stroke-opacity: .5
 
+
+
+  // Sankey version
+  tspan
+    fill: #fff
+
+  rect
+    fill: #5a6378
+    stroke: none
+
+  path
+    fill-opacity: 0.4
+    stroke-opacity: 0.4

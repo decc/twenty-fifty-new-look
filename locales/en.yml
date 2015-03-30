@@ -33,7 +33,7 @@ en:
     '5': "The sliders represent each sector of the UK energy system. Moving the sliders allows you to cut emissions by adjusting the level of change for energy demand, supply and other factors such as storage. Use the \"Demand\", \"Supply\" and \"Other\" tabs to toggle between the different groups of sliders.
 
 
-      To use a slider, select a number from 1 (minimal effort) to 4 (pushes limits of what is technically feasible).  When the choice is A to D, this describes different scenarios rather than changes in effort. 
+      To use a slider, select a number from 1 (minimal effort) to 4 (pushes limits of what is technically feasible).  When the choice is A to D, this describes different scenarios rather than changes in effort.
 
 
       For more information on each sector simply click the <span class=\"info-button\"></span> icon."
@@ -58,7 +58,7 @@ en:
 <em>Despite big increases in electricity use, liquid fuel, such as bioenergy, will still be needed in 2050.</em>"
 
     '8': "There are many different ways to create a pathway that hits the 80% target. To see some example pathways go to the menu button on the top left of the page and click on \"Example Pathways\"."
-    
+
     '9': "Once you've hit the target use the \"Finish & Share\" button for an overview of your pathway results and share with friends and colleagues."
 
     done:
@@ -66,10 +66,11 @@ en:
       body: ''
       button: 'Start'
     button: "Skip guide"
-  
+
   calculator:
     header:
       reduction: "C02 Reduction"
+      target_reached: "Congratulations! You have reached the UK's target to reduce our greenhouse gas emissions by at least 80% (from the 1990 baseline) by 2050. Use the tabs below to see the consequences of your plan and then press 'Finish & Share'."
 
     share:
       show: "Finish & Share"

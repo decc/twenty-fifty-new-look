@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/guide.html', 'bindings/scrolls'],
+define(['knockout', 'text!../../components/guide.html'],
   function(ko, html){
 
   'use strict';

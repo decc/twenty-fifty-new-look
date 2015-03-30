@@ -1,0 +1,56 @@
+.styled_select
+  background: $color-background-dark
+  // padding: .25em 0 .25em 1em
+  position: absolute
+  z-index: 1
+  color: #fff
+
+  &.open
+    z-index: 999
+
+    &>.styled_select_options
+      max-height: 20em
+      overflow: auto
+
+    &>.styled_select_selected:after
+      @include transform(rotate(90deg))
+
+.styled_select_wrapper
+  height: 2em
+  display: inline-block
+
+  ul
+    margin: 0
+    padding: 0
+
+.styled_select_selected
+  position: relative
+  padding: .25em
+  display: block
+  cursor: pointer
+  @extend %icon-chevron-after
+
+  &:after
+    position: absolute
+    top: 0.4em
+    right: 0.5em
+    color: #fff
+    @include transform(rotate(-90deg))
+
+.styled_select_options
+  max-height: 0px
+  width: 100%
+  overflow: hidden
+  padding: .25em
+  @include transition(max-height .2s ease-in-out)
+  background: $color-background-dark
+
+.styled_select_option
+  border-top: 1px dotted #fff
+  padding: 0.5em 0
+  cursor: pointer
+  color: #fff
+
+  &:first-of-type
+    border: none
+

@@ -1,18 +1,21 @@
 doctype html
 
-html
-  head
-    meta charset="utf-8"
-    meta http-equiv="X-UA-Compatible" content="IE=edge"
-    meta name="viewport" content="width=device-width, user-scalable=no"
+| <!--[if IE 9]><html class="ie9 no-js">
+| <![endif]-->
+| <!--[if gt IE 9]><!--> <html class="no-js"><![endif]-->
+head
+  meta charset="utf-8"
+  meta http-equiv="X-UA-Compatible" content="IE=edge"
+  meta name="viewport" content="width=device-width, user-scalable=no"
 
-    title= current_page.data.title || "DECC"
+  title= current_page.data.title || "DECC"
 
-    = stylesheet_link_tag "main"
-    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Lato:100,300,700,900"
+  = stylesheet_link_tag "main"
+  = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Lato:100,300,700,900"
 
-  body class= page_classes
-    = yield
+body class= page_classes
+  = yield
 
-  =javascript_include_tag 'vendor/require', :"data-main" => "/javascripts/main.js"
+=javascript_include_tag 'vendor/require', :"data-main" => "/javascripts/main.js"
 
+| </html>

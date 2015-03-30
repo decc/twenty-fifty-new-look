@@ -41,7 +41,7 @@ end
 
 # Reload the browser automatically whenever files change
 configure :development do
-  # activate :livereload, :host => "localhost"
+  activate :livereload, :host => "localhost"
 end
 
 activate :i18n
@@ -65,7 +65,7 @@ module RequireJS
     class << self
         def registered(app)
             app.after_build do |builder|
-                exec('node r.js -o build/javascripts/app.build.js');
+              exec('node r.js -o build.js');
             end
         end
         alias :included :registered
@@ -83,7 +83,7 @@ configure :build do
   # activate :minify_javascript
   #
   # # build js
-  # activate :requirejs
+  activate :requirejs
 
   # Enable cache buster
   # activate :asset_hash

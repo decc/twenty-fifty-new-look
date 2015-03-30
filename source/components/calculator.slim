@@ -1,6 +1,6 @@
 .loading
   .inner
-    img src='/images/spinner_blue.gif'
+    div.spinner.blue
     h5 loading...
 
 .viewport
@@ -13,6 +13,9 @@
 
       .content
         section#share.share data-bind="css: { 'is-active': shareVisible() }, component: { name: 'share', params: { pathway: currentPathway } }"
+
+        section#flows-fullscreen.modal-overlay data-bind="css: { 'is-active': fullscreenVisible() }"
+          = partial "partials/fullscreen"
 
         = partial "partials/cityscape"
 

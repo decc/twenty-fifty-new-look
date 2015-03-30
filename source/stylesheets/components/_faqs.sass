@@ -30,6 +30,12 @@
       header
         span
           color: #fff
+        
+        .close
+          display: block
+        
+        .open
+          display: none
 
     header
       overflow: auto
@@ -52,6 +58,15 @@
         text-align: right
         font-weight: bold
         color: #666
+        
+      .open
+        @extend %icon-down_arrow-before
+        display: block
+        color: #fff
+      
+      .close
+        display: none
+        color: #fff
 
     section
       background: rgba(0, 0, 0, 0.6)

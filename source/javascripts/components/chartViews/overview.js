@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/chartViews/overview.html'],
+define(['knockout', 'text!../../../components/chartViews/overview.html'],
   function(ko, html) {
 
   'use strict';
@@ -15,7 +15,7 @@ define(['knockout', 'text!/components/chartViews/overview.html'],
     self.chartOptions = [
       { name: 'Demand', xMin: 0, xMax: 5000 },
       { name: 'Supply', xMin: 0, xMax: 5000 },
-      { name: 'Emissions', xMin: 0, xMax: 1500 }
+      { name: 'Emissions', xMin: -500, xMax: 1500 }
     ];
 
     self.date = ko.observable(maxDate);

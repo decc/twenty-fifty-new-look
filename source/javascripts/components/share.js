@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/share.html', 'config', 'bindings/chart'], function(ko, html, config) {
+define(['knockout', 'text!../../components/share.html', 'config'], function(ko, html, config) {
   'use strict';
 
   var ViewModel = function(params) {
@@ -10,7 +10,7 @@ define(['knockout', 'text!/components/share.html', 'config', 'bindings/chart'], 
     self.chartOptions = [
       { name: 'Demand', xMin: 0, xMax: 5000 },
       { name: 'Supply', xMin: 0, xMax: 5000 },
-      { name: 'Emissions', xMin: 0, xMax: 1500 }
+      { name: 'Emissions', xMin: -500, xMax: 1500 }
     ];
 
     var minDate = 2015;
