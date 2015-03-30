@@ -1,4 +1,4 @@
-define(['knockout'], function(ko) {
+define(['knockout', 'bindings/range'], function(ko) {
   'use strict';
 
   ko.bindingHandlers.radio = {
@@ -21,8 +21,7 @@ define(['knockout'], function(ko) {
         radio.id = id;
 
         label.setAttribute('for', id);
-        label.className = 'r'
-
+        label.className = 'r';
 
         radio.setAttribute('type', 'radio');
         radio.setAttribute('name', params.name);
@@ -49,14 +48,15 @@ define(['knockout'], function(ko) {
       } else {
         element.parentNode.previousSibling.querySelector(element.label).innerHTML = '0';
       }
-
     },
 
     update: function(element, valueAccessor, allBindings, vm, context) {
       var value = valueAccessor();
       var data = allBindings.get('data');
-      var map = { "A":"1", "B": "2", "C":"3", "D": "4" };
+      var map = { A: 1, B: 2, C: 3, D: 4 };
       var val = map[value()];
+      var params = allBindings.get('params');
+      var max = params.max;
 
       element.querySelector('input[value="' + value() + '"]').checked = true
 
@@ -64,6 +64,7 @@ define(['knockout'], function(ko) {
       valueLabel.innerHTML = value();
 
       ko.bindingHandlers.radio.setTooltip(element, val, value());
+      ko.bindingHandlers.rangeInt.setLabelClass(val, max, valueLabel);
     },
 
     // TODO: this should be shared with tooltip binding

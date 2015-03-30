@@ -19,7 +19,7 @@ define(['knockout', 'bindings/range', 'bindings/actionInputs/tooltip'], function
       element.setAttribute('step', step);
 
       var valueLabel = element.parentNode.previousSibling.querySelector(element.label);
-      ko.bindingHandlers.rangeInt.setLabelClass(element, max, valueLabel);
+      ko.bindingHandlers.rangeInt.setLabelClass(element.value, max, valueLabel);
 
       for(var tip in tooltips){
         element.setAttribute('tip'+tip[0], tooltips[tip]);
@@ -31,7 +31,7 @@ define(['knockout', 'bindings/range', 'bindings/actionInputs/tooltip'], function
 
       element.addEventListener('input', function(){
 
-        ko.bindingHandlers.rangeInt.setLabelClass(element, max, valueLabel);
+        ko.bindingHandlers.rangeInt.setLabelClass(element.value, max, valueLabel);
 
         valueLabel.innerHTML = element.value;
 
@@ -61,22 +61,28 @@ define(['knockout', 'bindings/range', 'bindings/actionInputs/tooltip'], function
 
       element.value = value();
 
+
+      var val = element.value;
+
       var valueLabel = element.parentNode.previousSibling.querySelector(element.label);
       valueLabel.innerHTML = element.value;
 
-      ko.bindingHandlers.rangeInt.setLabelClass(element, max, valueLabel);
-      ko.bindingHandlers.tooltip.update(element, element.value);
+      ko.bindingHandlers.rangeInt.setLabelClass(val, max, valueLabel);
+      ko.bindingHandlers.tooltip.update(element, val);
       ko.bindingHandlers.range.update(element);
     },
 
-    setLabelClass: function(element, max, valueLabel) {
+    setLabelClass: function(value, max, valueLabel) {
       // Set label colour
       var klass;
-      var elValue = element.value;
 
-      if(elValue == max) {
+      console.log('----')
+      console.log(value)
+      console.log(max)
+
+      if(value == max) {
         klass = 'high';
-      } else if (elValue > max / 2) {
+      } else if (value > max / 2) {
         klass = 'med';
       } else {
         klass = "low";
