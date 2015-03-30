@@ -40,6 +40,7 @@ define(['knockout', 'bindings/range'], function(ko) {
         var valueLabel = element.parentNode.previousSibling.querySelector(element.label);
         valueLabel.innerHTML = element.value;
         ko.bindingHandlers.tooltip.update(element, element.value);
+        ko.bindingHandlers.rangeInt.setLabelClass(element.value, max, valueLabel);
       })
 
       if(element.parentNode.previousSibling.querySelector(element.label) == null){
@@ -58,12 +59,16 @@ define(['knockout', 'bindings/range'], function(ko) {
     update: function(element, valueAccessor, allBindings, vm, context) {
       var value = valueAccessor();
       var data = allBindings.get('data');
+      var params = allBindings.get('params');
+
+      var max = params.max;
 
       element.value = value();
 
       var valueLabel = element.parentNode.previousSibling.querySelector(element.label);
       valueLabel.innerHTML = element.value;
 
+      ko.bindingHandlers.rangeInt.setLabelClass(element.value, max, valueLabel);
       ko.bindingHandlers.tooltip.update(element, element.value);
       ko.bindingHandlers.range.update(element);
     },
