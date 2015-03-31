@@ -390,7 +390,10 @@
 
           window.removeEventListener(moveEvent, onMove);
           window.removeEventListener(endEvent, onUp);
+          window.removeEventListener('selectstart', this._preventSelection);
         });
+
+        window.addEventListener('selectstart', this._preventSelection);
 
         Event.fire(self.input, events[0]);
       },
@@ -402,8 +405,19 @@
        */
       _dragEnd: function(endEventName) {
         this._change();
+
         Event.fire(this.input, endEventName);
         Event.fire(this.input, 'click');
+      },
+
+      /**
+       * Stop user from selecting ranges when dragging
+       * @private
+       * @todo Firefox support
+       */
+      _preventSelection: function(e) {
+        e.preventDefault();
+        return false;
       },
 
       /**
