@@ -135,7 +135,6 @@ GEM
     uglifier (2.7.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    wdm (0.1.0)
 
 PLATFORMS
   ruby
@@ -151,4 +150,3 @@ DEPENDENCIES
   sass
   slim
   tzinfo-data
-  wdm (>= 0.1.0)
