@@ -18,12 +18,12 @@
 
     ul.social-links
       li
-        a.icon.icon-facebook-before data-bind="attr: { href: 'https://www.facebook.com/sharer/sharer.php?u=' + shareString() }" target="_blank" Facebook
+        a.icon.icon-facebook-before data-bind="attr: { href: 'https://www.facebook.com/sharer/sharer.php?u=' + shareString() }, popup" target="_blank" Facebook
       li
-        a.icon.icon-twitter-before data-bind="attr: { href: 'http://twitter.com/share?text=' + shareTitle + '&url=' + shareString() }" target="_blank" Twitter
+        a.icon.icon-twitter-before data-bind="attr: { href: 'http://twitter.com/share?text=' + shareTitle + '&url=' + shareString() }, popup" target="_blank" Twitter
       li
-        a.icon.icon-linkedin-before data-bind="attr: { href: 'https://www.linkedin.com/shareArticle?mini=true&url=' + shareString() + '&title=' + shareTitle + '&summary=' + shareSummary + '&source=' }" target="_blank" LinkedIn
+        a.icon.icon-linkedin-before data-bind="attr: { href: 'https://www.linkedin.com/shareArticle?mini=true&url=' + shareString() + '&title=' + shareTitle + '&summary=' + shareSummary + '&source=' }, popup" target="_blank" LinkedIn
       li
-        a.icon.icon-google-plus-before data-bind="attr: { href: 'https://plus.google.com/share?url=' + shareString() }" target="_blank" Google+
+        a.icon.icon-google-plus-before data-bind="attr: { href: 'https://plus.google.com/share?url=' + shareString() }, popup" target="_blank" Google+
       li
         a.icon.icon-envelope-before data-bind="attr: { href: 'mailto:?subject=' + shareTitle + '&body=' + shareSummary + '%0D%0A%0D%0A' + shareString() }" target="_blank" Email
