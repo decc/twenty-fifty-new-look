@@ -7,6 +7,10 @@ define(['knockout', 'ajax', 'config'], function(ko, Ajax, config) {
 
     update: function(el, valueAccessor) {
       var factsheet = valueAccessor();
+      var loadingClass= "is-loading";
+
+      el.innerHTML = '';
+      el.classList.add(loadingClass);
 
       // TODO: remove delay once on same domain
       setTimeout(function() {
@@ -16,6 +20,7 @@ define(['knockout', 'ajax', 'config'], function(ko, Ajax, config) {
           url: config.siteUrl + '/components/factsheets/' + factsheet + '.html',
           onSuccess: function(data) {
             el.innerHTML = data.responseText;
+            el.classList.remove(loadingClass);
           }
         });
       }, 4000);
