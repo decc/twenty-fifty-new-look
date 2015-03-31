@@ -2,10 +2,12 @@
  * range.js - Range input facade
  *
  * @author NathanG
- * @license Range.js 0.0.11 | https://github.com/nathamanath/range/LICENSE
+ * @version 0.0.7
+ * @license Range.js v0.0.7 | https://github.com/nathamanath/range/license
  */
 
-(function(window, document) {
+
+(function() {
   'use strict';
 
   /**
@@ -41,8 +43,7 @@
         };
       }
 
-      self.create = method;
-      return method(eventName);
+      return (self.create = method)(eventName);
     },
 
     /**
@@ -92,8 +93,7 @@
         };
       }
 
-      self.fire = method;
-      method(el, eventName);
+      (self.fire = method)(el, eventName);
     }
   };
 
@@ -106,33 +106,25 @@
     } else {
       window.Range = Range;
     }
-
-  })((function(Event) {
+  })((function(document, window, Event) {
 
     /**
      * Represents a range input
      *
      * @class Range
      * @param {object} el - range input to recieve facade
-     * @param {object} [args]
-     * @param {string} [args.pointerWidth] - See `.init`
-     * @param {boolean|array} [args.ticks] - set ticks via js instaead of list
-     * if you like. true will put a tick on each step, array of numbers will put
-     * a tick on each value in array (similar to datalist).
-     * @param {number} [args.max=100] - alternate max setter
-     * @param {number} [args.min=0] - alternate min setter
-     * @param {number} [args.step=1] - alternate step setter
+     * @param {object} args
+     * @param {string} args.pointerWidth - Set value for pointer width.
+     * Currently needed if range is initialy rendered with display: none
      */
     var Range = function(el, args) {
-      var self = this;
+      this.input = el;
 
-      self.input = el;
-      self.args = args || {};
-
-      self.value = parseFloat(el.value);
-      self.max = parseFloat(el.getAttribute('max')) || self.args['max'] || 100;
-      self.min = parseFloat(el.getAttribute('min')) || self.args['min'] || 0;
-      self.step = parseFloat(el.getAttribute('step')) || self.args['step'] || 1;
+      this.args = args || {};
+      this.value = parseFloat(el.value);
+      this.max = parseFloat(el.getAttribute('max')) || 100;
+      this.min = parseFloat(el.getAttribute('min')) || 0;
+      this.step = parseFloat(el.getAttribute('step')) || 1;
     };
 
     /** @memberof Range */
@@ -140,56 +132,20 @@
       init: function() {
         this._render();
         this._bindEvents();
-        this._setValue(this.value, this.args.silent);
-        this._handleTicks();
+        this._setValue(this.value);
+        this._list();
 
         return this;
       },
 
-      _handleTicks: function() {
-        var ticks = this.args.ticks;
-
-        if(ticks) {
-          if(Object.prototype.toString.call(ticks) === '[object Array]') {
-            this._generateTicks(ticks);
-          } else if(!!ticks) {
-            // make array of possible values
-            ticks = [];
-
-            for(var i = this.min, l = this.max; i <= l; i += this.step) {
-              ticks.push(i);
-            }
-
-            this._generateTicks(ticks);
-          }
-        } else {
-          this._list();
-        }
-      },
-
       /**
        * Handle list attribute if set
+       * @todo Propper list attr support
        * @private
        */
       _list: function() {
-        var options;
-        var ticks = [];
-
-        var listId = this.input.getAttribute('list');
-        var list = document.getElementById(listId);
-
-        if(listId) {
-          // get point values
-
-          if(list) {
-            options = list.querySelectorAll('option');
-
-            for(var i = 0, l = options.length; i < l; i++) {
-              ticks.push(parseInt(options[i].innerHTML, 10));
-            }
-
-            this._generateTicks(ticks);
-          }
+        if(this.input.getAttribute('list')) {
+          this._generateTicks();
         }
       },
 
@@ -205,19 +161,18 @@
 
         input.parentNode.insertBefore(this.el, input.nextSibling);
         this._getDimensions();
-        var pointerWidth = this._getPointerWidth();
+        this._getPointerWidth();
 
-        this.pointer.style.width = pointerWidth;
-        this.track.style.paddingRight = pointerWidth;
+        this._getPointerWidth()
+
+        this.track.style.paddingRight = [this.pointerWidth, 'px'].join('');
       },
 
       /**
-       * generate all html required for tick marks. If ticks array is not
-       * provided, generate tick at each step.
+       * generate all html required for tick marks
        * @private
-       * @param {array} ticks - values to put ticks on
        */
-      _generateTicks: function(ticks) {
+      _generateTicks: function() {
         var el = document.createElement('div');
         var inner = this._generateTicksInner();
 
@@ -225,7 +180,7 @@
 
         el.className = 'ticks';
 
-        this._generateTickEls(ticks, inner);
+        this._generateTickEls(inner);
         this.ticks = el;
 
         this.el.appendChild(this.ticks);
@@ -266,14 +221,15 @@
        * @param {object} inner - element which contains ticks
        * @returns el containing all tick marks
        */
-      _generateTickEls: function(values, inner) {
+      _generateTickEls: function(inner) {
+        var steps = (this.max - this.min) / this.step;
+        var stepPercent = 100 / steps;
+
         var offset;
 
-        for(var i = 0; i < values.length; i++) {
-          var value = values[i];
-          // scale value between min and max
-          offset = this._scale(value, [this.min, this.max], [0, 100]);
-          inner.appendChild(this._generateTick(offset, value));
+        for(var i = 0; i <= steps; i++) {
+          offset = stepPercent * i;
+          inner.appendChild(this._generateTick(offset));
         }
       },
 
@@ -282,11 +238,10 @@
        * @param {integer} offset - tick offset in %
        * @returns individual tick mark element
        */
-      _generateTick: function(offset, value) {
+      _generateTick: function(offset) {
         var tick = document.createElement('div');
 
         tick.className = 'tick';
-        tick.innerHTML = value;
 
         tick.style.position = 'absolute';
         tick.style.left = [offset, '%'].join('');
@@ -305,19 +260,11 @@
         this.xMax = rect.right - this.xMin;
       },
 
-      /**
-       * @private
-       * @returns {string} pointer width in px
-       */
       _getPointerWidth: function() {
-        this.pointerWidth = this.args['pointerWidth'] ||
-          this.pointer.offsetWidth;
-
-        return [this.pointerWidth, 'px'].join('');
+        this.pointerWidth = this.args['pointerWidth'] || this.pointer.offsetWidth;
       },
 
       /**
-       * HTML for entire range facade
        * @private
        * @returns {object} All input facade html
        */
@@ -329,7 +276,6 @@
         el.appendChild(this.track);
         this.track.appendChild(this.pointer);
 
-        // TODO: _preventSelection?!?
         el.addEventListener('selectstart', function(e) {
           e.preventDefault();
         });
@@ -342,13 +288,11 @@
        * @returns Range replacement wrapper element
        */
       _rangeEl: function() {
-        var el = document.createElement('div');
+        var  el = document.createElement('div');
         var width = this.pointerWidth || 0;
         var style = el.style;
 
         el.className = 'range-replacement';
-
-        el.setAttribute('tabindex', 0);
 
         style.position = 'relative';
         style.paddingRight = [width, 'px'].join('');
@@ -378,7 +322,7 @@
         pointer.className = 'point';
         style.position = 'relative';
 
-        var pointerWidth = this.pointerWidth;
+        var pointerWidth = this.args['pointerWidth'];
 
         if(!!pointerWidth) {
           style.width = pointerWidth + 'px';
@@ -387,26 +331,13 @@
         return pointer;
       },
 
-      /**
-       * Binds events for range replacement to work
-       * @private
-       */
       _bindEvents: function() {
         var self = this;
-        var el = self.el;
-
-        el.addEventListener('focus', function(e) {
-          self._focus(e);
-        });
+        var el = this.el;
 
         el.addEventListener('mousedown', function(e) {
-          var code = e.keyCode || e.which;
-
-          // left mousedown only
-          if(code === 1) {
-            var events = ['mousedown', 'mousemove', 'mouseup'];
-            self._dragStart(e, events, self._getMouseX);
-          }
+          var events = ['mousedown', 'mousemove', 'mouseup'];
+          self._dragStart(e, events, self._getMouseX);
         });
 
         el.addEventListener('touchstart', function(e) {
@@ -421,166 +352,17 @@
         el.addEventListener('touchend', function() {
           self._dragEnd('touchend');
         });
-
-      },
-
-      /**
-       * Handle focus
-       * @private
-       */
-      _focus: function() {
-        var self = this;
-
-        if(!self.hasFocus) {
-          self.hasFocus = true;
-          Event.fire(self.input, 'focus');
-
-          self.keydown = function(e) {
-            self._keydown(e);
-          };
-
-          self.blur = function(e) {
-            self._clickBlur(e);
-          };
-
-          window.addEventListener('keydown', self.keydown);
-          window.addEventListener('mousedown', self.blur);
-        }
-      },
-
-      /**
-       * Called when focused on range replacement and keydown
-       * @private
-       * @param e - keydown event
-       */
-      _keydown: function(e) {
-        // TODO: cache which is in use
-        var code = e.keyCode || e.charCode;
-        var self = this;
-
-        // left or down arrow
-        if(code === 40 || code === 37) {
-          self._setValue(self.value - self.step);
-        }
-
-        // right or up arrow
-        else if(code === 38 || code === 39) {
-          self._setValue(self.value + self.step);
-        }
-
-        // tab
-        else if(code === 9) {
-          self._blur();
-        }
-      },
-
-      /**
-       * @private
-       * @param e - click event
-       */
-      _clickBlur: function(e) {
-        var self = this,
-            input = self.input,
-            el = self.el,
-            // All els which wont cause blur if clicked
-            _els = el.querySelectorAll('*'),
-            els = [];
-
-        // nodelist to array
-        for(var i = 0, l = _els.length; i < l; i++) {
-          els.push(_els[i]);
-        }
-
-        els.push(el, input);
-
-        // if not clicking on this.el / descendants
-        if(els.indexOf(e.target) < 0) {
-          self._blur();
-        }
-      },
-
-      /**
-       * Handle blur event on range replacement
-       * @private
-       */
-      _blur: function() {
-        var self = this;
-
-        self.hasFocus = false;
-
-        window.removeEventListener('mousedown', self.blur);
-        window.removeEventListener('keydown', self.keydown);
-
-        Event.fire(self.input, 'blur');
       },
 
       /**
        * update element dimensions, reset value and pointer position
        * to that of this.input
-       * @param {boolean} silent - supress change + input event
-       * @returns Range instance
        */
-      'update': function(silent) {
+      'update': function() {
         this.value = this._roundAndLimit(parseFloat(this.input.value));
 
         this._getDimensions();
-        this._setValue(this.value, silent);
-
-        return this;
-      },
-
-      /**
-       * Stop user from selecting anything
-       * @private
-       */
-      _preventSelection: function() {
-        var method;
-        var self = this;
-
-        if(typeof self.el.onselectstart !== 'undefined') {
-          method = function() {
-            document.body.style.cursor = 'default';
-            window.addEventListener('selectstart', self.noSelect = function(e) {
-              e.preventDefault();
-            });
-          };
-        } else {
-          method = function() {
-            var style = document.body.style;
-
-            style.cursor = 'default';
-            style.MozUserSelect = 'none';
-          };
-        }
-
-        self._preventSelection = method;
-        method();
-      },
-
-      /**
-       * Un-prevent selection
-       * @private
-       */
-      _allowSelection: function() {
-        var method;
-        var self = this;
-
-        if(typeof self.el.onselectstart !== 'undefined') {
-          method = function() {
-            document.body.style.cursor = '';
-            window.removeEventListener('selectstart', self.noSelect);
-          };
-        } else {
-          method = function() {
-            var style = document.body.style;
-
-            style.cursor = '';
-            style.MozUserSelect = '';
-          };
-        }
-
-        self._allowSelection = method;
-        method();
+        this._setValue(this.value);
       },
 
       /**
@@ -591,32 +373,28 @@
        * @param {function} getX - method which returns x position of event
        */
       _dragStart: function(e, events, getX) {
-        var self = this,
-            onMove, onUp,
-            moveEvent = events[1],
-            endEvent = events[2];
+        var self = this;
+        var onMove, onUp;
+        var moveEvent = events[1];
+        var endEvent = events[2];
 
         self.oldValue = self.value;
         self._input(getX.call(self, e));
-
 
         window.addEventListener(moveEvent, onMove = function(e) {
           self._input(getX.call(self, e));
         });
 
-        self._preventSelection();
+        window.addEventListener('selectstart', this._preventSelection);
 
         window.addEventListener(endEvent, onUp = function() {
           self._change();
 
           window.removeEventListener(moveEvent, onMove);
           window.removeEventListener(endEvent, onUp);
-          self._allowSelection();
-
-          document.body.style.cursor = '';
+          window.removeEventListener('selectstart', self._preventSelection);
         });
 
-        // touchstart || mousedown
         Event.fire(self.input, events[0]);
       },
 
@@ -630,6 +408,16 @@
 
         Event.fire(this.input, endEventName);
         Event.fire(this.input, 'click');
+      },
+
+      /**
+       * Stop user from selecting ranges when dragging
+       * @private
+       * @todo Firefox support
+       */
+      _preventSelection: function(e) {
+        e.preventDefault();
+        return false;
       },
 
       /**
@@ -652,15 +440,9 @@
           };
         }
 
-        this._getMouseX = method;
-        return method(e);
+        return (this._getMouseX = method)(e);
       },
 
-      /**
-       * Get mouse x position during touch event
-       * @private
-       * @param e - touch event
-       */
       _getTouchX: function(e) {
         return e.changedTouches[0].clientX;
       },
@@ -681,50 +463,41 @@
 
         var scaled = this._scale(offsetX, from, to);
 
-        this._setValue(scaled);
+        this._setValue(this._roundAndLimit(scaled));
       },
 
       /**
-       * Sets value of both this.input and range replacement
        * @private
        * @param {number} value
-       * @param {boolean} silent - no inPut or change event
        */
-      _setValue: function(value, silent) {
-        var self = this;
-
-        value = self._roundAndLimit(value);
-
+      _setValue: function(value) {
         // set pointer position only when value changes
-        if(value !== self.oldInputValue) {
-          self.oldInputValue = self.input.value = self.newValue = value;
+        if(value !== this.oldInputValue) {
+          this.oldInputValue = this.input.value = this.newValue = value;
 
-          var min = self.min;
-          var percent = ((value - min) / (self.max - min) * 100) || 0;
+          var min = this.min;
 
-          self.pointer.style.left = [percent, '%'].join('');
+          var percent = ((value - min) / (this.max - min) * 100) || 0;
+          this.pointer.style.left = [percent, '%'].join('');
 
           // Do not fire event on first call (initialisation)
-          if(self.oldValue && !silent) {
-            Event.fire(self.input, 'input');
+          if(this.oldValue) {
+            Event.fire(this.input, 'input');
           }
-
-          self._change(silent);
         }
       },
 
       /**
        * Handle change of value if changed
        * @private
-       * @param {boolean} silent - no change event
        */
-      _change: function(silent) {
+      _change: function() {
         var newValue = this.newValue;
         var input = this.input;
 
         if(this.oldValue !== newValue) {
           input.value = this.oldValue = this.value = newValue;
-          if(!silent) Event.fire(input, 'change');
+          Event.fire(input, 'change');
         }
       },
 
@@ -733,7 +506,6 @@
        * Also ensure same decimal places as step for ie <= 9's sake. >:0
        *
        * @private
-       * @param {number} n
        */
       _roundAndLimit: function(n) {
         // count # of decimals in this.step
@@ -746,8 +518,6 @@
       },
 
       /**
-       * Scale a number
-       *
        * @private
        * @param {number} value - number to be rounded
        * @param {array} rangeFrom - Source range: [srcLow, srcHigh]
@@ -772,38 +542,29 @@
       return new Range(el, args).init();
     };
 
-    return {
-      /**
-       * @memberof Range
-       * @param {string|array|object} [ranges=input[type=range]] - css selector,
-       * nodelist/array, or dom node to be replaced.
-       * @param {object} args - arguments object
-       * @param {number} args.pointerWidth - static value for pointer width.
-       * Needed if range replacement is origionaly renered with `display: none`
-       *
-       * @returns {object|array} Range instance(s)
-       */
-      'init': function(ranges, args) {
-        ranges = ranges || 'input[type=range]';
+    /**
+     * @todo take dom node / nodelist / selector /
+     * default to all input[type=range]
+     * @param {string} [selector] - css selector for ranges to replace
+     * @returns {array} Range instances
+     */
+    Range.init = function(selector, args) {
+      selector = selector || 'input[type=range]';
+      var els = document.querySelectorAll(selector);
+      var ranges = [];
 
-        var replacements = [];
-
-        if(typeof ranges === 'string') {
-          // selector string
-          ranges = document.querySelectorAll(ranges);
-        } else if(typeof ranges.length === 'undefined') {
-          // dom node
-          return Range.create(ranges, args);
-        }
-
-        for(var i = 0, l = ranges.length; i < l; i++) {
-          replacements.push(Range.create(ranges[i], args));
-        }
-
-        return replacements;
+      for(var i = 0, l = els.length; i < l; i++) {
+        ranges.push(Range.create(els[i], args));
       }
+
+      return ranges;
     };
 
-  })(Event));
-})(window, document);
+    return {
+      'init': Range.init,
+      'create': Range.create
+    };
+
+  })(document, window, Event));
+}).call(window);
 
