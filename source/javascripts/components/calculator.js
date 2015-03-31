@@ -25,35 +25,8 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway'],
     self.faqVisible = ko.observable(false);
     self.mainViewVisible = ko.observable(true);
 
-    self.pinkButton = ko.observable(true);
-    self.blueButton = ko.observable(false);
-    self.whiteButton = ko.observable(false);
-    self.greyButton = ko.observable(false);
+    self.buttonColor = ko.observable('pink');
 
-    // OPTIMIZE: Button colour function
-    self.buttonColor =  function(color){
-      if(color == 'pink'){
-        self.blueButton(false);
-        self.whiteButton(false);
-        self.greyButton(false);
-        self.pinkButton(true);
-      } else if(color == 'white'){
-        self.blueButton(false);
-        self.pinkButton(false);
-        self.greyButton(false);
-        self.whiteButton(true);
-      } else if(color == 'blue'){
-        self.whiteButton(false);
-        self.pinkButton(false);
-        self.greyButton(false);
-        self.blueButton(true);
-      } else if(color == 'grey'){
-        self.whiteButton(false);
-        self.pinkButton(false);
-        self.blueButton(false);
-        self.greyButton(true);
-      }
-    }
 
     window.onresize = function () {
       self.cityscapeVisible(window.innerHeight > 760);
