@@ -88,6 +88,10 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
               d3.select(this).append("text")
                 .attr("class", "layer-label")
                 .text(function(d) { return d.key; })
+                .attr("transform", function(d) {
+                  var end = d.values[d.values.length - 1];
+                  return "translate(" + self.x(end.date) + "," + self.y(end.y0 + end.y / 2) + ")";
+                });
             })
 
       self.svg.selectAll('.layer').data(layers)
@@ -109,54 +113,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
           });
 
       // Secondary data
-      var lineContainer = self.svg.selectAll(".line-container")
-          .data([chartLine])
-
-      lineContainer.enter().append("g")
-          .attr("class", "line-container")
-          .each(function(d, i) {
-            d3.select(this).append("path")
-              .attr("class", "line")
-              .attr("d", line)
-              .on('mouseover', function(d) {
-                d3.select(this.parentNode).attr("data-state", "active")
-                d3.select(this.parentNode.parentNode).attr("data-state", "graph-hover")
-              })
-              .on('mouseout', function(d) {
-                d3.select(this.parentNode).attr("data-state", "inactive")
-                d3.select(this.parentNode.parentNode).attr("data-state", "inactive")
-              })
-
-            var label =  d3.select(this).append("g")
-              .attr("class", "line-label")
-              .attr("fill", "#fff")
-
-            label.append("rect")
-              .attr("width", self.margin.right)
-              .attr("height", 17);
-
-            label.append("text")
-              .text(function(d) {
-                var start = d[0].value
-                var end = d[d.length - 1].value;
-                // var percentageReduction = Math.round(end / start * 100)
-                return "Total";
-              })
-              .attr("dx", "6px")
-              .attr("dy", "1.05em");
-          });
-
-      self.svg.selectAll('.line').data([chartLine])
-          .transition()
-          .attr("d", line)
-
-      self.svg.selectAll('.line-label').data([chartLine])
-          .transition()
-            .attr("transform", function(d) {
-              var end = d[d.length - 1];
-              var textHeight = 12;
-              return "translate(" + x(end.date) + "," + (y(end.value) - textHeight)+ ")";
-            })
+      self.lineData = chartLine;
+      self.drawLine("Total");
 
       self.setupLineAxes("Date", "Greenhouse Gas Emissions (MtCO2e/yr)");
   };

@@ -91,15 +91,14 @@
 
 
   & > .tab
-    display: block !important
+    display: none
     position: absolute
     top: 0
-    left: -100000px
+    left: 0
     width: 100%
     bottom: 0
     height: 100%
     padding-left: $chart-tabs-width
 
     &.active
-      visibility: visible
-      left: 0px
+      display: block

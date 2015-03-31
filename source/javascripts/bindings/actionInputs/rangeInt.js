@@ -76,10 +76,6 @@ define(['knockout', 'bindings/range', 'bindings/actionInputs/tooltip'], function
       // Set label colour
       var klass;
 
-      console.log('----')
-      console.log(value)
-      console.log(max)
-
       if(value == max) {
         klass = 'high';
       } else if (value > max / 2) {

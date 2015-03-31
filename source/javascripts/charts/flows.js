@@ -167,17 +167,16 @@ define(['knockout', 'd3', 'charts/chart', 'raphael', 'sankey'], function(ko, d3,
       this.recolour(this.boxes["Electricity grid"].left_lines, self.colours(8));
     };
 
-    self.sankey.y_space = 20;
+    self.sankey.y_space = 15;
     self.sankey.right_margin = 210;
     self.sankey.left_margin = 120;
     self.sankey.box_width = self.drawParams.boxWidth || 30;
     self.sankey.flow_edge_width = 0;
-    self.sankey.flow_curve = 0.2;
+    self.sankey.flow_curve = 0.3;
     self.sankey.opacity = 1.0;
     self.sankey.opacity_hover = 0.2;
 
-    var pixels_per_TWh = self.element.clientHeight / 6000;
-    self.sankey.y_space = Math.round(1.5 * 100 * pixels_per_TWh);
+    var pixels_per_TWh = 0.3 * self.element.clientHeight / 6000;
 
     self.sankey.convert_flow_values_callback = function(flow) {
       return flow * pixels_per_TWh; // Pixels per TWh

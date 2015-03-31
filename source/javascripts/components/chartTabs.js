@@ -47,7 +47,8 @@ define(['knockout', 'text!../../components/chart-tabs.html', 'dataRequester', 'c
       { "id": 8, "name": "costs", "icon": "costs", "title": "Costs", "charts": [
           { "id": 1, "name": "CostsContextChart", "title": "In Context" },
           { "id": 2, "name": "CostsComparedChart", "title": "Compared" },
-          { "id": 3, "name": "CostsSensitivityChart", "title": "Sensitivity" }
+          { "id": 3, "name": "CostsSensitivityChart", "title": "Sensitivity" },
+          { "id": 4, "name": "CostsSensitivityComponentsChart", "title": "Sensitivity Components" }
         ]
       },
       { "id": 9, "name": "overview", "icon": "overview", "title": "Overview", "charts": [
@@ -61,6 +62,11 @@ define(['knockout', 'text!../../components/chart-tabs.html', 'dataRequester', 'c
     /** Sets visible tab */
     self.setActiveTab = function(chart) {
       self.currentTabId(chart.id);
+
+      chart.charts.forEach(function(chart) {
+        var chartElements = document.querySelectorAll('.' + chart.name);
+        ko.bindingHandlers.chart.redrawElements(chartElements);
+      });
     };
 
   };

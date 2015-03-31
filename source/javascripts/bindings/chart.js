@@ -7,7 +7,11 @@ define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySuppl
       var data = allBindings.get('data');
       var object = allBindings.get('object');
 
+      element.name = name;
+      element.data = data;
+
       element.params = allBindings.get('params') || {};
+      element.classList.add(name);
 
       if(typeof object === "undefined") {
         self.chart = eval("new " + name);
@@ -20,16 +24,27 @@ define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySuppl
 
       // Redraw on window resize
       window.addEventListener("resize", function () {
-        ko.bindingHandlers.chart.draw(element, name, data);
+        ko.bindingHandlers.chart.draw(element, name);
       });
     },
 
     update: function(element, valueAccessor, allBindings) {
       var name = valueAccessor();
       var data = allBindings.get('data');
+      var call = allBindings.get('call');
 
       var deferDrawing = element.params.deferDrawing;
       var autoSize = element.params.autoSize;
+
+      element.name = name;
+      element.data = data;
+
+      // Call anything in call array for update
+      if(call) {
+        call.forEach(function(f) {
+          f.call();
+        });
+      }
 
       // TODO: map needs data to be evaluated so update called?
       if(typeof data !== "object") {
@@ -45,34 +60,48 @@ define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySuppl
       // Chart can be sized based on background image
       if(autoSize !== true) {
         // Normal draw
-        ko.bindingHandlers.chart.draw(element, name, data);
+        ko.bindingHandlers.chart.draw(element, name);
       } else {
         // Defer loading until first child (image) has loaded
         if(element.drawn) {
-          ko.bindingHandlers.chart.draw(element, name, data);
+          ko.bindingHandlers.chart.draw(element, name);
         } else {
           element.children[0].onload = function() {
             element.drawn = true;
-            ko.bindingHandlers.chart.draw(element, name, data);
+            ko.bindingHandlers.chart.draw(element, name);
           }
         }
       }
     },
 
-    draw: function(element, name, data) {
+    draw: function(element, name) {
+      // Do not draw charts that are not visible
+      if(!element.offsetParent) { return; }
+
+      name = name || element.name;
+
       var containerStyle = window.getComputedStyle(element);
+
       var width = parseInt(containerStyle.width, 10) - parseInt(containerStyle.paddingLeft, 10) - parseInt(containerStyle.paddingRight, 10);
       var height = parseInt(containerStyle.height, 10) - parseInt(containerStyle.paddingTop, 10) - parseInt(containerStyle.paddingBottom, 10);
 
       // Whether data is object or KO observable
-      if(typeof data === "object") {
+      if(typeof element.data === "object") {
         // Multiple pathway chart
-        element.chart.draw(data, width, height);
+        element.chart.draw(element.data, width, height);
       } else {
         // Single pathway chart
-        element.chart.draw(data()[name], width, height);
+        element.chart.draw(element.data()[name], width, height);
       }
+    },
+
+    redrawElements: function(elementNodelist) {
+      for(var i = 0; i < elementNodelist.length; i++) {
+        ko.bindingHandlers.chart.draw(elementNodelist[i]);
+      };
     }
+
+
   };
 
 });

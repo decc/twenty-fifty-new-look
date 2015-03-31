@@ -8,9 +8,9 @@ define(['knockout', 'text!../../components/share.html', 'config'], function(ko, 
     self.chart = { "id": 1, "name": "OverviewChart", "title": "Overview" };
 
     self.chartOptions = [
-      { name: 'Demand', xMin: 0, xMax: 5000 },
-      { name: 'Supply', xMin: 0, xMax: 5000 },
-      { name: 'Emissions', xMin: -500, xMax: 1500 }
+      { name: 'Demand', title: 'Demand (TWh/yr)', xMin: 0, xMax: 5000 },
+      { name: 'Supply', title: 'Supply (TWh/yr)', xMin: 0, xMax: 5000 },
+      { name: 'Emissions', title: 'Emissions (MtCO2e/yr)', xMin: -500, xMax: 1500 }
     ];
 
     var minDate = 2015;
