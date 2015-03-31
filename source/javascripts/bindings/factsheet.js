@@ -8,6 +8,7 @@ define(['knockout', 'ajax', 'config'], function(ko, Ajax, config) {
     update: function(el, valueAccessor) {
       var factsheet = valueAccessor();
       var loadingClass= "is-loading";
+      var parent = el.parentNode;
 
       el.innerHTML = '';
       el.classList.add(loadingClass);
