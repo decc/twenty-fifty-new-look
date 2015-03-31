@@ -28,78 +28,28 @@ define(['knockout', 'd3', 'charts/chart', 'raphael', 'sankey'], function(ko, d3,
     }
     self.sankey = new Sankey(self.element.id);
 
-    self.sankey.stack(0,[
-    "Pumped heat",
-    "Solar",
-    "Wind",
-    "Tidal",
-    "Wave",
-    "Geothermal",
-    "Hydro",
-    "Electricity imports",
-    "Nuclear",
-    "Coal reserves",
-    "Coal imports",
-    "Biomass imports",
-    "Oil reserves",
-    "Oil imports",
-    "Biofuel imports",
-    "Gas reserves",
-    "Gas imports",
-    "UK land based bioenergy",
-    "Agricultural 'waste'",
-    "Other waste",
-    "Marine algae"
-    ]);
+    self.sankey.stack(0, ["Pumped heat", "Solar", "Wind", "Tidal", "Wave", "Geothermal", "Hydro", "Electricity imports", "Nuclear", "Coal reserves", "Coal imports", "Biomass imports", "Gas reserves", "Gas imports", "Oil reserves", "Oil imports", "Biofuel imports", "UK land based bioenergy", "Agricultural 'waste'", "Other waste", "Marine algae"]);
+    self.sankey.stack(1, ["Coal"], "Coal reserves");
+    self.sankey.stack(1, ["Natural Gas"], "Gas reserves");
+    self.sankey.stack(1, ["Oil"], "Oil reserves");
+    self.sankey.stack(1, ["Bio-conversion"], "UK land based bioenergy");
+    self.sankey.stack(2, ["Solar Thermal", "Solar PV"], "Solar");
+    self.sankey.stack(2, ["Solid", "Gas", "Liquid"], "Coal");
+    self.sankey.stack(3, ["Thermal generation", "CHP"], "Nuclear");
+    self.sankey.stack(4, ["Electricity grid", "District heating"], "Wind");
+    self.sankey.stack(5, ["H2 conversion"], "Electricity grid");
+    self.sankey.stack(6, ["H2"], "H2 conversion");
+    self.sankey.stack(7, ["Heating and cooling - homes", "Heating and cooling - commercial", "Lighting & appliances - homes", "Lighting & appliances - commercial", "Industry", "Road transport", "Rail transport", "Domestic aviation", "International aviation", "National navigation", "International shipping", "Agriculture", "Geosequestration", "Over generation / exports", "Losses"]);
 
-    self.sankey.stack(1,["Coal"],"Coal reserves");
-    self.sankey.stack(1,["Oil"],"Oil reserves");
-    self.sankey.stack(1,["Natural Gas"],"Gas reserves");
-    self.sankey.stack(1,["Bio-conversion"],"UK land based bioenergy");
-
-    self.sankey.stack(2,["Solar Thermal", "Solar PV"],"Solar");
-    self.sankey.stack(2,[
-    "Solid",
-    "Liquid",
-    "Gas"
-    ],"Coal");
-
-    self.sankey.stack(3,[
-    "Thermal generation",
-    "CHP"
-    ],"Nuclear");
-
-    self.sankey.stack(4,["Electricity grid","District heating"],"Wind");
-
-    self.sankey.stack(5,["H2 conversion"],"Electricity grid");
-
-    self.sankey.stack(6,["H2"],"H2 conversion");
-
-    self.sankey.stack(7,[
-    "Heating and cooling - homes",
-    "Heating and cooling - commercial",
-    "Lighting & appliances - homes",
-    "Lighting & appliances - commercial",
-    "Industry",
-    "Road transport",
-    "Rail transport",
-    "Domestic aviation",
-    "International aviation",
-    "National navigation",
-    "International shipping",
-    "Agriculture",
-    "Geosequestration",
-    "Over generation / exports",
-    //"Exports",
-    "Losses"
-    ]);
-
-    // Nudge
     self.sankey.nudge_boxes_callback = function() {
-      self.sankey.boxes["Losses"].y = (self.sankey.boxes["Marine algae"].b() - self.sankey.boxes["Losses"].size());
-      // self.sankey.boxes["Exports"].y = (self.sankey.boxes["Losses"].y - self.sankey.boxes["Exports"].size() - y_space);
-      // self.sankey.boxes["Over generation / exports"].y = (self.sankey.boxes["Exports"].y - self.sankey.boxes["Over generation / exports"].size() - y_space);
-    }
+      this.boxes["Losses"].y = this.boxes["Marine algae"].b() - this.boxes["Losses"].size();
+    };
+
+    self.sankey.nudge_colours_callback = function() {
+      this.recolour(this.boxes["Losses"].left_lines, "#ddd");
+      this.recolour(this.boxes["District heating"].left_lines, "#FF0000");
+      this.recolour(this.boxes["Electricity grid"].left_lines, "#0000FF");
+    };
 
     // Colours
     self.sankey.setColors({
