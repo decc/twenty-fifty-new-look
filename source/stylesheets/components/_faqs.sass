@@ -22,25 +22,24 @@
     display: block
     vertical-align: top
 
-    &.active
-      section
-        max-height: 600px
-        transition: max-height .75s ease-in
-
+    &.is-active
       header
-        span
-          color: #fff
-        
-        .close
-          display: block
-        
-        .open
-          display: none
+        &:after
+          @extend %icon-content-close
 
     header
       overflow: auto
       cursor: pointer
       background: rgba(0, 0, 0, 0.3)
+      position: relative
+
+      &:after
+        @extend %icon-content-down_arrow
+        position: absolute
+        right: 20px
+        top: 50%
+        @include transform(translateY(-50%))
+        font-size: 1.5em
 
       h5
         margin: 0
@@ -58,22 +57,14 @@
         text-align: right
         font-weight: bold
         color: #666
-        
-      .open
-        @extend %icon-down_arrow-before
-        display: block
-        color: #fff
-      
-      .close
-        display: none
-        color: #fff
 
     section
       background: rgba(0, 0, 0, 0.6)
-      max-height: 0
+      height: 0
       overflow: hidden
-      transition: max-height .2s ease-out
+      transition: height .2s ease-out
 
       div
         padding: 1em 2em
         font-size: 16px
+

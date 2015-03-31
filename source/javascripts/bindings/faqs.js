@@ -4,26 +4,31 @@ define(['knockout'], function(ko) {
   ko.bindingHandlers.faq = {
     init: function(el) {
 
-      el.addEventListener("click", function(event){
-        var ele = event.target;
-        var header = ele.parentNode;
-        var article = header.parentNode;
-        
-        // close all the open one
-        var e = document.getElementsByClassName('faqs')[0].getElementsByClassName('active');
-        if(e.length > 0 && !e[0].isEqualNode(article)){
-          e[0].className = e[0].className.replace( /(?:^|\s)active(?!\S)/g ,'');
-        }
-        
-        if(article.className.match(/(?:^|\s)active(?!\S)/)){
-          // remove class
-          article.className = article.className.replace( /(?:^|\s)active(?!\S)/g ,'');
+      var header = el.querySelector('header');
+      var activeClass = 'is-active';
+
+      header.addEventListener("click", function(event){
+
+        var wrapper = el.querySelector('.js-content-wrapper');
+        var content = el.querySelector('.js-content');
+
+        if(el.classList.contains(activeClass)) {
+          // close
+          wrapper.removeAttribute('style');
+          el.classList.remove(activeClass);
         } else {
-          // add class
-          article.className += " active";
+          // open
+          el.classList.add(activeClass);
+
+          // repaint el
+          var h = el.offsetHeight;
+          var height = [content.offsetHeight, 'px'].join('');
+
+          wrapper.style.height = height
         }
-        
+
       });
     }
   };
 });
+
