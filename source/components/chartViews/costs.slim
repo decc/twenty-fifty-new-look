@@ -45,7 +45,7 @@
             h3.select-title Choose a comparison
             select data-bind="options: $parent.examples, optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample, event: { change: $parent.changeSelectedExampleName }, select"
 
-          .chart.sensitivity-summary.bottom data-bind="chart: name, data: $parent.comparisonData, object: $parent.yourCostsSensitivityChart, params: { margin: { top: 40, right: 40, bottom: 20, left: 315 }, drawParams: { colour: 2 } }"
+          .chart.sensitivity-summary.bottom data-bind="chart: name, data: $parent.comparisonData, object: $parent.yourCostsSensitivityChart, params: { margin: { top: 40, right: 40, bottom: 0, left: 315 }, drawParams: { colour: 2 } }"
             h3.bar-title data-bind="text: $parent.selectedExampleName"
 
           ul.chart-key
