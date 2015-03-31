@@ -92,7 +92,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
        "3": "UK industry output falls 30-40% by 2050"
     }, pdf: "/assets/onepage/37.pdf", info: "demand/growth-in-industry" },
 
-    { name: "Energy intensity of industry", categoryId: 1, typeId: 1, max: 3, pathwayStringIndex: 41, tooltips: {
+    { name: "Energy intensity of industry", categoryId: 1, typeId: 3, max: 3, pathwayStringIndex: 41, tooltips: {
        "1": "No electrification of processes, little improvement in energy intensity",
        "2": "Some processes electrified; moderate improvements in process emissions and energy demand",
        "3": "High electrification; CCS captures 48% of emissions; process emissions reduced"
