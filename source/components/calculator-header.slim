@@ -15,6 +15,6 @@ header.calculator-header
       span data-bind="visible: $parent.shareVisible()" = I18n.t('calculator.share.hide')
       span data-bind="visible: !$parent.shareVisible()" = I18n.t('calculator.share.show')
 
-    button.help data-bind="click: $parent.toggleFaq, css: { pink: $parent.pinkButton, white: $parent.whiteButton, blue: $parent.blueButton, grey: $parent.greyButton }"
+    button.help data-bind="click: $parent.toggleFaq, css: $parent.buttonColor"
       span data-bind="visible: !$parent.pathwayUpdating(), text: $parent.faqCloseMode() ? '&times;' : '?'"
       div.spinner.pink data-bind="visible: $parent.pathwayUpdating"
