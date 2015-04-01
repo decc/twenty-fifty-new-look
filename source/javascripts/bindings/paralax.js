@@ -1,7 +1,7 @@
 define(['knockout'], function(ko) {
   'use strict';
 
-  ko.bindingHandlers.landscape = {
+  ko.bindingHandlers.paralax = {
     init: function(el) {
 
       var landscape = el;
