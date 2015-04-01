@@ -13,17 +13,19 @@ define(['knockout'], function(ko) {
         var content = el.querySelector('.js-content');
 
         if(el.classList.contains(activeClass)) {
-          // close
+          // closing
           wrapper.removeAttribute('style');
           el.classList.remove(activeClass);
         } else {
-          // open
+          // opening
+
           el.classList.add(activeClass);
 
-          // repaint el
+          // repaint el with activeClass
           var h = el.offsetHeight;
-          var height = [content.offsetHeight, 'px'].join('');
 
+          // set height... css handles transition
+          var height = [content.offsetHeight, 'px'].join('');
           wrapper.style.height = height
         }
 
