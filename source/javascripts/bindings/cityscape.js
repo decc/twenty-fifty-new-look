@@ -521,9 +521,9 @@ define(['knockout'], function(ko) {
           levels: {
             0: 1,
             1: 1,
-            2: 4,
-            3: 10,
-            4: 17
+            2: 10,
+            3: 20,
+            4: 34
           },
 
           levelAction: 'Land dedicated to bioenergy',
@@ -608,8 +608,10 @@ define(['knockout'], function(ko) {
             4: 10
           },
 
+          // TODO: change fuel type
+
           levelAction: 'Biomass power stations',
-          selector: '.biomass-power'
+          selector: '.bioenergy'
         },
 
         // geothermal wells

@@ -1,7 +1,7 @@
 define(['knockout'], function(ko) {
   'use strict';
 
-  ko.bindingHandlers.landscape = {
+  ko.bindingHandlers.paralax = {
     init: function(el) {
 
       var landscape = el;
@@ -44,15 +44,26 @@ define(['knockout'], function(ko) {
           'transform'
         ];
 
-        layers.forEach(function(layer) {
+        // For all you ie fans out there
+        window.requestAnimFrame = (function(){
+          return  window.requestAnimationFrame       ||
+                  window.webkitRequestAnimationFrame ||
+                  window.mozRequestAnimationFrame    ||
+                  function( callback ){
+                    window.setTimeout(callback, 1000 / 60);
+                  };
+        })();
 
-          transforms.forEach(function(transform) {
+        window.requestAnimFrame(function() {
+          layers.forEach(function(layer) {
 
-            var parallaxOffset = -( (xOffset / landscapeWidth) * (layer.width - landscapeWidth) );
+            transforms.forEach(function(transform) {
+              var parallaxOffset = -((xOffset / landscapeWidth) * (layer.width - landscapeWidth));
 
-            layer.el.style[transform] = 'translate(' + parallaxOffset + 'px, ' + (yOffset * layer.yThreshold) + 'px)';
-
+              layer.el.style[transform] = 'translate(' + parallaxOffset + 'px, ' + (yOffset * layer.yThreshold) + 'px)';
+            });
           });
+
         });
 
       };
