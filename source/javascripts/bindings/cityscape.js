@@ -608,8 +608,10 @@ define(['knockout'], function(ko) {
             4: 10
           },
 
+          // TODO: change fuel type
+
           levelAction: 'Biomass power stations',
-          selector: '.biomass-power'
+          selector: '.bioenergy'
         },
 
         // geothermal wells

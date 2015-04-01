@@ -800,63 +800,86 @@ i.nuclear[data-value="5"] { bottom: 254px; left: 900px; width: 18px; }
 i.nuclear[data-value="2"] { bottom: 179px; left: 541px; width: 40px; }
 i.nuclear[data-value="4"] { bottom: 190px; left: 880px; width: 28px; }
 
-
-
-/* === Oven / Hob === */
-
-/* Home */
-
-.home-oven {
+.cooker {
   background-size: 30% auto;
+  position: absolute;
+
+  i {
+    @extend .persist;
+  }
+
+  .hob {
+    background-size: 60% auto;
+    position: absolute;
+  }
+
+  &[data-value="3"] {
+    .hob.left {
+      background-image: url(/svgs/electric_white.svg);
+    }
+  }
+}
+
+.home-cooker {
   bottom: 53px;
   left: 1034px;
-  position: absolute;
   width: 23px;
+
+  &[data-value="3"] {
+    .hob.left {
+      background-image: url(/svgs/electric.svg);
+    }
+  }
+
+  .hob {
+    bottom: 84px;
+    width: 10px;
+
+    &.left {
+      background-image: url(/svgs/gas.svg);
+      left: 1034px;
+    }
+
+    &.right {
+      background-image: url(/svgs/electric.svg);
+      left: 1047px;
+    }
+  }
+
+  .oven {
+    background-image: url(/svgs/electric.svg);
+    width: 10px;
+  }
 }
 
-.home-oven.gas { background-image: url(/svgs/gas.svg); }
-.home-oven.electric { background-image: url(/svgs/electric.svg); }
-
-.home-hob {
-  background-size: 60% auto;
-  bottom: 84px;
-  position: absolute;
-  width: 10px;
-}
-
-.home-hob.left { left: 1034px; }
-.home-hob.right { left: 1047px; }
-
-.home-hob.gas { background-image: url(/svgs/gas.svg); }
-.home-hob.electric { background-image: url(/svgs/electric.svg); }
-
-
-/* Commercial */
-
-.commercial-oven {
-  background-size: 30% auto;
+.commercial-cooker {
   bottom: 101px;
   left: 76px;
-  position: absolute;
   width: 18px;
+
+  .oven {
+    width: 10px;
+  }
+
+  .hob {
+    bottom: 120px;
+    width: 9px;
+
+    &.left {
+      background-image: url(/svgs/gas_white.svg);
+      left: 76px;
+    }
+
+    &.right {
+      background-image: url(/svgs/electric_white.svg);
+      left: 85px;
+    }
+  }
+
+  .oven {
+    background-image: url(/svgs/electric_white.svg);
+  }
 }
-
-.commercial-oven.gas { background-image: url(/svgs/gas_white.svg); }
-.commercial-oven.electric { background-image: url(/svgs/electric_white.svg); }
-
-.commercial-hob {
-  background-size: 60% auto;
-  bottom: 120px;
-  position: absolute;
-  width: 9px;
-}
-
-.commercial-hob.left { left: 76px; }
-.commercial-hob.right { left: 85px; }
-
-.commercial-hob.gas { background-image: url(/svgs/gas_white.svg); }
-.commercial-hob.electric { background-image: url(/svgs/electric_white.svg); }
-
 
 
 /* === Recycling === */
