@@ -521,9 +521,9 @@ define(['knockout'], function(ko) {
           levels: {
             0: 1,
             1: 1,
-            2: 4,
-            3: 10,
-            4: 17
+            2: 10,
+            3: 20,
+            4: 34
           },
 
           levelAction: 'Land dedicated to bioenergy',
