@@ -1008,11 +1008,11 @@ i.thermometer {
   width: 10px;
 }
 
-i.thermometer[data-value="1"] { background-image: url(/svgs/thermometer_1.svg); }
-i.thermometer[data-value="2"] { background-image: url(/svgs/thermometer_2.svg); }
-i.thermometer[data-value="3"] { background-image: url(/svgs/thermometer_3.svg); }
-i.thermometer[data-value="4"] { background-image: url(/svgs/thermometer_4.svg); }
-i.thermometer[data-value="5"] { background-image: url(/svgs/thermometer_5.svg); }
+i.thermometer[data-value="1"] { background-image: url(/svgs/thermometer_3.svg); }
+i.thermometer[data-value="2"] { background-image: url(/svgs/thermometer_5.svg); }
+i.thermometer[data-value="3"] { background-image: url(/svgs/thermometer_4.svg); }
+i.thermometer[data-value="4"] { background-image: url(/svgs/thermometer_3.svg); }
+i.thermometer[data-value="5"] { background-image: url(/svgs/thermometer_2.svg); }
 
 
 
