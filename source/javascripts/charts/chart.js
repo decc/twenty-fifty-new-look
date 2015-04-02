@@ -74,20 +74,7 @@ define(['d3'], function(d3) {
       self.colours = function(index, key) {
 
         var colors = [
-          // pinks
-
-          "#C23474",
-          "#A12B61",
-          "#782048",
-          "#531632",
-          "#D53980",
-          "#C96E79",
-          "#9E1946",
-          "#710627",
-          "#A04668",
-          "#9A275A",
-          "#F75FA4",
-
+          
           // greens
 
           "#28A197",
@@ -107,6 +94,20 @@ define(['d3'], function(d3) {
           "#D6EDEB",
           "#95CFCA",
           "#29827E",
+        
+          // pinks
+
+          "#C23474",
+          "#A12B61",
+          "#782048",
+          "#531632",
+          "#D53980",
+          "#C96E79",
+          "#9E1946",
+          "#710627",
+          "#A04668",
+          "#9A275A",
+          "#F75FA4",
 
           // blues
 
@@ -119,7 +120,7 @@ define(['d3'], function(d3) {
         ];
 
         var keys = {
-          "0.01 gw geothermal stations": 9,
+          "0.01 gw geothermal stations": 18,
           "1 gw gas standby power stations": 25,
           "1.2 gw coal gas or biomass power stations with ccs": 0,
           "2 gw coal gas or biomass power stations without ccs": 14,
@@ -163,15 +164,15 @@ define(['d3'], function(d3) {
           "environmental heat": 1,
           "finance": 21,
           "finance cost": 21,
-          "forest": 18,
+          "forest": 9,
           "fossil fuel transfers": 33,
           "fossil fuels": 33,
           "fuel cell cars and buses": 2,
           "fuel combustion": 33,
           "gas": 25,
           "geosequestration": 10,
-          "geothermal": 9,
-          "geothermal electricity": 9,
+          "geothermal": 18,
+          "geothermal electricity": 18,
           "h2 production": 16,
           //"heating and cooling": 0,
           "hybrid cars and buses": 11,
