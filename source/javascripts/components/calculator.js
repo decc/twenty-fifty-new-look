@@ -1,5 +1,5 @@
-define(['knockout', 'text!../../components/calculator.html', 'pathway'],
-  function(ko, html, Pathway) {
+define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers'],
+  function(ko, html, Pathway, Helpers) {
 
   'use strict';
 
@@ -27,10 +27,12 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway'],
 
     self.buttonColor = ko.observable('pink');
 
-
-    window.onresize = function () {
+    var onResize = Helpers.throttle(function () {
       self.cityscapeVisible(window.innerHeight > 760);
-    };
+
+    }, 100, true);
+
+    window.addEventListener('resize', onResize);
 
     self.cityscapeVisible = ko.observable(window.innerWidth > 760);
     self.fullscreenVisible = ko.observable(false);
