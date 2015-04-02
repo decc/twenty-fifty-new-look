@@ -1,4 +1,6 @@
-aside.controls-sidebar data-bind="tabs"
+aside.controls-sidebar data-bind="tabs, css: { 'is-active': navVisible }"
+
+  button.toggle-nav data-bind="click: toggleNav"
 
   nav.tab-nav.pathway-category-tab-nav
     ul data-bind="foreach: pathwayCategories"

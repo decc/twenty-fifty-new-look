@@ -21,7 +21,7 @@
 
         .inner-content data-bind="visible: mainViewVisible"
 
-            div#landscape-label data-bind="click: toggleCity, css: { full: !cityscapeVisible() }"
+            #landscape-label.landscape-label data-bind="click: toggleCity, css: { full: !cityscapeVisible() }"
               label Your 2050 Landscape
               span.toggle-city data-bind="css: { up: cityscapeVisible(), down: !cityscapeVisible() }"
 

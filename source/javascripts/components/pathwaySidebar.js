@@ -21,6 +21,12 @@ define(['knockout', 'text!../../components/pathway-sidebar.html', 'pathway'],
       action.value = e.target.value;
       self.pathway.updateAction(action);
     };
+
+    self.navVisible = ko.observable(false);
+
+    self.toggleNav = function() {
+      self.navVisible(!self.navVisible());
+    }
   };
 
   return {

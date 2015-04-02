@@ -12,7 +12,10 @@
       font-size: 2em
 
     .min
-      left: $chart-tabs-width + 20px
+      left: 80px
+
+      @include media($media-big)
+        left: $chart-tabs-width + 20px
 
     .max
       right: 20px
@@ -36,8 +39,11 @@
     position: absolute
     top: 9em
     bottom: 20px
-    left: $chart-tabs-width
+    left: 80px
     right: 0
+
+    @include media($media-big)
+      left: $chart-tabs-width
 
     .chart
       height: percentage(1/3)

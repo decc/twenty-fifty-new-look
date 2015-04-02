@@ -11,6 +11,8 @@
   height: 100%
   background: #4A5163
   display: table
+  opacity: 1
+  @include transform(translateZ(0))
 
   .spinner
     width: 100px
@@ -20,12 +22,8 @@
 
   &.hidden
     z-index: -100
-    display: none
-
-  &.hidden
-    z-index: -100
     opacity: 0
-    transition: z-index 0.8s linear 0s, opacity 0.8s
+    @include transition(z-index 0.3s linear 0s, opacity 0.3s)
 
   .inner
     display: table-cell
@@ -62,7 +60,10 @@
   top: 0
   left: 0
   z-index: 10
-  width: calc(100% - #{$right-col-width})
+  width: 100%
+
+  @include media($media-big)
+    width: calc(100% - #{$right-col-width})
 
   @media screen and (max-height: $device-height-small)
     top: 0
@@ -81,21 +82,54 @@
   height: calc(100% - #{$header-height})
 
 .inner-content
-  width: calc(100% - #{$right-col-width})
-  // padding-right:
+  width: 100%
   position: relative
   height: 100%
   @include omega
+
+  @include media($media-big)
+    width: calc(100% - #{$right-col-width})
 
 .controls-sidebar
   width: $right-col-width
   height: 100%
   margin-bottom: 100px
-  overflow: hidden
+  // overflow: hidden
   position: absolute
   top: 0
-  right: 0
+  right: -$right-col-width
   background: #F5F5F5
+  @include transition(transform .2s)
+  z-index: 900
+
+  .toggle-nav
+    content: ''
+    width: 25px
+    height: 75px
+    background: red
+    top: 50%
+    margin-top: -50px
+    position: absolute
+    left: -25px
+    padding: 0
+    border: none
+    background: $color-background-light
+    color: $color-background-dark
+    &:before
+      @extend %icon-content-sliders
+
+  &.is-active
+    @include transform(translateX(-100%))
+
+  @include media($media-big)
+    right: 0
+    overflow: hidden
+
+    .toggle-nav
+      display: none
+
+    &.is-active
+      @include transform(none)
 
   .tabs
     overflow: auto
@@ -208,9 +242,9 @@
   border-top: 1px solid #ccc
   font-weight: 600
   height: 60px
+
   &:before
     margin-right: 0.5em
-
 
 .overview
   overflow: hidden
@@ -222,7 +256,7 @@
   @include transition(transform .3s ease-in-out)
   left: 100%
   height: 100%
-  z-index:  50
+  z-index:  1000
 
   &.active
     @include transform(translateX(-100%))
