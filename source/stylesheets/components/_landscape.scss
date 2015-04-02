@@ -205,10 +205,10 @@ i.algae {
   background-image: url(/svgs/algae.svg);
   bottom: 179px;
   left: 385px;
+  width: 28px;
+  @include transition(bottom .2s, width .2s)
 }
 
-i.algae[data-value="1"] { width: 28px; }
-i.algae[data-value="2"] { width: 28px; }
 i.algae[data-value="3"] { width: 31px; }
 i.algae[data-value="4"] { bottom: 173px; width: 45px; }
 i.algae[data-value="5"] { bottom: 173px; width: 45px; }

@@ -446,6 +446,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
       this.unlock();
     },
 
+    // TODO: cache this?
     getPathwayString: function() {
       var magicString = "";
       var magicStringLength = 53;
