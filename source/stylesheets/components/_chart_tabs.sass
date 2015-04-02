@@ -1,7 +1,6 @@
 .chart-tabs-container
   position: absolute
-  top: $cityscape-height + $cityscape-bar-height
-  height: calc(100% - #{$cityscape-bar-height + $cityscape-height})
+  height: 100%
   left: 0
   right: 0
   background: #5A6378
@@ -10,7 +9,7 @@
     top: $cityscape-bar-height
     height: calc(100% - #{$cityscape-bar-height})
 
-  @media screen and (max-height: $device-height-small)
+  @include media($media-height-small)
     top: 0
     height: 100%
 
@@ -21,19 +20,26 @@
   &.noTop
     top: 0px
 
+  @include media($media-medium)
+    top: $cityscape-height + $cityscape-bar-height
+    height: calc(100% - #{$cityscape-bar-height} - #{$cityscape-height})
+
 #landscape-label
-  @media screen and (max-height: $device-height-small)
+  @include media($media-height-small)
     display: none
 
 .chart-tab-nav
   position: absolute
   top: 0
   left: 0
-  width: $chart-tabs-width
+  width: $chart-tabs-width-small
   bottom: 0
   z-index: 10
-  @media screen and (max-height: $device-height-small)
+  @include media($media-height-small)
     top: 0
+
+  @include media($media-big)
+    width: $chart-tabs-width
 
   ul
     list-style: none
@@ -77,9 +83,12 @@
   position: relative
   overflow: hidden
   width: 100%
-  padding-left: $chart-tabs-width
+  padding-left: $chart-tabs-width-small
   height: 100%
   background: radial-gradient(ellipse at bottom right, rgba(0, 0, 0, 0.5) 0%, transparent)
+
+  @include media($media-big)
+    padding-left: $chart-tabs-width
 
   .tab
     p
@@ -89,7 +98,6 @@
       li
         line-height: 130%
 
-
   & > .tab
     display: none
     position: absolute
@@ -98,7 +106,10 @@
     width: 100%
     bottom: 0
     height: 100%
-    padding-left: $chart-tabs-width
+    padding-left: $chart-tabs-width-small
+
+    @include media($media-big)
+      padding-left: $chart-tabs-width
 
     &.active
       display: block

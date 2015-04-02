@@ -7,13 +7,18 @@ $tablet: "(max-width: 865px)"
     max-width: 100%
     width: 100%
 
-@media #{$tablet}
-  .cityscape
-    display: none
+.cityscape
+  display: none
+.charts
+  top: 0
+.landscape-label
+  display: none
+
+@include media($media-medium)
+  .cityscape, .landscape-label
+    display: block
   .charts
-    top: 0px
-  .toggle-city
-    display: none
+    top: 330px
 
 .toggle-city
   position: absolute

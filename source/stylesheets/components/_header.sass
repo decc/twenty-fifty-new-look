@@ -22,14 +22,15 @@
     color: #fff
 
   .total-co2-reduction
-    @include col(77.4%)
+    @include col(calc(77.4% - 140px))
     @include omega
     position: relative
-    width: calc(77.4% - 308px)
-    padding-right: 0 !important
     height: 100%
     color: $color-background-dark
     border-left: 1px solid #333
+
+    @include media($media-medium)
+      width: calc(77.4% - 360px)
 
     .container
       @extend %vertical-centered
@@ -83,12 +84,15 @@
 
 
   .controls
-    @include col($right-col-width)
+    @include col(140px)
     @include omega
     position: absolute
     top: 0
     right: 0
     height: 100%
+
+    @include media($media-medium)
+      width: $right-col-width
 
     .spinner
       width: 100%
@@ -107,6 +111,21 @@
       @extend %vertical-centered
       padding-right: 70px
       width: 100%
+      @extend %icon-flag-before
+
+      &:before
+        font-size: 1.5em
+        margin-left: -18px
+
+      span
+        display: none
+
+      @include media($media-medium)
+        span
+          display: inline
+
+        &:before
+          content: ''
 
     .help
       position: absolute
