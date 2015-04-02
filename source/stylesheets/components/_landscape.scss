@@ -123,32 +123,6 @@
 
 
 
-#landscape-label {
-  background: rgb(65, 70, 83);
-  top: $cityscape-height;
-  color: #fff;
-  font-size: 1.2em;
-  font-weight: 400;
-  padding: 3px 20px;
-  position: absolute;
-  right: 0;
-  z-index: 9;
-  width: 100%;
-  height: $cityscape-bar-height;
-  cursor: pointer;
-
-  &.full {
-    top: 0;
-  }
-
-  label {
-    cursor: pointer;
-  }
-}
-
-
-
-
 
 .layer > *, i {
   background-position: 50% 100%;
