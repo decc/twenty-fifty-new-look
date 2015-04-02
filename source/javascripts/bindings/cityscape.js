@@ -17,10 +17,20 @@ define(['knockout'], function(ko) {
          * @example Helpers.showEls.call(this)
          * @returns {array} active els
          */
-        // OPTIMIZE: cache results
         showEls: function() {
           var count = Helpers.findLevel(this.levels, this.levelAction);
-          var levelEls = element.querySelectorAll(this.selector);
+          var levelEls = [].slice.call(element.querySelectorAll(this.selector));
+
+          // order by data-value if set
+
+          if(levelEls[0] && levelEls[0].getAttribute('data-value')) {
+            levelEls.sort(function(a, b) {
+              var aValue = a.getAttribute('data-value');
+              var bValue = b.getAttribute('data-value');
+
+              return (aValue < bValue) ? 1 : -1;
+            });
+          }
 
           var out = [];
 
