@@ -11,11 +11,8 @@ input[type=radio]
     position: absolute
     top: 50%
     left: 50%
-    @include transform(translate(-3px, -2px))
+    margin: -2px -3px
     opacity: 0
-
-    @include media($media-webkit-only)
-      @include transform(translate(-3px, -3px))
 
   &:checked + .r:before
     opacity: 1
