@@ -11,11 +11,8 @@ input[type=radio]
     position: absolute
     top: 50%
     left: 50%
-    @include transform(translate(-3px, -2px))
+    margin: -2px -3px
     opacity: 0
-
-    @include media($media-webkit-only)
-      @include transform(translate(-3px, -3px))
 
   &:checked + .r:before
     opacity: 1
@@ -27,13 +24,18 @@ label
   margin-top: 0!important
   position: relative
   content: ''
-  width: 15px
-  height: 15px
+  width: 20px
+  height: 20px
   background: #fff
   display: inline-block
   border-radius: 10px
-  margin: 0 44px 0 0
+  margin: 0 38px 0 0
   border: 1px solid #ccc
+
+  @include media($media-big)
+    width: 15px
+    height: 15px
+    margin: 0 44px 0 0
 
   &:before
     @include transition(opacity 0.2s ease-in-out)
