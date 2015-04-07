@@ -94,7 +94,6 @@
   width: $right-col-width
   height: 100%
   margin-bottom: 100px
-  // overflow: hidden
   position: absolute
   top: 0
   right: -$right-col-width
@@ -104,17 +103,19 @@
 
   .toggle-nav
     content: ''
-    width: 25px
+    width: 30px
     height: 75px
     background: red
     top: 50%
     margin-top: -50px
     position: absolute
-    left: -25px
+    left: -30px
     padding: 0
     border: none
     background: $color-background-light
     color: $color-background-dark
+    font-size: 15px
+
     &:before
       @extend %icon-content-sliders
 
@@ -169,6 +170,10 @@
         float: left
         margin-top: 0.5vh
         max-width: 70%
+        font-size: 13px
+
+        @include media($media-big)
+          font-size: inherit
 
       .value-label
         float: right
