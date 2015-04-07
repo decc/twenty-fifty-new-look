@@ -11,8 +11,8 @@ define(['knockout'], function(ko) {
         var layerWidth = 1200, // could set dynamically?
             landscapeWidth = landscape.clientWidth,
             landscapeHeight = landscape.clientHeight,
-            xOffset = -( (landscapeWidth / 2) - (e.pageX - landscape.offsetLeft) ), // adjust for offsetLeft
-            yOffset = ((landscapeHeight + landscape.offsetParent.offsetTop) - e.pageY); // adjust for offsetTop - for some reason
+            xOffset = -((landscapeWidth / 2) - (e.pageX - landscape.offsetLeft)), // adjust for offsetLeft
+            yOffset = ((landscapeHeight + landscape.offsetTop) - e.pageY); // adjust for offsetTop
 
         var layers = [
           {
@@ -58,9 +58,15 @@ define(['knockout'], function(ko) {
           layers.forEach(function(layer) {
 
             transforms.forEach(function(transform) {
-              var parallaxOffset = -((xOffset / landscapeWidth) * (layer.width - landscapeWidth));
+              
+              var xParallax = -((xOffset / landscapeWidth) * (layer.width - landscapeWidth)),
+                  yParallax = 0;
 
-              layer.el.style[transform] = 'translate(' + parallaxOffset + 'px, ' + (yOffset * layer.yThreshold) + 'px)';
+              if (e.pageY <= (landscapeHeight + landscape.offsetTop))
+                yParallax = yOffset * (layer.yThreshold * ( landscapeHeight / (landscapeHeight + landscape.offsetTop) ) );
+
+              layer.el.style[transform] = 'translate(' + xParallax + 'px, ' + yParallax + 'px)';
+              
             });
           });
 
@@ -68,7 +74,7 @@ define(['knockout'], function(ko) {
 
       };
 
-      landscape.addEventListener("mousemove", parallaxLandscape);
+      window.addEventListener("mousemove", parallaxLandscape);
     }
   }
 });
