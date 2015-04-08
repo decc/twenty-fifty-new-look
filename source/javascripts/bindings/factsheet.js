@@ -13,18 +13,20 @@ define(['knockout', 'ajax', 'config'], function(ko, Ajax, config) {
       el.innerHTML = '';
       el.classList.add(loadingClass);
 
-      // TODO: remove delay once on same domain
-      setTimeout(function() {
-        Ajax.request({
-          method: 'GET',
-          XDomainRequest: true,
-          url: config.siteUrl + '/components/factsheets/' + factsheet + '.html',
-          onSuccess: function(data) {
-            el.innerHTML = data.responseText;
-            el.classList.remove(loadingClass);
-          }
-        });
-      }, 4000);
+      if(!!factsheet) {
+        // TODO: remove delay once on same domain
+        setTimeout(function() {
+          Ajax.request({
+            method: 'GET',
+            XDomainRequest: true,
+            url: config.siteUrl + '/components/factsheets/' + factsheet + '.html',
+            onSuccess: function(data) {
+              el.innerHTML = data.responseText;
+              el.classList.remove(loadingClass);
+            }
+          });
+        }, 4000);
+      }
     }
   };
 });

@@ -74,11 +74,42 @@ define(['d3'], function(d3) {
       self.colours = function(index, key) {
 
         var colors = [
-          // pinks
+        
+          "#28A197", // green
+          
+          "#C23474", // pink
+          
+          "#5A6378", // blue
+          
+          "#A7CECB", // green
+          
+          "#A12B61", // pink
+          
+          "#3867AF", // blue
+          
+          "#2D7883", // green
+          
+          "#782048", // pink
+          
+          // more greens
 
-          "#C23474",
-          "#A12B61",
-          "#782048",
+          "#26A197",
+          "#028090",
+          "#8BA6A9",
+          "#85BDBF",
+          "#C9FBFF",
+          "#037171",
+          "#00B9AE",
+          "#40ACA4",
+          "#68BDB6",
+          "#8ACCC7",
+          "#B3DEDB",
+          "#D6EDEB",
+          "#95CFCA",
+          "#29827E",
+        
+          // more pinks
+          
           "#531632",
           "#D53980",
           "#C96E79",
@@ -88,30 +119,8 @@ define(['d3'], function(d3) {
           "#9A275A",
           "#F75FA4",
 
-          // greens
+          // more blues
 
-          "#28A197",
-          "#A7CECB",
-          "#8BA6A9",
-          "#2D7883",
-          "#028090",
-          "#85BDBF",
-          "#C9FBFF",
-          "#037171",
-          "#00B9AE",
-          "#26A197",
-          "#40ACA4",
-          "#68BDB6",
-          "#8ACCC7",
-          "#B3DEDB",
-          "#D6EDEB",
-          "#95CFCA",
-          "#29827E",
-
-          // blues
-
-          "#5A6378",
-          "#3867AF",
           "#2978A0",
           "#2D3E5B",
           "#8193AD",
@@ -119,7 +128,7 @@ define(['d3'], function(d3) {
         ];
 
         var keys = {
-          "0.01 gw geothermal stations": 9,
+          "0.01 gw geothermal stations": 18,
           "1 gw gas standby power stations": 25,
           "1.2 gw coal gas or biomass power stations with ccs": 0,
           "2 gw coal gas or biomass power stations without ccs": 14,
@@ -163,17 +172,17 @@ define(['d3'], function(d3) {
           "environmental heat": 1,
           "finance": 21,
           "finance cost": 21,
-          "forest": 18,
+          "forest": 9,
           "fossil fuel transfers": 33,
           "fossil fuels": 33,
           "fuel cell cars and buses": 2,
           "fuel combustion": 33,
           "gas": 25,
           "geosequestration": 10,
-          "geothermal": 9,
-          "geothermal electricity": 9,
+          "geothermal": 18,
+          "geothermal electricity": 18,
           "h2 production": 16,
-          //"heating and cooling": 0,
+          "heating and cooling": 33,
           "hybrid cars and buses": 11,
           "hydro": 8,
           "hydroelectric": 8,
@@ -184,7 +193,7 @@ define(['d3'], function(d3) {
           "international aviation and shipping": 3,
           "international shipping (maritime bunkers)": 3,
           "land use, land-use change and forestry": 18,
-          //"lighting & appliances": 0,
+          "lighting & appliances": 28,
           "marine algae": 22,
           "micro wind": 17,
           "natural gas": 25,
@@ -208,7 +217,7 @@ define(['d3'], function(d3) {
           "tidal range": 29,
           "tidal stream": 29,
           "transport": 26,
-          //"unabated thermal generation": 0,
+          "unabated thermal generation": 29,
           "waste": 32,
           "waste arising": 32,
           "wave": 29,

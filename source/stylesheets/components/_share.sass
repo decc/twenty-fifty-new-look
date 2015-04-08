@@ -1,13 +1,13 @@
 .share
   position: absolute
-  top: $cityscape-height
+  top: 0
   bottom: 0
   left: 0
   right: 0
   color: #fff
 
-  @media screen and (max-height: $device-height-small)
-    top: 0
+  @include media($media-city)
+    top: $cityscape-height
 
   .background
     overflow-y: scroll
@@ -15,15 +15,18 @@
     padding-bottom: 63px
     background-color: #2C313B
     background-image: radial-gradient(circle at 50% 100%, $color-background 15%, rgba(0,0,0,0) 40%), url(/images/rays.svg)
-    background-size: 100% 100%
+    background-size: cover
 
   .share-section
     @include clearfix
 
   .share-description
     float: left
-    width: 40%
+    width: 100%
     padding: 20px 50px
+
+    @include media($media-big)
+      width: 40%
 
   #share-string
     width: 100%
@@ -34,17 +37,24 @@
 
   .share-chart
     float: left
-    width: 60%
+    width: 100%
     height: 100%
     padding: 40px 50px 30px
+
+    @include media($media-big)
+      width: 60%
 
     .overview-chartset
       height: 100%
 
       .chart
-        height: percentage(1/3)
+        height: percentage(1/5)
+        margin: 3em 0
+        min-height: 100px
 
-
+        @include media($media-big)
+          height: 33.333%
+          margin: 0
 
   .social
     position: absolute
@@ -76,6 +86,16 @@
         list-style-type: none
         text-align: center
         width: percentage(1/7)
+        margin-left: 1em
+
+        @include media($media-big)
+          margin: none
+
+        span
+          display: none
+
+          @include media($media-big)
+            display: inline
 
         .icon
           color: #fff

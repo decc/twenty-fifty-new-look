@@ -14,6 +14,7 @@
 
   .is-loading
     position: relative
+    min-height: 200px
     height: 100%
 
     &:after
@@ -26,7 +27,11 @@
       content: ''
       display: block
       @extend .spinner.white, .spinner
-
+  
+  .factsheet
+    margin: 0 auto
+    max-width: 800px
+  
   &.white
     background: #fff
     color: #000
@@ -46,6 +51,7 @@
     img
       display: inherit
       margin: auto
+      max-width: 100%
       padding-top: 2em
       padding-bottom: 1em
 
@@ -82,7 +88,7 @@
 
 
   &.is-active
-    z-index: 13
+    z-index: 1000
     opacity: 1
     @include transition(opacity .3s)
 

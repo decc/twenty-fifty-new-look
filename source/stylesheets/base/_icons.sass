@@ -1,4 +1,4 @@
-@include font-face(icons, '/fonts/icons_63a7d865582f169997bfdb2077ef4716', normal, normal, false, eot woff ttf svg)
+@include font-face(icons, '/fonts/icons_6d27266d35a282d9fc44489903716f25', normal, normal, false, eot woff ttf svg)
 
 %icon
   font-family: "icons" !important
@@ -295,6 +295,25 @@
 
 .icon-facebook-before
   @extend %icon-facebook-before
+
+
+
+
+
+%icon-content-flag
+  @extend %icon
+  content: '\f121'
+
+%icon-flag-after
+  &:after
+    @extend %icon-content-flag
+
+%icon-flag-before
+  &:before
+    @extend %icon-content-flag
+
+.icon-flag-before
+  @extend %icon-flag-before
 
 
 
@@ -599,6 +618,25 @@
 
 .icon-share-alt-before
   @extend %icon-share-alt-before
+
+
+
+
+
+%icon-content-sliders
+  @extend %icon
+  content: '\f122'
+
+%icon-sliders-after
+  &:after
+    @extend %icon-content-sliders
+
+%icon-sliders-before
+  &:before
+    @extend %icon-content-sliders
+
+.icon-sliders-before
+  @extend %icon-sliders-before
 
 
 

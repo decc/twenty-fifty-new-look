@@ -1,13 +1,13 @@
 {
   "checksum": {
-    "previous": "63a7d865582f169997bfdb2077ef47169ea8274b2750bcd44572496e0616c2c5",
-    "current": "63a7d865582f169997bfdb2077ef47169ea8274b2750bcd44572496e0616c2c5"
+    "previous": "6d27266d35a282d9fc44489903716f2551126bd7d94e0394e22ea1f84303a271",
+    "current": "6d27266d35a282d9fc44489903716f2551126bd7d94e0394e22ea1f84303a271"
   },
   "fonts": [
-    "source/fonts/icons_63a7d865582f169997bfdb2077ef4716.ttf",
-    "source/fonts/icons_63a7d865582f169997bfdb2077ef4716.svg",
-    "source/fonts/icons_63a7d865582f169997bfdb2077ef4716.woff",
-    "source/fonts/icons_63a7d865582f169997bfdb2077ef4716.eot"
+    "source/fonts/icons_6d27266d35a282d9fc44489903716f25.ttf",
+    "source/fonts/icons_6d27266d35a282d9fc44489903716f25.svg",
+    "source/fonts/icons_6d27266d35a282d9fc44489903716f25.woff",
+    "source/fonts/icons_6d27266d35a282d9fc44489903716f25.eot"
   ],
   "glyphs": {
     "air": {
@@ -69,6 +69,10 @@
     "facebook": {
       "codepoint": 61715,
       "source": "source/icons/facebook.svg"
+    },
+    "flag": {
+      "codepoint": 61729,
+      "source": "source/icons/flag.svg"
     },
     "flows": {
       "codepoint": 61707,
@@ -133,6 +137,10 @@
     "share-alt": {
       "codepoint": 61718,
       "source": "source/icons/share-alt.svg"
+    },
+    "sliders": {
+      "codepoint": 61730,
+      "source": "source/icons/sliders.svg"
     },
     "twitter": {
       "codepoint": 61719,

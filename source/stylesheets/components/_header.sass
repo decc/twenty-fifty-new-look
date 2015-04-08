@@ -16,20 +16,25 @@
     border: none
 
   .pathway-owner
+    display: none
     @include col(16.6%)
     height: 100%
     @extend %vertical-centered
     color: #fff
 
+    @include media($media-medium)
+      display: table
+
   .total-co2-reduction
-    @include col(77.4%)
+    @include col(calc(94% - 140px))
     @include omega
     position: relative
-    width: calc(77.4% - 308px)
-    padding-right: 0 !important
     height: 100%
     color: $color-background-dark
     border-left: 1px solid #333
+
+    @include media($media-medium)
+      width: calc(77.4% - 306px)
 
     .container
       @extend %vertical-centered
@@ -61,12 +66,13 @@
 
   .target-reached-tooltip
     position: absolute
-    left: 50%
     right: 20px
     top: 100%
     margin-top: 20px
     padding: 20px 20px 20px
     background-color: rgba(45, 49, 60, 0.95)
+    min-width: 250px
+    width: 33%
 
     .arrow
       left: 60%
@@ -83,12 +89,15 @@
 
 
   .controls
-    @include col($right-col-width)
+    @include col(140px)
     @include omega
     position: absolute
     top: 0
     right: 0
     height: 100%
+
+    @include media($media-medium)
+      width: $right-col-width
 
     .spinner
       width: 100%
@@ -107,6 +116,21 @@
       @extend %vertical-centered
       padding-right: 70px
       width: 100%
+      @extend %icon-flag-before
+
+      &:before
+        font-size: 1.5em
+        margin-left: -18px
+
+      span
+        display: none
+
+      @include media($media-medium)
+        span
+          display: inline
+
+        &:before
+          content: ''
 
     .help
       position: absolute
@@ -117,6 +141,13 @@
       font-weight: bold
       border-left: 1px solid #fff
       line-height: 1
+
+      &.share-closer
+        @extend .blue
+
+        @include media($media-city)
+          background: #fff!important
+          color: #000!important
 
       &.white
         background: #fff

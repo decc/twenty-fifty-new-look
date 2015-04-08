@@ -1,5 +1,5 @@
-define(['knockout', 'text!../../components/calculator.html', 'pathway'],
-  function(ko, html, Pathway) {
+define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers'],
+  function(ko, html, Pathway, Helpers) {
 
   'use strict';
 
@@ -27,12 +27,6 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway'],
 
     self.buttonColor = ko.observable('pink');
 
-
-    window.onresize = function () {
-      self.cityscapeVisible(window.innerHeight > 760);
-    };
-
-    self.cityscapeVisible = ko.observable(window.innerWidth > 760);
     self.fullscreenVisible = ko.observable(false);
     self.overlayVisible = ko.observable(false);
     self.overlayContent = ko.observable();
@@ -97,7 +91,7 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway'],
         self.fullscreenVisible(false);
         self.shareVisible(true);
 
-        self.buttonColor('white');
+        self.buttonColor('share-closer');
 
         // Explicitly draw charts now they are visible
         var shareCharts = document.querySelectorAll('.share .OverviewChart');

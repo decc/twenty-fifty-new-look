@@ -5,6 +5,18 @@
     background: #eee
     padding-top: 25px
 
+    .range-replacement
+      margin: -7px 0 0 0
+      height: 25px
+
+      .track
+        top: 10px
+
+      .point
+        width: 25px
+        height: 25px
+        top: -10px
+
     .min, .max
       position: absolute
       top: 0.3em
@@ -12,7 +24,10 @@
       font-size: 2em
 
     .min
-      left: $chart-tabs-width + 20px
+      left: 80px
+
+      @include media($media-big)
+        left: $chart-tabs-width + 20px
 
     .max
       right: 20px
@@ -36,10 +51,12 @@
     position: absolute
     top: 9em
     bottom: 20px
-    left: $chart-tabs-width
+    left: 80px
     right: 0
+
+    @include media($media-big)
+      left: $chart-tabs-width
 
     .chart
       height: percentage(1/3)
-
 

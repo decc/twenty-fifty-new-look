@@ -1,4 +1,5 @@
 require 'jshintrb/jshinttask'
+require 'json'
 
 Jshintrb::JshintTask.new :jshint do |t|
   t.pattern = 'source/javascripts/**/*.js'

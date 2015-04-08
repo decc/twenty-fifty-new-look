@@ -1,4 +1,4 @@
-define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySupply', 'charts/electricityDemand', 'charts/electricitySupply', 'charts/energyEmissions', 'charts/electricityEmissions', 'charts/flows', 'charts/map', 'charts/airQuality', 'charts/costsContext', 'charts/costsCompared', 'charts/costsSensitivity', 'charts/costsSensitivityComponents', 'charts/overview'], function(ko, SummaryChart, EnergyDemandChart, EnergySupplyChart, ElectricityDemandChart, ElectricitySupplyChart, EnergyEmissionsChart, ElectricityEmissionsChart, FlowsChart, MapChart, AirQualityChart, CostsContextChart, CostsComparedChart, CostsSensitivityChart, CostsSensitivityComponentsChart, OverviewChart) {
+define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySupply', 'charts/electricityDemand', 'charts/electricitySupply', 'charts/energyEmissions', 'charts/electricityEmissions', 'charts/flows', 'charts/map', 'charts/airQuality', 'charts/costsContext', 'charts/costsCompared', 'charts/costsSensitivity', 'charts/costsSensitivityComponents', 'charts/overview', 'helpers'], function(ko, SummaryChart, EnergyDemandChart, EnergySupplyChart, ElectricityDemandChart, ElectricitySupplyChart, EnergyEmissionsChart, ElectricityEmissionsChart, FlowsChart, MapChart, AirQualityChart, CostsContextChart, CostsComparedChart, CostsSensitivityChart, CostsSensitivityComponentsChart, OverviewChart, Helpers) {
   'use strict';
 
   ko.bindingHandlers.chart = {
@@ -22,10 +22,12 @@ define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySuppl
       self.chart.init(element, element.params);
       element.chart = self.chart;
 
-      // Redraw on window resize
-      window.addEventListener("resize", function () {
+      var onResize = Helpers.throttle(function() {
         ko.bindingHandlers.chart.draw(element, name);
-      });
+      }, 100, true)
+
+      // Redraw on window resize
+      window.addEventListener("resize", onResize);
     },
 
     update: function(element, valueAccessor, allBindings) {
