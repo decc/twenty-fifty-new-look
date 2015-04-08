@@ -16,13 +16,17 @@
     border: none
 
   .pathway-owner
+    display: none
     @include col(16.6%)
     height: 100%
     @extend %vertical-centered
     color: #fff
 
+    @include media($media-medium)
+      display: table
+
   .total-co2-reduction
-    @include col(calc(77.4% - 140px))
+    @include col(calc(94% - 140px))
     @include omega
     position: relative
     height: 100%
@@ -30,7 +34,7 @@
     border-left: 1px solid #333
 
     @include media($media-medium)
-      width: calc(77.4% - 360px)
+      width: calc(77.4% - 306px)
 
     .container
       @extend %vertical-centered
