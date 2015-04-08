@@ -7,18 +7,20 @@
 .loading
   position: absolute
   z-index: 100
+  left: 0
+  top: 0
   width: 100%
   height: 100%
-  background: #4A5163
   display: table
+  background: #4A5163
   opacity: 1
   @include transform(translateZ(0))
 
   .spinner
+    margin: auto
     width: 100px
     height: 100px
     display: block
-    margin: auto
 
   &.hidden
     z-index: -100
