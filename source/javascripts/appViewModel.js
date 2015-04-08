@@ -4,11 +4,6 @@ define(['knockout', 'pathway'], function(ko, Pathway) {
   var AppViewModel = function() {
     var self = this;
 
-    // Set viewport for small screen
-    if(screen.width <= 1024) {
-      document.getElementById('viewport').setAttribute('content','width=1140');
-    }
-
     self.pageComponent = ko.observable('splash');
     self.pageParams = ko.observable();
 

@@ -2,8 +2,15 @@ define(['knockout', 'range'], function(ko, Range) {
   'use strict';
 
   ko.bindingHandlers.range = {
-    init: function(el) {
-      el.rangeInstance = Range.create(el, { pointerWidth: 15 });
+    init: function(el, valueAccessor) {
+      var args = {};
+      var pointerWidth;
+
+      if(pointerWidth = parseInt(el.getAttribute('data-pointer-width'))) {
+        args.pointerWidth = pointerWidth;
+      }
+
+      el.rangeInstance = Range.create(el, args);
     },
 
     update: function(el) {

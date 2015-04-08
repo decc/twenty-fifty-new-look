@@ -13,7 +13,11 @@
       transform: translateY(-50%)
 
     .compare
-      height: 200px
+      height: 100px
+      margin-bottom: 2em
+
+      @include media($media-big)
+        height: 200px
 
       &.has-axis
 
@@ -21,19 +25,20 @@
       position: relative
       display: table
       z-index: 10
+      margin-bottom: 2em
 
     &.sensitivity
       .bar-title,
       .select-title
         width: 315px
 
-      // .example-selector
-      //   select
-      //     margin-left: 315px
-
+      .example-selector
+        .styled_select
+          margin-left: 310px
 
     .sensitivity-summary
       height: 100px
+      margin-bottom: 2em
 
       &.bottom
         height: 100px

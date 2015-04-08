@@ -1,13 +1,13 @@
 .share
   position: absolute
-  top: $cityscape-height
+  top: 0
   bottom: 0
   left: 0
   right: 0
   color: #fff
 
-  @media screen and (max-height: $device-height-small)
-    top: 0
+  @include media($media-medium)
+    top: $cityscape-height
 
   .background
     overflow-y: scroll
@@ -50,11 +50,11 @@
       .chart
         height: percentage(1/5)
         margin: 3em 0
+        min-height: 100px
 
         @include media($media-big)
           height: 33.333%
           margin: 0
-
 
   .social
     position: absolute

@@ -27,14 +27,6 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
 
     self.buttonColor = ko.observable('pink');
 
-    var onResize = Helpers.throttle(function () {
-      self.cityscapeVisible(window.innerHeight > 760);
-
-    }, 100, true);
-
-    window.addEventListener('resize', onResize);
-
-    self.cityscapeVisible = ko.observable(window.innerWidth > 760);
     self.fullscreenVisible = ko.observable(false);
     self.overlayVisible = ko.observable(false);
     self.overlayContent = ko.observable();

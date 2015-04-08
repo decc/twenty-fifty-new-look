@@ -1,7 +1,7 @@
 .overview-chartset
   .date-range
     span.min data-bind="text: rangeAttributes().min"
-    input type="range" value="2050" min="2015" max="2050" data-bind="value: date, attr: { min: rangeAttributes().min, max: rangeAttributes().max, step: rangeAttributes().step }, range"
+    input type="range" data-pointer-width="25" value="2050" min="2015" max="2050" data-bind="value: date, attr: { min: rangeAttributes().min, max: rangeAttributes().max, step: rangeAttributes().step }, range"
     span.max data-bind="text: rangeAttributes().max"
 
   h2.title data-bind="text: 'Snapshot ' + date() + ' outlook'"
