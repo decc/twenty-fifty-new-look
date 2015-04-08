@@ -35,7 +35,7 @@ label
   @include media($media-big)
     width: 15px
     height: 15px
-    margin: 0 44px 0 0
+    margin: 0 45px 0 0
 
   &:before
     @include transition(opacity 0.2s ease-in-out)
@@ -45,4 +45,14 @@ label
 
   &:first-of-type
     margin-left: 5px
+
+.radios + .tooltip
+  margin-top: 2em
+
+@include media($media-big)
+  .radios + .tooltip
+    margin-top: 1em
+
+    .arrow
+      margin-left: -10px
 
