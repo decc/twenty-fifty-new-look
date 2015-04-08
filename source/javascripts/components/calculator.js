@@ -91,7 +91,7 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
         self.fullscreenVisible(false);
         self.shareVisible(true);
 
-        self.buttonColor('white');
+        self.buttonColor('share-closer');
 
         // Explicitly draw charts now they are visible
         var shareCharts = document.querySelectorAll('.share .OverviewChart');

@@ -16,7 +16,6 @@ define(['knockout', 'pathway'], function(ko, Pathway) {
     self.pathway = ko.observable('user')
 
     self.currentPathway = ko.computed(function() {
-      // console.dir(self[self.pathway() + 'Pathway']().actions());
       return self[self.pathway() + 'Pathway']();
     });
 
