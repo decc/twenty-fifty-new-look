@@ -47,7 +47,7 @@
 #landscape-layer-1,
 #landscape-layer-1:before,
 #landscape-layer-1:after {
-  background-image: url('../layers/layer1.svg');
+  background-image: url('/layers/layer1.svg');
   background-position: 50% -23px;
   background-size: auto 428px;
 }
@@ -55,7 +55,7 @@
 #landscape-layer-2,
 #landscape-layer-2:before,
 #landscape-layer-2:after {
-  background-image: url('../layers/layer2.svg');
+  background-image: url('/layers/layer2.svg');
   background-position: 124% -23px; /* new adjustment for landfill */
   background-size: auto 434px;
 }
@@ -67,18 +67,14 @@
 #landscape-layer-2:after {
   background-position: -9px -153px;
   right: -1267px;
-     -moz-transform: none;
-       -o-transform: none;
-  -webkit-transform: none;
-          transform: none;
-             filter: none;
-         -ms-filter: none;
+  @include transform(none);
+  @include filter(none);
 }
 
 #landscape-layer-3,
 #landscape-layer-3:before,
 #landscape-layer-3:after {
-  background-image: url('../layers/layer3.svg');
+  background-image: url('/layers/layer3.svg');
   background-position: 0 -56px;
   background-size: auto 434px;
 }
@@ -193,10 +189,10 @@ i.bike {
   width: 18px;
   height: 18px;
 
-  &:nth-of-type(1) { bottom: 60px; left: 566px; }
-  &:nth-of-type(2) { left: 260px; }
-  &:nth-of-type(3) { bottom: 55px; left: 760px; }
-  &:nth-of-type(4) { left: 216px; }
+  &[data-value="1"] { bottom: 60px; left: 566px; }
+  &[data-value="2"] { left: 260px; }
+  &[data-value="3"] { bottom: 55px; left: 760px; }
+  &[data-value="4"] { left: 216px; }
 }
 
 .biocrops {
@@ -607,26 +603,18 @@ i.geothermal[data-value="5"] { bottom: 126px; left: 851px; width: 10px; }
 
 .bulb.led { background-image: url(/svgs/bulb_led.svg); }
 
-
-
-/* === Landfill === */
-
 i.landfill {
   background-image: url(/svgs/landfill_high.svg);
-  bottom: 163px;
+  bottom: 100px;
   left: 1214px;
   width: 57px;
+  @include transition(bottom .2s);
+
+  &[data-value="1"] { bottom: 160px; }
+  &[data-value="2"] { bottom: 160px; }
+  &[data-value="3"] { bottom: 150px }
+  &[data-value="4"] { bottom: 140px }
 }
-
-i.landfill[data-value="1"] { background-image: url(/svgs/landfill_high.svg); }
-i.landfill[data-value="2"] { background-image: url(/svgs/landfill_med.svg); }
-i.landfill[data-value="3"] { background-image: url(/svgs/landfill_low.svg); }
-i.landfill[data-value="4"] { background-image: none; }
-i.landfill[data-value="5"] { background-image: none; }
-
-
-
-/* === Lorries === */
 
 i.lorry {
   background-image: url(/svgs/lorry.svg);
@@ -641,22 +629,9 @@ i.lorry[data-value="4"] { left: 141px; }
 i.lorry[data-value="5"] { left: 180px; }
 i.lorry[data-value="6"] { bottom: 54px; left: 785px; }
 
-
-
-/* === Meters === */
-
 i.commercial-meter, i.home-meter {
   background-image: url(/svgs/dial.svg);
-
-      -ms-transition: all 300ms ease-in;
-  -webkit-transition: all 300ms ease-in;
-     -moz-transition: all 300ms ease-in;
-          transition: all 300ms ease-in;
-
-      -ms-transform-origin: 50%;
-  -webkit-transform-origin: 50%;
-     -moz-transform-origin: 50%;
-          transform-origin: 50%;
+  @include transition(transform .3s ease-in);
 }
 
 i.commercial-meter {
@@ -669,88 +644,53 @@ i.commercial-meter {
 }
 
 i.commercial-meter[data-value="1"] {
-      -ms-transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
-     -moz-transform: rotate(90deg);
-          transform: rotate(90deg);
+  @include transform(rotate(90deg));
 }
 
 i.commercial-meter[data-value="2"] {
-      -ms-transform: rotate(112.5deg);
-  -webkit-transform: rotate(112.5deg);
-     -moz-transform: rotate(112.5deg);
-          transform: rotate(112.5deg);
+  @include transform(rotate(112.5deg));
 }
 
 i.commercial-meter[data-value="3"] {
-      -ms-transform: rotate(99deg);
-  -webkit-transform: rotate(99deg);
-     -moz-transform: rotate(99deg);
-          transform: rotate(99deg);
+  @include transform(rotate(99deg));
 }
 
 i.commercial-meter[data-value="4"] {
-      -ms-transform: rotate(81deg);
-  -webkit-transform: rotate(81deg);
-     -moz-transform: rotate(81deg);
-          transform: rotate(81deg);
+  @include transform(rotate(81deg));
 }
 
 i.commercial-meter[data-value="5"] {
-      -ms-transform: rotate(63deg);
-  -webkit-transform: rotate(63deg);
-     -moz-transform: rotate(63deg);
-          transform: rotate(63deg);
+  @include transform(rotate(63deg));
 }
 
 
 i.home-meter {
-  background-position: 0 32px;
-  background-size: 42px auto;
   bottom: 10px;
   left: 934px;
-  height: 74px;
-  width: 74px;
+  height: 20px;
+  width: 42px;
+  @include transform-origin(90% 50%);
 }
 
 i.home-meter[data-value="1"] {
-      -ms-transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-     -moz-transform: rotate(180deg);
-          transform: rotate(180deg);
+  @include transform(rotate(180deg));
 }
 
 i.home-meter[data-value="2"] {
-      -ms-transform: rotate(144deg);
-  -webkit-transform: rotate(144deg);
-     -moz-transform: rotate(144deg);
-          transform: rotate(144deg);
+  @include transform(rotate(144deg));
 }
 
 i.home-meter[data-value="3"] {
-      -ms-transform: rotate(119deg);
-  -webkit-transform: rotate(119deg);
-     -moz-transform: rotate(119deg);
-          transform: rotate(119deg);
+  @include transform(rotate(119deg));
 }
 
 i.home-meter[data-value="4"] {
-      -ms-transform: rotate(70deg);
-  -webkit-transform: rotate(70deg);
-     -moz-transform: rotate(70deg);
-          transform: rotate(70deg);
+  @include transform(rotate(70deg));
 }
 
 i.home-meter[data-value="5"] {
-      -ms-transform: rotate(49deg);
-  -webkit-transform: rotate(49deg);
-     -moz-transform: rotate(49deg);
-          transform: rotate(49deg);
+  @include transform(rotate(49deg));
 }
-
-
-
-/* === Nuclear === */
 
 i.nuclear {
   background-image: url(/svgs/nuclear_powerstation.svg);
