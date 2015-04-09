@@ -422,8 +422,6 @@ i.cow[data-value="2"], i.cow[data-value="4"], i.cow[data-value="5"] {
          -ms-filter: "FlipH";
 }
 
-
-
 /* === Dams === */
 
 i.dam {
@@ -629,18 +627,19 @@ i.lorry[data-value="4"] { left: 141px; }
 i.lorry[data-value="5"] { left: 180px; }
 i.lorry[data-value="6"] { bottom: 54px; left: 785px; }
 
-i.commercial-meter, i.home-meter {
+i.meter {
+  height: 10px;
+  width: 42px;
+  display: block;
   background-image: url(/svgs/dial.svg);
   @include transition(transform .3s ease-in);
+  @include transform-origin(90% 50%);
+  background-size: 100% 100%;
 }
 
 i.commercial-meter {
-  background-position: 0 32px;
-  background-size: 42px auto;
-  bottom: 59px;
-  left: 170px;
-  height: 74px;
-  width: 74px;
+  bottom: 92px;
+  left: 165px;
 }
 
 i.commercial-meter[data-value="1"] {
@@ -665,11 +664,8 @@ i.commercial-meter[data-value="5"] {
 
 
 i.home-meter {
-  bottom: 10px;
+  bottom: 40px;
   left: 934px;
-  height: 20px;
-  width: 42px;
-  @include transform-origin(90% 50%);
 }
 
 i.home-meter[data-value="1"] {
@@ -728,8 +724,8 @@ i.nuclear[data-value="4"] { bottom: 190px; left: 880px; width: 28px; }
 }
 
 .home-cooker {
-  bottom: 53px;
-  left: 1034px;
+  bottom: 50px;
+  left: 1040px;
   width: 23px;
 
   &[data-value="3"] {
@@ -739,17 +735,17 @@ i.nuclear[data-value="4"] { bottom: 190px; left: 880px; width: 28px; }
   }
 
   .hob {
-    bottom: 84px;
+    bottom: 30px;
     width: 10px;
 
     &.left {
       background-image: url(/svgs/gas.svg);
-      left: 1034px;
+      left: -5px;
     }
 
     &.right {
       background-image: url(/svgs/electric.svg);
-      left: 1047px;
+      left: 8px;
     }
   }
 
@@ -760,8 +756,8 @@ i.nuclear[data-value="4"] { bottom: 190px; left: 880px; width: 28px; }
 }
 
 .commercial-cooker {
-  bottom: 101px;
-  left: 76px;
+  bottom: 99px;
+  left: 80px;
   width: 18px;
 
   .oven {
@@ -769,17 +765,17 @@ i.nuclear[data-value="4"] { bottom: 190px; left: 880px; width: 28px; }
   }
 
   .hob {
-    bottom: 120px;
+    bottom: 20px;
     width: 9px;
 
     &.left {
       background-image: url(/svgs/gas_white.svg);
-      left: 76px;
+      left: -4px;
     }
 
     &.right {
       background-image: url(/svgs/electric_white.svg);
-      left: 85px;
+      left: 5px;
     }
   }
 
@@ -1008,3 +1004,28 @@ i.thermometer[data-value="5"] { background-image: url(/svgs/thermometer_2.svg); 
 
 /*.ie #landscape-layer-2:after {
   background-position: -396px -*/
+.ie9 {
+  i.cow {
+    // no black outlines please
+    filter: none;
+    -ms-filter: none;
+  }
+
+  // css dial... ie9 flips bg images whilst rotating >:0
+  i.meter {
+    background: $color-highlight;
+    height: 3px;
+    width: 40px;
+  }
+
+  i.home-meter {
+    bottom: 40px;
+  }
+
+  i.commercial-meter {
+    bottom: 90px;
+    left: 170px;
+  }
+
+}
+
