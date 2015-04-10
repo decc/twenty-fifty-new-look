@@ -1,9 +1,12 @@
 ---
 en:
+  
+  
   splash:
     title: "2050 Energy calculator"
     body: "By the year 2050 we need to dramatically change the way we produce and consume energy.<br>Government targets require us to reduce emmissions to 20% of 1990 levels."
     button: "Start"
+
 
   guide:
     '1': "The UK is committed to reducing its greenhouse gas emissions by at least 80% by 2050, relative to 1990 levels.
@@ -67,16 +70,17 @@ en:
       button: 'Start'
     button: "Skip guide"
 
+
   calculator:
     header:
       reduction: "C02 Reduction"
-      target_reached: "Congratulations! You have reached the UK's target to reduce our greenhouse gas emissions by at least 80% (from the 1990 baseline) by 2050. Use the tabs below to see the consequences of your plan and then press 'Finish & Share'."
+      target_reached: "Congratulations! You have hit the UK’s 80% emissions target. To share your pathway with others go to 'Finish & Share'."
 
     share:
       show: "Finish & Share"
       hide: "Not Finished Yet"
       title: "My Finished 2050 Pathway"
-      body: "Lorem yo"
+      body: ""
       demand: "Demand"
       supply: "Supply"
       share: "Share your pathway"
@@ -149,6 +153,7 @@ en:
       show: "View all pathway actions"
       hide: "Hide all pathway actions"
 
+
   faqs:
     q1:
       question: "How does the calculator work?"
@@ -160,8 +165,23 @@ en:
       question: "Why can't I hit the 80% target?"
       answer: "You must reduce energy demand and decarbonise energy supply - so make sure you change both demand and supply levers. Have you electrified transport, heat or industry? If not, these sectors will be consuming fossil fuels and could stop you from meeting the target. Despite big increases in electricity use, liquid fuel, such as biofuel, will still be needed in 2050. So take a look at the 'flow' view to make sure you have enough low carbon liquid fuel."
     q4:
-      question: "What does the animation do?"
+      question: "What does the dynamic landscape do?"
       answer: "As you make changes to each slider, the image will change to reflect the decision you take. For example, if you increase the level of offshore wind, more turbines at sea will appear."
     q5:
       question: "Where do the figures come from?"
       answer: "The data behind the calculator is rooted in scientific and engineering realities, looking at what is thought to be physically and technically possible in each sector. To do this, a broad range of experts were consulted from inside and outside government. For more background on the calculator go to: <a href=\"https://www.gov.uk/2050-pathways-analysis\" target=\"_blank\">https://www.gov.uk/2050-pathways-analysis</a>."
+
+
+  share: "Congratulations on completing your pathway!
+
+
+These three charts summarise your choices for the demand and supply options you have selected and – crucially – the impact on emissions. The landscape above provides a visual overview of the changes you’ve made.
+
+
+Hopefully the calculator has highlighted the scale of the challenge – and the range of options available – to decarbonise the way we use energy.
+
+
+Please share your pathway with others to help build interest in the future of energy in the UK.
+
+
+To find out more about the calculator take a look at <a href=\"https://www.gov.uk/2050-pathways-analysis\" target=\"_blank\">https://www.gov.uk/2050-pathways-analysis</a>"
