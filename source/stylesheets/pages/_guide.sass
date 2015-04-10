@@ -38,15 +38,21 @@
 
     img
       width: 30vw
-      height: 40vh
+      height: auto
       margin: 1em 0
 
     a
-      color: $color-highlight
+      color: rgba(149, 207, 202, 1)
       text-decoration: none
 
       &.button
         @extend .button
+  
+  #guide-1
+    background-image: url(/images/uk-map.png)
+    background-position: 80% 50%
+    background-repeat: no-repeat
+    background-size: auto 75%
 
 .skip-guide
   @extend .button
