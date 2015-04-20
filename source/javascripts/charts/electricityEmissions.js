@@ -24,7 +24,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       self.height = self.outerHeight - self.margin.top - self.margin.bottom;
 
       var yMin = -500;
-      var yMax = 1500;
+      var yMax = 1000;
 
       var x = d3.scale.linear()
           .domain(d3.extent(chartLayers, function(d) { return d.date; }))
