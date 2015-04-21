@@ -36,7 +36,7 @@ define(['knockout', 'text!../../../components/chartViews/costs.html', 'charts/co
     // Update comparison charts
     ko.computed(function() {
       if(self.selectedExample()) {
-        self.calculator.pathwayUpdating(true);
+        args.pathway.updating(true);
 
         // TODO: remove delay once on same domain
         setTimeout(function() {
@@ -56,7 +56,7 @@ define(['knockout', 'text!../../../components/chartViews/costs.html', 'charts/co
               CostsSensitivityComponentsChart: sensitivityData
             });
 
-            self.calculator.pathwayUpdating(false);
+            args.pathway.updating(false);
           });
         }, 2000);
       }

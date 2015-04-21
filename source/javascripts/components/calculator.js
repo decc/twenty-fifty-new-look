@@ -18,7 +18,6 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
     self.navState = ko.observable(0);
 
     self.overviewVisible = ko.observable(false);
-    self.medium = ko.observable(false);
     self.subNavVisible = ko.observable(false);
     self.shareVisible = ko.observable(false);
     self.fullscreenVisible = ko.observable(false);
@@ -55,7 +54,9 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
 
     self.currentPathway = params.pathway;
 
-    self.pathwayUpdating = self.currentPathway().updating;
+    self.pathwayUpdating = ko.computed(function() {
+      return self.currentPathway().updating();
+    });
 
     self.pathwayCategories = Pathway.categories();
 
