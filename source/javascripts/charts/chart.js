@@ -427,9 +427,6 @@ define(['d3'], function(d3) {
 
             // Labels above yMax
             if(labelYValue > (self.yMax + self.margin.top*30)) {
-              console.log(self.yMax)
-              console.log(d.key + " / " + labelYValue)
-
               d3.select(this)
                 .attr("transform", function(d) {
                   return "translate(" + (self.x(end.date) + 5) + "," + labelYPosition + ")";
@@ -488,22 +485,24 @@ define(['d3'], function(d3) {
                 d3.select(this.parentNode).attr("data-state", "inactive")
                 d3.select(this.parentNode.parentNode).attr("data-state", "inactive")
               })
+          });
 
+      lineContainer.transition()
+        .each(function(d, i) {
             var end = d[d.length - 1];
+
+            // Remove and recreate labels
+            // Needed to get their BBox on IE/FF
+            d3.select(this).select(".line-label").remove();
+
             self.highlightedLabel(self.x(end.date), (self.y(end.value) - labelLineHeight / 2), labelText, "line-label", labelLineHeight, this);
 
-          });
+            d3.select(this).select(".line-label").attr("transform", function(d) { return "translate(" + self.x(end.date) + "," + (self.y(end.value) - labelLineHeight / 2) + ")"; })
+        });
 
       self.svg.selectAll('.line').data([self.lineData])
           .transition()
           .attr("d", self.line())
-
-      self.svg.selectAll('.line-label').data([self.lineData])
-          .transition()
-            .attr("transform", function(d) {
-              var end = d[d.length - 1];
-              return "translate(" + self.x(end.date) + "," + (self.y(end.value) - labelLineHeight / 2) + ")";
-            });
     },
 
     /**************************************************************************************************
