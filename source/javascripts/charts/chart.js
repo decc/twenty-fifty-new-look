@@ -706,7 +706,7 @@ define(['d3'], function(d3) {
         .text(text)
         .attr("dx", "6px")
         .attr("dy", "1.05em");
-      console.log((label.select("text")[0][0].getBBox()))
+
       var labelWidth = label.select("text")[0][0].getBBox().width + 12;
       label.select("rect")
         .attr("width", labelWidth);
