@@ -1,7 +1,7 @@
 ---
 en:
-  
-  
+
+
   splash:
     title: "2050 Energy calculator"
     body: "By the year 2050 we need to dramatically change the way we produce and consume energy.<br>Government targets require us to reduce emmissions to 20% of 1990 levels."
@@ -75,6 +75,7 @@ en:
     header:
       reduction: "C02 Reduction"
       target_reached: "Congratulations! You have hit the UK’s 80% emissions target. To share your pathway with others go to 'Finish & Share'."
+      your_landscape: "Your 2050 Landscape"
 
     share:
       show: "Finish & Share"

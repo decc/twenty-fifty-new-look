@@ -10,12 +10,14 @@ head
 
   title= current_page.data.title || "DECC"
 
+  = javascript_include_tag 'vendor/modernizr'
+
   = stylesheet_link_tag "main"
   = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Lato:100,300,700,900"
 
 body class= page_classes
   = yield
 
-=javascript_include_tag 'vendor/require', :"data-main" => "/javascripts/main.js"
+= javascript_include_tag 'vendor/require', :"data-main" => "/javascripts/main.js"
 
 | </html>
