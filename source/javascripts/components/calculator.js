@@ -56,7 +56,7 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
 
     self.pathwayUpdating = ko.computed(function() {
       return self.currentPathway().updating();
-    })
+    });
 
     self.pathwayCategories = Pathway.categories();
 
