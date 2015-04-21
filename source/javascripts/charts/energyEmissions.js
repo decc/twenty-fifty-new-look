@@ -88,7 +88,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       self.svg.selectAll('.target-line-label').remove();
       self.highlightedLabel((self.x(self.xMax)), targetEmissions - halfLabelLineHeight, "Target", "line-label target-line-label");
 
-
       self.setupLineAxes("Date", "Greenhouse Gas Emissions (MtCO2e/yr)");
   };
 
