@@ -83,6 +83,9 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
 
         self.buttonColor('pink');
 
+        // Redraw any newly visible charts by touching data
+        self.pathway().chartData.notifySubscribers();
+
       } else {
         self.faqCloseMode(true);
         self.faqVisible(false);
