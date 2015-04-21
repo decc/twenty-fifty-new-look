@@ -63,34 +63,38 @@ define(['d3'], function(d3) {
       self.outerHeight = args.height || 480;
 
       self.title = args.title || 'Chart';
-
-      self.xMin = args.xMin || 0;
-      self.xMax = args.xMax || 5000;
-      self.yMin = args.yMin || 0;
-      self.yMax = args.yMax || 1;
+      self.xMin = typeof args.xMin === "number" ? args.xMin : 2010;
+      self.xMax = typeof args.xMax === "number" ? args.xMax : 2050;
+      self.yMin = typeof args.yMin === "number" ? args.yMin : 0;
+      self.yMax = typeof args.yMax === "number" ? args.yMax : 1;
 
       self.minimumHeightForLabel = 12;
+
+      // Add classes based on args
+      if(self.hasAxis) {
+        self.element.classList.add("has-axis")
+      }
 
       self.colours = function(index, key) {
 
         var colors = [
-        
+
           "#28A197", // green
-          
+
           "#C23474", // pink
-          
+
           "#5A6378", // blue
-          
+
           "#A7CECB", // green
-          
+
           "#A12B61", // pink
-          
+
           "#3867AF", // blue
-          
+
           "#2D7883", // green
-          
+
           "#782048", // pink
-          
+
           // more greens
 
           "#26A197",
@@ -107,9 +111,9 @@ define(['d3'], function(d3) {
           "#D6EDEB",
           "#95CFCA",
           "#29827E",
-        
+
           // more pinks
-          
+
           "#531632",
           "#D53980",
           "#C96E79",
@@ -245,8 +249,6 @@ define(['d3'], function(d3) {
 
       if(args.initElement !== false) {
         self.svg = d3.select(self.element).append('svg')
-            // .attr("preserveAspectRatio", "xMinYMin meet")
-            // .attr("viewBox", "0 0 "+self.outerWidth+" "+self.outerHeight)
             .attr('width', '100%')
             .attr('height', '100%')
           .append("g")
@@ -268,7 +270,7 @@ define(['d3'], function(d3) {
     },
 
     stackOrderByEndValue: function(d) {
-      // Layer values at final x
+      // Layer values at final x position
       var endValues = d.map(function(layer){ return layer[layer.length - 1][1]; });
 
       // Create array mapping order of sizes
@@ -418,14 +420,49 @@ define(['d3'], function(d3) {
         .transition()
           .attr("x", 6)
           .attr("dy", "0.35em")
-          .attr("data-state", function(d){
-            // Hide label if layer too small at x1
+          .each(function(d, i) {
             var end = d.values[d.values.length - 1];
-            return (self.y(0) - self.y(end.y) > self.minimumHeightForLabel) ? "active" : "inactive";
-          })
-          .attr("transform", function(d) {
-            var end = d.values[d.values.length - 1];
-            return "translate(" + self.x(end.date) + "," + self.y(end.y0 + end.y / 2) + ")";
+            var labelYValue = end.y0 + end.y / 2;
+            var labelYPosition = self.y(self.yMax) - 50;
+
+            // Labels above yMax
+            if(labelYValue > (self.yMax + self.margin.top*30)) {
+              console.log(self.yMax)
+              console.log(d.key + " / " + labelYValue)
+
+              d3.select(this)
+                .attr("transform", function(d) {
+                  return "translate(" + (self.x(end.date) + 5) + "," + labelYPosition + ")";
+                })
+                .attr("data-state", "inactive")
+                .attr("dx", "1.4em");
+
+              d3.select(this.parentNode).select(".layer-label-arrow").remove()
+              d3.select(this.parentNode).append("polygon")
+                .attr("points", "8,0 16,7 14,10 8,5 2,10 0,7")
+                .attr("class", "layer-label-arrow")
+                .attr("fill", "#fff")
+                .attr("transform", function(d) {
+                  return "translate(" + (self.x(end.date) + 5) + "," + (labelYPosition - 5) + ")";
+                });
+            }
+
+            // Labels below yMin
+            // else if(labelYValue < self.y(self.yMin)) {}
+
+            // Normal labels
+            else {
+              d3.select(this.parentNode).select("polygon").remove();
+
+              d3.select(this)
+                .attr("dx", "0")
+                .attr("transform", function(d) { return "translate(" + self.x(end.date) + "," + self.y(end.y0 + end.y / 2) + ")" })
+                .attr("data-state", function(d){
+                  // Hide label if layer too small at x1
+                  var end = d.values[d.values.length - 1];
+                  return (Math.abs(self.y(0) - self.y(end.y)) > self.minimumHeightForLabel) ? "active" : "inactive";
+                });
+            }
           });
     },
 
@@ -452,25 +489,9 @@ define(['d3'], function(d3) {
                 d3.select(this.parentNode.parentNode).attr("data-state", "inactive")
               })
 
-            var label = d3.select(this).append("g")
-              .attr("class", "line-label")
-              .attr("fill", "#fff")
-              .attr("transform", function(d) {
-                var end = d[d.length - 1];
-                return "translate(" + self.x(end.date) + "," + (self.y(end.value) - labelLineHeight / 2)+ ")";
-              });
+            var end = d[d.length - 1];
+            self.highlightedLabel(self.x(end.date), (self.y(end.value) - labelLineHeight / 2), labelText, "line-label", labelLineHeight, this);
 
-            label.append("rect")
-              .attr("height", labelLineHeight);
-
-            label.append("text")
-              .text(labelText)
-              .attr("dx", "6px")
-              .attr("dy", "1.05em");
-
-            var labelWidth = label.select("text")[0][0].getBBox().width + 12;
-            label.select("rect")
-              .attr("width", labelWidth)
           });
 
       self.svg.selectAll('.line').data([self.lineData])
@@ -481,7 +502,7 @@ define(['d3'], function(d3) {
           .transition()
             .attr("transform", function(d) {
               var end = d[d.length - 1];
-              return "translate(" + self.x(end.date) + "," + (self.y(end.value) - labelLineHeight / 2)+ ")";
+              return "translate(" + self.x(end.date) + "," + (self.y(end.value) - labelLineHeight / 2) + ")";
             });
     },
 
@@ -657,6 +678,35 @@ define(['d3'], function(d3) {
         }
         self.transitionBars();
       });
+    },
+
+    /**************************************************************************************************
+      General Helpers
+    **************************************************************************************************/
+
+    highlightedLabel: function(x, y, text, cssClass, height, container) {
+      var self = this;
+
+      var cssClass = cssClass || "label";
+      var height = height || 17;
+      var container = container ? d3.select(container) : self.svg;
+
+      var label = container.append("g")
+        .attr("class", cssClass)
+        .attr("fill", "#fff")
+        .attr("transform", function(d) { return "translate(" + x + "," + y + ")"; });
+
+      label.append("rect")
+        .attr("height", height);
+
+      label.append("text")
+        .text(text)
+        .attr("dx", "6px")
+        .attr("dy", "1.05em");
+
+      var labelWidth = label.select("text")[0][0].getBBox().width + 12;
+      label.select("rect")
+        .attr("width", labelWidth);
     }
 
   };
