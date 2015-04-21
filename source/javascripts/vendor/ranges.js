@@ -2,7 +2,7 @@
  * range.js - Range input facade
  *
  * @author NathanG
- * @license Range.js 0.0.10 | https://github.com/nathamanath/range/LICENSE
+ * @license Range.js 0.0.11 | https://github.com/nathamanath/range/LICENSE
  */
 
 (function(window, document) {
@@ -140,7 +140,7 @@
       init: function() {
         this._render();
         this._bindEvents();
-        this._setValue(this.value);
+        this._setValue(this.value, this.args.silent);
         this._handleTicks();
 
         return this;
@@ -329,6 +329,7 @@
         el.appendChild(this.track);
         this.track.appendChild(this.pointer);
 
+        // TODO: _preventSelection?!?
         el.addEventListener('selectstart', function(e) {
           e.preventDefault();
         });
@@ -341,7 +342,7 @@
        * @returns Range replacement wrapper element
        */
       _rangeEl: function() {
-        var  el = document.createElement('div');
+        var el = document.createElement('div');
         var width = this.pointerWidth || 0;
         var style = el.style;
 
@@ -392,14 +393,13 @@
        */
       _bindEvents: function() {
         var self = this;
-        var el = this.el;
+        var el = self.el;
 
         el.addEventListener('focus', function(e) {
           self._focus(e);
         });
 
         el.addEventListener('mousedown', function(e) {
-
           var code = e.keyCode || e.which;
 
           // left mousedown only
@@ -460,13 +460,11 @@
 
         // left or down arrow
         if(code === 40 || code === 37) {
-          e.preventDefault();
           self._setValue(self.value - self.step);
         }
 
         // right or up arrow
         else if(code === 38 || code === 39) {
-          e.preventDefault();
           self._setValue(self.value + self.step);
         }
 
@@ -519,13 +517,14 @@
       /**
        * update element dimensions, reset value and pointer position
        * to that of this.input
+       * @param {boolean} silent - supress change + input event
        * @returns Range instance
        */
-      'update': function() {
+      'update': function(silent) {
         this.value = this._roundAndLimit(parseFloat(this.input.value));
 
         this._getDimensions();
-        this._setValue(this.value);
+        this._setValue(this.value, silent);
 
         return this;
       },
@@ -617,6 +616,7 @@
           document.body.style.cursor = '';
         });
 
+        // touchstart || mousedown
         Event.fire(self.input, events[0]);
       },
 
@@ -688,8 +688,9 @@
        * Sets value of both this.input and range replacement
        * @private
        * @param {number} value
+       * @param {boolean} silent - no inPut or change event
        */
-      _setValue: function(value) {
+      _setValue: function(value, silent) {
         var self = this;
 
         value = self._roundAndLimit(value);
@@ -704,25 +705,26 @@
           self.pointer.style.left = [percent, '%'].join('');
 
           // Do not fire event on first call (initialisation)
-          if(self.oldValue) {
+          if(self.oldValue && !silent) {
             Event.fire(self.input, 'input');
           }
 
-          self._change();
+          self._change(silent);
         }
       },
 
       /**
        * Handle change of value if changed
        * @private
+       * @param {boolean} silent - no change event
        */
-      _change: function() {
+      _change: function(silent) {
         var newValue = this.newValue;
         var input = this.input;
 
         if(this.oldValue !== newValue) {
           input.value = this.oldValue = this.value = newValue;
-          Event.fire(input, 'change');
+          if(!silent) Event.fire(input, 'change');
         }
       },
 
