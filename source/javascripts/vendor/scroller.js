@@ -141,6 +141,15 @@
         this._bindEvents();
       },
 
+
+      /**
+       * Kill scroller instance, unbind all event listeners
+       */
+      destroy: function() {
+        this._unbindEvents();
+        this._removeNav();
+      },
+
       _parseOptions: function() {
         if(!!this.opts.nav){ this.nav = this._generateNav(); }
         if(!!this.opts.next){ this.next = this._generateNext(); }
@@ -196,7 +205,15 @@
         nav.innerHTML = out.join('');
 
         this.el.insertBefore(nav, this.el.firstChild);
+
+        this.navEl = nav;
         return nav;
+      },
+
+      _removeNav: function() {
+        var nav = this.navEl;
+
+        nav.parentNode.removeChild(nav);
       },
 
       /**
@@ -235,27 +252,30 @@
       _bindEvents: function(){
         var that = this;
 
-        document.addEventListener(this._mouseWheelEvent, function(e){
+        that.onMouseEvent = function(e) {
           e.preventDefault();
           that._onMouseWheel(e);
-        });
+        };
 
-        document.addEventListener('keydown', function(e){
-          that._onKeyDown(e);
-        });
+        document.addEventListener(this._mouseWheelEvent, that.onMouseEvent);
 
-        window.addEventListener('resize', function(){
-          that._currentToTop();
-        });
 
-        // if were scrolling but not via our animation
-        document.addEventListener('scroll', function(e){
+        that.onKeydownEvent = function(e){ that._onKeyDown(e); }
+        document.addEventListener('keydown', that.onKeydownEvent);
+
+        that.onResizeEvent = function(){ that._currentToTop(); }
+        window.addEventListener('resize', that.onResizeEvent);
+
+        that.onScrollEvent = function(e){
           if(!that.scrolling){
             Helpers.throttle(200, that._activateCurrent).call(that);
           }else{
             e.preventDefault();
           }
-        });
+        };
+
+        // if were scrolling but not via our animation
+        document.addEventListener('scroll', that.onScrollEvent);
 
         // touch events
         var touchStartY = 0;
@@ -298,6 +318,14 @@
 
           that._navClicked(e);
         });
+      },
+
+      _unbindEvents: function() {
+        document.removeEventListener(this._mouseWheelEvent, this.onMouseEvent);
+        document.removeEventListener('keydown', this.onKeydownEvent);
+        window.removeEventListener('resize', this.onResizeEvent);
+        document.removeEventListener('scroll', this.onScrollEvent);
+
       },
 
       /**

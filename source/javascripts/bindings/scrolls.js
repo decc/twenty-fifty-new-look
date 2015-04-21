@@ -3,10 +3,12 @@ define(['knockout', 'scroller'], function(ko, Scroller) {
 
   ko.bindingHandlers.scrolls = {
     init: function(el, valueAccessor) {
-      new Scroller(el, { nav: true, next: true })._activateCurrent();
-    },
+      var scroller = new Scroller(el, { nav: true, next: true });
+      scroller._activateCurrent();
 
-    update: function(el, valueAccessor) {
+      ko.utils.domNodeDisposal.addDisposeCallback(el, function() {
+        scroller.destroy();
+      });
     }
   };
 });
