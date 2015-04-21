@@ -427,9 +427,6 @@ define(['d3'], function(d3) {
 
             // Labels above yMax
             if(labelYValue > (self.yMax + self.margin.top*30)) {
-              console.log(self.yMax)
-              console.log(d.key + " / " + labelYValue)
-
               d3.select(this)
                 .attr("transform", function(d) {
                   return "translate(" + (self.x(end.date) + 5) + "," + labelYPosition + ")";
@@ -493,7 +490,6 @@ define(['d3'], function(d3) {
       lineContainer.transition()
         .each(function(d, i) {
             var end = d[d.length - 1];
-            console.log(this.parentNode)
 
             // Remove and recreate labels
             // Needed to get their BBox on IE/FF

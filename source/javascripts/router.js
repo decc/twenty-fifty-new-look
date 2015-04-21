@@ -48,7 +48,7 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
       });
 
       crossroads.addRoute('not-found', function() {
-        console.log('404');
+
       });
 
       var parseHash = function(newHash, oldHash) {
