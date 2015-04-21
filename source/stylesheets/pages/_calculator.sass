@@ -60,21 +60,6 @@
 
 
 .cityscape
-  height: $cityscape-height
-  position: absolute
-  top: 0
-  left: 0
-  z-index: 10
-  width: 100%
-
-  @include media($media-big)
-    width: calc(100% - #{$right-col-width})
-
-  @media screen and (max-height: $device-height-small)
-    top: 0
-    height: 0
-    display: none
-
 .content-wrapper
   @include col(100%)
   @include omega

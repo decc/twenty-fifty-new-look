@@ -21,11 +21,11 @@
 
         .inner-content data-bind="visible: mainViewVisible"
 
-            #landscape-label.landscape-label data-bind="click: toggleCity"
-              label Your 2050 Landscape
-              span.toggle-city
+            .landscape-label data-bind="click: toggleCity, css: { full: !cityscapeVisible() }"
+              label= t('calculator.header.your_landscape')
+              span.toggle-city data-bind="css: { 'is-active': cityscapeVisible }"
 
-            .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway, pathwayUpdating: pathwayUpdating } }"
+            .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway, pathwayUpdating: pathwayUpdating } }, css: { full: !cityscapeVisible() }, transitionEnd: redrawCharts"
 
         = partial "partials/pathway-overlay"
 

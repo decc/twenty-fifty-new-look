@@ -18,7 +18,7 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
     self.navState = ko.observable(0);
 
     self.overviewVisible = ko.observable(false);
-    self.mainNavVisible = ko.observable(false);
+    self.medium = ko.observable(false);
     self.subNavVisible = ko.observable(false);
     self.shareVisible = ko.observable(false);
     self.fullscreenVisible = ko.observable(false);
@@ -136,12 +136,23 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
       self.activeTab(id)
     }
 
+    self.cityscapeVisible = ko.observable(true);
+
     /** toggle city scape */
     self.toggleCity = function(){
       toggleObservableBool(self, 'cityscapeVisible');
+
+      // TODO: this could be handled by transitionEnd binding
+      // cause ie9 dont do transitions
+      if(!Modernizr.csstransitions) {
+        setTimeout(self.redrawCharts, 10);
+      }
+    }
+
+    self.redrawCharts = function() {
       // Redraw charts by touching data
       self.pathway().chartData.notifySubscribers();
-    }
+    };
 
   };
 
