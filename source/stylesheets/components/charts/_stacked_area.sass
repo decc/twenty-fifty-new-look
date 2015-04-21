@@ -1,10 +1,20 @@
 .chart
+  .target-line
+    stroke: #fff
+    stroke-width: 2px
+    stroke-dasharray: 2, 4
+    pointer-events: none
+
   .layer-label
     fill: #c7ced9
     font-size: 0.7em
 
     &[data-state="inactive"]
       display: none
+
+  .layer-label-arrow
+    display: none
+    font-size: 0.7em
 
   .line-label
     fill: #5a6378
@@ -29,6 +39,10 @@
         opacity: 1
 
       .layer-label
+        display: block
+        fill: #fff
+
+      .layer-label-arrow
         display: block
         fill: #fff
 

@@ -52,7 +52,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     var xMin = 0;
     var xMax = 10000;
 
-    var nTicks = 5;
+    self.nTicks = 5;
 
     var x = d3.scale.linear()
         .domain([xMin, xMax])
@@ -61,7 +61,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("top")
-        .ticks(nTicks);
+        .ticks(self.nTicks);
 
     self.x = x;
     self.xAxis = xAxis;

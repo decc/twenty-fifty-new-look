@@ -47,6 +47,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
       self.x = x;
       self.y = y;
+      self.yMin = yMin;
+      self.yMax = yMax;
       self.xAxis = xAxis;
       self.yAxis = yAxis;
 

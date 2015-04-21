@@ -47,6 +47,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
 
       self.x = x;
       self.y = y;
+      self.yMin = yMin;
+      self.yMax = yMax;
       self.xAxis = xAxis;
       self.yAxis = yAxis;
 
@@ -63,58 +65,29 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       var positiveLayers = stack(positiveLayers);
       var negativeLayers = stack(negativeLayers);
 
-      var layers = positiveLayers.concat(negativeLayers);
+      self.stackedAreaData = positiveLayers.concat(negativeLayers);
+      self.lineData = data.chartLine;
 
       // Primary data
-      var demand = self.svg.selectAll(".layer-container")
-          .data(layers)
-
-
-      demand.enter().append("g")
-            .attr("class", "layer-container")
-            .each(function(d, i) {
-              d3.select(this).append('path')
-                .attr("class", function(d) { return "layer layer-" + d.key.replace(/ +/g, '-').replace(/[^\w|-]/g, '').toLowerCase(); })
-                .attr('fill', function(d, i) { return self.colours(i, d.key); })
-                .attr('opacity', '0.6')
-                .on('mouseover', function(d) {
-                  d3.select(this.parentNode).attr("data-state", "active")
-                  d3.select(this.parentNode.parentNode).attr("data-state", "graph-hover")
-                })
-                .on('mouseout', function(d) {
-                  d3.select(this.parentNode).attr("data-state", "inactive")
-                  d3.select(this.parentNode.parentNode).attr("data-state", "inactive")
-                })
-              d3.select(this).append("text")
-                .attr("class", "layer-label")
-                .text(function(d) { return d.key; })
-                .attr("transform", function(d) {
-                  var end = d.values[d.values.length - 1];
-                  return "translate(" + self.x(end.date) + "," + self.y(end.y0 + end.y / 2) + ")";
-                });
-            })
-
-      self.svg.selectAll('.layer').data(layers)
-        .transition()
-          .attr("d", function(d) { return area(d.values); });
-
-      self.svg.selectAll('.layer-label').data(layers)
-        .transition()
-          .attr("x", 6)
-          .attr("dy", "0.35em")
-          .attr("data-state", function(d){
-            // Hide label if layer too small at x1
-            var end = d.values[d.values.length - 1];
-            return (Math.abs(y(0) - y(end.y)) > self.minimumHeightForLabel) ? "active" : "inactive";
-          })
-          .attr("transform", function(d) {
-            var end = d.values[d.values.length - 1];
-            return "translate(" + x(end.date) + "," + y(end.y0 + end.y / 2) + ")";
-          });
+      self.drawStackedArea();
 
       // Secondary data
       self.lineData = chartLine;
       self.drawLine("Total");
+
+      // Target
+      var targetEmissions = y(153);
+      var halfLabelLineHeight = 8;
+      self.svg.selectAll('.target-line').remove();
+      self.svg.append("line")
+        .attr("x1", x(self.xMin))
+        .attr("x2", x(self.xMax))
+        .attr("y1", targetEmissions)
+        .attr("y2", targetEmissions)
+        .attr("class", "target-line")
+      self.svg.selectAll('.target-line-label').remove();
+      self.highlightedLabel((self.x(self.xMax)), targetEmissions - halfLabelLineHeight, "Target", "line-label target-line-label");
+
 
       self.setupLineAxes("Date", "Greenhouse Gas Emissions (MtCO2e/yr)");
   };
