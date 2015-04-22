@@ -117,7 +117,6 @@ define(['knockout', 'd3', 'charts/chart', 'raphael', 'sankey'], function(ko, d3,
       this.recolour(this.boxes["Electricity grid"].left_lines, self.colours(8));
     };
 
-    self.sankey.y_space = 15;
     self.sankey.right_margin = 210;
     self.sankey.left_margin = 120;
     self.sankey.box_width = self.drawParams.boxWidth || 30;
@@ -126,7 +125,21 @@ define(['knockout', 'd3', 'charts/chart', 'raphael', 'sankey'], function(ko, d3,
     self.sankey.opacity = 1.0;
     self.sankey.opacity_hover = 0.2;
 
-    var pixels_per_TWh = 0.3 * self.element.clientHeight / 6000;
+    // Set top and height of chart element
+    if(self.drawParams.setPosition) {
+      var precedingElement = document.querySelector('.chart-fullscreen-button');
+      var top = precedingElement.offsetTop + precedingElement.clientHeight + 30;
+      self.element.style.top = top + "px";
+      self.element.style.height = (self.element.parentNode.clientHeight - top) + "px";
+    }
+
+    // Set y spacing automatically between max/min
+    var ySpaceMin = 8;
+    var ySpaceMax = 20;
+    self.sankey.y_space = Math.min(Math.max(self.element.clientHeight / 40, ySpaceMin), ySpaceMax);
+
+    // Works for every height, constant takes y spacing into account
+    var pixels_per_TWh = self.element.clientHeight / 3800 - 0.04;
 
     self.sankey.convert_flow_values_callback = function(flow) {
       return flow * pixels_per_TWh; // Pixels per TWh
@@ -143,6 +156,7 @@ define(['knockout', 'd3', 'charts/chart', 'raphael', 'sankey'], function(ko, d3,
     self.sankey.setData(data);
     self.sankey.draw();
 
+    document
 
   };
 
