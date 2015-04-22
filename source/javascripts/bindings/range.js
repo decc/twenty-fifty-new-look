@@ -10,7 +10,9 @@ define(['knockout', 'range'], function(ko, Range) {
         args.pointerWidth = pointerWidth;
       }
 
-      el.rangeInstance = Range.create(el, args);
+      args.silent = true;
+
+      el.rangeInstance = Range.init(el, args);
     },
 
     update: function(el) {
