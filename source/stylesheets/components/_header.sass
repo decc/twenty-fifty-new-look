@@ -6,35 +6,56 @@
   @include row
   background: $color-background-dark
 
-  .toggle-nav
-    @include col(6%)
-    @include omega
-    height: 100%
-    width: 6%
-    color: $color-button-text
-    background: none
-    border: none
-
-  .pathway-owner
-    display: none
-    @include col(16.6%)
-    height: 100%
-    @extend %vertical-centered
-    color: #fff
+  .settings
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    z-index: 5
+    cursor: pointer
+    width: $chart-tabs-width-small
 
     @include media($media-medium)
-      display: table
+      width: $chart-tabs-width
+
+    .toggle-nav
+      position: absolute
+      top: 0
+      left: 0
+      width: $chart-tabs-width-small
+      height: 100%
+      color: $color-button-text
+
+      &:before
+        position: absolute
+        top: 50%
+        left: 50%
+        @include transform(translate(-50%, -50%))
+
+    .pathway-owner
+      display: none
+      padding-left: 56px
+      height: 100%
+      @extend %vertical-centered
+      color: #fff
+
+      @include media($media-medium)
+        display: table
 
   .total-co2-reduction
-    @include col(calc(94% - 140px))
-    @include omega
     position: relative
+    width: 100%
+    padding-left: $chart-tabs-width-small
+    padding-right: $small-controls-width
     height: 100%
     color: $color-background-dark
     border-left: 1px solid #333
 
     @include media($media-medium)
-      width: calc(77.4% - 306px)
+      padding-left: $chart-tabs-width
+
+    @include media($media-mediumbig)
+      padding-right: $right-col-width
 
     .container
       @extend %vertical-centered
@@ -96,7 +117,7 @@
     right: 0
     height: 100%
 
-    @include media($media-medium)
+    @include media($media-mediumbig)
       width: $right-col-width
 
     .spinner
@@ -125,7 +146,7 @@
       span
         display: none
 
-      @include media($media-medium)
+      @include media($media-mediumbig)
         span
           display: inline
           position: relative
