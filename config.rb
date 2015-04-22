@@ -31,8 +31,17 @@ helpers do
     RDiscount.new(string).to_html
   end
 
+  # Likt I18n.t but parses markdown
   def m(i18n)
     markdown(I18n.t(i18n))
+  end
+
+  # Rails like path helpers
+  # e.g. home_path => /#/home
+  %W(home guide calculator share).each do |p|
+    define_method("#{p}_path") do
+      "/#/#{p}"
+    end
   end
 end
 
@@ -45,17 +54,6 @@ configure :development do
 end
 
 activate :i18n
-
-# Methods defined in the helpers block are available in templates
-helpers do
-  # Rails like path helpers
-  # e.g. home_path => /#/home
-  %W(home guide calculator share).each do |p|
-    define_method("#{p}_path") do
-      "/#/#{p}"
-    end
-  end
-end
 
 set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
