@@ -1,12 +1,74 @@
+$scroll-nav-width: 25px
+
+.scrollable-nav
+
+  $color-scroll-nav: #95ceca
+
+  position: fixed
+  right: 5px
+  top: 50%
+  @include transform(translate(0, -50%))
+
+  @include media($media-medium)
+    right: $scroll-nav-width
+
+  > ul
+    list-style: none
+
+    > li
+      margin-bottom: $scroll-nav-width
+
+  a
+    display: block
+    border: 3px solid $color-scroll-nav
+    border-radius: 50px
+    width: $scroll-nav-width
+    height: $scroll-nav-width
+    text-indent: 999px
+    overflow: hidden
+
+    &.active
+      background: $color-scroll-nav
+
+.scrollable-next
+  @extend %icon-button, %icon-down_arrow-before
+  position: fixed
+  margin: auto
+  bottom: $scroll-nav-width
+  right: $scroll-nav-width
+  color: #ffffff
+  width: 68px
+  height: 53px
+  text-indent: 100%
+  overflow: hidden
+  opacity: 1
+  outline: none
+  @include transition(opacity .3s ease-in-out)
+
+  @include media($media-medium)
+    right: 50%
+    @include transform(translateX(50%))
+
+  &.is-hidden
+    opacity: 0
+
+  &:before
+    font-size: 50px
+    position: absolute
+    top: 0
+    left: -114%
+
+
+
 .guide
   section
     padding: 15%
     text-align: center
     width: 100%
 
-    *
-      font-size: 2.25vh
-      line-height: 1.6em
+    // *
+    //   font-size: 2.25vh
+    //   line-height: 1.6em
 
   section:after
     content: " "
@@ -19,15 +81,16 @@
       font-size: 1.5em
 
     .col
-      @include col(50%)
+      @include col(100%)
       padding: 0 20px
       text-align: left
 
     img
-      width: 30vw
+      width: 50%
       max-width: 100%
       height: auto
-      margin: 1em 0
+      margin: 1em auto
+      display: block
 
     a
       color: rgba(149, 207, 202, 1)
@@ -57,6 +120,6 @@
 .skip-guide
   @extend .button
   position: fixed
-  bottom: 1em
+  bottom: $scroll-nav-width
   left: 1em
 
