@@ -16,6 +16,7 @@ desc 'deploy preview'
 task :preview do
   `middleman build`
   FileUtils.cp_r './build', '../preview/'
+  FileUtils.rm_r './build'
   FileUtils.cd '../preview'
   `git add -A && git commit -m 'preview' && git push heroku master --force`
 end
