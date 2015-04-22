@@ -5,12 +5,9 @@ $scroll-nav-width: 25px
   $color-scroll-nav: #95ceca
 
   position: fixed
-  right: 5px
+  right: 1em
   top: 50%
   @include transform(translate(0, -50%))
-
-  @include media($media-medium)
-    right: $scroll-nav-width
 
   > ul
     list-style: none
@@ -22,10 +19,14 @@ $scroll-nav-width: 25px
     display: block
     border: 3px solid $color-scroll-nav
     border-radius: 50px
-    width: $scroll-nav-width
-    height: $scroll-nav-width
+    width: 15px
+    height: 15px
     text-indent: 999px
     overflow: hidden
+
+    @include media($media-medium)
+      width: $scroll-nav-width
+      height: $scroll-nav-width
 
     &.active
       background: $color-scroll-nav
@@ -35,9 +36,9 @@ $scroll-nav-width: 25px
   position: fixed
   margin: auto
   bottom: $scroll-nav-width
-  right: $scroll-nav-width
+  right: 1em
   color: #ffffff
-  width: 68px
+  width: 60px
   height: 53px
   text-indent: 100%
   overflow: hidden
@@ -61,14 +62,26 @@ $scroll-nav-width: 25px
 
 
 .guide
+  .fixed-logo
+    opacity: 0
+    @include transition(opacity .3s ease-in-out)
+    &.is-active
+      opacity: 1
+      @include transition(opacity .3s .3s ease-in-out)
+
+    @media(orientation: portrait)
+      opacity: 1
+
+    @include media($media-big)
+      opacity: 1!important
+
   section
-    padding: 15%
+    padding: 1.5em
     text-align: center
     width: 100%
 
-    // *
-    //   font-size: 2.25vh
-    //   line-height: 1.6em
+    @include media($media-medium)
+      padding: 3em
 
   section:after
     content: " "
@@ -76,6 +89,12 @@ $scroll-nav-width: 25px
     display: block
 
   article
+
+    @include media($media-big)
+      font-size: 1.5em
+
+    line-height: 1.6em
+
     h1, h2
       margin-bottom: 10px
       font-size: 1.5em
@@ -85,12 +104,18 @@ $scroll-nav-width: 25px
       padding: 0 20px
       text-align: left
 
+      @include media($media-medium)
+        width: 50%
+
     img
-      width: 50%
+      width: 100%
       max-width: 100%
       height: auto
       margin: 1em auto
       display: block
+
+      @include media($media-medium)
+        width: auto
 
     a
       color: rgba(149, 207, 202, 1)
@@ -101,9 +126,12 @@ $scroll-nav-width: 25px
 
   #guide-1
     background-image: url(/images/uk-map.png)
-    background-position: 80% 50%
+    background-position: center
     background-repeat: no-repeat
     background-size: auto 75%
+
+    @include media($media-medium)
+      background-position: 80% 50%
 
 .button
   text-transform: uppercase
