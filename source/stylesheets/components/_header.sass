@@ -5,36 +5,59 @@
   min-height: 65px
   @include row
   background: $color-background-dark
+  border-bottom: 1px solid $color-border-dark
 
-  .toggle-nav
-    @include col(6%)
-    @include omega
-    height: 100%
-    width: 6%
-    color: $color-button-text
-    background: none
-    border: none
-
-  .pathway-owner
-    display: none
-    @include col(16.6%)
-    height: 100%
-    @extend %vertical-centered
-    color: #fff
+  .settings
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    z-index: 5
+    cursor: pointer
+    width: $chart-tabs-width-small
+    border-right: 1px solid $color-border-dark
 
     @include media($media-medium)
-      display: table
+      width: $chart-tabs-width
+
+    .toggle-nav
+      position: absolute
+      top: 0
+      left: 0
+      width: $chart-tabs-width-small
+      height: 100%
+      color: $color-button-text
+
+      &:before
+        position: absolute
+        top: 50%
+        left: 50%
+        @include transform(translate(-50%, -50%))
+
+    .pathway-owner
+      display: none
+      padding-left: 56px
+      padding-right: 15px
+      height: 100%
+      @extend %vertical-centered
+      color: #fff
+
+      @include media($media-medium)
+        display: table
 
   .total-co2-reduction
-    @include col(calc(94% - 140px))
-    @include omega
     position: relative
+    width: 100%
+    padding-left: $chart-tabs-width-small
+    padding-right: $small-controls-width
     height: 100%
     color: $color-background-dark
-    border-left: 1px solid #333
 
     @include media($media-medium)
-      width: calc(77.4% - 306px)
+      padding-left: $chart-tabs-width
+
+    @include media($media-mediumbig)
+      padding-right: $right-col-width
 
     .container
       @extend %vertical-centered
@@ -64,6 +87,10 @@
         border-bottom: 40px solid $color-background-dark
         border-left: 40px solid transparent
 
+  .spacer
+    position: relative
+    width: 100%
+
   .target-reached-tooltip
     position: absolute
     right: 20px
@@ -75,7 +102,7 @@
     width: 33%
 
     .arrow
-      left: 60%
+      left: 42%
       margin-left: 2px
       border-color: rgba(45, 49, 60, 0.95) transparent
 
@@ -96,7 +123,7 @@
     right: 0
     height: 100%
 
-    @include media($media-medium)
+    @include media($media-mediumbig)
       width: $right-col-width
 
     .spinner
@@ -116,6 +143,7 @@
       @extend %vertical-centered
       padding-right: 70px
       width: 100%
+      border-left: 1px solid $color-border-dark
       @extend %icon-flag-before
 
       &:before
@@ -125,7 +153,7 @@
       span
         display: none
 
-      @include media($media-medium)
+      @include media($media-mediumbig)
         span
           display: inline
           position: relative
@@ -141,7 +169,7 @@
       width: 70px
       font-size: 2em
       font-weight: bold
-      border-left: 1px solid #fff
+      border-left: 1px solid $color-background
       line-height: 1
 
       &.share-closer
@@ -155,9 +183,9 @@
         background: #fff
         color: #000
 
-      &.pink
+      &.question
         color: #fff
-        background: #d53980
+        background: #4a5163
         cursor: help
 
       &.blue
@@ -171,16 +199,3 @@
       span
         width: 100%
         height: 100%
-
-      &:not(.pink)
-        img
-          display: none
-
-      img
-        position: absolute
-        left: 10px
-        top: 10px
-        bottom: 10px
-        right: 10px
-        width: calc(100% - 20px)
-

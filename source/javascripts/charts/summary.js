@@ -40,7 +40,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         .attr("gradientUnits", "userSpaceOnUse")
         .attr("x1", x(xMin)).attr("y1", 0)
         .attr("x2", function(d) { return x(d) }).attr("y2", 0)
-        // .attr("x2", function(d) { return x(xMax); }).attr("y2", 0)
       .selectAll("stop")
         .data([
           { offset: "0%", color: "#fff" },
@@ -48,7 +47,13 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         ])
       .enter().append("stop")
         .attr("offset", function(d) { return d.offset; })
-        .attr("stop-color", function(d) { return d.color; })
+        .attr("stop-color", function(d, i) {
+          // New color interpolated between original and white depending on chart %
+          // var colorness = function(color) { return Math.round(color * (data / 100) + 255 * (1 - (data / 100))); }
+          // var color = "rgb("+colorness(90)+","+colorness(99)+","+colorness(120)+")";
+          // return i === 0 ? color : d.color;
+          return data >= 80 ? "#28a197" : "#d53980"
+        })
         .attr("stop-opacity", function(d, i) { return i === 0 ? (1 - (data / 100)) : "1"; });
 
     var bars = self.svg.selectAll(".bar")
@@ -57,7 +62,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     bars.enter().append("polygon")
         .attr("class", "bar")
         .attr('fill', 'url(#arrow-gradient)')
-        .attr('opacity', '0.6')
         .attr("points", function(d) { return [x(0)+" 0", x(d)+" 0", (x(d)+20)+" "+(self.height/2), x(d)+" "+self.height, x(0)+" "+self.height].join(", ") })
 
     bars.transition()
@@ -72,7 +76,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         .attr("y", 44)
 
     text.transition()
-        .attr("x", function(d) { return self.width / 2 })
+        .attr("x", function(d) { return self.width * 0.4 })
         .text(function(d) { return (d + "% CO₂ Reduction") })
 
     self.svg.selectAll('.target').remove();
@@ -87,27 +91,15 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         "stroke-dasharray": "4 3"
       });
 
-    self.svg.selectAll('.target-achieved').remove();
-    self.svg.append("rect").data([data])
-      .attr({
-        "class": "target-achieved",
-        "x" : x(80),
-        "width" : x(20),
-        "y" : 0,
-        "height" : self.height,
-        "fill": function(d) { return d >= 80 ? "#95cfca" : "none"; },
-        "fill-opacity": "0.3"
-      });
-
     self.svg.selectAll('.target-label').remove();
     self.svg.append("text")
       .attr({
         "class": "target-label",
         "x": x(90),
         "y": 0,
-        "dy": "2.6em"
+        "dy": "2.5em"
       })
-      .text("80% Target")
+      .text("\u2190\u00A0\u00A080% Target")
   };
 
   return SummaryChart;

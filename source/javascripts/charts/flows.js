@@ -139,7 +139,7 @@ define(['knockout', 'd3', 'charts/chart', 'raphael', 'sankey'], function(ko, d3,
     self.sankey.y_space = Math.min(Math.max(self.element.clientHeight / 40, ySpaceMin), ySpaceMax);
 
     // Works for every height, constant takes y spacing into account
-    var pixels_per_TWh = self.element.clientHeight / 3800 - 0.04;
+    var pixels_per_TWh = self.element.clientHeight / 12000 - 0.02;
 
     self.sankey.convert_flow_values_callback = function(flow) {
       return flow * pixels_per_TWh; // Pixels per TWh

@@ -25,7 +25,7 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
     self.faqVisible = ko.observable(false);
     self.mainViewVisible = ko.observable(true);
 
-    self.buttonColor = ko.observable('pink');
+    self.buttonColor = ko.observable('question');
 
     self.fullscreenVisible = ko.observable(false);
     self.overlayVisible = ko.observable(false);
@@ -50,7 +50,7 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
 
     self.hideOverlay = function() {
       self.overlayVisible(false);
-      self.buttonColor('pink');
+      self.buttonColor('question');
     };
 
     self.currentPathway = params.pathway;
@@ -78,7 +78,7 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
         self.mainViewVisible(true);
         self.shareVisible(false);
 
-        self.buttonColor('pink');
+        self.buttonColor('question');
 
         // Redraw any newly visible charts by touching data
         self.pathway().chartData.notifySubscribers();
@@ -109,7 +109,7 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
         self.fullscreenVisible(false);
         self.faqVisible(false);
 
-        self.buttonColor('pink');
+        self.buttonColor('question');
 
       } else {
         self.faqCloseMode(true);

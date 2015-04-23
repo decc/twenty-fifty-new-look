@@ -95,6 +95,27 @@ define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySuppl
         // Single pathway chart
         element.chart.draw(element.data()[name], width, height);
       }
+
+      ko.bindingHandlers.chart.afterDraw(element);
+    },
+
+    afterDraw: function(element) {
+      // Remove scroll from container
+      if(element.params.autoSize === true) {
+        var scrolls = document.querySelectorAll('.scroll');
+        for (var i = 0; i < scrolls.length; i++) {
+          var scroll = scrolls[i];
+          if(scroll.contains(element)) {
+            // If no scroll needed remove overflow scroll
+            if(scroll.children[0].clientHeight > scroll.clientHeight) {
+              scroll.style.overflowY = "scroll";
+            } else {
+              scroll.style.overflowY = "visible";
+            }
+            break;
+          }
+        }
+      }
     },
 
     redrawElements: function(elementNodelist) {

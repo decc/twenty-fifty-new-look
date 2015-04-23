@@ -8,10 +8,10 @@
 
   @include media($media-city)
     top: $cityscape-height
-  
+
   a
     color: rgba(149, 207, 202, 1)
-  
+
   .background
     overflow-y: scroll
     height: 100%
@@ -68,11 +68,8 @@
     color: #fff
     background: #28a197
 
-    .title, li
-      float: left
-      padding: 20px 5px 16px
-
     .title
+      padding: 20px 5px 16px
       position: absolute
       top: 0
       left: 0
@@ -82,17 +79,19 @@
       line-height: 21px
 
     .social-links
-      padding: 0 0 0 210px
+      padding: 0 0 0 250px
       margin: 0
 
       li
         list-style-type: none
         text-align: center
-        width: percentage(1/7)
-        margin-left: 1em
+        width: percentage(1/5)
+        margin: 0
+        float: left
+        border-left: 1px solid #fff
 
-        @include media($media-big)
-          margin: none
+        &:first-child
+          border-left: none
 
         span
           display: none
@@ -104,7 +103,14 @@
           color: #fff
           text-decoration: none
           position: relative
-          top: -0.4em
+          display: block
+          padding: 15px 0px 21px 15px
+
+          @include media($media-big)
+            padding: 15px 5px 21px
+
+          &:hover
+            background: lighten(#28a197, 10%)
 
           &:before
             position: relative

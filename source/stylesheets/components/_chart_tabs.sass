@@ -4,6 +4,7 @@
   left: 0
   right: 0
   background: #5A6378
+  border-top: 1px solid #fff
   @include transition(height .3s ease-in-out, top .3s ease-in-out)
 
   &.full
@@ -33,6 +34,7 @@
   overflow: hidden
   bottom: 0
   z-index: 10
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3)
   @include media($media-height-small)
     top: 0
 
@@ -74,7 +76,7 @@
         left: 0
         top: 50%
         margin-top: -0.45em
-        padding: 0 0.5em
+        padding: 0 16px
         font-size: 1.5em
 
 .chart-tabs

@@ -1,4 +1,6 @@
-.chart
+.chart svg
+  overflow: hidden
+
   .target-line
     stroke: #fff
     stroke-width: 2px
@@ -12,9 +14,15 @@
     &[data-state="inactive"]
       display: none
 
-  .layer-label-arrow
-    display: none
-    font-size: 0.7em
+    .layer-label-arrow
+      display: none
+      font-size: 0.7em
+
+    &.always-show
+      display: block
+
+      .layer-label-arrow
+        display: block
 
   .line-label
     fill: #5a6378

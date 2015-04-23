@@ -8,7 +8,6 @@
   list-style-type: none
   padding: 0
   margin: 0
-  background: #4b5365
 
   @include media($media-big)
     left: $chart-tabs-width
@@ -16,10 +15,20 @@
   li
     float: left
     height: 100%
+    background: #5a6378
+    border-bottom: 1px solid $color-border-dark
 
     &.active
-      .tab-button
-        background: #5a6378
+      background: none
+      border-bottom: none
+      border-left: 1px solid $color-border-dark
+      border-right: 1px solid $color-border-dark
+
+    &:first-child
+      border-left: none
+
+    &:last-child
+      border-right: none
 
     &.one-of-2
       width: 50%
@@ -39,9 +48,12 @@
       background: none
 
 .chart-component
-  position: relative
+  position: absolute !important
+  top: percentage(1/9)
+  left: 220px
+  right: 0
+  bottom: 0
   overflow: hidden
-  height: 100%
 
   .tab
     position: absolute
@@ -50,13 +62,13 @@
     height: 100%
 
     .inner
-      padding: #{(100/9)}vh $chart-tab-padding-right $chart-tab-padding-bottom $chart-tab-padding-left
+      padding: 42px $chart-tab-padding-right $chart-tab-padding-bottom $chart-tab-padding-left
       height: 100%
 
     .outer
       overflow-y: scroll
       height: 100%
-      border-top: #{(100/9)}vh solid transparent
+      padding-top: 42px
 
       .scroll
         overflow: visible
