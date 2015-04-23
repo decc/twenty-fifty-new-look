@@ -29,9 +29,9 @@
 
         = partial "partials/pathway-overlay"
 
-        pathway-sidebar data-bind="visible: mainViewVisible" params="pathway: currentPathway"
+        pathway-sidebar data-bind="visible: mainViewVisible" params="pathway: currentPathway, overviewVisible: overviewVisible"
 
-        all-pathway-actions params="pathway: currentPathway, visible: overviewVisible, toggle: toggleOverview"
+        all-pathway-actions params="pathway: currentPathway, visible: overviewVisible"
 
         section#faq.modal-overlay data-bind="css: { 'is-active': faqVisible() }, component: { name: 'faq' }"
 

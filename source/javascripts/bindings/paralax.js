@@ -58,7 +58,7 @@ define(['knockout'], function(ko) {
           layers.forEach(function(layer) {
 
             transforms.forEach(function(transform) {
-              
+
               var xParallax = -((xOffset / landscapeWidth) * (layer.width - landscapeWidth)),
                   yParallax = 0;
 
@@ -66,7 +66,7 @@ define(['knockout'], function(ko) {
                 yParallax = yOffset * (layer.yThreshold * ( landscapeHeight / (landscapeHeight + landscape.offsetTop) ) );
 
               layer.el.style[transform] = 'translate(' + xParallax + 'px, ' + yParallax + 'px)';
-              
+
             });
           });
 
@@ -75,6 +75,10 @@ define(['knockout'], function(ko) {
       };
 
       window.addEventListener("mousemove", parallaxLandscape);
+
+      ko.utils.domNodeDisposal.addDisposeCallback(el, function() {
+        window.removeEventListener('mousemove', parallaxLandscape);
+      });
     }
   }
 });

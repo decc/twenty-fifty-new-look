@@ -34,5 +34,5 @@ aside.controls-sidebar data-bind="tabs, css: { 'is-active': navVisible }"
             .arrow
             .text
 
-  button.show-overview data-bind="click: $parent.toggleOverview"= I18n.t('calculator.all.show')
+  button.show-overview data-bind="click: toggleOverview, swipe: swipeOverview"= I18n.t('calculator.all.show')
 
