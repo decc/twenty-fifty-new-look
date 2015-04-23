@@ -3,8 +3,8 @@ en:
 
 
   splash:
-    title: "2050 Energy calculator"
-    body: "By the year 2050 we need to dramatically change the way we produce and consume energy.<br>Government targets require us to reduce emmissions to 20% of 1990 levels."
+    heading: "2050 Energy calculator"
+    content: "By the year 2050 we need to dramatically change the way we produce and consume energy.<br>Government targets require us to reduce emmissions to 20% of 1990 levels."
     button: "Start"
 
 
@@ -70,6 +70,15 @@ en:
       button: 'Start'
     button: "Skip guide"
 
+  not_found:
+    heading: 'Pathway not found'
+    content: 'The pathway you are looking for does not exist'
+    button: 'To the calculator!'
+
+  too_small:
+    heading: 'Your device is too small'
+    content: 'Come back with a bigger screen to see our awesome charts'
+    button: 'To the old calculator?'
 
   calculator:
     header:

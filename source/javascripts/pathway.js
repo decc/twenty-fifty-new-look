@@ -1,5 +1,5 @@
-define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
-  function(ko, DataRequester, config, ChartParser, Action) {
+define(['knockout', 'dataRequester', 'config', 'chartParser', 'action', 'hasher'],
+  function(ko, DataRequester, config, ChartParser, Action, hasher) {
 
   'use strict';
 
@@ -324,6 +324,9 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
     var args = args || {},
         self = this;
 
+    // check values are probably valid (server does not check this)
+    self.valid = true;
+
     self.name = args.name;
     self.values = args.values; // TODO: Map values to pathway action values
 
@@ -340,10 +343,12 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
       var pathwayString = self.getPathwayString();
       if(!self.locked()) {
         self.updating(true);
+
         DataRequester.pathway(pathwayString, function(data){
           var data = JSON.parse(data.responseText);
           self.chartParser = new ChartParser(data);
           self.chartData(self.chartParser.all());
+          self.validateValues();
           self.updating(false);
         });
       }
@@ -353,6 +358,14 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
   }
 
   Pathway.prototype = {
+    validateValues: function() {
+      var values = this.values;
+
+      if(!/^[0-9a-z]+$/.test(values) || values.length !== 53) {
+        hasher.replaceHash('not-found');
+      }
+    },
+
     /** find action by slug*/
     findAction: function(slug) {
       var actions = this.actions();
@@ -506,7 +519,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
     }
   };
 
-  /** @returns {object|null} Pathway instance if found else null */
+  /** @returns {object|null} Pathway instance if found */
   Pathway.find = function(slug) {
     // find example by slug
     var example = ko.utils.arrayFirst(Pathway.examples(), function(ex) {
@@ -517,7 +530,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
     return example ? new Pathway(example) : null;
   };
 
-  /** @returns {string} Default pathway values as bitwise string */
+  /** @returns {string} Default pathway values as magical string */
   Pathway.defaultValues = function() {
     return '10111111111111110111111001111110111101101101110110111';
   };
