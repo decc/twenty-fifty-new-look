@@ -403,13 +403,15 @@ define(['d3'], function(d3) {
                   d3.select(this.parentNode).attr("data-state", "inactive")
                   d3.select(this.parentNode.parentNode).attr("data-state", "inactive")
                 })
-              d3.select(this).append("text")
+              d3.select(this).append("g")
                 .attr("class", "layer-label")
-                .text(function(d) { return d.key; })
                 .attr("transform", function(d) {
                   var end = d.values[d.values.length - 1];
                   return "translate(" + self.x(end.date) + "," + self.y(end.y0 + end.y / 2) + ")";
-                });
+                }).append("text")
+                  .text(function(d) { return d.key; })
+                  .attr("dx", "6px")
+                  .attr("dy", "0.35em");
             })
 
       self.svg.selectAll('.layer').data(self.stackedAreaData)
@@ -418,47 +420,16 @@ define(['d3'], function(d3) {
 
       self.svg.selectAll('.layer-label').data(self.stackedAreaData)
         .transition()
-          .attr("x", 6)
-          .attr("dy", "0.35em")
           .each(function(d, i) {
             var end = d.values[d.values.length - 1];
-            var labelYValue = end.y0 + end.y / 2;
-            var labelYPosition = self.y(self.yMax);
+            var labelYValue = Math.round(end.y0 + end.y / 2);
 
-            // Labels above yMax
-            if(labelYValue > (self.yMax)) {
+            self.boundedLabelPosition(this, end.date, labelYValue);
+
+            // Hide label if layer too small at x1
+            if(Math.abs(self.y(0) - self.y(end.y)) < self.minimumHeightForLabel) {
               d3.select(this)
-                .attr("transform", function(d) {
-                  return "translate(" + (self.x(end.date) + 5) + "," + labelYPosition + ")";
-                })
-                .attr("data-state", "inactive")
-                .attr("dx", "1.4em");
-
-              d3.select(this.parentNode).select(".layer-label-arrow").remove()
-              d3.select(this.parentNode).append("polygon")
-                .attr("points", "8,0 16,7 14,10 8,5 2,10 0,7")
-                .attr("class", "layer-label-arrow")
-                .attr("fill", "#fff")
-                .attr("transform", function(d) {
-                  return "translate(" + (self.x(end.date) + 5) + "," + (labelYPosition - 5) + ")";
-                });
-            }
-
-            // Labels below yMin
-            // else if(labelYValue < self.y(self.yMin)) {}
-
-            // Normal labels
-            else {
-              d3.select(this.parentNode).select("polygon").remove();
-
-              d3.select(this)
-                .attr("dx", "0")
-                .attr("transform", function(d) { return "translate(" + self.x(end.date) + "," + self.y(end.y0 + end.y / 2) + ")" })
-                .attr("data-state", function(d){
-                  // Hide label if layer too small at x1
-                  var end = d.values[d.values.length - 1];
-                  return (Math.abs(self.y(0) - self.y(end.y)) > self.minimumHeightForLabel) ? "active" : "inactive";
-                });
+                .attr("data-state", "inactive");
             }
           });
     },
@@ -472,7 +443,7 @@ define(['d3'], function(d3) {
         .data([self.lineData])
 
       lineContainer.enter().append("g")
-          .attr("class", "line-container")
+          .attr("class", "line-container always-show")
           .each(function(d, i) {
             d3.select(this).append("path")
               .attr("class", "line")
@@ -495,9 +466,11 @@ define(['d3'], function(d3) {
             // Needed to get their BBox on IE/FF
             d3.select(this).select(".line-label").remove();
 
-            self.highlightedLabel(self.x(end.date), (self.y(end.value) - labelLineHeight / 2), labelText, "line-label", labelLineHeight, this);
+            self.highlightedLabel(self.x(end.date), (self.y(end.value) - labelLineHeight / 2), labelText, "line-label padded", labelLineHeight, this);
 
-            d3.select(this).select(".line-label").attr("transform", function(d) { return "translate(" + self.x(end.date) + "," + (self.y(end.value) - labelLineHeight / 2) + ")"; })
+            d3.select(this).select(".line-label").each(function() {
+              self.boundedLabelPosition(this, end.date, end.value, labelLineHeight);
+            });
         });
 
       self.svg.selectAll('.line').data([self.lineData])
@@ -683,17 +656,60 @@ define(['d3'], function(d3) {
       General Helpers
     **************************************************************************************************/
 
+    boundedLabelPosition: function(label, x, y, height) {
+      var self = this;
+
+      var labelYHighest = self.y(self.yMax);
+      var height = height || 0;
+
+      // Labels above yMax
+      if(y > (self.yMax)) {
+        d3.select(label)
+          .attr("transform", function(d) {
+            return "translate(" + self.x(x) + "," + labelYHighest + ")";
+          })
+          .attr("data-state", "inactive")
+          .select("text")
+            .attr("dx", "2.3em");
+
+        d3.select(label).select(".layer-label-arrow").remove();
+        d3.select(label).append("polygon")
+          .attr("points", "8,0 16,7 14,10 8,5 2,10 0,7")
+          .attr("class", "layer-label-arrow")
+          .attr("fill", "#fff")
+          .attr("transform", function() {
+            return this.parentNode.classList.contains("padded") ? "translate(5, 3)" : "translate(5, -5)";
+          });
+      }
+
+      // Labels below yMin
+      // else if(y < self.y(self.yMin)) {}
+
+      // Normal labels
+      else {
+        d3.select(label).select("polygon").remove();
+
+        d3.select(label)
+          .attr("transform", function(d) { return "translate(" + self.x(x) + "," + Math.round(self.y(y) - height/2) + ")" })
+          .attr("data-state", "active")
+          .select("text")
+            .attr("dx", "6px");
+      }
+    },
+
     highlightedLabel: function(x, y, text, cssClass, height, container) {
       var self = this;
 
       var cssClass = cssClass || "label";
       var height = height || 17;
       var container = container ? d3.select(container) : self.svg;
+      var overflow = y < self.y(self.yMax);
+      var backgroundExtraWidth = overflow ? 32 : 12;
 
       var label = container.append("g")
         .attr("class", cssClass)
         .attr("fill", "#fff")
-        .attr("transform", function(d) { return "translate(" + x + "," + y + ")"; });
+        .attr("transform", function(d) { return "translate(" + x + "," + Math.round(y - height/2) + ")"; })
 
       label.append("rect")
         .attr("height", height);
@@ -703,7 +719,7 @@ define(['d3'], function(d3) {
         .attr("dx", "6px")
         .attr("dy", "1.05em");
 
-      var labelWidth = label.select("text")[0][0].getBBox().width + 12;
+      var labelWidth = label.select("text")[0][0].getBBox().width + backgroundExtraWidth;
       label.select("rect")
         .attr("width", labelWidth);
     }
