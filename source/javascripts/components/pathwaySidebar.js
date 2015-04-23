@@ -9,7 +9,7 @@ define(['knockout', 'text!../../components/pathway-sidebar.html', 'pathway'],
     self.pathwayCategories = Pathway.categories();
     self.pathway = params.pathway;
 
-    self.toggleOverview = params.toggleOverview;
+    self.overviewVisible = params.overviewVisible;
     self.currentTabId = ko.observable(1);
 
     self.setActiveTab = function(pathwayCategory) {
@@ -33,6 +33,19 @@ define(['knockout', 'text!../../components/pathway-sidebar.html', 'pathway'],
         self.navVisible(true);
       } else if (direction === 'right') {
         self.navVisible(false);
+      }
+    }
+
+
+    self.toggleOverview = function() {
+      self.overviewVisible(!self.overviewVisible());
+    };
+
+    self.swipeOverview = function(direction) {
+      if(direction === 'left') {
+        self.overviewVisible(true);
+      } else if (direction === 'right') {
+        self.overviewVisible(false);
       }
     }
   };

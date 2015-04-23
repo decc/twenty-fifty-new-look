@@ -65,11 +65,6 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
       context[boolName](!toggleable());
     };
 
-    /** toggle overview visibility */
-    self.toggleOverview = function() {
-      toggleObservableBool(self, 'overviewVisible');
-    };
-
     /** toggle main nav visibility */
     self.toggleMainNav = function() {
       toggleObservableBool(self, 'mainNavVisible');

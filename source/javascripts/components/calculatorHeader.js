@@ -35,7 +35,15 @@ define(['knockout', 'text!../../components/calculator-header.html'],
         self.targetDismissed = true;
         self.targetReachedVisible(false);
       }
-    }
+    };
+
+    self.swipeNav = function(direction) {
+      if(direction === 'left') {
+        navState(0);
+      } else if (direction === 'right') {
+        navState(1);
+      }
+    };
   };
 
   return {
