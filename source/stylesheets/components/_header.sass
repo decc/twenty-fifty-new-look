@@ -5,6 +5,7 @@
   min-height: 65px
   @include row
   background: $color-background-dark
+  border-bottom: 1px solid $color-background
 
   .settings
     position: absolute
@@ -14,6 +15,7 @@
     z-index: 5
     cursor: pointer
     width: $chart-tabs-width-small
+    border-right: 1px solid $color-background
 
     @include media($media-medium)
       width: $chart-tabs-width
@@ -35,6 +37,7 @@
     .pathway-owner
       display: none
       padding-left: 56px
+      padding-right: 15px
       height: 100%
       @extend %vertical-centered
       color: #fff
@@ -49,7 +52,6 @@
     padding-right: $small-controls-width
     height: 100%
     color: $color-background-dark
-    border-left: 1px solid #333
 
     @include media($media-medium)
       padding-left: $chart-tabs-width
@@ -85,6 +87,10 @@
         border-bottom: 40px solid $color-background-dark
         border-left: 40px solid transparent
 
+  .spacer
+    position: relative
+    width: 100%
+
   .target-reached-tooltip
     position: absolute
     right: 20px
@@ -96,7 +102,7 @@
     width: 33%
 
     .arrow
-      left: 60%
+      left: 42%
       margin-left: 2px
       border-color: rgba(45, 49, 60, 0.95) transparent
 
@@ -137,6 +143,7 @@
       @extend %vertical-centered
       padding-right: 70px
       width: 100%
+      border-left: 1px solid $color-background
       @extend %icon-flag-before
 
       &:before
