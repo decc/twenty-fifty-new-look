@@ -5,7 +5,7 @@
   min-height: 65px
   @include row
   background: $color-background-dark
-  border-bottom: 1px solid $color-background
+  border-bottom: 1px solid $color-border-dark
 
   .settings
     position: absolute
@@ -15,7 +15,7 @@
     z-index: 5
     cursor: pointer
     width: $chart-tabs-width-small
-    border-right: 1px solid $color-background
+    border-right: 1px solid $color-border-dark
 
     @include media($media-medium)
       width: $chart-tabs-width
@@ -143,7 +143,7 @@
       @extend %vertical-centered
       padding-right: 70px
       width: 100%
-      border-left: 1px solid $color-background
+      border-left: 1px solid $color-border-dark
       @extend %icon-flag-before
 
       &:before
@@ -169,7 +169,7 @@
       width: 70px
       font-size: 2em
       font-weight: bold
-      border-left: 1px solid #fff
+      border-left: 1px solid $color-background
       line-height: 1
 
       &.share-closer
@@ -183,9 +183,9 @@
         background: #fff
         color: #000
 
-      &.pink
+      &.question
         color: #fff
-        background: #d53980
+        background: #4a5163
         cursor: help
 
       &.blue
@@ -199,16 +199,3 @@
       span
         width: 100%
         height: 100%
-
-      &:not(.pink)
-        img
-          display: none
-
-      img
-        position: absolute
-        left: 10px
-        top: 10px
-        bottom: 10px
-        right: 10px
-        width: calc(100% - 20px)
-

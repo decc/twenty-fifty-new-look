@@ -2,14 +2,14 @@
   section.share-section
   .share-description
     h1 My Finished 2050 Pathway
-    
+
     = m 'share'
 
     textarea#share-string rows="3" readonly="readonly" data-bind="text: shareString, event: { focus: highlightText }"
 
   .share-chart
     .overview-chartset data-bind="foreach: chartOptions"
-      .chart data-bind="visible: $parents[1].shareVisible(), chart: 'OverviewChart', data: data, params: { title: name, xMin: xMin, xMax: xMax, hasAxis: true, drawParams: { date: date }, margin: { top: 20, right: 40, bottom: 20, left: 135 } }"
+      .chart data-bind="visible: $parents[1].shareVisible(), chart: 'OverviewChart', data: data, params: { title: name, xMin: xMin, xMax: xMax, hasAxis: true, drawParams: { date: date }, margin: { top: 30, right: 40, bottom: 30, left: 135 } }"
         h3.bar-title data-bind="text: title"
 
 

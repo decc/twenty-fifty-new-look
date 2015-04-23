@@ -423,10 +423,10 @@ define(['d3'], function(d3) {
           .each(function(d, i) {
             var end = d.values[d.values.length - 1];
             var labelYValue = end.y0 + end.y / 2;
-            var labelYPosition = self.y(self.yMax) - 50;
+            var labelYPosition = self.y(self.yMax);
 
             // Labels above yMax
-            if(labelYValue > (self.yMax + self.margin.top*30)) {
+            if(labelYValue > (self.yMax)) {
               d3.select(this)
                 .attr("transform", function(d) {
                   return "translate(" + (self.x(end.date) + 5) + "," + labelYPosition + ")";
