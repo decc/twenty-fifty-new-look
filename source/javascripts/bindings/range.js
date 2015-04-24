@@ -3,9 +3,6 @@ define(['knockout', 'range'], function(ko, Range) {
 
   ko.bindingHandlers.range = {
     init: function(el, valueAccessor) {
-
-      ZeroClipboard.config( { swfPath: "/swf/ZeroClipboard.swf" } );
-
       var args = {};
       var pointerWidth;
 
