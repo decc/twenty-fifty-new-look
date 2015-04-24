@@ -7,6 +7,8 @@
 
     textarea#share-string rows="3" readonly="readonly" data-bind="text: shareString, event: { focus: highlightText }"
 
+    button.button data-bind="copy: shareString" = t('calculator.share.copy')
+
   .share-chart
     .overview-chartset data-bind="foreach: chartOptions"
       .chart data-bind="visible: $parents[1].shareVisible(), chart: 'OverviewChart', data: data, params: { title: name, xMin: xMin, xMax: xMax, hasAxis: true, drawParams: { date: date }, margin: { top: 30, right: 40, bottom: 30, left: 135 } }"

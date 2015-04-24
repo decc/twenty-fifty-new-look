@@ -95,6 +95,7 @@ en:
       supply: "Supply"
       share: "Share your pathway"
       error: "Demand is exceeding supply"
+      copy: 'Copy to clipboard'
 
     menu:
       mine:
