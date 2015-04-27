@@ -7,7 +7,7 @@ aside.controls-sidebar data-bind="tabs, css: { 'is-active': navVisible }"
       li data-bind="css: { 'active': $parent.currentTabId() === id }"
         button.tab-button data-bind="attr: { 'data-tab': id }, click: $parent.setActiveTab, text: name"
 
-  .tabs.pathway-categories data-bind="foreach: pathwayCategories"
+  .tabs.pathway-categories.js-scrollable data-bind="foreach: pathwayCategories"
     .tab data-bind="foreach: $parent.pathway().actionsForCategory(id), css: { 'active': $parent.currentTabId() === id }"
 
       .item

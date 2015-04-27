@@ -9,7 +9,7 @@ nav.main-nav
 
     = link_to I18n.t('calculator.menu.guide'), home_path, class: "tab-button exit", :"data-bind" => "click: closeNav"
 
-  .secondary
+  .secondary.js-scrollable
     = I18n.t('calculator.menu.examples.body')
 
     ul data-bind="foreach: exampleCategories"
