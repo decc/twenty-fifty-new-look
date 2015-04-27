@@ -13,9 +13,13 @@
   @include transition(opacity .3s, z-index 0s .3s)
 
   .is-loading
-    position: relative
-    min-height: 200px
+    position: absolute
     height: 100%
+    width: 100%
+    display: table-cell
+    vertical-align: middle
+    top: 0
+    left: 0
 
     &:after
       width: 100px
@@ -31,6 +35,9 @@
   .factsheet
     margin: 0 auto
     max-width: 800px
+
+    h2
+      text-align: left
 
   &.white
     background: #fff
