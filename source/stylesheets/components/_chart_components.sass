@@ -50,10 +50,13 @@
 .chart-component
   position: absolute !important
   top: percentage(1/9)
-  left: 220px
   right: 0
+  left: $chart-tabs-width-small
   bottom: 0
   overflow: hidden
+
+  @include media($media-big)
+    left: $chart-tabs-width
 
   .tab
     position: absolute
