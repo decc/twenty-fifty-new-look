@@ -33,7 +33,7 @@
 
   .tab data-bind="with: sensitivityTab, css: { 'active': currentTabId() === sensitivityTab.id }"
     .outer
-      .inner.scroll
+      .inner.scroll.js-scrollable
         h2.title The cost (£/person/yr) of your pathway, allowing simple variation in cost estimates.
         .costs-chartset.sensitivity
           .chart.compare.sensitivity-summary.top.has-axis data-bind="chart: name, data: $parent.data, object: $parent.comparisonCostsSensitivityChart, params: { hasAxis: true, margin: { top: 40, right: 40, bottom: 0, left: 315 }, drawParams: { colour: 1 } }"

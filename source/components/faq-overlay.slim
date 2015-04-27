@@ -1,12 +1,13 @@
-h2 FAQs
+.js-scrollable
+  h2 FAQs
 
-div.faqs
+  div.faqs
 
-  - [*1..5].each do |faq|
-    article data-bind="faq"
-      header
-        h5 = t "faqs.q#{faq}.question"
+    - [*1..5].each do |faq|
+      article data-bind="faq"
+        header
+          h5 = t "faqs.q#{faq}.question"
 
-      section.js-content-wrapper
-        div.js-content = m "faqs.q#{faq}.answer"
+        section.js-content-wrapper
+          div.js-content = m "faqs.q#{faq}.answer"
 

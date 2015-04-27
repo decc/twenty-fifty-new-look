@@ -1,4 +1,4 @@
-.background
+.background.js-scrollable
   section.share-section
   .share-description
     h1 My Finished 2050 Pathway
@@ -13,7 +13,6 @@
     .overview-chartset data-bind="foreach: chartOptions"
       .chart data-bind="visible: $parents[1].shareVisible(), chart: 'OverviewChart', data: data, params: { title: name, xMin: xMin, xMax: xMax, hasAxis: true, drawParams: { date: date }, margin: { top: 30, right: 40, bottom: 30, left: 135 } }"
         h3.bar-title data-bind="text: title"
-
 
   .social
     h3.title Share Your Pathway:
