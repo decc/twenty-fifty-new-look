@@ -1,5 +1,5 @@
-define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
-  function(ko, DataRequester, config, ChartParser, Action) {
+define(['knockout', 'dataRequester', 'config', 'chartParser', 'action', 'hasher'],
+  function(ko, DataRequester, config, ChartParser, Action, hasher) {
 
   'use strict';
 
@@ -65,7 +65,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
        "2": "The proportion of new domestic heating systems using electricity is 20%",
        "3": "The proportion of new domestic heating systems supplied using electricity is 30-60%",
        "4": "The proportion of new domestic heating systems supplied using electricity is 80-100%"
-     }, pdf: "/assets/onepage/31.pdf", info: "demand/home-heating-electrification" },
+     }, pdf: "/assets/onepage/31.pdf", info: "demand/heating-choices" },
 
     { name: "Home heating that isn't electric", categoryId: 1, typeId: 3, value: 'A', pathwayStringIndex: 35, tooltips: {
        "1": "The dominant non-electric heat source is gas or gas CHP (biogas if available)",
@@ -103,35 +103,33 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
        "2": "Space heating demand increases by 30%, hot water demand by 50%, cooling demand by 60%",
        "3": "Space heating demand stable, hot water demand increases by 25%, cooling demand stable",
        "4": "Space heating demand drops by 25%, hot water demand by 10%, cooling demand by 60%"
-       }, pdf: "/assets/onepage/40.pdf" },
+       }, pdf: "/assets/onepage/40.pdf", info: 'demand/commercial-demand-for-heating-and-cooling' },
 
     { name: "Commercial heating electrification", categoryId: 1, typeId: 3, value: 'A', pathwayStringIndex: 44, tooltips: {
        "1": "The proportion of non-domestic heat supplied using electricity is 0-10%, as today",
        "2": "The proportion of non-domestic heat supplied using electricity is 20%",
        "3": "The proportion of non-domestic heat supplied using electricity is 30-60%",
        "4": "The proportion of non-domestic heat supplied using electricity is 80-100%"
-       }, pdf: "/assets/onepage/31.pdf" },
+       }, pdf: "/assets/onepage/31.pdf", info: 'demand/heating-choices' },
 
     { name: "Commercial heating that isn't electric", categoryId: 1, typeId: 3, value: 'A', pathwayStringIndex: 45, tooltips: {
        "1": "The dominant non-electric heat source is gas or gas CHP (biogas if available)",
        "2": "The dominant non-electric heat source is coal or coal CHP (biomass if available)",
        "3": "The dominant non-electric heat source is heat from power stations",
        "4": "A mixture of gas/biogas, coal/biomass, and heat from power stations"
-       }, pdf: "/assets/onepage/31.pdf" },
+       }, pdf: "/assets/onepage/31.pdf", info: "demand/home-heating-that-isnt-electric" },
 
     { name: "Commercial lighting & appliances", categoryId: 1, typeId: 1, pathwayStringIndex: 47, tooltips: {
        "1": "Energy demand for lights & appliances increases by 33%. Energy for cooking is stable",
        "2": "Energy demand for lights & appliances increases by 15%; decreases by 5% for cooking",
        "3": "Energy demand for lights & appliances decreases by 5%; decreases by 20% for cooking",
        "4": "Energy demand for lights & appliances decreases by 30%; decreases by 25% for cooking"
-       }, pdf: "/assets/onepage/44.pdf" },
+       }, pdf: "/assets/onepage/44.pdf", info: 'demand/lighting-and-appliances' },
 
     { name: "Electrification of commercial cooking", categoryId: 1, typeId: 3, value: 'A', max: 2, pathwayStringIndex: 48, tooltips: {
        "1": "60% electricity and 40% gas (no change from 2007)",
        "2": "100% electric"
-
-
-    }, pdf: "/assets/onepage/35.pdf" },
+    }, pdf: "/assets/onepage/35.pdf", info: 'demand/electrification-of-cooking' },
 
     { name: "Nuclear power stations", categoryId: 2, typeId: 2, pathwayStringIndex: 0, tooltips: {
        "1": "No new nuclear power installed; estimated closure of final plant in 2035",
@@ -201,14 +199,14 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
        "2": "4m2 of photovoltaic panels per person in 2050, supplying ~60 TWh/yr of electricity",
        "3": "5.4m2 of photovoltaic panels per person in 2050, supplying ~80 TWh/yr",
        "4": "9.5m2 of photovoltaic panels per person – all suitable roof and facade space used"
-       }, pdf: "/assets/onepage/8.pdf" , info: "solar-panels-for-electricity" },
+       }, pdf: "/assets/onepage/8.pdf" , info: "supply/solar-panels-for-electricity" },
 
     { name: "Solar panels for hot water", categoryId: 2, typeId: 2, pathwayStringIndex: 11, tooltips: {
        "1": "As today, a negligible proportion of buildings have solar thermal in 2050",
        "2": "~30% of suitable buildings get ~30% of their hot water from solar thermal",
        "3": "All suitable buildings get ~30% of their hot water from solar thermal",
        "4": "All suitable buildings get ~60% of their hot water from solar thermal"
-     }, pdf: "/assets/onepage/9.pdf", info: "solar-panels-for-hot-water" },
+     }, pdf: "/assets/onepage/9.pdf", info: "supply/solar-panels-for-hot-water" },
 
     { name: "Geothermal electricity", categoryId: 2, typeId: 2, pathwayStringIndex: 12, tooltips: {
        "1": "No deployment of geothermal electricity generation",
@@ -324,6 +322,9 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
     var args = args || {},
         self = this;
 
+    // check values are probably valid (server does not check this)
+    self.valid = true;
+
     self.name = args.name;
     self.values = args.values; // TODO: Map values to pathway action values
 
@@ -340,10 +341,12 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
       var pathwayString = self.getPathwayString();
       if(!self.locked()) {
         self.updating(true);
+
         DataRequester.pathway(pathwayString, function(data){
           var data = JSON.parse(data.responseText);
           self.chartParser = new ChartParser(data);
           self.chartData(self.chartParser.all());
+          self.validateValues();
           self.updating(false);
         });
       }
@@ -353,6 +356,14 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
   }
 
   Pathway.prototype = {
+    validateValues: function() {
+      var values = this.values;
+
+      if(!/^[0-9a-z]+$/.test(values) || values.length !== 53) {
+        hasher.replaceHash('not-found');
+      }
+    },
+
     /** find action by slug*/
     findAction: function(slug) {
       var actions = this.actions();
@@ -506,7 +517,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
     }
   };
 
-  /** @returns {object|null} Pathway instance if found else null */
+  /** @returns {object|null} Pathway instance if found */
   Pathway.find = function(slug) {
     // find example by slug
     var example = ko.utils.arrayFirst(Pathway.examples(), function(ex) {
@@ -517,7 +528,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action'],
     return example ? new Pathway(example) : null;
   };
 
-  /** @returns {string} Default pathway values as bitwise string */
+  /** @returns {string} Default pathway values as magical string */
   Pathway.defaultValues = function() {
     return '10111111111111110111111001111110111101101101110110111';
   };

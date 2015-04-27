@@ -2,7 +2,7 @@
  * range.js - Range input facade
  *
  * @author NathanG
- * @license Range.js 0.0.11 | https://github.com/nathamanath/range/LICENSE
+ * @license Range.js 0.0.13 | https://github.com/nathamanath/range/LICENSE
  */
 
 (function(window, document) {
@@ -97,6 +97,8 @@
     }
   };
 
+  var throttle = function() {};
+
   (function(Range) {
     // Expose range
     var define = window.define || null;
@@ -137,10 +139,17 @@
 
     /** @memberof Range */
     Range.prototype = {
-      init: function() {
+      /**
+       * Initialize range replacements
+       * @example new Range(args).init();
+       *
+       * @param {boolean} [silent=false] - do not fire change / input events
+       * on init. handy when asynchronously setting value
+       */
+      'init': function(silent) {
         this._render();
         this._bindEvents();
-        this._setValue(this.value, this.args.silent);
+        this._setValue(this.value, silent);
         this._handleTicks();
 
         return this;
@@ -766,10 +775,12 @@
 
     /**
      * @param {object} el - input to be replaced
+     * @param {object} args
+     * @param silent - see #init
      * @returns {object} Range instance
      */
-    Range.create = function(el, args) {
-      return new Range(el, args).init();
+    Range.create = function(el, args, silent) {
+      return new Range(el, args).init(silent);
     };
 
     return {
@@ -780,10 +791,11 @@
        * @param {object} args - arguments object
        * @param {number} args.pointerWidth - static value for pointer width.
        * Needed if range replacement is origionaly renered with `display: none`
+       * @param silent - see #init
        *
        * @returns {object|array} Range instance(s)
        */
-      'init': function(ranges, args) {
+      'init': function(ranges, args, silent) {
         ranges = ranges || 'input[type=range]';
 
         var replacements = [];
@@ -793,7 +805,7 @@
           ranges = document.querySelectorAll(ranges);
         } else if(typeof ranges.length === 'undefined') {
           // dom node
-          return Range.create(ranges, args);
+          return Range.create(ranges, args, silent);
         }
 
         for(var i = 0, l = ranges.length; i < l; i++) {

@@ -1,5 +1,5 @@
-define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers'],
-  function(ko, html, Pathway, Helpers) {
+define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers', 'hasher'],
+  function(ko, html, Pathway, Helpers, hasher) {
 
   'use strict';
 
@@ -13,6 +13,7 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
     var self = this;
 
     self.pathway = params.pathway
+
     // Main navigation state.
     // 0: closed, 1: primary, 2: secondary
     self.navState = ko.observable(0);

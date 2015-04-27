@@ -1,0 +1,15 @@
+define(['knockout', 'text!../../components/text.html'], function(ko, html){
+  'use strict';
+
+  var ViewModel = function() {
+    self.heading = '<%= I18n.t('not_found.heading') %>';
+    self.content = '<%= I18n.t('not_found.content') %>';
+    self.button = '<%= I18n.t('not_found.button')%>';
+  };
+
+  return {
+    viewModel: ViewModel,
+    template: html
+  }
+});
+
