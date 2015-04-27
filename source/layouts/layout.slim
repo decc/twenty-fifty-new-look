@@ -19,6 +19,9 @@ head
 body class= page_classes
   = yield
 
+  .background-container
+    .background-inner
+
 = javascript_include_tag 'vendor/require', :"data-main" => "/javascripts/main.js"
 
 | </html>
