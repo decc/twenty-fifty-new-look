@@ -1,5 +1,6 @@
 require 'jshintrb/jshinttask'
 require 'json'
+require 'pry'
 
 Jshintrb::JshintTask.new :jshint do |t|
   t.pattern = 'source/javascripts/**/*.js'
@@ -20,13 +21,16 @@ task :preview do
   FileUtils.cd '../preview'
   `git add -A && git commit -m 'preview' && git push heroku master --force`
 
-  head = `git rev-parse HEAD`
-  last = `git rev-parse HEAD~1`
+  head = `git rev-parse HEAD`.delete(" \n")
+  last = `git rev-parse HEAD~1`.delete(" \n")
 
-  'bundle exec cb deploy OLD NEW -e staging \
+  binding.pry
+
+  `cb deploy #{last} #{head} \
+    -e staging \
     -s staging.decc.monochromedns.co.uk \
-    -b develop \
+    -b master \
     -h codebase.monochrome.co.uk -r decc-ui:decc-ui \
-    --protocol htts'
+    --protocol https`
 end
 
