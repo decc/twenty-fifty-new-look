@@ -13,8 +13,8 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
         app.getPage('guide', {});
       });
 
-      crossroads.addRoute('too-small', function() {
-        app.getPage('too-small', {});
+      crossroads.addRoute('too-small', function(lastRoute) {
+        app.getPage('too-small', { lastRoute: lastRoute });
       });
 
       crossroads.addRoute('calculator/:slug:', function(lastRoute, slug) {

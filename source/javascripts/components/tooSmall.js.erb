@@ -1,9 +1,26 @@
-define(['knockout', 'text!../../components/text.html'], function(ko, html){
+define(['knockout', 'text!../../components/text.html', 'config', 'hasher'], function(ko, html, config, hasher){
   'use strict';
 
-  var ViewModel = function() {
+  var ViewModel = function(params) {
+    var lastRoute = params.lastRoute;
+
     self.heading = '<%= I18n.t('small.heading') %>';
     self.content = '<%= I18n.t('small.content') %>';
+
+    var timer;
+
+    self.handleResize = function() {
+      timer = setTimeout(function() {
+        if(window.innerWidth > config.MIN_WIDTH && window.innerHeight > config.MIN_HEIGHT) {
+          hasher.replaceHash(lastRoute);
+          window.removeEventListener('resize', self.handleResize);
+        }
+        console.log('resize')
+
+      }, 500);
+    };
+
+    window.addEventListener('resize', self.handleResize);
   };
 
   return {
