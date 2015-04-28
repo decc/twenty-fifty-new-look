@@ -1,9 +1,19 @@
+@include keyframes(fade)
+  from
+    opacity: 0
+  to
+    opacity: 1
+
 .splash-content
   background-position: bottom center
   background-repeat: no-repeat
   height: 100%
   z-index: 10
   position: relative
+  opacity: 0
+  @include animation(fade 0.75s ease-in-out)
+  @include animation-delay(0.25s)
+  @include animation-fill-mode(forwards)
 
   @include media($media-big)
     font-size: 1.5em
@@ -15,4 +25,6 @@
   left: 0
   z-index: 0
   width: 100%
-
+  opacity: 0
+  @include animation(fade 0.75s ease-in-out)
+  @include animation-fill-mode(forwards)
