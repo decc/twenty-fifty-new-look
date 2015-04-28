@@ -23,9 +23,9 @@ task :preview do
   head = `git rev-parse HEAD`
   last = `git rev-parse HEAD~1`
 
-  'bundle exec cb deploy OLD NEW -e staging \
+  'bundle exec cb deploy #{last} #{head} -e staging \
     -s staging.decc.monochromedns.co.uk \
-    -b develop \
+    -b master \
     -h codebase.monochrome.co.uk -r decc-ui:decc-ui \
     --protocol htts'
 end
