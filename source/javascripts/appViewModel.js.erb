@@ -8,7 +8,7 @@ define(['knockout', 'pathway'], function(ko, Pathway) {
     self.pageParams = ko.observable();
 
     self.userPathway = ko.observable(
-      new Pathway({ name: 'Your Pathway', values: Pathway.defaultValues() })
+      new Pathway({ name: '<%= I18n.t('your_pathway')%>', values: Pathway.defaultValues() })
     );
 
     self.examplePathway = ko.observable();

@@ -179,7 +179,9 @@
       line-height: 1
 
       &.share-closer
-        @extend .blue
+        @extend .question
+        .spinner
+          @extend .spinner.white
 
         @include media($media-city)
           background: #fff!important
@@ -188,19 +190,15 @@
       &.white
         background: #fff
         color: #000
+        .spinner
+          @extend .spinner.white
 
       &.question
         color: #fff
         background: #4a5163
         cursor: help
-
-      &.blue
-        color: #fff
-        background: rgba(53, 58, 68, 1)
-
-      &.grey
-        color: #000
-        background: #f5f5f5
+        .spinner
+          @extend .spinner.question
 
       span
         width: 100%

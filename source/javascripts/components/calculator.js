@@ -102,6 +102,7 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
         self.pathway().chartData.notifySubscribers();
 
       } else {
+        // TODO: Tidy this up...
         self.faqCloseMode(true);
         self.faqVisible(false);
         self.overlayVisible(false);
