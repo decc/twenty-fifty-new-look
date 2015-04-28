@@ -1,5 +1,5 @@
-define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers', 'hasher'],
-  function(ko, html, Pathway, Helpers, hasher) {
+define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers', 'hasher', 'config'],
+  function(ko, html, Pathway, Helpers, hasher, config) {
 
   'use strict';
 
@@ -11,6 +11,24 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
     var params = params || {};
 
     var self = this;
+
+
+    // check screen is big enough
+    var timer;
+
+    self.handleResize = function() {
+      timer = setTimeout(function() {
+        if(window.innerWidth < config.MIN_WIDTH || window.innerHeight < config.MIN_HEIGHT) {
+          hasher.replaceHash('too-small');
+          window.removeEventListener('resize', self.handleResize);
+        }
+        console.log('resize')
+
+      }, 500);
+    };
+
+    window.addEventListener('resize', self.handleResize);
+
 
     self.pathway = params.pathway
 
