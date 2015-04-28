@@ -70,6 +70,8 @@
       border: none
       background: none
       outline: none
+      @include media($media-big)
+        padding: 0.5em 0 0.5em 4em
 
       &:before
         position: absolute
@@ -78,6 +80,9 @@
         margin-top: -0.45em
         padding: 0 16px
         font-size: 1.5em
+
+        @include media($media-big)
+          padding: 0 25px
 
 .chart-tabs
   position: relative

@@ -24,8 +24,6 @@ task :preview do
   head = `git rev-parse HEAD`.delete(" \n")
   last = `git rev-parse HEAD~1`.delete(" \n")
 
-  binding.pry
-
   `cb deploy #{last} #{head} \
     -e staging \
     -s staging.decc.monochromedns.co.uk \

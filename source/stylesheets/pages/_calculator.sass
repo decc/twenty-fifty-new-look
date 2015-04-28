@@ -80,6 +80,9 @@
   @include media($media-big)
     width: calc(100% - #{$right-col-width})
 
+  @include media($media-bigger)
+    width: calc(100% - #{$right-col-width-bigger})
+
 .controls-sidebar
   width: $right-col-width
   height: 100%
@@ -91,6 +94,9 @@
   border-left: 1px solid $color-border-dark
   @include transition(transform .2s)
   z-index: 900
+
+  @include media($media-bigger)
+    width: $right-col-width-bigger
 
   .toggle-nav
     content: ''
@@ -141,7 +147,6 @@
 
     .item
       padding: 1em 0em
-      width: 260px
       font-size: 70%
       border-bottom: 1px dashed #ccc
       &:hover

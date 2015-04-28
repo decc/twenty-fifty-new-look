@@ -59,6 +59,9 @@
     @include media($media-mediumbig)
       padding-right: $right-col-width
 
+    @include media($media-bigger)
+      padding-right: $right-col-width-bigger
+
     .container
       @extend %vertical-centered
       text-align: right
@@ -125,6 +128,9 @@
 
     @include media($media-mediumbig)
       width: $right-col-width
+
+    @include media($media-bigger)
+      width: $right-col-width-bigger
 
     .spinner
       width: 100%
