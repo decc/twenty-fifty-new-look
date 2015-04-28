@@ -1,0 +1,16 @@
+define(['knockout', 'text!../../components/text.html'], function(ko, html){
+  'use strict';
+
+  var ViewModel = function() {
+    self.heading = '<%= I18n.t('splash.heading') %>';
+    self.content = '<%= I18n.t('splash.content') %>';
+    self.button = '<%= I18n.t('splash.button')%>';
+
+  };
+
+  return {
+    viewModel: ViewModel,
+    template: html
+  }
+});
+

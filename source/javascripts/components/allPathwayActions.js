@@ -1,4 +1,4 @@
-define(['knockout', 'text!/components/all-pathway-actions.html', 'pathway'],
+define(['knockout', 'text!../../components/all-pathway-actions.html', 'pathway'],
   function(ko, html, Pathway) {
 
   'use strict';
@@ -8,9 +8,17 @@ define(['knockout', 'text!/components/all-pathway-actions.html', 'pathway'],
 
     self.pathway = params.pathway;
     self.visible = params.visible;
-    self.toggle = params.toggle;
     self.pathwayCategories = Pathway.categories();
 
+    self.hide = function() {
+      self.visible(false);
+    };
+
+    self.swipe = function(direction) {
+      if(direction === 'right') {
+        self.hide();
+      }
+    };
   };
 
   return {

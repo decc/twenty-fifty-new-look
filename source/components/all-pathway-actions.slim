@@ -1,4 +1,4 @@
-.overview data-bind="css: { 'is-active': visible }"
+.overview.js-scrollable data-bind="css: { 'active': visible }"
 
   .pathway-actions-wrapper
     | <!-- ko foreach: pathwayCategories -->
@@ -7,10 +7,10 @@
       h2 data-bind="text: name"
       ul.pathway-actions data-bind="foreach: $parent.pathway().actionsForCategory(id)"
         li
-          span data-bind="text: name"
-          span.value data-bind="text: value, css: { high: value() == 4 || value() == 'D', med: value() == 3 || value() == 'D' }"
+          span.key data-bind="text: name"
+          span.value data-bind="text: value, css: { high: value() == getMaxValue(), med: value() == getMedValue() }"
 
     | <!-- /ko -->
 
-  button.hide-overview data-bind="click: toggle"= I18n.t('calculator.all.hide')
+  button.hide-overview data-bind="click: hide, swipe: swipe"= I18n.t('calculator.all.hide')
 

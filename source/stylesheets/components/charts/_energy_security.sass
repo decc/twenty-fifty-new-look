@@ -1,0 +1,31 @@
+.energy-security
+  padding: 2em
+  margin-bottom: 2em
+  color: #ffffff
+  height: 100%
+  overflow: auto
+
+  article
+    margin-bottom: 2em
+
+  %title
+    background: rgba(255,255,255,0.2)
+    font-weight: bold
+
+  table
+    width: 100%
+    margin: 2em 0 4em
+
+    thead
+      td
+        @extend %title
+
+    tr
+      td
+        border: 1px solid #ffffff
+        padding: 0.5em
+
+        &:first-of-type
+          @extend %title
+          width: 33.333%
+

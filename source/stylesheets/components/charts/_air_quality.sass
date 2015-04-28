@@ -1,0 +1,55 @@
+.scroll
+  overflow-y: scroll
+  height: 100%
+
+.air-quality
+  padding: 20px
+  color: #FFF
+  text-align: left
+
+  a
+    color: #FFF
+
+  ul
+    font-size: 0.9em
+    padding-left: 1em
+
+    li
+      margin: 0.8em
+
+
+  p
+    font-size: 0.9em
+
+
+
+  @media screen and (min-width: 1200px)
+    @include clearfix
+
+  .col
+    position: relative
+
+    .chart
+      height: 500px
+
+
+    @media screen and (min-width: 1200px)
+      float: left
+      min-height: 100%
+
+      &:first-child
+        width: 42%
+        height: 100%
+        padding-right: 20px
+
+      &:last-child
+        width: 58%
+        border-left: 1px solid #747985
+        padding-left: 20px
+
+    @media screen and (max-width: 1199px)
+
+      &:first-child
+        margin-bottom: 50px
+
+

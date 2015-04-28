@@ -1,12 +1,17 @@
 html, body
   height: 100%
 
+body
+  max-width: 1920px
+  margin: auto
+
 .fixed-logo
   position: fixed
   top: 2em
   left: 2em
-  width: 240px
-  max-width: 15%
+  width: 15%
+  max-width: 250px
+  min-width: 100px
 
 .centered
   display: table
@@ -15,11 +20,6 @@ html, body
   text-align: center
   background-size: cover
   color: $color-intro-text
-  background-color: $color-background
-  background-image: radial-gradient(circle at 50% 100%, $color-background 15%, rgba(0,0,0,0) 40%), url(/images/rays.svg)
-  background-position: center center
-  background-attachment: fixed
-  background-repeat: no-repeat
 
   section
     height: 100vh
@@ -32,5 +32,31 @@ html, body
     line-height: 2
     display: table-cell
     vertical-align: middle
-    width: 50%
 
+// Background hack for IOS safari's sake
+.background-container
+  left: 0px
+  top: 0px
+  height: 100vh
+  width: 100vw
+  z-index: -99999
+  position: fixed
+  overflow: hidden
+  margin: 0
+  padding: 0
+
+.background-inner
+  position: absolute
+  margin: 0
+  padding: 0
+  height: 100%
+  width: 100%
+  max-height: none
+  min-height: none
+  left: 0
+  top: 0
+  z-index: -99999
+  background: #2C313B
+  background-image: radial-gradient(circle at 50% 100%, #2c313b 15%,rgba(0,0,0,0) 40%), url(/images/rays.svg)
+  background-size: cover
+  background-position: center center

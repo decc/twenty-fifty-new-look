@@ -1,18 +1,21 @@
 nav.tab-nav.chart-tab-nav
   ul data-bind="foreach: CHART_TABS"
-    li data-bind="attr: { class: 'icon-'+name+'-before' }, css: { 'is-active': $parent.currentTabId() === id }"
-      button data-bind="click: $parent.setActiveTab, text: title"
+    li data-bind="css: { 'active': $parent.currentTabId() === id }"
+      button data-bind="click: $parent.setActiveTab, text: title, attr: { class: 'icon-'+icon+'-before' }"
 
-.tabs.chart-tabs data-bind="foreach: CHART_TABS"
+.tabs#chart-tabs.chart-tabs data-bind="foreach: CHART_TABS"
   .tab data-bind="
     css: { 'active': $parent.currentTabId() === id },
     component: {
       name: 'chartViews/' + (typeof viewmodel === 'undefined' ? name : viewmodel),
       params: {
+        calculator: $parents[1],
         charts: charts,
+        pathway: $parent.pathway(),
         data: $parent.pathway().chartData,
         Pathway: $parent.Pathway,
         DataRequester: $parent.DataRequester,
         ChartParser: $parent.ChartParser
       }
     }"
+

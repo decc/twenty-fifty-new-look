@@ -1,2 +1,35 @@
-| share
+.background.js-scrollable
+  section.share-section
+  .share-description
+    h1 My Finished 2050 Pathway
 
+    = m 'share'
+
+    textarea#share-string rows="3" readonly="readonly" data-bind="text: shareString, event: { focus: highlightText }"
+
+    button.button data-bind="copy: shareString" = t('calculator.share.copy')
+
+  .share-chart
+    .overview-chartset data-bind="foreach: chartOptions"
+      .chart data-bind="visible: $parents[1].shareVisible(), chart: 'OverviewChart', data: data, params: { title: name, xMin: xMin, xMax: xMax, hasAxis: true, drawParams: { date: date }, margin: { top: 30, right: 40, bottom: 30, left: 135 } }"
+        h3.bar-title data-bind="text: title"
+
+  .social
+    h3.title Share Your Pathway:
+
+    ul.social-links
+      li
+        a.icon.icon-facebook-before data-bind="attr: { href: 'https://www.facebook.com/sharer/sharer.php?u=' + shareString() }, popup" target="_blank"
+          span  Facebook
+      li
+        a.icon.icon-twitter-before data-bind="attr: { href: 'http://twitter.com/share?text=' + shareTitle + '&url=' + shareString() }, popup" target="_blank"
+          span Twitter
+      li
+        a.icon.icon-linkedin-before data-bind="attr: { href: 'https://www.linkedin.com/shareArticle?mini=true&url=' + shareString() + '&title=' + shareTitle + '&summary=' + shareSummary + '&source=' }, popup" target="_blank"
+          span LinkedIn
+      li
+        a.icon.icon-google-plus-before data-bind="attr: { href: 'https://plus.google.com/share?url=' + shareString() }, popup" target="_blank"
+          span Google+
+      li
+        a.icon.icon-envelope-before data-bind="attr: { href: 'mailto:?subject=' + shareTitle + '&body=' + shareSummary + '%0D%0A%0D%0A' + shareString() }" target="_blank"
+          span Email

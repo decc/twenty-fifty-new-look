@@ -1,0 +1,71 @@
+.styled_select
+  background: $color-background-dark
+  position: absolute
+  z-index: 1
+  color: #fff
+  border: 1px solid #414653
+
+  &.open
+    z-index: 999
+
+    &>.styled_select_options
+      max-height: 20em
+      overflow: auto
+
+    &>.styled_select_selected:after
+      @include transform(rotate(90deg))
+
+.styled_select_wrapper
+  height: 0.7em
+  display: inline-block
+
+  ul
+    margin: 0
+    padding: 0
+
+.styled_select_selected
+  position: relative
+  padding: .75em
+  display: block
+  cursor: pointer
+  @extend %icon-chevron-after
+
+  &:after
+    position: absolute
+    top: .8em
+    right: 0.5em
+    color: #fff
+    @include transform(rotate(-90deg))
+
+  @include media($media-big)
+    padding: .5em
+
+    &:after
+      top: .7em
+
+.styled_select_options
+  max-height: 0px
+  width: 100%
+  overflow: hidden
+  padding: .25em
+  @include transition(max-height .2s ease-in-out)
+  background: $color-background-dark
+
+.styled_select_option
+  $colour-border: rgba(255, 255, 255, .1)
+
+  border-top: 1px solid $colour-border
+  padding: 0.75em
+  cursor: pointer
+  color: #fff
+  background: #414653
+
+  @include media($media-big)
+    padding: .5em
+
+  &:first-of-type
+    border: none
+
+  &:last-of-type
+    border-bottom: 1px solid $colour-border
+

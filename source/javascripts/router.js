@@ -13,38 +13,55 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
         app.getPage('guide', {});
       });
 
-      crossroads.addRoute('calculator/:slug:', function(slug) {
-        var pathway = Pathway.find(slug) || app.userPathway;
+      crossroads.addRoute('too-small', function(lastRoute) {
+        app.getPage('too-small', { lastRoute: lastRoute });
+      });
+
+      crossroads.addRoute('calculator/:slug:', function(lastRoute, slug) {
+        var pathway;
+
+        if(pathway = Pathway.find(slug)) {
+          app.examplePathway(pathway);
+          app.pathway('example');
+        } else {
+          app.pathway('user');
+        }
 
         // 404 if invalid slug
         if(slug && !pathway) {
           hasher.replaceHash('not-found');
           return;
         }
-        var actionSection = document.querySelector('.pathway-category-tab-nav');
-        pathway.setActionsFromPathwayString(pathway.values);
 
-        // TODO: check if calculator already made
-        if(hello != 4)
-          app.getPage('calculator', { pathway: pathway });
-        hello = 4;
+        // check if calculator already made
+        var oldHash = lastRoute || '';
 
+        if(oldHash.split('/')[0] !== 'calculator') {
+          app.getPage('calculator', { pathway: app.currentPathway });
+        }
+      });
+
+      crossroads.addRoute('share/:code:', function(lastRoute, pathwayString) {
+        app.userPathway(
+          new Pathway({ name: 'Your Pathway', values: pathwayString })
+        );
+        app.pathway('user');
+        app.getPage('calculator', { pathway: app.currentPathway });
+
+        hasher.replaceHash('calculator');
       });
 
       crossroads.addRoute('not-found', function() {
-        console.log('404');
+        app.getPage('notFound', {});
       });
 
-      crossroads.addRoute('share', function() {
-        app.getPage('share', {});
-      });
-
-      var parseHash = function(newHash) {
-        crossroads.parse(newHash);
+      var parseHash = function(newHash, oldHash) {
+        crossroads.parse(newHash, [oldHash]);
       };
 
       hasher.initialized.add(parseHash);
       hasher.changed.add(parseHash);
+
       hasher.init();
 
       if(!window.location.hash) { hasher.setHash('home'); }

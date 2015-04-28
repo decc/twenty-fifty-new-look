@@ -1,90 +1,134 @@
 define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
   'use strict';
 
-  var hasAxis = false;
+  var CostsContextChart = function() {};
 
-  var CostsContextChart = function(args) {
-    var args = args || {};
-    hasAxis = args.hasAxis || false;
-  };
-
-  CostsContextChart.prototype = new Chart({
-    height: 240,
-    margin: { top: 40, right: 50, bottom: 70, left: 100 }
-  });
+  CostsContextChart.prototype = new Chart({});
 
   CostsContextChart.prototype.constructor = CostsContextChart
 
-  CostsContextChart.prototype.draw = function(bar){
-      var self = this;
+  CostsContextChart.prototype.draw = function(data, width, height){
+    var self = this;
 
-      var width = self.width;
-      var height = self.height;
-      var margin = self.margin;
+    if(typeof data === "undefined") {
+      return 1;
+    }
 
-      var xMin = 0;
-      var xMax = 10000;
+    self.data = data;
 
-      var nTicks = 5;
+    var readSelects = function() {
+      var selects = document.querySelectorAll(".select");
+      var sensitivitySelection = [];
 
-      var x = d3.scale.linear()
-          .domain([xMin, xMax])
-          .range([0, width]);
+      for(var i = 0; i < selects.length; i++) {
+        sensitivitySelection.push(selects[i].value);
+      }
 
-      var xAxis = d3.svg.axis()
-          .scale(x)
-          .orient("top")
-          .ticks(nTicks);
+      return sensitivitySelection;
+    };
 
-      self.x = x;
-      self.xAxis = xAxis;
+    var selects = readSelects();
+    var totalSelection = 0;
+    var totalRange = 0;
 
+    for(var i = 0; i < data.length; i++) {
+      var key = Object.keys(data);
+      if(typeof selects[i] === "undefined") {
+        totalSelection += data[key[i]].value.point;
+      } else if(selects[i] === "range") {
+        totalSelection += data[key[i]].value.low;
+        totalRange += data[key[i]].value.range;
+      } else {
+        totalSelection += data[key[i]].value[selects[i]];
+      }
+    }
 
-      var bars = self.svg.selectAll(".bar")
-          .data([bar])
+    self.outerWidth = width || self.outerWidth;
+    self.outerHeight = height || self.outerHeight;
 
-      bars.enter().append("rect")
-          .attr("class", "bar")
-          .attr('fill', self.colours(1))
-          .attr('opacity', '0.6')
-          .attr("y", margin.top)
-          .attr("height", height)
-          .attr("x", function(d) { return x(0); })
-          .attr("width", function(d) { return width - x(d); });
+    self.width = self.outerWidth - self.margin.left - self.margin.right;
+    self.height = self.outerHeight - self.margin.top - self.margin.bottom;
 
-      bars.transition()
+    var xMin = 0;
+    var xMax = 10000;
+
+    self.nTicks = 5;
+
+    var x = d3.scale.linear()
+        .domain([xMin, xMax])
+        .range([0, self.width]);
+
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("top")
+        .ticks(self.nTicks);
+
+    self.x = x;
+    self.xAxis = xAxis;
+
+    // Gridlines
+    self.drawVerticalGridlines();
+
+    // Selection and range bar options
+    // var bars = [
+    //   {
+    //     "name": "selection",
+    //     "data": [totalSelection]
+    //   },
+    //   {
+    //     "name": "range",
+    //     "data": [totalRange],
+    //     "offset": totalSelection
+    //   }
+    // ];
+
+    // // Draw bars
+    // self.drawStackedBars(bars);
+
+    var selectionBar = self.svg.selectAll(".selection-bar")
+        .data([totalSelection])
+
+    selectionBar.enter().append("rect")
+        .attr("class", "bar selection-bar")
+        .attr('fill', function(d, i) { return self.colours(i); })
+        .attr('opacity', '0.6')
+        .attr("y", 0)
+        .attr("height", self.height)
+        .attr("x", function(d) { return x(0); })
+        .attr("width", function(d) { return self.width - x(d); });
+
+    var rangeBar = self.svg.selectAll(".range-bar")
+        .data([totalRange])
+
+    rangeBar.enter().append("rect")
+        .attr("class", "bar range-bar")
+        .attr('fill', function(d, i) { return self.colours(i); })
+        .attr('opacity', '0.3')
+        .attr("y", 0)
+        .attr("height", self.height)
+        .attr("x", function(d) { return x(totalSelection); })
+        .attr("width", function(d) { return x(d); });
+
+    self.transitionBars = function() {
+      var selectionBar = self.svg.selectAll(".selection-bar")
+        .data([totalSelection])
+
+      var rangeBar = self.svg.selectAll(".range-bar")
+        .data([totalRange])
+
+      var selects = readSelects();
+
+      selectionBar.transition()
           .attr("x", function(d) { return x(0); })
           .attr("width", function(d) { return x(d); });
 
-      self.svg.selectAll("line.horizontalGrid").data(self.x.ticks(nTicks)).enter()
-        .append("line")
-          .attr({
-            "class":"horizontalGrid",
-            "x1" : function(d){ return self.x(d);},
-            "x2" : function(d){ return self.x(d);},
-            "y1" : margin.top,
-            "y2" : self.height + margin.top,
-            "fill" : "none",
-            "shape-rendering" : "crispEdges",
-            "stroke" : "rgba(255, 255, 255, 0.2)",
-            "stroke-width" : "1px"
-          });
+      rangeBar.transition()
+          .attr("x", function(d) { return x(totalSelection); })
+          .attr("width", function(d) { return x(d); });
+    };
+    self.transitionBars();
 
-      if(hasAxis) {
-        self.svg.selectAll('.axis').remove();
-
-        self.svg.append("g")
-            .attr("class", "x axis")
-            .attr("transform", "translate(0," + self.margin.top + ")")
-            .attr("shape-rendering", "crispEdges")
-            .call(self.xAxis)
-          .append("text")
-            .attr("class", "label")
-            .attr("x", self.width / 2)
-            .attr("y", -self.margin.top / 2)
-            .attr("dy", "-1.5em")
-            .text("Cost (£)");
-      }
+    self.drawBorders();
   };
 
   return CostsContextChart;

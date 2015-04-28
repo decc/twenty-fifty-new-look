@@ -1,3 +1,5 @@
+require 'rdiscount'
+
 ###
 # Page options, layouts, aliases and proxies
 ###
@@ -5,7 +7,8 @@
 # Per-page layout changes:
 #
 # With no layout
-page "/components/**.*.html", layout: false
+page "/components/*", layout: false
+
 #
 # With alternative layout
 # page "/path/to/file.html", :layout => :otherlayout
@@ -23,6 +26,25 @@ page "/components/**.*.html", layout: false
 # Helpers
 ###
 
+helpers do
+  def markdown(string)
+    RDiscount.new(string).to_html
+  end
+
+  # Likt I18n.t but parses markdown
+  def m(i18n)
+    markdown(I18n.t(i18n))
+  end
+
+  # Rails like path helpers
+  # e.g. home_path => /#/home
+  %W(home guide calculator share).each do |p|
+    define_method("#{p}_path") do
+      "/#/#{p}"
+    end
+  end
+end
+
 # Automatic image dimensions on image_tag helper
 # activate :automatic_image_sizes
 
@@ -33,17 +55,6 @@ end
 
 activate :i18n
 
-# Methods defined in the helpers block are available in templates
-helpers do
-  # Rails like path helpers
-  # e.g. home_path => /#/home
-  %W(home guide calculator share).each do |p|
-    define_method("#{p}_path") do
-      "/#/#{p}"
-    end
-  end
-end
-
 set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 set :images_dir, 'images'
@@ -52,7 +63,7 @@ module RequireJS
     class << self
         def registered(app)
             app.after_build do |builder|
-                exec('node r.js -o build/javascripts/app.build.js');
+              exec('node r.js -o build.js');
             end
         end
         alias :included :registered
@@ -70,7 +81,7 @@ configure :build do
   # activate :minify_javascript
   #
   # # build js
-  # activate :requirejs
+  activate :requirejs
 
   # Enable cache buster
   # activate :asset_hash

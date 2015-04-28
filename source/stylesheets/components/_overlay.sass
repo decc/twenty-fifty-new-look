@@ -1,5 +1,5 @@
 .modal-overlay
-  background: $color-background
+  background: rgba(44, 49, 59, 0.95)
   position: absolute
   left: 0
   right: 0
@@ -8,10 +8,111 @@
   padding: 10%
   overflow: auto
   color: #ffffff
+  z-index: -10
+  opacity: 0
+  @include transition(opacity .3s, z-index 0s .3s)
+
+  .is-loading
+    position: absolute
+    height: 100%
+    width: 100%
+    display: table-cell
+    vertical-align: middle
+    top: 0
+    left: 0
+
+    &:after
+      width: 100px
+      height: 100px
+      position: absolute
+      top: 50%
+      left: 50%
+      margin: -50px 0 0 -50px
+      content: ''
+      display: block
+      @extend .spinner.white, .spinner
+
+  .factsheet
+    margin: 0 auto
+    max-width: 800px
+
+    h1, h2, h3, h4
+      text-align: left
+
+  &.white
+    background: #fff
+    color: #000
+
+    h1
+      display: none
+
+    div
+      padding-top: 1em
+
+    a
+      text-decoration: none
+      color: #000
+      font-weight: bold
+      font-size: 12px
+
+    img
+      display: inherit
+      margin: auto
+      max-width: 100%
+      padding-top: 2em
+      padding-bottom: 1em
+
+    .figure
+      font-size: 12px
+      width: 100%
+      text-align: center
+
+    .subtitle
+      font-weight: bold
+
+    table
+      width: 100%
+
+      td
+        padding: 0.4em
+        vertical-align: middle
+        text-align: center
+
+      th
+        padding: 1em
+
+      tr
+        &:nth-child(2)
+          font-weight: bold
+
+        &:nth-child(odd)
+          background: #f2f2f2
+
+        td
+          &:first-child
+            font-weight: bold
+            text-align: left
+
+
+  &.is-active
+    z-index: 1000
+    opacity: 1
+    @include transition(opacity .3s)
+
+  .social
+    @extend %inline-list
+    margin-bottom: 2em
+    a
+      color: #ffffff
+      text-decoration: none
+    &.black
+      a
+        color: #000
 
   .closer
     position: absolute
     top: 1em
     right: 1em
     cursor: pointer
+    font-size: 50px
 

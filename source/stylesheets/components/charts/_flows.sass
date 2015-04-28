@@ -1,0 +1,54 @@
+.flows-chartset
+  position: relative
+  height: 100%
+  padding: 20px
+  color: #fff
+
+  .chart-fullscreen-button
+    cursor: pointer
+    margin-bottom: 2em
+
+    &:before
+      padding-right: 0.5em
+
+
+  .chart.flows
+    position: absolute
+    top: 150px
+    bottom: 50px
+    left: 20px
+    right: 20px
+    padding: 0
+    -webkit-backface-visibility: hidden
+
+  .node rect
+    cursor: move
+    fill-opacity: .9
+    shape-rendering: crispEdges
+
+  .node text
+    pointer-events: none
+    fill: #fff
+    font-size: 0.7em
+
+  .link
+    fill: none
+    stroke: #000
+    stroke-opacity: .2
+
+  .link:hover
+    stroke-opacity: .5
+
+
+
+  // Sankey version
+  tspan
+    fill: #fff
+
+  rect
+    fill: #5a6378
+    stroke: none
+
+  path
+    fill-opacity: 0.4
+    stroke-opacity: 0.4

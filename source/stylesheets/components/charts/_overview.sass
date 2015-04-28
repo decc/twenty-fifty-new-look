@@ -1,0 +1,62 @@
+.overview-chartset
+  .date-range
+    height: 4em
+    padding: 0 120px
+    background: #eee
+    padding-top: 25px
+
+    .range-replacement
+      margin: -7px 0 0 0
+      height: 25px
+
+      .track
+        top: 10px
+
+      .point
+        width: 25px
+        height: 25px
+        top: -10px
+
+    .min, .max
+      position: absolute
+      top: 0.3em
+      color: $color-background-dark
+      font-size: 2em
+
+    .min
+      left: 80px
+
+      @include media($media-big)
+        left: $chart-tabs-width + 20px
+
+    .max
+      right: 20px
+
+    input
+      margin-top: 1.25em
+      width: 100%
+
+  .title
+    color: #FFF
+    margin: 30px
+
+  .bar-title
+    transform: translateY(-100%)
+    left: 20px
+
+  .bar-label
+    text-anchor: start
+
+  .charts
+    position: absolute
+    top: 9em
+    bottom: 20px
+    left: 80px
+    right: 0
+
+    @include media($media-big)
+      left: $chart-tabs-width
+
+    .chart
+      height: percentage(1/3)
+

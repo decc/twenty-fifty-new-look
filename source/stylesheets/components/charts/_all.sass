@@ -1,0 +1,103 @@
+.full-height
+  height: 100%
+  overflow-y: scroll
+
+  .chart.full-size
+    height: 100%
+
+h2, .title
+  font-size: 1.4em
+  text-align: center
+
+.fixed-note
+  position: absolute
+  top: calc(#{$chart-tab-padding-top / 2} + #{percentage(1/9)})
+  right: $chart-tab-padding-right
+  font-size: 0.7em
+  color: #FFF
+
+.chart
+  position: relative
+
+  svg
+    position: relative
+    overflow: visible
+
+  &.full-size
+    padding: 40px 20px
+    height: 100%
+
+  .domain
+    fill: none
+    stroke-width: 1
+
+  .domain,
+  .axis
+    stroke: #fcfdfd
+
+  .tick
+    fill: #fcfdfd
+
+    text
+      stroke: none
+      fill: #fff
+
+
+  .label
+    stroke: none
+    fill: #c7ced9
+    text-anchor: middle
+
+  .border
+    fill: none
+    stroke: #fff
+    // shape-rendering: crispEdges
+
+  .line
+    fill: none
+    stroke: #fcfdfd
+    stroke-width: 4
+
+  .layer
+
+  .bar-label
+    display: none
+    text-anchor: middle
+    pointer-events: none
+
+    text
+      text-anchor: middle
+
+    rect
+      fill: #8193ad
+
+
+  .d3-chart[data-state="graph-hover"]
+    .layer-label
+      display: none
+      pointer-events: none
+
+    .bar-container[data-state="active"]
+      .bar
+        opacity: 1
+
+    .bar-label[data-state="active"]
+      display: block
+      fill: #fff
+
+.bar-title,
+.select-title
+  position: absolute
+  top: 50%
+  left: 0
+  color: #fff
+  width: 120px
+  margin: 0
+  padding-right: 1em
+  font-weight: normal
+  font-size: 1em
+
+.has-axis
+  .bar-title,
+  .select-title
+    margin-top: 20px

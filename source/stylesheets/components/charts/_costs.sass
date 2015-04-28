@@ -1,0 +1,96 @@
+.costs-tabs .tab
+
+  .title
+    font-size: 1em
+
+  .example-selector
+    .styled_select
+      margin-left: 148px
+      width: 320px
+
+  .costs-chartset
+    position: relative
+    height: 100%
+
+    .bar-title
+      transform: translateY(-50%)
+
+    .compare
+      height: 60px
+      margin-bottom: 20px
+
+      &.has-axis
+        height: 100px
+
+    .example-selector
+      position: relative
+      z-index: 10
+      height: 46px
+      margin-bottom: 22px
+
+      .select-title
+        @include transform(translateY(-50%))
+
+    &.sensitivity
+      .bar-title,
+      .select-title
+        width: 315px
+
+      .example-selector
+        .styled_select
+          margin-left: 310px
+
+    .chart-key
+      @include clearfix
+      margin: 0 0 34px
+      padding: 0
+      list-style-type: none
+      color: #fff
+      font-size: 0.7em
+      line-height: 1.4
+
+      li
+        position: relative
+        float: left
+        width: 25%
+        padding-right: 1em
+
+        .colour
+          position: absolute
+          left: 0
+          top: 0.15em
+          width: 1em
+          height: 1em
+          background: #FFF
+
+        .name
+          display: block
+          padding-left: 1.5em
+
+
+    .sensitivity-components
+      height: 1950px
+
+      .bar-label
+        display: block
+        text-anchor: end
+        fill: #FFF
+        font-size: 0.7em
+
+      foreignobject
+        margin-left: -97px
+
+      .styled_select
+        background: none
+        font-size: 0.7em
+        color: #fff
+        height: 32px
+        width: 90px
+        background: $color-background-dark
+        padding-top: .55em
+
+      .ie-select
+        position: absolute
+        left: 0
+        margin-left: -97px
+

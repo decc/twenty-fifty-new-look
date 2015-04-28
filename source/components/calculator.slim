@@ -1,29 +1,37 @@
-.viewport
+.loading
+  .inner
+    div.spinner.blue
+    h5 loading...
 
-  .wrapper data-bind="css: { 'with-nav': mainNavVisible }"
-    main-nav
+.viewport
+  main-nav params="navState: navState"
+
+  .wrapper data-bind="css: { 'with-nav': navState() > 0, 'with-subnav': navState() === 2 }"
 
     .content-wrapper
-      calculator-header params="mainNavVisible: mainNavVisible, pathwayName: currentPathway().name"
+      calculator-header params="navState: navState, pathwayName: currentPathway().name, pathway: currentPathway"
 
       .content
-        .bit
-          header.cityscape
+        section#share.share data-bind="css: { 'is-active': shareVisible() }, component: { name: 'share', params: { pathway: currentPathway } }"
 
-          section.charts
-            chart-tabs params="pathway: currentPathway"
+        section#flows-fullscreen.modal-overlay data-bind="css: { 'is-active': fullscreenVisible() }"
+          = partial "partials/flows-fullscreen"
 
+        = partial "partials/cityscape"
 
-          .modal-overlay data-bind="visible: overlayVisible"
-            .closer data-bind="click: hideOverlay" &times;
-            h2 data-bind="text: overlayAction().name"
-            ul
-              li
-                a target="_blank" data-bind="attr: { href: overlayAction().pdf }" Download pdf
+        .inner-content data-bind="visible: mainViewVisible"
 
-            p data-bind="text: overlayAction().info"
+            .landscape-label data-bind="click: toggleCity, css: { full: !cityscapeVisible() }"
+              label= t('calculator.header.your_landscape')
+              span.toggle-city data-bind="css: { 'is-active': cityscapeVisible }"
 
-        pathway-sidebar params="pathway: currentPathway"
+            .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway, pathwayUpdating: pathwayUpdating } }, css: { full: !cityscapeVisible() }, transitionEnd: redrawCharts"
 
-        all-pathway-actions params="pathway: currentPathway, visible: overviewVisible, toggle: toggleOverview"
+        = partial "partials/pathway-overlay"
+
+        pathway-sidebar data-bind="visible: mainViewVisible" params="pathway: currentPathway, overviewVisible: overviewVisible"
+
+        all-pathway-actions params="pathway: currentPathway, visible: overviewVisible"
+
+        section#faq.modal-overlay data-bind="css: { 'is-active': faqVisible() }, component: { name: 'faq' }"
 

@@ -1,0 +1,119 @@
+.share
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  color: #fff
+
+  @include media($media-city)
+    top: $cityscape-height
+
+  a
+    color: rgba(149, 207, 202, 1)
+
+  .background
+    overflow-y: scroll
+    height: 100%
+    padding-bottom: 63px
+    background-color: #2C313B
+    background-image: radial-gradient(circle at 50% 100%, $color-background 15%, rgba(0,0,0,0) 40%), url(/images/rays.svg)
+    background-size: cover
+
+  .share-section
+    @include clearfix
+
+  .share-description
+    float: left
+    width: 100%
+    padding: 20px 50px
+
+    @include media($media-big)
+      width: 40%
+
+  #share-string
+    width: 100%
+    padding: 10px
+    resize: none
+    background: none
+    outline: none
+
+  .share-chart
+    float: left
+    width: 100%
+    height: 100%
+    padding: 40px 50px 30px
+
+    @include media($media-big)
+      width: 60%
+
+    .overview-chartset
+      height: 100%
+
+      .chart
+        height: percentage(1/5)
+        margin: 3em 0
+        min-height: 100px
+
+        @include media($media-big)
+          height: 33.333%
+          margin: 0
+
+  .social
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    margin: 0
+    color: #fff
+    background: #28a197
+
+    .title
+      padding: 20px 5px 16px
+      position: absolute
+      top: 0
+      left: 0
+      margin: 0
+      width: 250px
+      font-weight: normal
+      line-height: 21px
+
+    .social-links
+      padding: 0 0 0 250px
+      margin: 0
+
+      li
+        list-style-type: none
+        text-align: center
+        width: percentage(1/5)
+        margin: 0
+        float: left
+        border-left: 1px solid #fff
+
+        &:first-child
+          border-left: none
+
+        span
+          display: none
+
+          @include media($media-big)
+            display: inline
+
+        .icon
+          color: #fff
+          text-decoration: none
+          position: relative
+          display: block
+          padding: 15px 0px 21px 15px
+
+          @include media($media-big)
+            padding: 15px 5px 21px
+
+          &:hover
+            background: lighten(#28a197, 10%)
+
+          &:before
+            position: relative
+            font-size: 1.7em
+            padding-right: 0.5em
+            top: 0.2em

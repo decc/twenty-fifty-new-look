@@ -16,3 +16,7 @@
 @mixin omega
   @extend %_omega
 
+@mixin media($query)
+  @media #{$query}
+    @content
+

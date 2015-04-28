@@ -9,12 +9,15 @@
   left: 100%
   height: 100%
 
-  &.is-active
+  &.active
     @include transform(translatex(-100%))
 
 .pathway-actions-wrapper
   overflow: auto
   height: calc(100% - $header-height)
+
+  section
+    margin-bottom: 40px
 
 
 .pathway-actions
@@ -24,17 +27,25 @@
   display: block
   @include clearfix
 
-
   > li
     list-style: none
     margin: 0
     padding: 0
-    width: 25%
+    width: 100%
     float: left
     padding: 10px
     min-height: 80px
     border-bottom: 1px dashed #ccc
     @extend %vertical-centered
+
+    @include media($media-medium)
+      width: 50%
+
+    @include media($media-big)
+      width: 25%
+
+    .key
+      padding-right: 0.5em
 
     .value
       padding: 2px .25em

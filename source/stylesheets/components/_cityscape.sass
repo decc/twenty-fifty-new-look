@@ -1,3 +1,89 @@
+$tablet: "(max-width: 865px)"
+
 .cityscape
   background: url(/images/cityscape.png)
+
+  &.fullWidth
+    max-width: 100%
+    width: 100%
+
+.cityscape
+  // height: $cityscape-height
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 10
+  width: 100%
+  height: $cityscape-height
+
+  @include media($media-big)
+    width: calc(100% - #{$right-col-width})
+
+  @include media("screen and (max-height: #{$device-height-small})")
+    top: 0
+    display: none
+
+  display: none
+  @include transform(translateY(-100%))
+  overflow: hidden
+  @include transition(transform .3s ease-in-out)
+
+.charts
+  top: 0
+.landscape-label
+  display: none
+
+@include media($media-city)
+  .cityscape, .landscape-label
+    display: block
+
+  .cityscape
+    &.is-visible
+      @include transform(translateY(0))
+
+  .charts
+    top: 330px
+
+.landscape-label
+  // TODO: mobile first
+  @include media($media-height-small)
+    display: none
+
+.landscape-label
+  background: rgba(65, 70, 83, .6)
+  top: $cityscape-height - $cityscape-bar-height
+  color: #fff
+  font-size: 1.1em
+  font-weight: 400
+  padding: 5px 12px
+  position: absolute
+  right: 0
+  z-index: 11
+  width: 100%
+  height: $cityscape-bar-height
+  cursor: pointer
+  @include transition(top .3s ease-in-out, background .3s)
+
+  &.full
+    top: 0
+    background: rgba(65, 70, 83, 1)
+
+  label
+    cursor: pointer
+
+.toggle-city
+  position: absolute
+  top: 5px
+  right: 12px
+  z-index: 20
+  width: 20px
+  height: 20px
+  background-color: transparent
+  color: #fff
+  cursor: pointer
+  background-size: contain
+  @extend %icon-landscape_down-before
+
+  &.is-active
+    @extend %icon-landscape_up-before
 

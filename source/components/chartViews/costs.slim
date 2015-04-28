@@ -1,20 +1,72 @@
+.tabs.chart-component.costs-tabs
+  .tab data-bind="with: contextTab, css: { 'active': currentTabId() === contextTab.id }"
+    .inner.js-scrollable
+      h2.title The cost (£/person/yr) to society of your pathway. This is not your energy bill.
+      .costs-chartset
+        .chart.compare.top.has-axis data-bind="chart: name, data: $parent.data, object: $parent.yourCostsContextChart, params: { hasAxis: true, margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
+          h3.bar-title Your pathway
+
+        .example-selector
+          h3.select-title Compare pathway with...
+          select data-bind="options: $parent.examples, optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample, event: { change: $parent.changeSelectedExampleName }, select"
+
+        .chart.compare.bottom data-bind="chart: name, data: $parent.comparisonData, object: $parent.comparisonCostsContextChart, params: { margin: { top: 0, right: 40, bottom: 0, left: 150 } }"
+          h3.bar-title data-bind="text: $parent.selectedExampleName"
+
+        p.note Note: The cost of failing to tackle climate change is not included. Some pathways, including the 'All at Level 1' pathway shown here, fail to tackle climate change. The Stern review estimated that failing to tackle climate change could reduce global GDP by up to 20% (equivalent to up to £6500 per person per year on top of the cost of the energy system included in the chart above). Nor are the costs of travelling less, being colder, or consuming less included.
+
+  .tab data-bind="with: comparedTab, css: { 'active': currentTabId() === comparedTab.id }"
+    .inner.js-scrollable
+      h2.title The cost (£/person/yr) breakdown of your pathway. This is not your energy bill.
+      .costs-chartset
+        .chart.compare.top.has-axis data-bind="chart: name, data: $parent.data, object: $parent.yourCostsComparedChart, params: { hasAxis: true, margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
+          h3.bar-title Your pathway
+
+        .example-selector
+          h3.select-title Compare pathway with...
+          select data-bind="options: $parent.examples, optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample, event: { change: $parent.changeSelectedExampleName }, select"
+
+        .chart.compare.bottom data-bind="chart: name, data: $parent.comparisonData, object: $parent.comparisonCostsComparedChart, params: { margin: { top: 0, right: 40, bottom: 0, left: 150 } }"
+          h3.bar-title data-bind="text: $parent.selectedExampleName"
+
+        p.note Note: The cost of failing to tackle climate change is not included. Some pathways, including the 'All at Level 1' pathway shown here, fail to tackle climate change. The Stern review estimated that failing to tackle climate change could reduce global GDP by up to 20% (equivalent to up to £6500 per person per year on top of the cost of the energy system included in the chart above). Nor are the costs of travelling less, being colder, or consuming less included.
+
+  .tab data-bind="with: sensitivityTab, css: { 'active': currentTabId() === sensitivityTab.id }"
+    .outer
+      .inner.scroll.js-scrollable
+        h2.title The cost (£/person/yr) of your pathway, allowing simple variation in cost estimates.
+        .costs-chartset.sensitivity
+          .chart.compare.sensitivity-summary.top.has-axis data-bind="chart: name, data: $parent.data, object: $parent.comparisonCostsSensitivityChart, params: { hasAxis: true, margin: { top: 40, right: 40, bottom: 0, left: 315 }, drawParams: { colour: 1 } }"
+            h3.bar-title Your pathway
+
+          .example-selector
+            h3.select-title Compare pathway with...
+            select data-bind="options: $parent.examples, optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample, event: { change: $parent.changeSelectedExampleName }, select"
+
+          .chart.compare.sensitivity-summary.bottom data-bind="chart: name, data: $parent.comparisonData, object: $parent.yourCostsSensitivityChart, params: { margin: { top: 0, right: 40, bottom: 0, left: 315 }, drawParams: { colour: 2 } }"
+            h3.bar-title data-bind="text: $parent.selectedExampleName"
+
+          ul.chart-key
+            li
+              span.colour#costs-sensitivity-colour-1
+              span.name The cost in your pathway
+
+            li
+              span.colour#costs-sensitivity-colour-2
+              span.name The range of cost estimates in your pathway
+
+            li
+              span.colour#costs-sensitivity-colour-3
+              span.name data-bind="text: 'The cost in \''  + $parent.selectedExampleName() +'\''"
+
+            li
+              span.colour#costs-sensitivity-colour-4
+              span.name data-bind="text: 'The range of cost estimates in \''  + $parent.selectedExampleName() +'\''"
+
+          .chart.sensitivity-components data-bind="chart: $parent.sensitivityComponents.name, data: $parent.comparisonData, params: { margin: { top: 0, right: 40, bottom: 0, left: 315 }, drawParams: { currentData: $parent.data, updateCharts: [$parent.yourCostsContextChart, $parent.comparisonCostsContextChart, $parent.yourCostsComparedChart, $parent.comparisonCostsComparedChart, $parent.yourCostsSensitivityChart, $parent.comparisonCostsSensitivityChart] } }"
+
+
 ul.tab-nav.chart-component-tabs data-bind="foreach: tabs"
-  li data-bind="css: { 'is-active': $parent.currentTabId() === id }"
-    button.tab-button data-bind="click: $parent.setActiveTab, text: title"
+  li data-bind="attr: { class: ($parent.currentTabId() === id ? 'active' : '') + ' one-of-'+$parent.tabs.length }"
+    button.tab-button data-bind="attr: { 'data-tab': id }, click: $parent.setActiveTab, text: title"
 
-.tabs
-  .tab data-bind="with: contextTab, css: { 'is-active': currentTabId() === contextTab.id }"
-    h2 data-bind="text: 'a'"
-    .costs-chartset
-      .chart.compare data-bind="chart: name, data: $parent.data, params: { hasAxis: true }"
-      select data-bind="event: { change: $parent.enableComparisonCharts }, options: $parent.examples, optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample"
-
-      .chart.compare data-bind="visible: $parent.comparisonChartsEnabled, chart: name, data: $parent.comparisonData"
-
-  .tab data-bind="with: comparedTab, css: { 'is-active': currentTabId() === comparedTab.id }"
-    h2 data-bind="text: 'a'"
-    .costs-chartset
-      .chart.compare data-bind="chart: name, data: $parent.data, params: { hasAxis: true }"
-      select data-bind="event: { change: $parent.enableComparisonCharts }, options: $parent.examples, optionsText: 'name', optionsValue: 'values', value: $parent.selectedExample"
-
-      .chart.compare data-bind="visible: $parent.comparisonChartsEnabled, chart: name, data: $parent.comparisonData"

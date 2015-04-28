@@ -1,0 +1,36 @@
+.energy-security.js-scrollable
+  article
+    section
+      .col
+        = m('calculator.charts.security.imports.blurb')
+
+        table
+          thead
+            td= t('calculator.charts.security.imports.table.col1')
+            td= t('calculator.charts.security.imports.table.col2')
+            td= t('calculator.charts.security.imports.table.col3')
+
+          tbody data-bind="foreach: data().imports"
+            td data-bind="text: name"
+            td data-bind="text: t2007.quantity + ' - ' + t2007.proportion"
+            td data-bind="text: t2050.quantity + ' - ' + t2050.proportion"
+
+      .col
+        = m('calculator.charts.security.diversity.blurb')
+
+        table
+          thead
+            td= t('calculator.charts.security.diversity.table.col1')
+            td= t('calculator.charts.security.diversity.table.col2')
+            td= t('calculator.charts.security.diversity.table.col3')
+
+          tbody data-bind="foreach: data().diversity"
+            td data-bind="text: name"
+            td data-bind="text: t2007"
+            td data-bind="text: t2050"
+
+    section
+      h2= t('calculator.charts.security.balance.title')
+      span data-bind="visible: auto > 0"= m('calculator.charts.security.balance.known')
+      span= m('calculator.charts.security.balance.not')
+

@@ -1,33 +1,63 @@
 .calculator-header
-  height: 7vh
-  min-height: 60px
+  position: relative
+  height: $header-height
+  z-index: 12
+  min-height: 65px
   @include row
   background: $color-background-dark
+  border-bottom: 1px solid $color-border-dark
 
-  .toggle-nav
-    @include col(6%)
-    @include omega
-    height: 100%
-    width: 6%
-    min-width: 60px
-    color: $color-button-text
-    background: none
-    border: none
+  .settings
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    z-index: 5
+    cursor: pointer
+    width: $chart-tabs-width-small
+    border-right: 1px solid $color-border-dark
 
-  .pathway-owner
-    @include col(20%)
-    height: 100%
-    @extend %vertical-centered
-    color: #fff
+    @include media($media-medium)
+      width: $chart-tabs-width
 
-  .co2-reduction
-    @include col(49%)
-    @include omega
+    .toggle-nav
+      position: absolute
+      top: 0
+      left: 0
+      width: $chart-tabs-width-small
+      height: 100%
+      color: $color-button-text
+
+      &:before
+        position: absolute
+        top: 50%
+        left: 50%
+        @include transform(translate(-50%, -50%))
+
+    .pathway-owner
+      display: none
+      padding-left: 56px
+      padding-right: 15px
+      height: 100%
+      @extend %vertical-centered
+      color: #fff
+
+      @include media($media-medium)
+        display: table
+
+  .total-co2-reduction
+    position: relative
+    width: 100%
+    padding-left: $chart-tabs-width-small
+    padding-right: $small-controls-width
     height: 100%
     color: $color-background-dark
 
-    .percentage
-      font-weight: bold
+    @include media($media-medium)
+      padding-left: $chart-tabs-width
+
+    @include media($media-mediumbig)
+      padding-right: $right-col-width
 
     .container
       @extend %vertical-centered
@@ -57,16 +87,115 @@
         border-bottom: 40px solid $color-background-dark
         border-left: 40px solid transparent
 
-  .finish-share
-    @include col($right-col-width)
+  .spacer
+    position: relative
+    width: 100%
+
+  .target-reached-tooltip
+    position: absolute
+    right: 20px
+    top: 100%
+    margin-top: 20px
+    padding: 20px 20px 20px
+    background-color: rgba(45, 49, 60, 0.95)
+    min-width: 250px
+    width: 33%
+
+    .arrow
+      left: 42%
+      margin-left: 2px
+      border-color: rgba(45, 49, 60, 0.95) transparent
+
+    .close
+      position: absolute
+      top: 2px
+      right: 8px
+      line-height: 1
+      font-size: 25px
+      cursor: pointer
+
+
+  .controls
+    @include col(140px)
     @include omega
+    position: absolute
+    top: 0
+    right: 0
+    height: 100%
 
-    @extend %vertical-centered
+    @include media($media-mediumbig)
+      width: $right-col-width
 
-    min-width: $right-col-min-width
+    .spinner
+      width: 100%
+      height: 100%
+      background-size: 100% auto
 
-    background: $color-highlight
-    color: $color-button-text
-    text-align: center
-    text-decoration: none
+    button
+      border: none
+      color: $color-button-text
+      background: $color-highlight
+      height: 100%
+      padding: 20px
+      text-align: center
 
+    .finish-share
+      @extend %vertical-centered
+      padding-right: 70px
+      width: 100%
+      border-left: 1px solid $color-border-dark
+      @extend %icon-flag-before
+
+      &:before
+        font-size: 1.5em
+        margin-left: -18px
+
+      span
+        display: none
+
+      @include media($media-mediumbig)
+        span
+          display: inline
+          position: relative
+          top: -5px
+
+        &:before
+          content: ''
+
+    .help
+      position: absolute
+      top: 0
+      right: 0
+      width: 70px
+      font-size: 2em
+      font-weight: bold
+      border-left: 1px solid $color-background
+      line-height: 1
+
+      &.share-closer
+        @extend .blue
+
+        @include media($media-city)
+          background: #fff!important
+          color: #000!important
+
+      &.white
+        background: #fff
+        color: #000
+
+      &.question
+        color: #fff
+        background: #4a5163
+        cursor: help
+
+      &.blue
+        color: #fff
+        background: rgba(53, 58, 68, 1)
+
+      &.grey
+        color: #000
+        background: #f5f5f5
+
+      span
+        width: 100%
+        height: 100%

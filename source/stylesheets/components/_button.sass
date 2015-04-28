@@ -6,24 +6,19 @@
   @extend %button
   background: none
 
-.button
-  padding: 15px 60px
-  text-transform: uppercase
-  background: $color-highlight
-  display: inline-block
-  color: $color-button-text
-  text-decoration: none
-  border-radius: 4px
-  font: $font-light
-  font-size: 1.75em
-  margin: 1em 0 0 0
-  border: 0
+button
+  outline: none
 
 .info-button
   @extend %button, %icon-info-before
   background: #cccccc
-  border-radius: 20px
+  border-radius: 100%
   font-size: 11px
-  padding: 0 2px
   color: #f5f5f5
+  width: 15px
+  height: 15px
+  text-align: center
+
+  &:hover
+    background: #bbbbbb
 

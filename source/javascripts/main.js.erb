@@ -1,0 +1,51 @@
+(function(require) {
+  'use strict';
+
+  require.config({
+    urlArgs: 'bust=' + (new Date()).getTime(), // Cache busting for dev only
+    paths: {
+      knockout: 'vendor/knockout-3.2.0.min',
+      crossroads: 'vendor/crossroads',
+      hasher: 'vendor/hasher',
+      signals: 'vendor/signals',
+      ajax: 'vendor/ajax',
+      ZeroClipboard: 'vendor/zero-clipboard',
+      scroller: 'vendor/scroller',
+      text: 'vendor/text',
+      d3: 'vendor/d3',
+      tabber: 'vendor/tabber',
+      range: 'vendor/ranges',
+      modernizr: 'vendor/modernizr',
+      selects: 'vendor/styled-selects',
+
+      // For sankey
+      raphael: 'vendor/raphael.min',
+      sankey: 'vendor/sankey'
+    }
+  });
+
+  require([
+    'componentLoader',
+    'customElements',
+    'bindings/cityscape',
+    'bindings/transitionEnd',
+    'bindings/paralax',
+    'bindings/factsheet',
+    'bindings/chart',
+    'bindings/faqs',
+    'bindings/scrolls',
+    'bindings/tabs',
+    'bindings/actionInputs/rangeInt',
+    'bindings/actionInputs/rangeFloat',
+    'bindings/actionInputs/radio',
+    'bindings/select',
+    'bindings/swipe',
+    'bindings/copy',
+    'bindings/popup'
+  ]);
+
+  require(['app'], function(app) {
+    app.init();
+  });
+})(require, define);
+
