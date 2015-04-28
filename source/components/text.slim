@@ -6,7 +6,7 @@ img.splash-image onmousedown="return false;" src="/images/landscape.svg"
   section.splash-content
     article
       h1 data-bind="text: heading"
-      div data-bind="text: content"
+      div data-bind="html: content"
       | <!-- ko if: typeof button !== 'undefined' -->
       a class="button" data-bind="text: button" href=guide_path
       | <!-- /ko -->
