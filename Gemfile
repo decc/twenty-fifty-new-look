@@ -18,4 +18,4 @@ gem 'fontcustom'
 gem 'jshintrb'
 gem 'rdiscount'
 gem 'codebase4'
-
+gem 'pry'
