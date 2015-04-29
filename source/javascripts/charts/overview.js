@@ -17,6 +17,21 @@ define(['knockout', 'd3', 'charts/chart', 'bindings/range'], function(ko, d3, Ch
     var percentageReduction = data[self.title].percentageReduction
     data = data[self.title][self.drawParams.date()]
 
+    // Get total
+    var total = data.filter(function(d) { return d.key === "Total"; })[0];
+
+    // Get max x extent of graph (sum of positive values)
+    var sum = data
+      .filter(function(d) { return !(d.key === "Total") && d.value > 0; })
+      .reduce(function(total, current) { return total + current.value }, 0);
+
+    // Change scale x max to encompass extent of data
+    if(sum > self.xMax) {
+      var xMax = Math.ceil(sum/1000)*1000;
+    } else {
+      var xMax = self.xMax;
+    }
+
     self.outerWidth = width || self.outerWidth;
     self.outerHeight = height || self.outerHeight;
 
@@ -26,7 +41,7 @@ define(['knockout', 'd3', 'charts/chart', 'bindings/range'], function(ko, d3, Ch
     self.nTicks = 5;
 
     var x = d3.scale.linear()
-        .domain([self.xMin, self.xMax])
+        .domain([self.xMin, xMax])
         .range([0, self.width]);
 
     var xAxis = d3.svg.axis()
@@ -44,9 +59,6 @@ define(['knockout', 'd3', 'charts/chart', 'bindings/range'], function(ko, d3, Ch
 
     // Grid
     self.drawVerticalGridlines();
-
-    // Get total
-    var total = data.filter(function(d) { return d.key === "Total"; })[0];
 
     // Separate data positive/negative
     var positiveData = data.filter(function(d) { return d.key !== "Total" && d.value >= 0; });
