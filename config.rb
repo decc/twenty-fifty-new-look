@@ -1,5 +1,4 @@
 require 'rdiscount'
-
 ###
 # Page options, layouts, aliases and proxies
 ###
@@ -28,10 +27,10 @@ page "/components/*", layout: false
 
 helpers do
   def markdown(string)
-    RDiscount.new(string).to_html
+    RDiscount.new(string).to_html.delete("\n")
   end
 
-  # Likt I18n.t but parses markdown
+  # Like I18n.t but parses markdown
   def m(i18n)
     markdown(I18n.t(i18n))
   end
