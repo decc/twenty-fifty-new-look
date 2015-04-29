@@ -1,16 +1,16 @@
 nav.main-nav
 
   .top-level
-    = image_tag "/images/logo.png", class: :logo
+    = image_tag "/images/logo.png", class: :logo, alt: t('decc')
 
-    = link_to I18n.t('calculator.menu.mine.link'), calculator_path, class: "tab-button", :'data-bind' => "click: closeNav"
+    = link_to I18n.t('calculator.menu.mine.link'), calculator_path, class: "my-pathway tab-button", :'data-bind' => "click: closeNav, css: {'is-active': myPathway }"
 
-    button class="tab-button" data-bind="click: toggleSubnav, css: { active: navState() === 2 }"= I18n.t('calculator.menu.examples.link')
+    button class="tab-button" data-bind="click: toggleSubnav, css: { 'is-active': !myPathway() || navState() === 2 }"= I18n.t('calculator.menu.examples.link')
 
     = link_to I18n.t('calculator.menu.guide'), home_path, class: "tab-button exit", :"data-bind" => "click: closeNav"
 
   .secondary.js-scrollable
-    = I18n.t('calculator.menu.examples.body')
+    p = I18n.t('calculator.menu.examples.body')
 
     ul data-bind="foreach: exampleCategories"
       li
@@ -18,5 +18,5 @@ nav.main-nav
 
         ul data-bind="foreach: $parent.pathway.examples($data)"
           li
-            a data-bind="text: name, click: $parents[1].closeNav, attr: { href: '/#/calculator/' + slug }"
+            a data-bind="text: name, click: $parents[1].closeNav, attr: { href: '/#/calculator/' + slug }, css: { 'is-active': $parents[1].currentPathway().name === name }"
 

@@ -326,6 +326,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action', 'hasher'
     self.valid = true;
 
     self.name = args.name;
+    console.log(self.name)
     self.values = args.values; // TODO: Map values to pathway action values
 
     // Do not make requests until after all binding updates
@@ -362,6 +363,11 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action', 'hasher'
       if(!/^[0-9a-z]+$/.test(values) || values.length !== 53) {
         hasher.replaceHash('not-found');
       }
+    },
+
+    /** is pathway and example or mine? */
+    isMine: function() {
+      return (this.name === 'Your pathway');
     },
 
     /** find action by slug*/
