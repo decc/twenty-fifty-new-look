@@ -4,7 +4,7 @@
     h5 loading...
 
 .viewport
-  main-nav params="navState: navState"
+  main-nav params="navState: navState, pathway: currentPathway"
 
   .wrapper data-bind="css: { 'with-nav': navState() > 0, 'with-subnav': navState() === 2 }"
 

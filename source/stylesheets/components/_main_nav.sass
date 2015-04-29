@@ -42,7 +42,11 @@ main-nav
       &:hover
         background: $color-background-dark
 
-      &.active
+      &.my-pathway
+        &.is-active
+          background: $color-background-dark
+
+      &.is-active
         background: $color-highlight
 
     .exit
@@ -58,7 +62,17 @@ main-nav
     padding: 2em 1em
     overflow: auto
 
+    h3
+      padding: 1em 0 0
+
     ul
       li
-        padding: 0.5em 0
+
+        a
+          display: inline-block
+          width: 100%
+          padding: 0.5em 0.75em
+
+          &.is-active
+            font-weight: bold
 
