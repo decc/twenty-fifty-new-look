@@ -46,10 +46,13 @@ $device-height-small: 760px
 $cityscape-height: 300px
 $cityscape-bar-height: 30px
 
+$width-small: 700px
 $width-medium: 860px
 $width-mediumbig: 1000px
 $width-big: 1300px
 $width-bigger: 1600px
+
+$min-landscape-height: 700px
 
 $media-webkit-only: 'screen and (-webkit-min-device-pixel-ratio: 0)'
 
@@ -57,8 +60,8 @@ $media-bigger: 'screen and (min-width: #{$width-bigger})'
 $media-big: 'screen and (min-width: #{$width-big})'
 $media-mediumbig: 'screen and (min-width: #{$width-mediumbig})'
 $media-medium: 'screen and (min-width: #{$width-medium})'
-$media-city: '(min-width: #{$width-medium}) and (min-height: 761px)'
-$media-small: 'screen and (min-width: 600px)'
+$media-city: '(min-width: #{$width-medium}) and (min-height: #{$min-landscape-height})'
+$media-small: 'screen and (min-width: #{$width-small})'
 
 $media-height-small: 'screen and (max-height: #{$device-height-small})'
 

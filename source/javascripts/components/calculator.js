@@ -1,5 +1,5 @@
-define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers', 'hasher', 'config'],
-  function(ko, html, Pathway, Helpers, hasher, config) {
+define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers', 'hasher', 'utils'],
+  function(ko, html, Pathway, Helpers, hasher, Utils) {
 
   'use strict';
 
@@ -12,23 +12,30 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
 
     var self = this;
 
-
     // check screen is big enough
     var timer;
 
     self.handleResize = function() {
+      var remove = false;
+
       timer = setTimeout(function() {
-        if(window.innerWidth < config.MIN_WIDTH || window.innerHeight < config.MIN_HEIGHT) {
+        if(Utils.tooSmall()) {
           hasher.replaceHash('too-small');
+          remove = true;
+        } else if(Utils.shouldRotate()) {
+          hasher.replaceHash('rotate');
+          remove = true;
+        }
+
+        if(remove) {
           window.removeEventListener('resize', self.handleResize);
         }
-        console.log('resize')
-
       }, 500);
     };
 
     window.addEventListener('resize', self.handleResize);
 
+    self.handleResize();
 
     self.pathway = params.pathway
 
@@ -155,7 +162,7 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
       self.activeTab(id)
     }
 
-    self.cityscapeVisible = ko.observable(true);
+    self.cityscapeVisible = ko.observable(window.innerWidth > 1200);
 
     /** toggle city scape */
     self.toggleCity = function(){
@@ -171,6 +178,14 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
     self.redrawCharts = function() {
       // Redraw charts by touching data
       self.pathway().chartData.notifySubscribers();
+    };
+
+    self.swipeLandscape = function(swipe) {
+      if(swipe.down) {
+        self.cityscapeVisible(true);
+      } else if(swipe.up) {
+        self.cityscapeVisible(false);
+      }
     };
 
   };

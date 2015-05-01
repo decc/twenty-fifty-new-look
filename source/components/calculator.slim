@@ -21,7 +21,7 @@
 
         .inner-content data-bind="visible: mainViewVisible"
 
-            .landscape-label data-bind="click: toggleCity, css: { full: !cityscapeVisible() }"
+            .landscape-label data-bind="swipe: swipeLandscape, click: toggleCity, css: { full: !cityscapeVisible() }"
               label= t('calculator.header.your_landscape')
               span.toggle-city data-bind="css: { 'is-active': cityscapeVisible }"
 

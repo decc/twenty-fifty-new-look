@@ -29,9 +29,9 @@ define(['knockout', 'text!../../components/pathway-sidebar.html', 'pathway'],
     }
 
     self.swipeNav = function(direction) {
-      if(direction === 'left') {
+      if(direction.left) {
         self.navVisible(true);
-      } else if (direction === 'right') {
+      } else if (direction.right) {
         self.navVisible(false);
       }
     }
@@ -42,9 +42,9 @@ define(['knockout', 'text!../../components/pathway-sidebar.html', 'pathway'],
     };
 
     self.swipeOverview = function(direction) {
-      if(direction === 'left') {
+      if(direction.left) {
         self.overviewVisible(true);
-      } else if (direction === 'right') {
+      } else if (direction.right) {
         self.overviewVisible(false);
       }
     }

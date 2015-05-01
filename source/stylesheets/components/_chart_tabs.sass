@@ -3,28 +3,52 @@
   height: calc(100%)
   left: 0
   right: 0
+  top: 0
   background: #5A6378
   border-top: 1px solid #fff
-  @include transition(height .3s ease-in-out, top .3s ease-in-out)
+  @include transition(height .3s ease-in-out, top .3s ease-in-out, transform .3s ease-in-out)
+  pointer-events: none
+  @include transform(translateY($cityscape-height))
+  height: calc(100% - #{$cityscape-bar-height})
+
+  &:after
+    content: ''
+    z-index: 999
+    opacity: 1
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    background: rgba(0, 0, 0, .4)
+    @include transition(opacity .3s ease-in-out)
+    pointer-events: none
+    .ie9 &
+      display: none
 
   &.full
-    top: $cityscape-bar-height
-    height: calc(100% - #{$cityscape-bar-height})
+    pointer-events: auto
 
-  @include media($media-height-small)
-    top: 0
-    height: 100%
+    &:after
+      opacity: 0
+
+    @include transform(translateY(0))
+    top: $cityscape-bar-height
+
+  @include media($media-city)
+    @include transform(translateY(0))
+    height: calc(100% - #{$cityscape-height})
+    top: $cityscape-height
+    pointer-events: auto
+
+    &:after
+      display: none
 
     &.full
-      top: 0
-      height: 100%
+      height: calc(100% - #{$cityscape-bar-height})
 
   &.noTop
     top: 0px
-
-  @include media($media-city)
-    top: $cityscape-height
-    height: calc(100% - #{$cityscape-height})
 
 .chart-tab-nav
   position: absolute
@@ -35,8 +59,6 @@
   bottom: 0
   z-index: 10
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3)
-  @include media($media-height-small)
-    top: 0
 
   @include media($media-big)
     width: $chart-tabs-width

@@ -13,6 +13,7 @@ define(['knockout', 'text!../../components/calculator-header.html'],
 
     self.targetReachedVisible = ko.observable(false);
     self.targetDismissed = false;
+
     ko.computed(function() {
       // Show target reached tooltip if target reached; do not show if user has closed it before
       if(!self.targetDismissed && self.pathway().chartData()["SummaryChart"] >= 80) {
@@ -38,9 +39,9 @@ define(['knockout', 'text!../../components/calculator-header.html'],
     };
 
     self.swipeNav = function(direction) {
-      if(direction === 'left') {
+      if(direction.left) {
         navState(0);
-      } else if (direction === 'right') {
+      } else if (direction.right) {
         navState(1);
       }
     };

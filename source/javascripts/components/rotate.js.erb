@@ -4,15 +4,15 @@ define(['knockout', 'text!../../components/text.html', 'utils', 'hasher'], funct
   var ViewModel = function(params) {
     var lastRoute = params.lastRoute || 'home';
 
-    self.heading = '<%= I18n.t('small.heading') %>';
-    self.content = '<%= m('small.content') %>';
+    self.heading = '<%= I18n.t('rotate.heading') %>';
+    self.content = '<%= m('rotate.content') %>';
     self.button = false;
 
     var timer;
 
     self.handleResize = function() {
       timer = setTimeout(function() {
-        if(!Utils.tooSmall()) {
+        if(!Utils.shouldRotate()) {
           hasher.replaceHash(lastRoute);
           window.removeEventListener('resize', self.handleResize);
         }

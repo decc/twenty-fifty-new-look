@@ -6,20 +6,36 @@ define(['knockout'], function(ko) {
       var callback = valueAccessor();
 
       var touchStartX = 0;
+      var touchStartY = 0;
 
       el.addEventListener('touchstart', function(e){
-        touchStartX = e.changedTouches[0].pageX;
+        var changedTouch = e.changedTouches[0];
+
+        touchStartX = changedTouch.pageX;
+        touchStartY = changedTouch.pageY;
       });
 
       el.addEventListener('touchend', function(e){
-        var touchEndX = e.changedTouches[0].pageX,
-            minSwipe = 100;
+        var changedTouch = e.changedTouches[0];
+
+        var touchEndX = changedTouch.pageX;
+        var touchEndY = changedTouch.pageY;
+        var minSwipe = 100;
+        var out = {};
 
         if((touchStartX - touchEndX) >= minSwipe){
-          callback('left');
+          out.left = true;
         }else if((touchEndX - touchStartX) >= minSwipe){
-          callback('right');
+          out.right = true;
         }
+
+        if((touchStartY - touchEndY) >= minSwipe){
+          out.up = true;
+        }else if((touchEndY - touchStartY) >= minSwipe){
+          out.down = true;
+        }
+
+        callback(out)
       });
 
     }
