@@ -12,6 +12,113 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
 
     var self = this;
 
+    var Preloadable = function(path, callback) {
+      var self = this;
+
+      self.hasLoaded = false;
+      self.path = path;
+      self.callback = callback;
+
+      self.img = new Image();
+      self.img.onload = function() {
+        self.loaded();
+      };
+
+      self.img.src = self.path;
+    }
+
+    Preloadable.prototype = {
+      loaded: function() {
+        this.hasLoaded = true;
+
+        if(this.callback) {
+          this.callback();
+        }
+      }
+    };
+
+    var touch = function() {
+      self.preloadables.notifySubscribers();
+    }
+
+    /** Image assets to preload before showing calculator */
+    self.preloadables = ko.observableArray([
+      // backgrounds
+      new Preloadable('/layers/layer1.svg', touch),
+      new Preloadable('/layers/layer2.svg', touch),
+      new Preloadable('/layers/layer3.svg', touch),
+      new Preloadable('/layers/layer4.svg', touch),
+
+      // icons
+      new Preloadable('/svgs/airplane.svg', touch),
+      new Preloadable('/svgs/algae.svg', touch),
+      new Preloadable('/svgs/bike.svg', touch),
+      new Preloadable('/svgs/biocrop_layer3.svg', touch),
+      new Preloadable('/svgs/biocrop_layer4.svg', touch),
+      new Preloadable('/svgs/bioenergy.svg', touch),
+      new Preloadable('/svgs/bioenergy_powerstation.svg', touch),
+      new Preloadable('/svgs/boat.svg', touch),
+      new Preloadable('/svgs/bulb.svg', touch),
+      new Preloadable('/svgs/bulb_led.svg', touch),
+      new Preloadable('/svgs/bus.svg', touch),
+      new Preloadable('/svgs/car.svg', touch),
+      new Preloadable('/svgs/carriage.svg', touch),
+      new Preloadable('/svgs/ccs_powerstation.svg', touch),
+      new Preloadable('/svgs/coal_powerstation.svg', touch),
+      new Preloadable('/svgs/commercial_fan.svg', touch),
+      new Preloadable('/svgs/commercial_solar.svg', touch),
+      new Preloadable('/svgs/cow.svg', touch),
+      new Preloadable('/svgs/dial.svg', touch),
+      new Preloadable('/svgs/electric.svg', touch),
+      new Preloadable('/svgs/electric_white.svg', touch),
+      new Preloadable('/svgs/factory.svg', touch),
+      new Preloadable('/svgs/field_solar.svg', touch),
+      new Preloadable('/svgs/gas.svg', touch),
+      new Preloadable('/svgs/gas_white.svg', touch),
+      new Preloadable('/svgs/geothermal.svg', touch),
+      new Preloadable('/svgs/heating_pipe.svg', touch)
+    ]);
+
+    self.componentsLoaded = ko.observable(false);
+    self.hasLoaded = ko.computed(function() {
+      var ready = true;
+
+      ko.utils.arrayForEach(self.preloadables(), function(preloadable) {
+        if(!!!preloadable.loaded) {
+          ready = false;
+        };
+      });
+
+      return (ready && self.componentsLoaded());
+    });
+
+
+    var img, preloadable;
+
+    for(var i = 0, l = self.preloadables().length; i < l; i++) {
+      preloadable = self.preloadables()[i];
+
+      debugger
+
+      preloadable.img = new Image();
+
+      preloadable.img.onlaod = preloadable.loaded;
+      preloadable.img.src = preloadable.path;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     // check screen is big enough
     var timer;
 
