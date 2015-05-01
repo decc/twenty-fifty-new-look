@@ -93,32 +93,6 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
     });
 
 
-    var img, preloadable;
-
-    for(var i = 0, l = self.preloadables().length; i < l; i++) {
-      preloadable = self.preloadables()[i];
-
-      debugger
-
-      preloadable.img = new Image();
-
-      preloadable.img.onlaod = preloadable.loaded;
-      preloadable.img.src = preloadable.path;
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
     // check screen is big enough
     var timer;
 
