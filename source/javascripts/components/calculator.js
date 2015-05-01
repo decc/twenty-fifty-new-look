@@ -12,6 +12,53 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
 
     var self = this;
 
+
+    /** Image assets to preload before showing calculator */
+    self.preloadables = ko.observableArray([
+      {
+        path: '/layers/layer1.svg',
+      }
+      // '/layers/layer2.svg',
+      // '/layers/layer3.svg',
+      // '/layers/layer4.svg',
+      //
+      // '/svgs/airplane.svg',
+      // '/svgs/algae.svg',
+      // '/bike.svg',
+      // '/svgs/biocrop_layer3.svg',
+      // '/svgs/biocrop_layer4.svg',
+      // 'svgs/bioenergy_powerstation.svg'
+    ]);
+
+    self.hasLoaded = ko.computed(function() {
+      // areturn self.preloadables.forEach(function(loadable) {
+      //
+      // });
+
+    });
+
+    var preloaded = [];
+
+    var img, preloadable;
+
+    /** called on preloadable onload */
+    var preloaded = function() {
+      this._preloadable.loaded = true;
+    };
+
+    for(var i = 0, l = preloadables.length; i < l; i++) {
+      preloadable = preloadables[i];
+
+      img = new Image();
+      img._preloadable = preloadable;
+      img.addEventListener('laod', preloaded);
+      img.src = preloadable.path;
+
+      preloadable.image = img;
+
+    }
+
+
     // check screen is big enough
     var timer;
 
