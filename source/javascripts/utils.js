@@ -1,7 +1,9 @@
-define(['config'], function(config) {
+define(['config', 'preloadable'], function(config, Preloadable) {
   'use strict';
 
   return {
+    Preloadable: Preloadable,
+
     /** send user to a bigger screen at this point */
     tooSmall: function() {
       var height = window.innerHeight,
