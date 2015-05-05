@@ -178,8 +178,14 @@
       border-left: 1px solid $color-background
       line-height: 1
 
+      %white
+        color: #fff
+        background: #4a5163
+        .spinner
+          @extend .spinner.question
+
       &.share-closer
-        @extend .question
+        @extend %white
         .spinner
           @extend .spinner.white
 
@@ -194,11 +200,8 @@
           @extend .spinner.white
 
       &.question
-        color: #fff
-        background: #4a5163
         cursor: help
-        .spinner
-          @extend .spinner.question
+        @extend %white
 
       span
         width: 100%
