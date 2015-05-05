@@ -63,7 +63,7 @@
 
     .item
       padding: 1em 0em
-      font-size: 70%
+      font-size: 75%
       border-bottom: 1px dashed #ccc
       &:hover
         .option
@@ -81,17 +81,19 @@
       label
         float: left
         margin-top: 0.5vh
-        max-width: 70%
+        max-width: 75%
         font-size: 13px
 
         @include media($media-big)
           font-size: inherit
+        @include media($media-bigger)
+          font-size: 14px
 
       .value-label
         float: right
         padding: 1em 0.5em
         background-color: #ccc
-        margin-left: 1em
+        margin-left: .5em
         min-width: 35px
         text-align: center
         @include transition(background-color .3s)
