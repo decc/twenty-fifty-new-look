@@ -1,16 +1,26 @@
 ---
 en:
+  decc: 'Department of energy and climate change'
+  your_pathway: 'Your pathway'
+
+  rotate:
+    heading: 'Turn me around'
+    content: 'Rotate your device to see our lovely app.'
 
   small:
     heading: "Thats tiny"
     content: 'The device you are using is too small to propperly display this app.
+
+
       Come back with a bigger screen.'
 
   splash:
     heading: "2050 Energy calculator"
-    content: "By the year 2050 we need to dramatically change the way we produce and consume energy.<br>Government targets require us to reduce emmissions to 20% of 1990 levels."
-    button: "Start"
+    content: "By the year 2050 we need to dramatically change the way we produce and consume energy.
 
+
+      Government targets require us to reduce emmissions to 20% of 1990 levels."
+    button: "Start"
 
   guide:
     '1': "The UK is committed to reducing its greenhouse gas emissions by at least 80% by 2050, relative to 1990 levels.

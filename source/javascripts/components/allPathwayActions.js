@@ -15,7 +15,7 @@ define(['knockout', 'text!../../components/all-pathway-actions.html', 'pathway']
     };
 
     self.swipe = function(direction) {
-      if(direction === 'right') {
+      if(direction.right) {
         self.hide();
       }
     };

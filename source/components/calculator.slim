@@ -1,10 +1,10 @@
-.loading
+.loading data-bind="css: { hidden: hasLoaded() }"
   .inner
-    div.spinner.blue
+    div.spinner.question
     h5 loading...
 
 .viewport
-  main-nav params="navState: navState"
+  main-nav params="navState: navState, pathway: currentPathway"
 
   .wrapper data-bind="css: { 'with-nav': navState() > 0, 'with-subnav': navState() === 2 }"
 
@@ -21,11 +21,11 @@
 
         .inner-content data-bind="visible: mainViewVisible"
 
-            .landscape-label data-bind="click: toggleCity, css: { full: !cityscapeVisible() }"
+            .landscape-label data-bind="swipe: swipeLandscape, click: toggleCity, css: { full: !cityscapeVisible() }"
               label= t('calculator.header.your_landscape')
               span.toggle-city data-bind="css: { 'is-active': cityscapeVisible }"
 
-            .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway, pathwayUpdating: pathwayUpdating } }, css: { full: !cityscapeVisible() }, transitionEnd: redrawCharts"
+            .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway, pathwayUpdating: pathwayUpdating, componentsLoaded: componentsLoaded } }, css: { full: !cityscapeVisible() }, transitionEnd: redrawCharts"
 
         = partial "partials/pathway-overlay"
 

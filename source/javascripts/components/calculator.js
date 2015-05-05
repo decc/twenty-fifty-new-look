@@ -1,5 +1,5 @@
-define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers', 'hasher', 'config'],
-  function(ko, html, Pathway, Helpers, hasher, config) {
+define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers', 'hasher', 'utils'],
+  function(ko, html, Pathway, Helpers, hasher, Utils) {
 
   'use strict';
 
@@ -12,23 +12,86 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
 
     var self = this;
 
+    var Prelaoder = Utils.Preloadable;
+
+    var touch = function() {
+      self.preloadables.notifySubscribers();
+    }
+
+    /** Image assets to preload before showing calculator */
+    var preloadables = [
+      // backgrounds
+      '/layers/layer1.svg',
+      '/layers/layer2.svg',
+      '/layers/layer3.svg',
+      '/layers/layer4.svg',
+      // icons
+      '/svgs/airplane.svg',
+      '/svgs/algae.svg',
+      '/svgs/bike.svg',
+      '/svgs/biocrop_layer3.svg',
+      '/svgs/biocrop_layer4.svg',
+      '/svgs/bioenergy.svg',
+      '/svgs/bioenergy_powerstation.svg',
+      '/svgs/boat.svg',
+      '/svgs/bulb.svg',
+      '/svgs/bulb_led.svg',
+      '/svgs/bus.svg',
+      '/svgs/car.svg',
+      '/svgs/carriage.svg',
+      '/svgs/ccs_powerstation.svg',
+      '/svgs/coal_powerstation.svg',
+      '/svgs/commercial_fan.svg',
+      '/svgs/commercial_solar.svg',
+      '/svgs/cow.svg',
+      '/svgs/dial.svg',
+      '/svgs/electric.svg',
+      '/svgs/electric_white.svg',
+      '/svgs/factory.svg',
+      '/svgs/field_solar.svg',
+      '/svgs/gas.svg',
+      '/svgs/gas_white.svg',
+      '/svgs/geothermal.svg',
+      '/svgs/heating_pipe.svg'
+    ];
+
+    self.componentsLoaded = ko.observable(false);
+    self.assetsLoaded = ko.observable(false);
+
+    // preload the assets
+    Prelaoder.batch(preloadables, function() {
+      self.assetsLoaded(true);
+    });
+
+    self.hasLoaded = ko.computed(function() {
+      return (self.assetsLoaded() && self.componentsLoaded());
+    });
+
 
     // check screen is big enough
     var timer;
 
     self.handleResize = function() {
+      var remove = false;
+
       timer = setTimeout(function() {
-        if(window.innerWidth < config.MIN_WIDTH || window.innerHeight < config.MIN_HEIGHT) {
+        if(Utils.tooSmall()) {
           hasher.replaceHash('too-small');
+          remove = true;
+        } else if(Utils.shouldRotate()) {
+          hasher.replaceHash('rotate');
+          remove = true;
+        }
+
+        if(remove) {
           window.removeEventListener('resize', self.handleResize);
         }
-        console.log('resize')
-
       }, 500);
     };
 
     window.addEventListener('resize', self.handleResize);
 
+    self.handleResize();
 
     self.pathway = params.pathway
 
@@ -102,6 +165,7 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
         self.pathway().chartData.notifySubscribers();
 
       } else {
+        // TODO: Tidy this up...
         self.faqCloseMode(true);
         self.faqVisible(false);
         self.overlayVisible(false);
@@ -154,7 +218,7 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
       self.activeTab(id)
     }
 
-    self.cityscapeVisible = ko.observable(true);
+    self.cityscapeVisible = ko.observable(window.innerWidth > 1200);
 
     /** toggle city scape */
     self.toggleCity = function(){
@@ -170,6 +234,14 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
     self.redrawCharts = function() {
       // Redraw charts by touching data
       self.pathway().chartData.notifySubscribers();
+    };
+
+    self.swipeLandscape = function(swipe) {
+      if(swipe.down) {
+        self.cityscapeVisible(true);
+      } else if(swipe.up) {
+        self.cityscapeVisible(false);
+      }
     };
 
   };

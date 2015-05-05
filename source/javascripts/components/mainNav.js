@@ -4,7 +4,19 @@ define(['knockout', 'text!../../components/main-nav.html', 'ajax', 'pathway'], f
   var ViewModel = function(params) {
     var self = this;
 
+    // if my pathway, my is active, else example is active
+
+    // submenu...
+    // if pathway name === current pathway name active
+
     self.navState = params.navState;
+
+    self.currentPathway = params.pathway;
+
+    /** @returns {boolean} - is it my pathway or not */
+    self.myPathway = ko.computed(function() {
+      return self.currentPathway().isMine();
+    });
 
     self.exampleCategories = Pathway.exampleCategories();
     self.pathway = Pathway;

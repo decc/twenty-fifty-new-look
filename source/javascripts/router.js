@@ -17,6 +17,10 @@ define(['crossroads', 'hasher', 'pathway'], function(crossroads, hasher, Pathway
         app.getPage('too-small', { lastRoute: lastRoute });
       });
 
+      crossroads.addRoute('rotate', function(lastRoute) {
+        app.getPage('rotate', { lastRoute: lastRoute });
+      });
+
       crossroads.addRoute('calculator/:slug:', function(lastRoute, slug) {
         var pathway;
 

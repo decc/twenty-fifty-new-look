@@ -4,6 +4,8 @@ define(['knockout', 'text!../../components/chart-tabs.html', 'dataRequester', 'c
   var ViewModel = function(params) {
     var self = this;
 
+    self.componentsLoaded = params.componentsLoaded;
+
     // - For chartView components TODO: fix them so they can require? :) --
     self.DataRequester = DataRequester;
     self.ChartParser = ChartParser;

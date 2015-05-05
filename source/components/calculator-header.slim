@@ -19,5 +19,5 @@ header.calculator-header
 
     button.help data-bind="click: $parent.toggleFaq, css: $parent.buttonColor"
       span data-bind="visible: !$parent.pathwayUpdating(), text: $parent.faqCloseMode() ? '&times;' : '?'"
-      div.spinner.question data-bind="visible: $parent.pathwayUpdating"
+      div.spinner data-bind="visible: $parent.pathwayUpdating"
 
