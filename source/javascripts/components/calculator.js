@@ -12,61 +12,59 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
 
     var self = this;
 
-    var Preloadable = Utils.Preloadable;
+    var Prelaoder = Utils.Preloadable;
 
     var touch = function() {
       self.preloadables.notifySubscribers();
     }
 
     /** Image assets to preload before showing calculator */
-    self.preloadables = ko.observableArray([
+    var preloadables = [
       // backgrounds
-      new Preloadable('/layers/layer1.svg', touch),
-      new Preloadable('/layers/layer2.svg', touch),
-      new Preloadable('/layers/layer3.svg', touch),
-      new Preloadable('/layers/layer4.svg', touch),
-
+      '/layers/layer1.svg',
+      '/layers/layer2.svg',
+      '/layers/layer3.svg',
+      '/layers/layer4.svg',
       // icons
-      new Preloadable('/svgs/airplane.svg', touch),
-      new Preloadable('/svgs/algae.svg', touch),
-      new Preloadable('/svgs/bike.svg', touch),
-      new Preloadable('/svgs/biocrop_layer3.svg', touch),
-      new Preloadable('/svgs/biocrop_layer4.svg', touch),
-      new Preloadable('/svgs/bioenergy.svg', touch),
-      new Preloadable('/svgs/bioenergy_powerstation.svg', touch),
-      new Preloadable('/svgs/boat.svg', touch),
-      new Preloadable('/svgs/bulb.svg', touch),
-      new Preloadable('/svgs/bulb_led.svg', touch),
-      new Preloadable('/svgs/bus.svg', touch),
-      new Preloadable('/svgs/car.svg', touch),
-      new Preloadable('/svgs/carriage.svg', touch),
-      new Preloadable('/svgs/ccs_powerstation.svg', touch),
-      new Preloadable('/svgs/coal_powerstation.svg', touch),
-      new Preloadable('/svgs/commercial_fan.svg', touch),
-      new Preloadable('/svgs/commercial_solar.svg', touch),
-      new Preloadable('/svgs/cow.svg', touch),
-      new Preloadable('/svgs/dial.svg', touch),
-      new Preloadable('/svgs/electric.svg', touch),
-      new Preloadable('/svgs/electric_white.svg', touch),
-      new Preloadable('/svgs/factory.svg', touch),
-      new Preloadable('/svgs/field_solar.svg', touch),
-      new Preloadable('/svgs/gas.svg', touch),
-      new Preloadable('/svgs/gas_white.svg', touch),
-      new Preloadable('/svgs/geothermal.svg', touch),
-      new Preloadable('/svgs/heating_pipe.svg', touch)
-    ]);
+      '/svgs/airplane.svg',
+      '/svgs/algae.svg',
+      '/svgs/bike.svg',
+      '/svgs/biocrop_layer3.svg',
+      '/svgs/biocrop_layer4.svg',
+      '/svgs/bioenergy.svg',
+      '/svgs/bioenergy_powerstation.svg',
+      '/svgs/boat.svg',
+      '/svgs/bulb.svg',
+      '/svgs/bulb_led.svg',
+      '/svgs/bus.svg',
+      '/svgs/car.svg',
+      '/svgs/carriage.svg',
+      '/svgs/ccs_powerstation.svg',
+      '/svgs/coal_powerstation.svg',
+      '/svgs/commercial_fan.svg',
+      '/svgs/commercial_solar.svg',
+      '/svgs/cow.svg',
+      '/svgs/dial.svg',
+      '/svgs/electric.svg',
+      '/svgs/electric_white.svg',
+      '/svgs/factory.svg',
+      '/svgs/field_solar.svg',
+      '/svgs/gas.svg',
+      '/svgs/gas_white.svg',
+      '/svgs/geothermal.svg',
+      '/svgs/heating_pipe.svg'
+    ];
 
     self.componentsLoaded = ko.observable(false);
+    self.assetsLoaded = ko.observable(false);
+
+    // preload the assets
+    Prelaoder.batch(preloadables, function() {
+      self.assetsLoaded(true);
+    });
+
     self.hasLoaded = ko.computed(function() {
-      var ready = true;
-
-      ko.utils.arrayForEach(self.preloadables(), function(preloadable) {
-        if(!!!preloadable.loaded) {
-          ready = false;
-        };
-      });
-
-      return (ready && self.componentsLoaded());
+      return (self.assetsLoaded() && self.componentsLoaded());
     });
 
 
