@@ -216,7 +216,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action', 'hasher'
 
   /** @returns {object|null} Pathway instance if found */
   Pathway.find = function(slug) {
-    // find example by slug
+    // Find example by slug
     var example = ko.utils.arrayFirst(Pathway.examples(), function(ex) {
       if(ex.slug === slug) {
         return ex;

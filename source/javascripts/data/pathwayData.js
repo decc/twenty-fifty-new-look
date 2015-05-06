@@ -8,7 +8,7 @@ define([], function() {
       { category: 'Extreme Pathways', name: 'Maximum supply, no demand', slug: 'max-supply-no-demand-example', values: '40444444444444440443424001121110111101102101110110111' },
       { category: 'Government Pathways', name: 'Analagous to MARKAL 3.26', slug: 'markal-326-example', values: 'i0g2dd2pp1121f1i0322112004314110433304202304320420121' },
       { category: 'Government Pathways', name: 'Higher renewables, more energy efficiency', slug: 'high-renewables-more-energy-efficiency-example', values: 'e0d3jrg221ci12110222112004423220444404202304440420141' },
-      { category: 'Government Pathways', name: 'Higher nuclear, less energy efficiency', slug: 'high-nuclear-less-energy-efficiency-example', values: 'r013ce1111111111042233B002322220233302202102330220121' },
+      { category: 'Government Pathways', name: 'Higher nuclear, less energy efficiency', slug: 'high-nuclear-less-energy-efficiency-example', values: 'r013ce11111111110422334002322220233302202102330220121' },
       { category: 'Government Pathways', name: 'Higher CCS, more bioenergy', slug: 'high-css-more-bioenergy-example', values: 'f023df111111111f0322123003223220333203102303430310221' },
       { category: 'Government Pathways', name: 'Low cost pathway', slug: 'low-cost-example', values: 'q0111111111111110324131004314110434104103204440410111' },
       { category: '3rd Party Pathways', name: 'Friends of the Earth', slug: 'friends-of-the-earth-example', values: '10h4nn4431w23y110244111004424440343304202304430420441' },
