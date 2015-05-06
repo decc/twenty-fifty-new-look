@@ -109,8 +109,10 @@ define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySuppl
             // If no scroll needed remove overflow scroll
             if(scroll.children[0].clientHeight > scroll.clientHeight) {
               scroll.style.overflowY = "scroll";
+              scroll.classList.add('is-scrollable');
             } else {
               scroll.style.overflowY = "visible";
+              scroll.classList.remove('is-scrollable');
             }
             break;
           }

@@ -70,7 +70,6 @@ define(['knockout', 'text!../../components/chart-tabs.html', 'dataRequester', 'c
         ko.bindingHandlers.chart.redrawElements(chartElements);
       });
     };
-
   };
 
   return {

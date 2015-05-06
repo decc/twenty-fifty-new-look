@@ -1,0 +1,29 @@
+.is-scrollable
+  &:after
+    @extend %icon-content-down_arrow
+    @include transform(translateX(-50%))
+    @include transition(opacity .3s ease-in-out)
+    font-size: 2.5em
+    width: 2.5em
+    position: absolute
+    bottom: .333em
+    left: 50%
+    opacity: 0
+    z-index: 20
+
+    @include media($media-under-medium)
+      @include animation(scrollable 2s ease-in-out)
+
+@include keyframes(scrollable)
+  0%
+    opacity: 1
+
+  33%
+    opacity: .2
+
+  66%
+    opacity: .8
+
+  100%
+    opacity: 0
+
