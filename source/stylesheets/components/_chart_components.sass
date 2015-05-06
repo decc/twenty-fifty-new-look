@@ -1,10 +1,31 @@
-.chart-component-tabs
-  @include clearfix
+%chart-topper
   position: absolute
   top: 0
   left: $chart-tabs-width-small
   right: 0
   height: $chart-tab-nav-height
+
+.chart-component-title
+  @extend %chart-topper
+  border-bottom: 1px solid $color-border-dark
+
+  @include media($media-big)
+    display: none
+
+  h1
+    position: absolute
+    top: 50%
+    @include transform(translateY(-50%))
+    margin: 0
+    width: 100%
+    font-size: 1em
+    text-align: center
+    font-weight: normal
+    color: #FFF
+
+.chart-component-tabs
+  @include clearfix
+  @extend %chart-topper
   list-style-type: none
   padding: 0
   margin: 0
@@ -55,13 +76,27 @@
   bottom: 0
   overflow: hidden
 
-  // TODO: scroll class??
-  &.costs-tabs
-    .inner
-      overflow: auto
-
   @include media($media-big)
     left: $chart-tabs-width
+
+    &:not(.with-tabs)
+      top: 0
+
+  .title,
+  h2
+    color: #fff
+    font-size: 1em
+    text-align: left
+
+  .title
+    margin-top: 0
+
+  h2
+    margin: 1em 0
+
+  h2:first-child,
+  p:first-child
+    margin-top: 0
 
   .tab
     position: absolute
@@ -85,11 +120,6 @@
       overflow-y: scroll
       padding-top: 0
       height: auto
-
-    .title
-      color: #fff
-      font-size: 1.1em
-      margin-top: 0
 
     .note
       color: #fff

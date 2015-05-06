@@ -39,7 +39,7 @@ define(['knockout', 'text!../../components/chart-tabs.html', 'dataRequester', 'c
           { "id": 1, "name": "MapChart", "title": "Map" }
         ]
       },
-      { "id": 6, "name": "airQuality", "icon": "air", "title": "Air", "charts": [
+      { "id": 6, "name": "airQuality", "icon": "air", "title": "Air Quality", "charts": [
           { "id": 1, "name": "AirQualityChart", "title": "Air Quality" }
         ]
       },

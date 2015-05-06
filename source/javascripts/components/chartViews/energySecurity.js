@@ -6,6 +6,8 @@ define(['knockout', 'text!../../../components/chartViews/energySecurity.html'],
   var ViewModel = function(args) {
     var self = this;
 
+    self.title = args.title;
+
     self.data = ko.computed(function() {
       // TODO: why is chartData null sometimes
       var chartData = args.data()[args.charts[0].name] || { imports: [], diversity: [], electricity: {}};

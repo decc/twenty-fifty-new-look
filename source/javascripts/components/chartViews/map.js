@@ -5,6 +5,7 @@ define(['knockout', 'text!../../../components/chartViews/map.html'],
   var ViewModel = function(args) {
     var self = this;
 
+    self.title = args.title;
     self.chart = args.charts[0];
     self.data = args.data;
 
