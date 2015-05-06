@@ -39,6 +39,10 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action', 'hasher'
     });
 
     self.setActionsFromPathwayString();
+
+    self.targetReached = ko.computed(function() {
+      return self.chartData()['SummaryChart'] >= 80;
+    });
   }
 
   Pathway.prototype = {
