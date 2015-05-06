@@ -1,6 +1,6 @@
 .chart-tabs-container
   position: absolute
-  height: calc(100%)
+  bottom: 0
   left: 0
   right: 0
   top: 0
@@ -36,8 +36,7 @@
     top: $cityscape-bar-height
 
   @include media($media-city)
-    @include transform(translateY(0))
-    top: $cityscape-height - $cityscape-bar-height
+    @include transform(translateY($cityscape-height - $cityscape-bar-height))
     pointer-events: auto
 
     &:after
@@ -45,6 +44,8 @@
 
     &.full
       // height: calc(100% - #{$cityscape-bar-height})
+
+
 
   &.noTop
     top: 0px
