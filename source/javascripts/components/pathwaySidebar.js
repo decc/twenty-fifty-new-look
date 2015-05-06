@@ -17,7 +17,6 @@ define(['knockout', 'text!../../components/pathway-sidebar.html', 'pathway'],
     };
 
     self.setActionValue = function(action, e) {
-      /** @todo use observables!! */
       action.value = e.target.value;
       self.pathway.updateAction(action);
     };

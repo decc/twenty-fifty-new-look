@@ -22,6 +22,13 @@ define(['knockout', 'ajax', 'config'], function(ko, Ajax, config) {
             url: config.siteUrl + '/components/factsheets/' + factsheet + '.html',
             onSuccess: function(data) {
               el.innerHTML = data.responseText;
+
+              // Show items with the magic class
+              var showables = parent.querySelectorAll(".factsheet-hidden");
+              for (var i = 0; i < showables.length; i++) {
+                showables[i].setAttribute("data-state", "active");
+              };
+
               el.classList.remove(loadingClass);
             }
           });
