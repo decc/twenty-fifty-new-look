@@ -323,6 +323,7 @@ define([], function() {
 
     airQuality: function() {
       var data = this.data.air_quality;
+      data.key = "2050 - Your pathway";
 
       return data;
     },

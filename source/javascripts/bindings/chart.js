@@ -41,16 +41,16 @@ define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySuppl
       element.name = name;
       element.data = data;
 
-      // Call anything in call array for update
+      // Evaluate data so this binding knows to update
+      if(typeof data !== "object") {
+        data();
+      }
+
+      // Call anything else specified to update
       if(call) {
         call.forEach(function(f) {
           f.call();
         });
-      }
-
-      // TODO: map needs data to be evaluated so update called?
-      if(typeof data !== "object") {
-        data();
       }
 
       // If data observable not (yet) set

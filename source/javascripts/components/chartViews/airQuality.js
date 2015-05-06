@@ -15,23 +15,27 @@ define(['knockout', 'text!../../../components/chartViews/airQuality.html'],
 
     self.example = args.Pathway.examples()[0];
 
-    // self.deferDrawing = ko.observable(true);
-    self.deferDrawing = ko.observable(false);
+    self.deferDrawing = ko.observable(true);
 
-    // TODO: request data
     // Request comparison chart data
-    // (function(args) {
-    //   self.calculator.pathwayUpdating(true);
-    //   args.DataRequester.pathway(self.example.values, function(data) {
-    //     var data = JSON.parse(data.response);
-    //     var chartParser = new args.ChartParser(data);
+    ko.computed(function() {
+      self.calculator.currentPathway().updating(true);
 
-    //     self.comparison1(chartParser.airQuality());
-    //     self.deferDrawing(false);
+      // Request first example
+      args.DataRequester.pathway(self.example.values, function(data) {
+        var data = JSON.parse(data.response);
+        var chartParser = new args.ChartParser(data);
 
-    //     self.calculator.pathwayUpdating(false);
-    //   });
-    // })(args);
+        self.comparison1({key: "2010", low: 100, high: 100});
+
+        var comparison2 = chartParser.airQuality();
+        comparison2.key = "2050 - Doesn't tackle climate change (All at level 1)";
+        self.comparison2(comparison2);
+
+        self.deferDrawing(false);
+        self.calculator.currentPathway().updating(true);
+      });
+    });
 
   };
 
