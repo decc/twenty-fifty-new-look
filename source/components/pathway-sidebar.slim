@@ -1,6 +1,7 @@
 aside.controls-sidebar data-bind="tabs, css: { 'is-active': navVisible }"
 
-  button.toggle-nav data-bind="click: toggleNav, swipe: swipeNav"
+  button.toggle-nav data-bind="click: toggleNav, swipe: swipeNav, css: { 'is-clicked': navToggled }"
+    .tooltip= t('nav')
 
   nav.tab-nav.pathway-category-tab-nav
     ul data-bind="foreach: pathwayCategories"

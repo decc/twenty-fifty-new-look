@@ -29,3 +29,15 @@
   display: block
   width: 0
   z-index: 1
+
+@mixin arrow-right($color)
+  width: 0
+  height: 0
+  border-top: 10px solid transparent
+  border-bottom: 10px solid transparent
+  border-left: 10px solid $color
+  position: absolute
+  right: -10px
+  top: 50%
+  @include transform(translateY(-50%))
+
