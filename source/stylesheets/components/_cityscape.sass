@@ -1,13 +1,6 @@
 $tablet: "(max-width: 865px)"
 
 .cityscape
-  background: url(/images/cityscape.png)
-
-  &.fullWidth
-    max-width: 100%
-    width: 100%
-
-.cityscape
   position: absolute
   top: $cityscape-bar-height
   left: 0
@@ -15,6 +8,17 @@ $tablet: "(max-width: 865px)"
   width: 100%
   height: $cityscape-height
   @include transform(translateY(-100%))
+  background: url(/images/cityscape.png)
+
+  &.fullWidth
+    max-width: 100%
+    width: 100%
+    display: none
+    @include transition(none)
+    @include transform(translateY(-$cityscape-bar-height))
+
+    @include media($media-city)
+      display: block
 
   @include media($media-big)
     width: calc(100% - #{$right-col-width})
