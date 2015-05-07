@@ -2,6 +2,8 @@ define(['config', 'preloader'], function(config, Preloader) {
   'use strict';
 
   return {
+    noop: function() {},
+
     Preloader: Preloader,
 
     /** send user to a bigger screen at this point */

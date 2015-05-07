@@ -37,7 +37,9 @@ define([], function() {
       loaded++;
 
       if (loaded === paths.length) {
-        callback();
+        if(callback) {
+          callback();
+        }
       }
     };
 
