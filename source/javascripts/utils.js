@@ -1,8 +1,8 @@
-define(['config', 'preloadable'], function(config, Preloadable) {
+define(['config', 'preloader'], function(config, Preloader) {
   'use strict';
 
   return {
-    Preloadable: Preloadable,
+    Preloader: Preloader,
 
     /** send user to a bigger screen at this point */
     tooSmall: function() {

@@ -1,31 +1,51 @@
 define([], function() {
   'use strict';
 
-  var Preloadable = function(path, callback) {
-    var self = this;
+  /**
+   * @class Loader
+   * @param path - image path
+   * @param callback - called after image at path is loaded
+   */
+  var Loader = function(path, callback) {
+    this.path = path;
+    this.callback = callback;
+  };
 
-    self.hasLoaded = false;
-    self.path = path;
-    self.callback = callback;
+  /** @lends @Loader */
+  Loader.prototype = {
+    /** @returns Loader instance */
+    load: function() {
+      var image = this.image = new Image();
+      image.onload = this.callback;
+      image.src = this.path;
 
-    self.img = new Image();
-    self.img.onload = function() {
-      self.loaded();
-    };
-
-    self.img.src = self.path;
-  }
-
-  Preloadable.prototype = {
-    loaded: function() {
-      this.hasLoaded = true;
-
-      if(this.callback) {
-        this.callback();
-      }
+      return this;
     }
   };
 
-  return Preloadable;
+  /**
+   * Preload an array of image paths
+   *
+   * @static
+   * @param paths - array of paths
+   * @param callback - function to be called when batch has loaded
+   */
+  Loader.batch = function(paths, callback) {
+    var loaded = 0;
+
+    var handleLoad = function() {
+      loaded++;
+
+      if (loaded === paths.length) {
+        callback();
+      }
+    };
+
+    for (var i = 0, l = paths.length; i < l; i++) {
+      new Loader(paths[i], handleLoad).load();
+    }
+  };
+
+  return Loader;
 });
 
