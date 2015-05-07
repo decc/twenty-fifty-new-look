@@ -1,6 +1,6 @@
 .tabs.chart-component.costs-tabs.with-tabs
   .tab data-bind="with: contextTab, css: { 'active': currentTabId() === contextTab.id }"
-    .inner.js-scrollable
+    .inner.scroll.js-scrollable
       h2.title The cost (£/person/yr) to society of your pathway. This is not your energy bill.
       .costs-chartset
         .chart.compare.top.has-axis data-bind="chart: name, data: $parent.data, object: $parent.yourCostsContextChart, params: { hasAxis: true, margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
@@ -16,7 +16,7 @@
         p.note Note: The cost of failing to tackle climate change is not included. Some pathways, including the 'All at Level 1' pathway shown here, fail to tackle climate change. The Stern review estimated that failing to tackle climate change could reduce global GDP by up to 20% (equivalent to up to £6500 per person per year on top of the cost of the energy system included in the chart above). Nor are the costs of travelling less, being colder, or consuming less included.
 
   .tab data-bind="with: comparedTab, css: { 'active': currentTabId() === comparedTab.id }"
-    .inner.js-scrollable
+    .inner.scroll.js-scrollable
       h2.title The cost (£/person/yr) breakdown of your pathway. This is not your energy bill.
       .costs-chartset
         .chart.compare.top.has-axis data-bind="chart: name, data: $parent.data, object: $parent.yourCostsComparedChart, params: { hasAxis: true, margin: { top: 40, right: 40, bottom: 0, left: 150 } }"
