@@ -2,6 +2,7 @@
 en:
   decc: 'Department of energy and climate change'
   your_pathway: 'Your pathway'
+  nav: 'pathway actions'
 
   rotate:
     heading: 'Turn me around'
@@ -197,10 +198,9 @@ en:
       answer: "The data behind the calculator is rooted in scientific and engineering realities, looking at what is thought to be physically and technically possible in each sector. To do this, a broad range of experts were consulted from inside and outside government. For more background on the calculator go to: <a href=\"https://www.gov.uk/2050-pathways-analysis\" target=\"_blank\">https://www.gov.uk/2050-pathways-analysis</a>."
 
 
-  share: "Congratulations on completing your pathway!
-
-
-These three charts summarise your choices for the demand and supply options you have selected and – crucially – the impact on emissions. The landscape above provides a visual overview of the changes you’ve made.
+  share:
+    congratulate: "Congratulations on completing your pathway!"
+    body: "These three charts summarise your choices for the demand and supply options you have selected and – crucially – the impact on emissions. The landscape above provides a visual overview of the changes you’ve made.
 
 
 Hopefully the calculator has highlighted the scale of the challenge – and the range of options available – to decarbonise the way we use energy.

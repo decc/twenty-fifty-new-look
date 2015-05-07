@@ -12,7 +12,7 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
 
     var self = this;
 
-    var Prelaoder = Utils.Preloadable;
+    var Prelaoder = Utils.Preloader;
 
     var touch = function() {
       self.preloadables.notifySubscribers();

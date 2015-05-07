@@ -39,6 +39,12 @@
     h1, h2, h3, h4
       text-align: left
 
+    .factsheet-hidden
+      display: none
+
+      &[data-state="active"]
+        display: block
+
   &.white
     background: #fff
     color: #000

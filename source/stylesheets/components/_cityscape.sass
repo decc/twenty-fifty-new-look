@@ -1,13 +1,6 @@
 $tablet: "(max-width: 865px)"
 
 .cityscape
-  background: url(/images/cityscape.png)
-
-  &.fullWidth
-    max-width: 100%
-    width: 100%
-
-.cityscape
   position: absolute
   top: $cityscape-bar-height
   left: 0
@@ -15,6 +8,17 @@ $tablet: "(max-width: 865px)"
   width: 100%
   height: $cityscape-height
   @include transform(translateY(-100%))
+  background: url(/images/cityscape.png)
+
+  &.fullWidth
+    max-width: 100%
+    width: 100%
+    display: none
+    @include transition(none)
+    @include transform(translateY(-$cityscape-bar-height))
+
+    @include media($media-city)
+      display: block
 
   @include media($media-big)
     width: calc(100% - #{$right-col-width})
@@ -37,7 +41,8 @@ $tablet: "(max-width: 865px)"
 
 .landscape-label
   background: rgba(65, 70, 83, .6)
-  top: $cityscape-height - $cityscape-bar-height
+  top: 0
+  @include transform(translateY($cityscape-height - $cityscape-bar-height))
   color: #fff
   font-size: 1.1em
   font-weight: 400
@@ -48,10 +53,10 @@ $tablet: "(max-width: 865px)"
   width: 100%
   height: $cityscape-bar-height
   cursor: pointer
-  @include transition(top .3s ease-in-out, background .3s)
+  @include transition(transform .3s ease-in-out)
 
   &.full
-    top: 0
+    @include transform(translateY(0px))
     background: rgba(65, 70, 83, 1)
 
   label

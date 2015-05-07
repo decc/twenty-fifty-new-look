@@ -6,6 +6,7 @@ define(['knockout', 'text!../../../components/chartViews/flows.html'],
   var ViewModel = function(params) {
     var self = this;
 
+    self.title = params.title;
     self.chart = params.charts[0];
     self.data = params.data;
   };

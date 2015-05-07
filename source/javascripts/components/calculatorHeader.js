@@ -16,12 +16,12 @@ define(['knockout', 'text!../../components/calculator-header.html'],
 
     ko.computed(function() {
       // Show target reached tooltip if target reached; do not show if user has closed it before
-      if(!self.targetDismissed && self.pathway().chartData()["SummaryChart"] >= 80) {
+      if(!self.targetDismissed && self.pathway().targetReached()) {
         self.targetReachedVisible(true);
       }
 
       // Hide if user drops below target
-      if(self.pathway().chartData()["SummaryChart"] < 80) {
+      if(!self.pathway().targetReached()) {
         self.targetReachedVisible(false);
       }
     });

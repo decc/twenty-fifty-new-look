@@ -1,9 +1,11 @@
 .overview-chartset
   .date-range
-    height: 4em
+    position: relative
+    height: 64px
     padding: 0 120px
-    background: #eee
+    background: $color-background-dark
     padding-top: 25px
+    border-bottom: 1px solid $color-border-dark
 
     .range-replacement
       margin: -7px 0 0 0
@@ -20,21 +22,62 @@
     .min, .max
       position: absolute
       top: 0.3em
-      color: $color-background-dark
+      color: #fff
       font-size: 2em
 
     .min
-      left: 80px
-
-      @include media($media-big)
-        left: $chart-tabs-width + 20px
+      left: 30px
 
     .max
-      right: 20px
+      right: 30px
 
     input
       margin-top: 1.25em
       width: 100%
+
+    .tooltip-zone
+      position: relative
+      height: 100%
+      margin: 0 12px
+
+    &:hover .current-value
+      display: block
+
+    .current-value
+      display: none
+      position: absolute
+      top: 15px
+      left: 50%
+      @include transform(translateX(-50%))
+      color: #fff
+      background: #414653
+      padding: 5px
+      line-height: 1
+      margin-left: -1px
+
+      &[data-position="2015"]
+        left: 0%
+      &[data-position="2020"]
+        left: 14.5%
+      &[data-position="2025"]
+        left: 28.5%
+      &[data-position="2030"]
+        left: 42.8%
+      &[data-position="2035"]
+        left: 57.2%
+      &[data-position="2040"]
+        left: 71.5%
+      &[data-position="2045"]
+        left: 85.7%
+      &[data-position="2050"]
+        left: 100%
+
+      &:before
+        @include tooltip-arrow(#414653)
+        display: block
+        content: ""
+        left: 50%
+        @include transform(translateX(-50%))
 
   .title
     color: #FFF
@@ -49,13 +92,10 @@
 
   .charts
     position: absolute
-    top: 9em
-    bottom: 20px
-    left: 80px
-    right: 0
-
-    @include media($media-big)
-      left: $chart-tabs-width
+    top: 94px
+    bottom: 30px
+    left: 14px
+    right: 14px
 
     .chart
       height: percentage(1/3)

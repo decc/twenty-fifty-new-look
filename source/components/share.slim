@@ -3,11 +3,15 @@
   .share-description
     h1 My Finished 2050 Pathway
 
-    = m 'share'
+    | <!-- ko if: pathway().targetReached() -->
+    = m 'share.congratulate'
+    | <!-- /ko -->
+
+    = m 'share.body'
 
     textarea#share-string rows="3" readonly="readonly" data-bind="text: shareString, event: { focus: highlightText }"
 
-    button.button data-bind="copy: shareString" = t('calculator.share.copy')
+    button.button.copy data-bind="copy: shareString" = t('calculator.share.copy')
 
   .share-chart
     .overview-chartset data-bind="foreach: chartOptions"
@@ -33,3 +37,4 @@
       li
         a.icon.icon-envelope-before data-bind="attr: { href: 'mailto:?subject=' + shareTitle + '&body=' + shareSummary + '%0D%0A%0D%0A' + shareString() }" target="_blank"
           span Email
+

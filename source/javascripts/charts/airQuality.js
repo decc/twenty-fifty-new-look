@@ -50,10 +50,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     var lowData = [];
     var highData = [];
 
-    data.key = "2050 - Your pathway"
-
-    var comparison1 = {key: "2010", low: 100, high: 100};
-    var comparison2 = {key: "2050 - Doesn't tackle climate change (All at level 1)", low: 23.027647092933996, high: 60.550259470292204};
+    var comparison1 = self.drawParams.comparison1();
+    var comparison2 = self.drawParams.comparison2();
 
     [comparison1, comparison2, data].forEach(function(d) {
       lowData.push({ key: d.key, value: d.low })

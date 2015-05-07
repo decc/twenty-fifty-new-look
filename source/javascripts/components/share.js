@@ -18,12 +18,12 @@ define(['knockout', 'text!../../components/share.html', 'config']
     var maxDate = 2050;
 
     self.date = ko.observable(maxDate);
+    self.pathway = params.pathway;
 
     self.shareTitle = "My DECC 2050 Pathway";
     self.shareSummary = "My DECC 2050 Pathway";
-    self.shareString = ko.computed(function() {
-      return config.siteUrl + "/share/" + params.pathway().values
-    })
+
+    self.shareString = self.pathway().shareString;
 
     self.rangeAttributes = ko.observable({
       min: minDate,

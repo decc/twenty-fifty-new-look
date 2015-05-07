@@ -9,6 +9,7 @@ define(['knockout', 'text!../../../components/chartViews/overview.html'],
     var minDate = 2015;
     var maxDate = 2050;
 
+    self.title = params.title;
     self.chart = params.charts[0];
     self.data = params.data;
 

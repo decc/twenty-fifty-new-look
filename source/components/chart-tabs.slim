@@ -10,6 +10,7 @@ nav.tab-nav.chart-tab-nav
       name: 'chartViews/' + (typeof viewmodel === 'undefined' ? name : viewmodel),
       params: {
         calculator: $parents[1],
+        title: title,
         charts: charts,
         pathway: $parent.pathway(),
         data: $parent.pathway().chartData,

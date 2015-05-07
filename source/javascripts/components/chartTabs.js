@@ -26,7 +26,7 @@ define(['knockout', 'text!../../components/chart-tabs.html', 'dataRequester', 'c
           { "id": 2, "name": "ElectricitySupplyChart", "title": "Supply vs Demand" }
         ]
       },
-      { "id": 3, "name": "emissions", "icon": "emissions", "title": "Emissions", "charts": [
+      { "id": 3, "name": "emissions", "icon": "emissions", "title": "Emissions", "viewmodel": "tabbed", "charts": [
           { "id": 1, "name": "EnergyEmissionsChart", "title": "Energy" },
           { "id": 2, "name": "ElectricityEmissionsChart", "title": "Electricity" }
         ]
@@ -39,7 +39,7 @@ define(['knockout', 'text!../../components/chart-tabs.html', 'dataRequester', 'c
           { "id": 1, "name": "MapChart", "title": "Map" }
         ]
       },
-      { "id": 6, "name": "airQuality", "icon": "air", "title": "Air", "charts": [
+      { "id": 6, "name": "airQuality", "icon": "air", "title": "Air Quality", "charts": [
           { "id": 1, "name": "AirQualityChart", "title": "Air Quality" }
         ]
       },
@@ -70,7 +70,6 @@ define(['knockout', 'text!../../components/chart-tabs.html', 'dataRequester', 'c
         ko.bindingHandlers.chart.redrawElements(chartElements);
       });
     };
-
   };
 
   return {

@@ -9,7 +9,6 @@ define(['knockout', 'text!../../../components/chartViews/tabbed.html'],
     self.charts = params.charts;
     self.data = params.data;
 
-
     self.currentTabId = ko.observable(1);
 
     /** Sets visible tab */

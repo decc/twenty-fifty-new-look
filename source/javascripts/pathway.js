@@ -12,7 +12,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action', 'hasher'
     self.valid = true;
 
     self.name = args.name;
-    self.values = args.values; // TODO: Map values to pathway action values
+    self.values = ko.observable(args.values); // TODO: Map values to pathway action values
 
     // Do not make requests until after all binding updates
     self.locked = ko.observable(true);
@@ -33,17 +33,28 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action', 'hasher'
           self.chartParser = new ChartParser(data);
           self.chartData(self.chartParser.all());
           self.validateValues();
+
+          self.values(self.getPathwayString());
           self.updating(false);
         });
       }
     });
 
     self.setActionsFromPathwayString();
+
+    self.targetReached = ko.computed(function() {
+      return self.chartData()['SummaryChart'] >= 80;
+    });
+
+    // make this work... replace this.values?!?!?!?
+    self.shareString = ko.computed(function() {
+      return [config.siteUrl, 'share', self.values()].join('/');
+    });
   }
 
   Pathway.prototype = {
     validateValues: function() {
-      var values = this.values;
+      var values = this.values();
 
       if(!/^[0-9a-z]+$/.test(values) || values.length !== 53) {
         hasher.replaceHash('not-found');
@@ -140,7 +151,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action', 'hasher'
         // search for correct action at this point in pathway string
         for(var j = 0, l = actions.length; j < l; j++) {
           if(actions[j].pathwayStringIndex === i) {
-            actions[j].value(this.getActionFromMagicChar(self.values[i], actions[j].getTypeName()));
+            actions[j].value(this.getActionFromMagicChar(self.values()[i], actions[j].getTypeName()));
           }
         }
       }
@@ -212,7 +223,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action', 'hasher'
 
   /** @returns {object|null} Pathway instance if found */
   Pathway.find = function(slug) {
-    // find example by slug
+    // Find example by slug
     var example = ko.utils.arrayFirst(Pathway.examples(), function(ex) {
       if(ex.slug === slug) {
         return ex;
