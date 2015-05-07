@@ -4,7 +4,7 @@ define([], function() {
   /**
    * @class Loader
    * @param path - image path
-   * @param callback - called after image at path is loaded
+   * @param [callback] - called after image at path is loaded
    */
   var Loader = function(path, callback) {
     this.path = path;
@@ -28,7 +28,7 @@ define([], function() {
    *
    * @static
    * @param paths - array of paths
-   * @param callback - function to be called when batch has loaded
+   * @param [callback] - function to be called when batch has loaded
    */
   Loader.batch = function(paths, callback) {
     var loaded = 0;

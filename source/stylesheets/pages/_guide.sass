@@ -24,7 +24,7 @@ $scroll-nav-width: 25px
     text-indent: 999px
     overflow: hidden
 
-    @include media($media-medium)
+    @include media($media-small)
       width: $scroll-nav-width
       height: $scroll-nav-width
 
@@ -47,7 +47,7 @@ $scroll-nav-width: 25px
   @include transition(opacity .3s ease-in-out)
   @include clearfix
 
-  @include media($media-medium)
+  @include media($media-small)
     right: 50%
     @include transform(translateX(50%))
 
@@ -79,7 +79,7 @@ $scroll-nav-width: 25px
     text-align: center
     width: 100%
 
-    @include media($media-medium)
+    @include media($media-small)
       padding: 3em
 
   section:after
@@ -103,18 +103,18 @@ $scroll-nav-width: 25px
       padding: 0
       text-align: left
 
-      @include media($media-medium)
+      @include media($media-small)
         width: 50%
         padding: 0 20px
 
     img
-      width: 100%
+      width: 40%
       max-width: 100%
       height: auto
       margin: 1em auto
       display: block
 
-      @include media($media-medium)
+      @include media($media-small)
         width: auto
 
     a
@@ -130,7 +130,7 @@ $scroll-nav-width: 25px
     background-repeat: no-repeat
     background-size: auto 75%
 
-    @include media($media-medium)
+    @include media($media-small)
       background-position: 80% 50%
 
 .button
