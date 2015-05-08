@@ -92,10 +92,14 @@
 
   .charts
     position: absolute
-    top: 94px
-    bottom: 30px
+    top: 74px
+    bottom: 10px
     left: 14px
     right: 14px
+
+    @include media($media-big)
+      top: 94px
+      bottom: 30px
 
     .chart
       height: percentage(1/3)
