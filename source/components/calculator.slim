@@ -22,11 +22,14 @@
 
           .inner-content data-bind="visible: mainViewVisible"
 
-              .landscape-label data-bind="swipe: swipeLandscape, click: toggleCity, css: { full: !cityscapeVisible() }"
-                label= t('calculator.header.your_landscape')
-                span.toggle-city data-bind="css: { 'is-active': cityscapeVisible }"
+            .landscape-label-large data-bind="swipe: swipeLandscape, click: toggleCity, css: { 'is-active': !cityscapeVisible() }"
+              label= t('calculator.header.your_landscape')
+              span.toggle-city data-bind="css: { 'is-active': cityscapeVisible }"
+            .landscape-label-small data-bind="swipe: swipeLandscape, click: toggleCity, css: { 'is-active': cityscapeVisible() }"
+              label= t('calculator.header.your_landscape')
+              span.toggle-city data-bind="css: { 'is-active': cityscapeVisible }"
 
-              .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway, pathwayUpdating: pathwayUpdating, componentsLoaded: componentsLoaded } }, css: { full: !cityscapeVisible() }, transitionEnd: redrawCharts"
+            .chart-tabs-container data-bind="visible: !shareVisible(), component: { name: 'chart-tabs', params: { pathway: currentPathway, pathwayUpdating: pathwayUpdating, componentsLoaded: componentsLoaded } }, css: { full: !cityscapeVisible() }, transitionEnd: redrawCharts"
 
           = partial "partials/pathway-overlay"
 
