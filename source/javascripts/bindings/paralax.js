@@ -48,22 +48,22 @@ define(['knockout'], function(ko) {
         {
           el: document.getElementById('landscape-layer-1'),
           width: (landscapeWidth > layerWidth ? landscapeWidth : layerWidth),
-          yThreshold: 0.04
+          yThreshold: 0.1
         },
         {
           el: document.getElementById('landscape-layer-2'),
           width: (landscapeWidth > layerWidth ? landscapeWidth + 20 : layerWidth + 20),
-          yThreshold: 0.08
+          yThreshold: 0.07
         },
         {
           el: document.getElementById('landscape-layer-3'),
           width: (landscapeWidth > layerWidth ? landscapeWidth + 60 : layerWidth + 60),
-          yThreshold: 0.15
+          yThreshold: 0.05
         },
         {
           el: document.getElementById('landscape-layer-4'),
           width: (landscapeWidth > layerWidth ? landscapeWidth + 115 : layerWidth + 115),
-          yThreshold: 0.3
+          yThreshold: -0.01
         }
       ];
 
@@ -92,16 +92,13 @@ define(['knockout'], function(ko) {
             var xParallax = -((xOffset / landscapeWidth) * (layer.width - landscapeWidth)),
                 yParallax = 0;
 
-            if (e.pageY <= (landscapeHeight + landscape.offsetTop))
-              yParallax = yOffset * (layer.yThreshold * ( landscapeHeight / (landscapeHeight + landscape.offsetTop) ) );
+            yParallax = yOffset * ((layer.yThreshold / (window.innerHeight / 200)) * ( landscapeHeight / (landscapeHeight + landscape.offsetTop) ) );
 
             layer.el.style[transform] = 'translate(' + xParallax + 'px, ' + yParallax + 'px)';
 
           });
         });
-
       });
-
     }
   }
 });
