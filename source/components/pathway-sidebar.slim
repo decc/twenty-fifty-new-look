@@ -12,13 +12,14 @@ aside.controls-sidebar data-bind="tabs, css: { 'is-active': navVisible }"
     .tab data-bind="foreach: $parent.pathway().actionsForCategory(id), css: { 'active': $parent.currentTabId() === id }"
 
       .item
-        div
-          label data-bind="text: name"
+        .details
+          .label
+            label data-bind="text: name"
           span.value-label data-bind="text: value"
 
           button.info-button data-bind="click: $parents[2].showOverlay"
 
-        div.option
+        .option
           <!-- ko if: getTypeName() === 'rangeInt' -->
             input data-bind="rangeInt: value, params: { name: name, tooltips: tooltips, min: min, max: max, step: step }"
           <!-- /ko -->

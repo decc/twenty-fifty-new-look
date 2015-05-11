@@ -7,8 +7,9 @@
       h2 data-bind="text: name"
       ul.pathway-actions data-bind="foreach: $parent.pathway().actionsForCategory(id)"
         li
-          span.key data-bind="text: name"
-          span.value data-bind="text: value, css: { high: value() == getMaxValue(), med: value() == getMedValue() }"
+          .action-wrapper
+            span.key data-bind="text: name"
+            span.value data-bind="text: value, css: { high: value() == getMaxValue(), med: value() == getMedValue() }"
 
     | <!-- /ko -->
 
