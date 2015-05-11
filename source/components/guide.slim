@@ -1,44 +1,52 @@
 a href=home_path
-  img.fixed-logo.is-active#fixed-logo src="/images/logo.png"
+  img.fixed-logo.is-active#fixed-logo src="/images/logo.png" draggable="false"
 
-.centered data-bind="scrolls"
-  section.scrollable#guide-1
-    article
-      .col = m 'guide.1'
+.guide.centered data-bind="scrolls"
+  section.scrollable.intro
+    .container
+      article
+        .col = m 'guide.1'
 
-  section.scrollable#guide-2
-    article
-      .col
-        img src="/images/guide/screenshot.png"
-      .col = m 'guide.2'
+  section.scrollable
+    .container
+      article
+        .col
+          img src="/images/guide/screenshot.png" draggable="false"
+        .col = m 'guide.2'
 
-  section.scrollable#guide-3
-    article
-      .col=  m 'guide.3'
-      .col
-        img src="/images/guide/graph.png"
+  section.scrollable
+    .container
+      article
+        .col=  m 'guide.3'
+        .col
+          img src="/images/guide/graph.png" draggable="false"
 
-  section.scrollable#guide-4
-    article = m 'guide.4'
+  section.scrollable
+    .container
+      article = m 'guide.4'
 
-  section.scrollable#guide-5
-    article = m 'guide.5'
+  section.scrollable
+    .container
+      article = m 'guide.5'
 
-  section.scrollable#guide-6
-    article
-      .col = m 'guide.6'
-      .col
-        img src="/images/guide/target.png"
+  section.scrollable
+    .container
+      article
+        .col = m 'guide.6'
+        .col
+          img src="/images/guide/target.png" draggable="false"
 
-  section.scrollable#guide-7
-    article
-      = m 'guide.7'
+  section.scrollable
+    .container
+      article
+        = m 'guide.7'
 
-  section.scrollable#guide-8
-    article
-      .col
-        img src="/images/guide/example-pathways.png"
-      .col = m 'guide.8'
+  section.scrollable
+    .container
+      article
+        .col
+          img src="/images/guide/example-pathways.png" draggable="false"
+        .col = m 'guide.8'
 
   section.scrollable
     article
