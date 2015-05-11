@@ -101,21 +101,22 @@ define(['knockout', 'charts/summary', 'charts/energyDemand', 'charts/energySuppl
 
     afterDraw: function(element) {
       // Remove scroll from container
-      if(element.params.autoSize === true) {
-        var scrolls = document.querySelectorAll('.scroll');
-        for (var i = 0; i < scrolls.length; i++) {
-          var scroll = scrolls[i];
-          if(scroll.contains(element)) {
-            // If no scroll needed remove overflow scroll
-            if(scroll.children[0].clientHeight > scroll.clientHeight) {
-              scroll.style.overflowY = "scroll";
-              scroll.classList.add('is-scrollable');
-            } else {
-              scroll.style.overflowY = "visible";
-              scroll.classList.remove('is-scrollable');
-            }
-            break;
+
+      var scrolls = document.querySelectorAll('.scroll');
+      for (var i = 0; i < scrolls.length; i++) {
+        var scroll = scrolls[i];
+
+
+        if(scroll.contains(element)) {
+          // If no scroll needed remove overflow scroll
+          if(scroll.children[0].clientHeight > scroll.clientHeight) {
+            scroll.style.overflowY = "scroll";
+            scroll.classList.add('is-scrollable');
+          } else {
+            scroll.style.overflowY = "visible";
+            scroll.classList.remove('is-scrollable');
           }
+          break;
         }
       }
     },
