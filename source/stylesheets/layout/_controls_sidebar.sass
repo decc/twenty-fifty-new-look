@@ -84,6 +84,7 @@
       background-color: $color-background-light
       height: auto
 
+    // TODO: belongs in pathway action component
     .item
       padding: 1em 0em
       font-size: 75%
@@ -97,20 +98,26 @@
       > div
         overflow: auto
 
+      .details
+        position: relative
+
+        label
+          float: left
+          position: absolute
+          max-width: 72%
+          font-size: 13px
+          top: 50%
+          @include transform(translateY(-50%))
+
+          @include media($media-big)
+            font-size: inherit
+          @include media($media-bigger)
+            font-size: 14px
+
+
       .info-button
         float: right
         margin-top: 1vh
-
-      label
-        float: left
-        margin-top: 0.5vh
-        max-width: 72%
-        font-size: 13px
-
-        @include media($media-big)
-          font-size: inherit
-        @include media($media-bigger)
-          font-size: 14px
 
       .value-label
         float: right
