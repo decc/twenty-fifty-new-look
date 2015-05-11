@@ -39,6 +39,7 @@ $tablet: "(max-width: 865px)"
   .charts
     top: 330px
 
+
 .landscape-label-small,
 .landscape-label-large
   cursor: pointer
@@ -63,7 +64,7 @@ $tablet: "(max-width: 865px)"
 .landscape-label-small
   @include transform(translateY(0))
   @include transition(transform .3s ease-in-out, opacity .3s ease-in-out)
-  background: rgba(0, 0, 0, 0.25)
+  background: $color-background-dark
   border-top-left-radius: 2px
   right: 0
   width: 230px
@@ -79,9 +80,11 @@ $tablet: "(max-width: 865px)"
   font-weight: 400
   width: 100%
   z-index: 13
+  background: $color-darkest
 
   &.is-active
     @include transform(translateY(0))
+    pointer-events: none
 
 .toggle-city
   position: absolute
