@@ -2,55 +2,48 @@ a href=home_path
   img.fixed-logo.is-active#fixed-logo src="/images/logo.png" draggable="false"
 
 .guide.centered data-bind="scrolls"
-  section.scrollable.intro
-    .container
+  .container
+    section.scrollable.intro
       article
         .col = m 'guide.1'
 
-  section.scrollable
-    .container
+    section.scrollable
       article
         .col
           img src="/images/guide/screenshot.png" draggable="false"
         .col = m 'guide.2'
 
-  section.scrollable
-    .container
+    section.scrollable
       article
         .col=  m 'guide.3'
         .col
           img src="/images/guide/graph.png" draggable="false"
 
-  section.scrollable
-    .container
+    section.scrollable
       article = m 'guide.4'
 
-  section.scrollable
-    .container
+    section.scrollable
       article = m 'guide.5'
 
-  section.scrollable
-    .container
+    section.scrollable
       article
         .col = m 'guide.6'
         .col
           img src="/images/guide/target.png" draggable="false"
 
-  section.scrollable
-    .container
+    section.scrollable
       article
         = m 'guide.7'
 
-  section.scrollable
-    .container
+    section.scrollable
       article
         .col
           img src="/images/guide/example-pathways.png" draggable="false"
         .col = m 'guide.8'
 
-  section.scrollable
-    article
-      h2= t('guide.done.title')
-      = link_to t('guide.done.button'), calculator_path, class: :button
+    section.scrollable
+      article
+        h2= t('guide.done.title')
+        = link_to t('guide.done.button'), calculator_path, class: :button
 
-= link_to t('guide.button'), calculator_path, class: "skip-guide"
+  = link_to t('guide.button'), calculator_path, class: "skip-guide"
