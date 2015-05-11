@@ -14,7 +14,7 @@ $scroll-nav-width: 25px
   @include media($media-medium)
     display: block
     position: fixed
-    right: 1em
+    right: 30px
     top: 50%
     @include transform(translate(0, -50%))
 
@@ -41,7 +41,7 @@ $scroll-nav-width: 25px
   @extend %icon-button, %icon-down_arrow-before
   position: fixed
   margin: auto
-  bottom: $scroll-nav-width
+  bottom: 30px
   right: 1em
   color: #ffffff
   width: 60px
@@ -91,7 +91,8 @@ $scroll-nav-width: 25px
       display: block
 
   .container
-    max-width: 60%
+    max-width: 1200px
+    padding: 0 3em
     margin: 0 auto
 
   article
@@ -99,11 +100,11 @@ $scroll-nav-width: 25px
     height: 100vh
 
     @include media($media-big)
-      font-size: 1.5em
+      font-size: 1.2em
 
     h1, h2
       margin-bottom: 10px
-      font-size: 1.5em
+      font-size: 1.2em
 
     .col
       @include col(100%)
@@ -138,10 +139,14 @@ $scroll-nav-width: 25px
     background-image: url(/images/uk-map.png)
     background-position: center
     background-repeat: no-repeat
-    background-size: auto 75%
+    background-size: auto 65%
 
     @include media($media-medium)
-      background-position: 80% 50%
+      background-position: 90% 50%
+
+      .col
+        display: block
+        width: 50%
 
 .button
   text-transform: uppercase
@@ -158,5 +163,5 @@ $scroll-nav-width: 25px
 .skip-guide
   @extend .button
   position: fixed
-  bottom: 48px
-  left: 48px
+  bottom: 30px
+  left: 30px
