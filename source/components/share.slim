@@ -9,7 +9,7 @@
 
     = m 'share.body'
 
-    textarea#share-string rows="3" readonly="readonly" data-bind="text: shareString, event: { focus: highlightText }"
+    textarea#share-string readonly="readonly" data-bind="text: shareString, event: { focus: highlightText }"
 
     button.button.copy data-bind="copy: shareString" = t('calculator.share.copy')
 
