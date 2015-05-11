@@ -11,7 +11,7 @@
 
     textarea#share-string rows="3" readonly="readonly" data-bind="text: shareString, event: { focus: highlightText }"
 
-    button.button data-bind="copy: shareString" = t('calculator.share.copy')
+    button.button.copy data-bind="copy: shareString" = t('calculator.share.copy')
 
   .share-chart
     .overview-chartset data-bind="foreach: chartOptions"

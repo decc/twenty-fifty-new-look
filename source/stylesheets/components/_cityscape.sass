@@ -1,13 +1,6 @@
 $tablet: "(max-width: 865px)"
 
 .cityscape
-  background: url(/images/cityscape.png)
-
-  &.fullWidth
-    max-width: 100%
-    width: 100%
-
-.cityscape
   position: absolute
   top: $cityscape-bar-height
   left: 0
@@ -15,6 +8,18 @@ $tablet: "(max-width: 865px)"
   width: 100%
   height: $cityscape-height
   @include transform(translateY(-100%))
+  background: url(/images/cityscape.png)
+
+  &.fullWidth
+    max-width: 100%
+    width: 100%
+    display: none
+    border-bottom: 1px solid #fff
+    @include transition(none)
+    @include transform(translateY(-$cityscape-bar-height))
+
+    @include media($media-city)
+      display: block
 
   @include media($media-big)
     width: calc(100% - #{$right-col-width})
@@ -35,28 +40,49 @@ $tablet: "(max-width: 865px)"
   .charts
     top: 330px
 
-.landscape-label
-  background: rgba(65, 70, 83, .6)
-  top: 0
-  @include transform(translateY($cityscape-height - $cityscape-bar-height))
+.landscape-label-small,
+.landscape-label-large
+  cursor: pointer
   color: #fff
+  position: absolute
+  top: 0
+  opacity: 0
+  padding: 5px 20px
   font-size: 1.1em
   font-weight: 400
-  padding: 5px 12px
-  position: absolute
-  right: 0
-  z-index: 11
-  width: 100%
-  height: $cityscape-bar-height
-  cursor: pointer
   @include transition(transform .3s ease-in-out)
+  height: $cityscape-bar-height
 
-  &.full
-    @include transform(translateY(0px))
-    background: rgba(65, 70, 83, 1)
+  &.is-active
+    @include transition(opacity .3s ease-in-out, transform .3s ease-in-out)
+    opacity: 1
+    z-index: 11
 
   label
     cursor: pointer
+
+.landscape-label-small
+  @include transform(translateY(0))
+  @include transition(transform .3s ease-in-out, opacity .3s ease-in-out)
+  background: rgba(0, 0, 0, 0.25)
+  border-top-left-radius: 2px
+  right: 0
+  width: 230px
+  z-index: 11
+
+  &.is-active
+    @include transform(translateY($cityscape-height - $cityscape-bar-height))
+
+.landscape-label-large
+  @include transform(translateY($cityscape-height - $cityscape-bar-height))
+  @include transition(transform .3s ease-in-out, opacity .3s ease-in-out)
+  background: #414653
+  font-weight: 400
+  width: 100%
+  z-index: 13
+
+  &.is-active
+    @include transform(translateY(0))
 
 .toggle-city
   position: absolute
@@ -73,4 +99,3 @@ $tablet: "(max-width: 865px)"
 
   &.is-active
     @extend %icon-landscape_up-before
-

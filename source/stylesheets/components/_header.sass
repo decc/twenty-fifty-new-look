@@ -161,9 +161,9 @@
 
       @include media($media-mediumbig)
         span
-          display: inline
+          display: inline-block
           position: relative
-          top: -5px
+          top: -4px
 
         &:before
           content: ''
@@ -178,6 +178,9 @@
       border-left: 1px solid $color-background
       line-height: 1
 
+      .spinner
+        @extend .spinner.pink
+
       %white
         color: #fff
         background: #4a5163
@@ -188,10 +191,6 @@
         @extend %white
         .spinner
           @extend .spinner.white
-
-        @include media($media-city)
-          background: #fff!important
-          color: #000!important
 
       &.white
         background: #fff

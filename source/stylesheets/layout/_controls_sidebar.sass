@@ -42,6 +42,7 @@
       opacity: 1
       @include transition(opacity .3s ease-in-out)
       @include transform(translateY(-50%))
+      @include animation(jiggle 1.5s ease-in-out infinite)
 
       &:after
         content: ''

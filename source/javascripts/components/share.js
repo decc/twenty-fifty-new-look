@@ -23,9 +23,7 @@ define(['knockout', 'text!../../components/share.html', 'config']
     self.shareTitle = "My DECC 2050 Pathway";
     self.shareSummary = "My DECC 2050 Pathway";
 
-    self.shareString = ko.computed(function() {
-      return config.siteUrl + "/share/" + self.pathway().values
-    })
+    self.shareString = self.pathway().shareString;
 
     self.rangeAttributes = ko.observable({
       min: minDate,
