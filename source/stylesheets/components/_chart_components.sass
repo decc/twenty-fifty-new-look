@@ -107,7 +107,11 @@
       height: 100%
       padding: 0
       padding: $chart-tab-padding-small
-      @include media($media-big)
+
+      $media-big-not-bigger: '(min-width: #{$width-medium}) and (max-width: #{$width-big})'
+
+      @include double_media($media-big-not-bigger, '(min-width: #{$width-bigger})')
+        background: red
         padding: $chart-tab-padding
 
     .outer
