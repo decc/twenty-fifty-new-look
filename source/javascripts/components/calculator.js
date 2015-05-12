@@ -220,10 +220,17 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
 
     self.cityscapeVisible = ko.observable(window.innerWidth > 1200);
 
-    /** toggle city scape */
-    self.toggleCity = function(){
-      toggleObservableBool(self, 'cityscapeVisible');
+    self.openCity = function() {
+      self.cityscapeVisible(true);
+      self.drawCharts();
+    };
 
+    self.closeCity = function() {
+      self.cityscapeVisible(false);
+      self.drawCharts();
+    };
+
+    self.drawCharts = function(){
       // TODO: this could be handled by transitionEnd binding
       // cause ie9 dont do transitions
       if(!Modernizr.csstransitions) {
