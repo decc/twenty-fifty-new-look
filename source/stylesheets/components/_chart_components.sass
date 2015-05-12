@@ -104,13 +104,20 @@
     height: 100%
 
     .inner
-      padding: 42px $chart-tab-padding-right $chart-tab-padding-bottom $chart-tab-padding-left
       height: 100%
+      padding: 0
+      padding: $chart-tab-padding-small
+      @include media($media-big)
+        padding: $chart-tab-padding
 
     .outer
       overflow-y: scroll
       height: 100%
-      padding-top: 30px
+      padding: $chart-tab-padding-small
+      @include media($media-big)
+        padding: $chart-tab-padding
+      .inner
+        padding: 0
 
       .scroll
         overflow: visible

@@ -3,9 +3,11 @@
   height: 100%
 
 .air-quality
-  padding: 30px
   color: #FFF
   text-align: left
+  padding: $chart-tab-padding-small
+  @include media($media-big)
+    padding: $chart-tab-padding
 
   a
     color: #FFF

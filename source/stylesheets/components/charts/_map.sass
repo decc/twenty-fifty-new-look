@@ -3,14 +3,17 @@
   height: 100%
 
 .map
-  padding: 30px
+  padding: $chart-tab-padding-small
+  @include media($media-big)
+    padding: $chart-tab-padding
 
   @media screen and (min-width: 1200px)
     display: table
 
   h2
     font-weight: normal
-    padding-bottom: 25px
+    padding-bottom: 0
+    margin-bottom: 60px
 
   .col
     position: relative
