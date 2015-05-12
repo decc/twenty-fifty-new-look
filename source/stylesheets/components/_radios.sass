@@ -2,16 +2,16 @@ input[type=radio]
   display: none
 
   & + .r:before
-    width: 5px
-    height: 5px
+    width: 6px
+    height: 6px
     background: #cccccc
     display: inline-block
     border-radius: 5px
     content: ''
     position: absolute
-    top: 6px
-    left: 7px
-    margin: -2px -3px
+    top: 50%
+    left: 50%
+    @include transform(translate(-50%, -50%))
     opacity: 0
 
   &:checked + .r:before
@@ -33,8 +33,8 @@ label
   border: 1px solid #ccc
 
   @include media($media-big)
-    width: 15px
-    height: 15px
+    width: 16px
+    height: 16px
     margin: 0 45px 0 0
 
   &:before
