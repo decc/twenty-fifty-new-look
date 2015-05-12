@@ -1,4 +1,4 @@
-@include font-face(icons, '/fonts/icons_6d27266d35a282d9fc44489903716f25', normal, normal, false, eot woff ttf svg)
+@include font-face(icons, '/fonts/icons_a1f1cc5a450dcf818b230134b10031e8', normal, normal, false, eot woff ttf svg)
 
 %icon
   font-family: "icons" !important
@@ -599,6 +599,44 @@
 
 .icon-power-stations-without-ccs-before
   @extend %icon-power-stations-without-ccs-before
+
+
+
+
+
+%icon-content-powerstation-with-css
+  @extend %icon
+  content: '\f122'
+
+%icon-powerstation-with-css-after
+  &:after
+    @extend %icon-content-powerstation-with-css
+
+%icon-powerstation-with-css-before
+  &:before
+    @extend %icon-content-powerstation-with-css
+
+.icon-powerstation-with-css-before
+  @extend %icon-powerstation-with-css-before
+
+
+
+
+
+%icon-content-powerstation-without-css
+  @extend %icon
+  content: '\f123'
+
+%icon-powerstation-without-css-after
+  &:after
+    @extend %icon-content-powerstation-without-css
+
+%icon-powerstation-without-css-before
+  &:before
+    @extend %icon-content-powerstation-without-css
+
+.icon-powerstation-without-css-before
+  @extend %icon-powerstation-without-css-before
 
 
 
