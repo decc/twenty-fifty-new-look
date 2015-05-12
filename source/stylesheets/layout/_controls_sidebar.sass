@@ -71,7 +71,7 @@
   .tabs
     overflow: auto
     padding-left: 1px
-    height: calc(100% - 14vh)
+    height: calc(100% - 11vh)
 
   .tab
     padding: 0
@@ -84,6 +84,7 @@
       background-color: $color-background-light
       height: auto
 
+    // TODO: belongs in pathway action component
     .item
       padding: 1em 0em
       font-size: 75%
@@ -97,26 +98,32 @@
       > div
         overflow: auto
 
+      .details
+        position: relative
+
+        label
+          float: left
+          position: absolute
+          max-width: 72%
+          font-size: 13px
+          top: 50%
+          @include transform(translateY(-50%))
+
+          @include media($media-big)
+            font-size: inherit
+          @include media($media-bigger)
+            font-size: 14px
+
+
       .info-button
         float: right
         margin-top: 1vh
-
-      label
-        float: left
-        margin-top: 0.5vh
-        max-width: 75%
-        font-size: 13px
-
-        @include media($media-big)
-          font-size: inherit
-        @include media($media-bigger)
-          font-size: 14px
 
       .value-label
         float: right
         padding: 1em 0.5em
         background-color: #ccc
-        margin-left: .5em
+        margin-left: 1em
         min-width: 35px
         text-align: center
         @include transition(background-color .3s)
