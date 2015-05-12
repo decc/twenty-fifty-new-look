@@ -13,6 +13,8 @@ define(['knockout', 'bindings/range'], function(ko) {
       var id = params.name.replace(' ', '-').replace(/[^a-z0-9-?]/ig, '').toLowerCase();
       var tooltips = params.tooltips;
 
+      var previous = element.parentNode.previousSibling;
+
       element.setAttribute('type', 'range');
       element.setAttribute('list', id);
       element.setAttribute('min', min);
@@ -37,20 +39,24 @@ define(['knockout', 'bindings/range'], function(ko) {
       })
 
       element.addEventListener('input', function(){
-        var valueLabel = element.parentNode.previousSibling.querySelector(element.label);
+        var valueLabel = previous.querySelector(element.label);
         valueLabel.innerHTML = element.value;
-        ko.bindingHandlers.tooltip.update(element, element.value);
+
+
+        var left = element.rangeInstance.pointer.style.left;
+
+        ko.bindingHandlers.tooltip.update(element, element.value, left);
         ko.bindingHandlers.rangeInt.setLabelClass(element.value, max, valueLabel);
       })
 
-      if(element.parentNode.previousSibling.querySelector(element.label) == null){
+      if(previous.querySelector(element.label) == null){
         var valueLabel = document.createElement('span');
         valueLabel.classList.add('value-label');
         element.parentNode.insertBefore(valueLabel, element);
 
         valueLabel.innerHTML = value();
       } else {
-        element.parentNode.previousSibling.querySelector(element.label).innerHTML = '0';
+        previous.querySelector(element.label).innerHTML = '0';
       }
 
       ko.bindingHandlers.range.init(element);
