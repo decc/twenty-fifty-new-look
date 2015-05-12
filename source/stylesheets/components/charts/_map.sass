@@ -84,9 +84,12 @@
     li
       color: #8e939f
       padding-left: 4.5em
-      margin-bottom: 1.4em
-      padding-top: 0.6em
       position: relative
+      margin: 60px 0
+      @include media($media-big)
+        margin: 30px 0
+      &:first-child
+        margin-top: 0
 
       &:before
         position: absolute
