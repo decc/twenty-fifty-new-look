@@ -6,14 +6,27 @@
 
 .layer
   position: absolute
-  bottom: 0
-  top: 0
-  left: 50%
-  right: 0
+  // bottom: 0
+  // top: 0
+  // left: 50%
+  // right: 0
   /* centre align the inner div */
-  margin-left: -660px
+  // margin-left: -660px
   width: 1320px
   background-repeat: no-repeat
+
+  &.one
+    left: 0
+    top: 0
+
+  &.two
+
+  &.three
+
+  &.four
+
+  &.five
+
 
 
   &:before,
@@ -38,7 +51,7 @@
 #landscape-layer-1:before,
 #landscape-layer-1:after
   background-image: url('/layers/layer1.svg')
-  background-position: 50% -23px
+  background-position: 50% -73px
   background-size: auto 428px
 
 #landscape-layer-2,
@@ -76,14 +89,29 @@
 #landscape-layer-4,
 #landscape-layer-4:before,
 #landscape-layer-4:after
-  background-image: url('../layers/layer4.svg')
+  background-image: url('/layers/layer4.svg')
+  background-position: 0 -56px
+  background-size: auto 434px
+
+#landscape-layer-4:before
+  background-position: -366px -56px
+  left: -1318px
+
+#landscape-layer-4:after
+  background-position: 169px -39px
+  background-size: auto 421px
+
+#landscape-layer-5,
+#landscape-layer-5:before,
+#landscape-layer-5:after
+  background-image: url('../layers/layer5.svg')
   background-position: 0 -41px
   background-size: auto 428px
 
-#landscape-layer-4:before
+#landscape-layer-5:before
   left: -1316px
 
-#landscape-layer-4:after
+#landscape-layer-5:after
   background-position: -300px -41px
 
 /* === set z-indexing === */
@@ -107,6 +135,11 @@
   z-index: 7
   *
     z-index: 8
+
+#landscape-layer-5
+  z-index: 9
+  *
+    z-index: 10
 
 .layer > *, i
   background-position: 50% 100%
@@ -168,19 +201,23 @@ i
   background-image: url(/svgs/algae.svg)
   bottom: 179px
   left: 385px
-  width: 28px
-  @include transition(bottom .2s, width .2s)
+  width: 20px
+  @include transition(bottom .2s, left .2s, width .2s)
 
   &[data-value="3"]
-    width: 31px
+    bottom: 177px
+    left: 383px
+    width: 25px
 
   &[data-value="4"]
-    bottom: 173px
-    width: 45px
+    bottom: 175px
+    left: 381px
+    width: 30px
 
   &[data-value="5"]
-    bottom: 173px
-    width: 45px
+    bottom: 175px
+    left: 381px
+    width: 30px
 
 .bike
   background-image: url(/svgs/bike.svg)
@@ -450,7 +487,13 @@ i
 /* === Commercial Fans === */
 
 .commercial-fan
-  background-image: url(/svgs/commercial_fan.svg)
+  background-image: url(/svgs/commercial_fan_green.svg)
+
+  &[data-value="1"],
+  &[data-value="3"],
+  &[data-value="5"],
+  &[data-value="6"]
+    background-image: url(/svgs/commercial_fan_grey.svg)
 
   &[data-value="1"]
     bottom: 244px
@@ -603,29 +646,29 @@ i
   /* on layer 1 */
 
   &[data-value="2"]
-    bottom: 229px
+    bottom: 231px
     left: 881px
     width: 4px
 
   &[data-value="4"]
-    bottom: 229px
+    bottom: 231px
     left: 779px
     width: 4px
 
   /* on layer 2 */
 
   &[data-value="1"]
-    bottom: 124px
+    bottom: 128px
     left: 700px
     width: 10px
 
   &[data-value="3"]
-    bottom: 127px
+    bottom: 130px
     left: 516px
     width: 8px
 
   &[data-value="5"]
-    bottom: 126px
+    bottom: 130px
     left: 851px
     width: 10px
 
@@ -746,9 +789,9 @@ i
 
 .bulb
   background-image: url(/svgs/bulb.svg)
-  bottom: 142px
-  left: 983px
-  width: 27px
+  bottom: 152px
+  left: 991px
+  width: 18px
 
   &.led
     background-image: url(/svgs/bulb_led.svg)
