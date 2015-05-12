@@ -50,10 +50,13 @@
         background: $color-highlight
 
     .exit
-      position: fixed
+      position: absolute
       left: 0
       bottom: 0
       background: rgba(255, 255, 255, 0.05)
+
+      .ios &
+        position: fixed
 
   .secondary
     height: 100%
@@ -75,4 +78,5 @@
 
           &.is-active
             font-weight: bold
+
 
