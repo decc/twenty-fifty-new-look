@@ -24,14 +24,6 @@
     return /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
   });
 
-  Modernizr.addTest('safari', function(){
-     return Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
-  })
-
-  Modernizr.addTest('ie', function(){
-    return /*@cc_on!@*/false || !!document.documentMode; // At least IE6
-  })
-
   Modernizr.load([
     {
       test: testClassList(),
