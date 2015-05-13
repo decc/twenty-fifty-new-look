@@ -1,4 +1,4 @@
-define(['config', 'preloader'], function(config, Preloader) {
+define(['config', 'preloader', 'cookie'], function(config, Preloader, Cookie) {
   'use strict';
 
   return {
@@ -22,7 +22,9 @@ define(['config', 'preloader'], function(config, Preloader) {
       var width = window.innerWidth;
 
       return (!this.tooSmall() && width < config.ROTATE_WIDTH && window.innerHeight > width)
-    }
+    },
+
+    Cookie: Cookie
   }
 });
 
