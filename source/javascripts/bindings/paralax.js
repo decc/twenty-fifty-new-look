@@ -7,6 +7,7 @@ define(['knockout'], function(ko) {
 
       var unParalax = function() {
         window.removeEventListener('mousemove', ko.bindingHandlers.paralax.paralaxLandscape);
+        window.removeEventListener('resize', ko.bindingHandlers.paralax.handleResize);
       };
 
       var checkParalax = function() {
@@ -26,15 +27,18 @@ define(['knockout'], function(ko) {
         //user has mouse!! do paralax
         checkParalax();
 
-        var timer;
-        window.addEventListener('resize', function() {
-          timer = setTimeout(checkParalax, 500);
-        });
+        window.addEventListener('resize', ko.bindingHandlers.paralax.handleResize);
 
         window.removeEventListener('mousemove', handleMouseMove);
       };
 
       window.addEventListener('mousemove', handleMouseMove);
+    },
+
+    timer: {},
+
+    handleResize: function() {
+      this.timer = setTimeout(checkParalax, 500);
     },
 
     paralaxLandscape: function(e) {
