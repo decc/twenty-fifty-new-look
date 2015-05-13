@@ -7,7 +7,9 @@ header.calculator-header
   .total-co2-reduction
     .chart.compare.top data-bind="chart: 'SummaryChart', data: pathway().chartData, params: { text: '#{I18n.t("calculator.header.reduction")}', margin: { top: 0, right: 0, bottom: 0, left: 0 } }" style="height: 100%"
 
-    .target-goal= t('target')
+    .goal-wrapper
+      .goal= t('target')
+
     .spacer
       .target-reached-tooltip.tooltip data-bind="visible: targetReachedVisible"
         .arrow

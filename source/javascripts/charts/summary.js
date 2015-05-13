@@ -97,16 +97,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         "stroke": "rgba(255,255,255, 0.5)",
         "stroke-dasharray": "4 3"
       });
-
-    self.svg.selectAll('.target-label').remove();
-    // self.svg.append("text")
-    //   .attr({
-    //     "class": "target-label",
-    //     "x": x(87),
-    //     "y": 0,
-    //     "dy": "2.5em"
-    //   })
-    //   .text("80% Target")
   };
 
   return SummaryChart;

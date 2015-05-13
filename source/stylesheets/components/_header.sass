@@ -92,18 +92,28 @@
         border-bottom: 40px solid $color-background-dark
         border-left: 40px solid transparent
 
-  .target-goal
-    position: absolute
-    top: 50%
-    left: $small-controls-width
-    color: #fff
-    @include transform(translateY(-50%))
+  .goal-wrapper
+    z-index: 30
+    top: 0
+    width: 100%
+    height: 100%
+    @include transform(translateY(-100%))
+    position: relative
 
-    @include media($media-mediumbig)
-      left: calc($left-col-width + 10%)
+    .goal
+      position: absolute
+      top: 50%
+      left: 81%
+      color: #fff
+      @include transform(translateY(-50%))
+      @extend %icon-chevron-before
 
-    @include media($media-bigger)
-      right: calc(#{$right-col-width-bigger} + 30%)
+      @include media($media-big)
+        left: 82%
+        font-size: $font-size-header
+
+        &:before
+          padding-right: 10px
 
   .spacer
     position: relative
@@ -167,21 +177,18 @@
       border-left: 1px solid $color-border-dark
       @extend %icon-flag-before
 
-      .text
-        font-size: $font-size-header
-
       &:before
         font-size: 1.5em
         margin-left: -18px
 
       span
         display: none
+        font-size: $font-size-header
 
       @include media($media-mediumbig)
         span
           display: inline-block
           position: relative
-          top: -4px
 
         &:before
           content: ''
