@@ -3,6 +3,7 @@ en:
   decc: 'Department of energy and climate change'
   your_pathway: 'Your pathway'
   nav: 'Pathway actions'
+  target: '80% target'
 
   rotate:
     heading: 'Turn me around'
