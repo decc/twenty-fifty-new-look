@@ -1,7 +1,7 @@
 .calculator-header
   position: relative
   height: $header-height
-  z-index: 12
+  z-index: 14
   min-height: 65px
   @include row
   background: $color-background-dark
@@ -122,7 +122,8 @@
 
   .target-reached-tooltip
     padding: 20px 20px 20px
-    background-color: rgba(45, 49, 60, 0.95)
+    background-color: $color-background-light
+    color: $color-background-dark
     min-width: 250px
     width: 33%
     z-index: 14
@@ -130,6 +131,7 @@
     top: 0
     margin-top: 89px
     right: 16%
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3)
     @include media ('(min-width: 800px)')
       right: 15%
     @include media ('(min-width: 860px)')
@@ -149,7 +151,7 @@
     .arrow
       left: 42%
       margin-left: 2px
-      border-color: rgba(45, 49, 60, 0.95) transparent
+      border-color: $color-background-light transparent
 
     .close
       position: absolute
