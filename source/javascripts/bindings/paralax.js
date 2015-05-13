@@ -5,27 +5,13 @@ define(['knockout'], function(ko) {
     init: function(el) {
       var landscape = el;
 
-      var unParalax = function() {
-        window.removeEventListener('mousemove', ko.bindingHandlers.paralax.paralaxLandscape);
-        window.removeEventListener('resize', ko.bindingHandlers.paralax.handleResize);
-      };
-
-      var checkParalax = function() {
-        // TODO: detect mouse instead
-        if(window.innerWidth > 800 && window.innerHeight > 600) {
-          window.addEventListener("mousemove", ko.bindingHandlers.paralax.paralaxLandscape);
-        } else {
-          unParalax();
-        }
-      }
-
       ko.utils.domNodeDisposal.addDisposeCallback(el, function() {
-        unParalax();
+        ko.bindingHandlers.paralax.unParalax();
       });
 
       var handleMouseMove = function() {
         //user has mouse!! do paralax
-        checkParalax();
+        ko.bindingHandlers.paralax.checkParalax();
 
         window.addEventListener('resize', ko.bindingHandlers.paralax.handleResize);
 
@@ -38,7 +24,22 @@ define(['knockout'], function(ko) {
     timer: {},
 
     handleResize: function() {
-      this.timer = setTimeout(checkParalax, 500);
+      this.timer = setTimeout(ko.bindingHandlers.paralax.checkParalax, 500);
+    },
+
+
+    unParalax: function() {
+      window.removeEventListener('mousemove', ko.bindingHandlers.paralax.paralaxLandscape);
+      window.removeEventListener('resize', ko.bindingHandlers.paralax.handleResize);
+    },
+
+    checkParalax: function() {
+      // TODO: detect mouse instead
+      if(window.innerWidth > 800 && window.innerHeight > 600) {
+        window.addEventListener("mousemove", ko.bindingHandlers.paralax.paralaxLandscape);
+      } else {
+        ko.bindingHandlers.paralax.unParalax();
+      }
     },
 
     paralaxLandscape: function(e) {
