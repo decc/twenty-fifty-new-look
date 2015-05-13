@@ -41,6 +41,7 @@
       height: 100%
       @extend %vertical-centered
       color: #fff
+      font-size: $font-size-header
 
       @include media($media-medium)
         display: table
@@ -52,6 +53,7 @@
     padding-right: $small-controls-width
     height: 100%
     color: $color-background-dark
+    position: relative
 
     @include media($media-medium)
       padding-left: $chart-tabs-width
@@ -89,6 +91,29 @@
         bottom: 0
         border-bottom: 40px solid $color-background-dark
         border-left: 40px solid transparent
+
+  .goal-wrapper
+    z-index: 30
+    top: 0
+    width: 100%
+    height: 100%
+    @include transform(translateY(-100%))
+    position: relative
+
+    .goal
+      position: absolute
+      top: 50%
+      left: 81%
+      color: #fff
+      @include transform(translateY(-50%))
+      @extend %icon-chevron-before
+
+      @include media($media-big)
+        left: 82%
+        font-size: $font-size-header
+
+        &:before
+          padding-right: 10px
 
   .spacer
     position: relative
@@ -158,12 +183,12 @@
 
       span
         display: none
+        font-size: $font-size-header
 
       @include media($media-mediumbig)
         span
           display: inline-block
           position: relative
-          top: -4px
 
         &:before
           content: ''
@@ -174,7 +199,7 @@
       right: 0
       width: 70px
       font-size: 2em
-      font-weight: bold
+      font-family: $font-bold
       border-left: 1px solid $color-background
       line-height: 1
 

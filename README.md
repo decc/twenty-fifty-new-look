@@ -6,7 +6,7 @@ Front end for [DECC 2050 calculator](https://github.com/decc/twenty-fifty)
 
 ### Dependencies
 
-* Requires ruby 2.1.x
+* Requires ruby 2.2.0
 * Fontcustom has its own dependencies. See
   [github](https://github.com/FontCustom/fontcustom)
 
@@ -15,4 +15,9 @@ Front end for [DECC 2050 calculator](https://github.com/decc/twenty-fifty)
 * `git clone`
 * `bundle install`
 * `middleman`
+
+### Icon font
+
+Built with font custom gem. Svg files go in `source/icons`, run `rake fonts` to
+compile.
 

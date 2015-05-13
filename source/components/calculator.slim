@@ -15,7 +15,7 @@
         .content
           section#share.share data-bind="css: { 'is-active': shareVisible() }, component: { name: 'share', params: { pathway: currentPathway } }"
 
-          section#flows-fullscreen.modal-overlay data-bind="css: { 'is-active': fullscreenVisible() }"
+          section#flows-fullscreen.modal-overlay.scrollable.js-scrollable data-bind="css: { 'is-active': fullscreenVisible() }"
             = partial "partials/flows-fullscreen"
 
           = partial "partials/cityscape"
@@ -37,5 +37,5 @@
 
           all-pathway-actions params="pathway: currentPathway, visible: overviewVisible"
 
-          section#faq.modal-overlay data-bind="css: { 'is-active': faqVisible() }, component: { name: 'faq' }"
+          section#faq.modal-overlay.scrollable.js-scrollable data-bind="css: { 'is-active': faqVisible() }, component: { name: 'faq' }"
 
