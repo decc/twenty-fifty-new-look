@@ -4,7 +4,7 @@
 
 .map
   padding: $chart-tab-padding-small
-  @include big-not-bigger
+  @include media($media-big)
     padding: $chart-tab-padding
 
   @media screen and (min-width: 1200px)
@@ -18,17 +18,13 @@
   .col
     position: relative
 
-    &:first-child
-      margin-bottom: calc(#{$chart-tab-padding}*2)
-
-    @include table-columns
+    @media screen and (min-width: 1200px)
       display: table-cell
       width: 50%
       min-height: 100%
 
       &:first-child
         padding-right: 20px
-        margin-bottom: 0
 
       &:last-child
         border-left: 1px solid #747985

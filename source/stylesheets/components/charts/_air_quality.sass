@@ -6,8 +6,7 @@
   color: #FFF
   text-align: left
   padding: $chart-tab-padding-small
-  overflow: auto
-  @include big-not-bigger
+  @include media($media-big)
     padding: $chart-tab-padding
 
   a
@@ -35,10 +34,8 @@
     .chart
       height: 500px
 
-    &:first-child
-      margin-bottom: calc(#{$chart-tab-padding})
 
-    @include table-columns
+    @media screen and (min-width: 1200px)
       float: left
       min-height: 100%
 
@@ -47,7 +44,6 @@
         height: 100%
         padding-right: 20px
         border-right: 1px solid #747985
-        margin-bottom: 0
 
       &:last-child
         width: 58%
@@ -56,8 +52,5 @@
 
       &:first-child
         margin-bottom: 50px
-
-
-
 
 
