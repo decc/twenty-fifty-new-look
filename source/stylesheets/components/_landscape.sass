@@ -10,33 +10,116 @@
   background-repeat: no-repeat
 
   &.one
-    right: 120px
-    top: 20px
+    background-image: url('/layers/layer1.svg')
+    background-size: auto 320px
+    top: 30px
+    left: 150px
     height: 220px
+    z-index: 1
+
+    *
+      z-index: 2
+
+    &:before,
+    &:after
+      background-image: url('/layers/layer1.svg')
+      background-size: auto 320px
+
+    &:before
+      left: -920px
+
+    &:after
+      right: -1231px
 
   &.two
-    left: -90px
+    background-image: url('/layers/layer2.svg')
+    background-size: auto 260px
+    left: 130px
     top: 90px
     height: 320px
-    background-size: auto 260px
+    z-index: 3
+
+    *
+      z-index: 4
+
+    &:before,
+    &:after
+      background-image: url('/layers/layer2.svg')
+
+    &:before
+      left: 0
+      display: none
+
+    &:after
+      left: 1220px
+      top: 16px
+      background-position: 33px -18px
 
   &.three
+    background-image: url('/layers/layer3.svg')
+    background-size: auto 328px
     top: 45px
     left: -50px
     height: 260px
-    background-size: auto 328px
+    z-index: 5
+
+    *
+      z-index: 6
+
+    &:before,
+    &:after
+      background-image: url('/layers/layer3.svg')
+
+    &:before
+      background-size: auto 328px
+      left: -1305px
+      top: 0px
+
+    &:after
+      background-size: auto 230px
+      left: 960px
+      right: 0
+      top: 46px
 
   &.four
-    top: 117px
-    left: -78px
-    height: 200px
     background-size: auto 250px
+    background-image: url('/layers/layer4.svg')
+    top: 117px
+    left: -5px
+    height: 200px
+    z-index: 7
+
+    *
+      z-index: 8
+
+    &:before,
+    &:after
+      background-image: url('/layers/layer4.svg')
+
+    &:before
+      left: -1285px
+      top: 94px
+
+    &:after
+      top: -24px
+      left: 630px
 
   &.five
     bottom: 0
     height: 330px
-    left: 100px
+    left: 400px
     background-size: auto 410px
+    background-image: url('/layers/layer5.svg')
+    z-index: 9
+
+    *
+      z-index: 10
+
+    &:after
+      background-image: url('/layers/layer5.svg')
+      background-size: auto 410px
+      top: 1px
+      left: 1156px
 
   &:before,
   &:after
@@ -50,106 +133,12 @@
     filter: FlipH
     -ms-filter: "FlipH"
 
-  &:before
-    left: 1220px /* avoid stitching errors */
-
-  &:after
-    right: -1319px /* avoid stitching errors */
-
-#landscape-layer-1,
-#landscape-layer-1:before,
-#landscape-layer-1:after
-  background-image: url('/layers/layer1.svg')
-  // background-position: 50% -73px
-  background-size: auto 428px
-
-#landscape-layer-2,
-#landscape-layer-2:before,
-#landscape-layer-2:after
-  background-image: url('/layers/layer2.svg')
-
-#landscape-layer-2:before
-  background-position: 124% -23px //landfill
-
-#landscape-layer-2:after
-  @include transform(none)
-  @include filter(none)
-
-#landscape-layer-3,
-#landscape-layer-3:before,
-#landscape-layer-3:after
-  background-image: url('/layers/layer3.svg')
-
-#landscape-layer-3:before
-  // background-position: -366px -56px
-  // left: -1318px
-
-#landscape-layer-3:after
-  // background-position: 169px -39px
-  background-size: auto 421px
-
-#landscape-layer-4,
-#landscape-layer-4:before,
-#landscape-layer-4:after
-  background-image: url('/layers/layer4.svg')
-  // background-position: 0 -56px
-  // background-size: auto 434px
-
-#landscape-layer-4:before
-  // background-position: -366px -56px
-  // left: -1318px
-
-#landscape-layer-4:after
-  // background-position: 169px -39px
-  // background-size: auto 421px
-
-#landscape-layer-5,
-#landscape-layer-5:before,
-#landscape-layer-5:after
-  background-image: url('/layers/layer5.svg')
-  // background-position: 0 -41px
-  // background-size: auto 378px
-
-#landscape-layer-5:before
-  // left: -1316px
-
-#landscape-layer-5:after
-  // background-position: -300px -41px
-
-/* === set z-indexing === */
-
-#landscape-layer-1
-  z-index: 1
-  *
-    z-index: 2
-
-#landscape-layer-2
-  z-index: 3
-  *
-    z-index: 4
-
-#landscape-layer-3
-  z-index: 5
-  *
-    z-index: 6
-
-#landscape-layer-4
-  z-index: 7
-  *
-    z-index: 8
-
-#landscape-layer-5
-  z-index: 9
-  *
-    z-index: 10
-
 .layer > *, i
   background-position: 50% 100%
   background-repeat: no-repeat
   background-size: 100% auto
   position: absolute
-  // height: 300px /* default height (landscape height) */
-  margin-right: 4px // fix icon spacing
+  margin-right: 4px
 
 i
   opacity: 0
@@ -169,41 +158,39 @@ i
     left: 0
     right: 0
 
-/* === Airplanes === */
-
 .airplane
   background-image: url(/svgs/airplane.svg)
   height: 20px
 
   &[data-value="1"]
-    top: 0
-    left: 395px
+    top: -19px
+    left: 355px
     width: 25px
 
   &[data-value="2"]
-    top: -5px
-    left: 685px
+    top: -25px
+    left: 565px
     width: 20px
 
   &[data-value="3"]
-    top: 0
-    left: 835px
+    top: -38px
+    left: 685px
     width: 19px
 
   &[data-value="4"]
-    top: 5px
-    left: 335px
+    top: -10px
+    left: 175px
     width: 18px
 
   &[data-value="5"]
-    top: -25px
-    left: 530px
+    top: -4px
+    left: 500px
     width: 16px
 
 .algae
   background-image: url(/svgs/algae.svg)
-  top: 70px
-  left: 570px
+  top: 55px
+  left: 430px
   width: 20px
   height: 20px
   @include transform(scale(1))
@@ -215,7 +202,6 @@ i
   &[data-value="4"],
   &[data-value="5"]
     @include transform(scale(1.5))
-
 
 .bike
   background-image: url(/svgs/bike.svg)
@@ -246,7 +232,7 @@ i
 
 #biocrops-layer-3
   bottom: 96px
-  left: 760px
+  left: 700px
   height: 18px
 
   .biocrop
@@ -264,8 +250,6 @@ i
     width: 8px
     height: 25px
 
-/* === bioenergy === */
-
 .bioenergy
   background-image: url(/svgs/bioenergy_powerstation.svg)
 
@@ -275,63 +259,70 @@ i
   /* on layer 1 */
 
   &[data-value="1"]
-    bottom: 254px
-    left: 975px
+    top: -7px
+    left: 785px
     width: 20px
+    height: 22px
 
   &[data-value="3"]
-    bottom: 244px
-    left: 640px
+    top: 1px
+    left: 675px
     width: 14px
+    height: 17px
 
   &[data-value="5"]
-    bottom: 254px
-    left: 940px
+    top: -1px
+    left: 840px
     width: 14px
+    height: 16px
 
   &[data-value="7"]
-    bottom: 250px
+    top: -3px
     left: 700px
     width: 18px
+    height: 20px
 
   &[data-value="9"]
-    top: 25px
-    left: 785px
+    top: 5px
+    left: 625px
     width: 17px
-    height: 15px
+    height: 19px
 
   &[data-value="10"]
-    bottom: 254px
-    left: 838px
+    top: -3px
+    left: 920px
     width: 16px
+    height: 18px
 
   /* on layer 2 */
 
   &[data-value="2"]
-    bottom: 173px
-    left: 460px
+    top: 14px
+    left: 320px
     width: 47px
+    height: 50px
 
   &[data-value="4"]
-    bottom: 190px
-    left: 1105px
+    top: -10px
+    left: 1245px
     width: 24px
+    height: 27px
 
   &[data-value="6"]
-    bottom: 190px
-    left: 980px
+    top: -22px
+    left: 785px
     width: 37px
+    height: 40px
 
   &[data-value="8"]
-    bottom: 185px
-    left: 740px
+    top: -14px
+    left: 560px
     width: 44px
-
-/* === Boats === */
+    height: 47px
 
 .boat
   background-image: url(/svgs/boat.svg)
-  top: 24px
+  top: 11px
   width: 30px
   height: 30px
 
@@ -339,35 +330,31 @@ i
   /* what goes here? */
 
   &[data-value="1"]
-    left: 440px
+    left: 270px
 
   &[data-value="2"]
-    left: 480px
+    left: 310px
 
   &[data-value="3"]
-    left: 520px
+    left: 350px
 
   &[data-value="4"]
-    left: 560px
+    left: 390px
 
   &[data-value="5"]
-    left: 600px
-
-/* === Boiler === */
+    left: 430px
 
 .boiler
-  background-size: 30% auto
-  bottom: 140px
-  left: 922px
-  width: 34px
+  bottom: 153px
+  left: 607px
+  width: 16px
+  height: 26px
 
   &.electric
     background-image: url(/svgs/electric_white.svg)
 
   &.gas
     background-image: url(/svgs/gas_white.svg)
-
-/* === Buses === */
 
 .bus
   background-image: url(/svgs/bus.svg)
@@ -401,8 +388,6 @@ i
   &[data-value="4"]
     bottom: 50px
     left: 875px
-
-/* === Cars === */
 
 .car
   background-image: url(/svgs/car.svg)
@@ -454,44 +439,46 @@ i
   &[data-value="9"]
     left: 314px
 
-/* === CCS === */
-
 .ccs
   background-image: url(/svgs/ccs_powerstation.svg)
 
   /* in layer 1 */
 
   &[data-value="1"]
-    bottom: 244px
-    left: 1008px
+    top: -1px
+    left: 751px
     width: 30px
+    height: 26px
 
   &[data-value="3"]
-    bottom: 245px
-    left: 790px w
-    idth: 27px
+    top: -1px
+    left: 866px
+    width: 27px
+    height: 25px
 
   &[data-value="5"]
-    bottom: 245px
-    left: 1053px
+    top: -1px
+    left: 1005px
     width: 27px
+    height: 25px
 
   /* on layer 2 */
 
   &[data-value="2"]
-    bottom: 161px
-    left: 616px
+    top: -12px
+    left: 1010px
     width: 60px
+    height: 50px
 
   &[data-value="4"]
-    bottom: 174px
-    left: 1057px
+    top: -8px
+    left: 1425px
     width: 49px
-
-/* === Commercial Fans === */
+    height: 42px
 
 .commercial-fan
   background-image: url(/svgs/commercial_fan_green.svg)
+  z-index: 7!important // infront of turbine
 
   &[data-value="1"],
   &[data-value="3"],
@@ -512,7 +499,7 @@ i
     height: 8px
 
   &[data-value="3"]
-    bottom: 177px
+    bottom: 176px
     left: 141px
     width: 20px
     height: 9px
@@ -535,42 +522,52 @@ i
     width: 16px
     height: 7px
 
-/* === Commercial Turbines === */
-
 .commercial-turbine
-  background-image: url(/svgs/turbine_land.svg)
+  &[data-value="1"],
+  &[data-value="3"],
+  &[data-value="5"],
+  &[data-value="6"]
+    background-image: url(/svgs/turbine_grey.svg)
+
+  &[data-value="2"],
+  &[data-value="4"]
+    background-image: url(/svgs/turbine_land.svg)
 
   &[data-value="1"]
-    bottom: 244px
-    left: 114px
+    top: 7px
+    left: 107px
     width: 13px
+    height: 20px
 
   &[data-value="2"]
-    bottom: 249px
-    left: 198px
+    top: -7px
+    left: 184px
     width: 18px
+    height: 30px
 
   &[data-value="3"]
-    bottom: 185px
-    left: 155px
+    top: 54px
+    left: 141px
     width: 20px
+    height: 30px
 
   &[data-value="4"]
-    bottom: 182px
-    left: 278px
+    top: 63px
+    left: 260px
     width: 15px
+    height: 22px
 
   &[data-value="5"]
-    bottom: 209px
-    left: 237px
+    top: 35px
+    left: 228px
     width: 17px
+    height: 25px
 
   &[data-value="6"]
-    bottom: 200px
-    left: 50px
+    top: 45px
+    left: 43px
     width: 16px
-
-/* === Cows === */
+    height: 24px
 
 .cow
   background-image: url(/svgs/cow.svg)
@@ -602,26 +599,26 @@ i
     filter: FlipH
     -ms-filter: "FlipH"
 
-/* === Dams === */
-
 .dam
   background-image: url(/svgs/hydo_dam.svg)
   height: 50px
 
   &[data-value="1"]
-    top: 52px
-    left: 666px
+    top: 38px
+    left: 600px
     width: 133px
 
   &[data-value="2"]
-    top: 52px
-    left: 966px
+    top: 38px
+    left: 1200px
     width: 133px
 
 .factory
-  bottom: 144px
-  left: 1150px
+  bottom: 34px
+  left: 1413px
+  width: 200px
   position: absolute
+  z-index: 0!important // behind bush
 
   i
     display: inline-block
@@ -632,25 +629,36 @@ i
 
   &[data-value="1"]
     .factory-building
-      width: 80px
+      width: 50px
+      height: 60px
+      top: 42px
+      left: -25px
 
   &[data-value="2"]
     .factory-building
-      width: 120px
+      width: 100px
+      height: 110px
+      top: 42px
+      left: -25px
 
   &[data-value="3"]
     .factory-building
-      width: 104px
+      width: 100px
+      height: 100px
+      display: block
+      top: 42px
+      left: -25px
 
   &[data-value="4"]
     .factory-building
-      width: 52px
+      width: 80px
+      height: 90px
+      top: -72px
+      left: -25px
 
   &[data-value="5"]
     .factory-building
       display: none
-
-/* === Geothermal === */
 
 .geothermal
   background-image: url(/svgs/geothermal.svg)
@@ -658,45 +666,45 @@ i
   /* on layer 1 */
 
   &[data-value="2"]
-    bottom: 231px
-    left: 881px
+    top: 14px
+    left: 1069px
     width: 4px
+    height: 15px
 
   &[data-value="4"]
-    bottom: 231px
-    left: 779px
+    top: 14px
+    left: 731px
     width: 4px
+    height: 15px
 
   /* on layer 2 */
 
   &[data-value="1"]
-    bottom: 128px
-    left: 700px
+    top: 32px
+    left: 538px
     width: 10px
+    height: 50px
 
   &[data-value="3"]
-    bottom: 130px
-    left: 516px
+    top: 64px
+    left: 305px
     width: 8px
+    height: 40px
 
   &[data-value="5"]
-    bottom: 130px
-    left: 851px
+    top: 22px
+    left: 674px
     width: 10px
-
-/* === Home Fan === */
+    height: 61px
 
 .home-fan
   background-image: url(/svgs/home_fan.svg)
-  bottom: 23px
-  left: 698px
+  bottom: 33px
+  left: 528px
   width: 36px
   height: 42px
 
-/* === Imports === */
-
 .imports
-  background: #fff
   height: 20px
   left: -320px
   position: absolute
@@ -704,7 +712,6 @@ i
 
   &:before
     border: 10px solid transparent
-    border-left-color: #fff
     content: " "
     position: absolute
     right: -20px
@@ -719,11 +726,13 @@ i
     right: 0
     width: 8px
 
-/* Electricity Imports */
-
 .electricity-imports
-  top: 70px
-  left: 0
+  background: #28A197
+  top: -18px
+  left: -160px
+
+  &:before
+    border-left-color: #28A197
 
   &:after
     background-image: url(/svgs/electric.svg)
@@ -735,19 +744,21 @@ i
     width: 0px
 
   &[data-value="3"]
-    width: 410px
+    width: 100px
 
   &[data-value="4"]
-    width: 500px
+    width: 150px
 
   &[data-value="5"]
-    width: 680px
-
-/* Bioenergy Imports */
+    width: 200px
 
 .bioenergy-imports
-  top: 90px
-  left: 0
+  background: #95CFCA
+  top: 9px
+  left: -160px
+
+  &:before
+    border-left-color: #95CFCA
 
   &:after
     background-image: url(/svgs/bioenergy.svg)
@@ -759,15 +770,13 @@ i
     width: 0px
 
   &[data-value="3"]
-    width: 410px
+    width: 100px
 
   &[data-value="4"]
-    width: 500px
+    width: 150px
 
   &[data-value="5"]
-    width: 680px
-
-/* === Insulation === */
+    width: 200px
 
 .insulation
   border-left: 6px solid rgb(90, 99, 120)
@@ -775,7 +784,7 @@ i
   bottom: 30px
   display: inline-block
   height: 183px
-  left: 733px
+  left: 563px
   position: absolute
   width: 222px
   @include transition(all 0.3s ease-in)
@@ -792,22 +801,20 @@ i
   &[data-value="5"]
     border-width: 16px
 
-/* === Light Bulb === */
-
 .bulb
   background-image: url(/svgs/bulb.svg)
-  bottom: 180px
-  left: 838px
-  width: 18px
+  bottom: 162px
+  left: 667px
+  width: 22px
+  height: 34px
 
   &.led
     background-image: url(/svgs/bulb_led.svg)
 
-
 .landfill
   background-image: url(/svgs/landfill_high.svg)
-  top: 70px
-  left: 1270px
+  left: 1180px
+  top: 50px
   width: 57px
   height: 40px
   @include transition(top .2s)
@@ -816,16 +823,16 @@ i
     left: 1120px
 
   &[data-value="1"]
-    top: 70px
+    top: 15px
 
   &[data-value="2"]
-    top: 80px
+    top: 5px
 
   &[data-value="3"]
-    top: 90px
+    top: 15px
 
   &[data-value="4"]
-    top: 100px
+    top: 25px
 
 .lorry
   background-image: url(/svgs/lorry.svg)
@@ -855,7 +862,7 @@ i
     left: 785px
 
 .meter
-  height: 8px
+  height: 10px
   width: 42px
   display: block
   background-image: url(/svgs/dial.svg)
@@ -883,8 +890,8 @@ i
     @include transform(rotate(63deg))
 
 .home-meter
-  bottom: 60px
-  left: 775px
+  bottom: 54px
+  left: 609px
 
   &[data-value="1"]
     @include transform(rotate(180deg))
@@ -907,31 +914,36 @@ i
   /* on layer 1 */
 
   &[data-value="1"]
-    bottom: 254px
-    left: 741px
+    top: -5px
+    left: 970px
     width: 22px
+    height: 20px
 
   &[data-value="3"]
-    bottom: 254px
-    left: 860px
+    top: 3px
+    left: 812px
     width: 14px
+    height: 12px
 
   &[data-value="5"]
-    bottom: 254px
-    left: 900px
+    top: -5px
+    left: 1040px
     width: 18px
+    height: 20px
 
   /* on layer 2 */
 
   &[data-value="2"]
-    bottom: 179px
-    left: 541px
+    top: 6px
+    left: 490px
     width: 40px
+    height: 34px
 
   &[data-value="4"]
-    bottom: 190px
-    left: 880px
+    top: -6px
+    left: 838px
     width: 28px
+    height: 24px
 
 .cooker
   background-size: 30% auto
@@ -949,8 +961,8 @@ i
       background-image: url(/svgs/electric_white.svg)
 
 .home-cooker
-  bottom: 66px
-  left: 880px
+  bottom: 60px
+  left: 710px
   width: 31px
   height: 50px
 
@@ -961,18 +973,19 @@ i
   .hob
     bottom: 37px
     width: 10px
+    height: 11px
 
     &.left
       background-image: url(/svgs/gas.svg)
-      left: 5px
+      left: 4px
 
     &.right
       background-image: url(/svgs/electric.svg)
-      left: 18px
+      left: 17px
 
   .oven
     background-image: url(/svgs/electric.svg)
-    width: 11px
+    width: 9px
     height: 16px
     bottom: 3px
     left: 10px
@@ -983,26 +996,30 @@ i
   width: 18px
 
   .oven
-    width: 10px
     background-image: url(/svgs/electric_white.svg)
+    width: 6px
+    height: 9px
+    top: -9px
+    left: -4px
 
   .hob
-    bottom: 20px
-    width: 9px
+    bottom: 18px
 
     &.left
       background-image: url(/svgs/gas_white.svg)
-      left: -4px
+      left: -9px
+      width: 9px
+      height: 10px
 
     &.right
       background-image: url(/svgs/electric_white.svg)
-      left: 5px
-
-/* === Recycling === */
+      left: -1px
+      width: 10px
+      height: 10px
 
 .recycling
-  bottom: 64px
-  left: 1085px
+  bottom: 60px
+  left: 930px
   height: 40px
 
   i
@@ -1014,20 +1031,16 @@ i
     width: 27px
     height: 40px
 
-/* === Solar === */
-
-/* Home */
-
 .home-solar
   bottom: 220px
   position: absolute
   height: 37px
 
   &.left
-    left: 790px
+    left: 620px
 
   &.right
-    left: 848px
+    left: 678px
 
   .solar
     background-image: url(/svgs/home_solar.svg)
@@ -1039,8 +1052,6 @@ i
     &[data-value="1"]
     &[data-value="2"]
     &[data-value="3"]
-
-/* Commercial */
 
 .commercial-solar
   .solar
@@ -1110,11 +1121,9 @@ i
         left: 66px
         width: 10px
 
-/* Field */
-
 .solar-field
-  bottom: 124px
-  left: 720px
+  top: 45px
+  left: 1071px
   position: absolute
 
   i
@@ -1123,15 +1132,10 @@ i
       display: inline-block
       position: relative
       width: 17px
-
-      &[data-value="1"]
-      &[data-value="2"]
-      &[data-value="3"]
-
-/* === Trains === */
+      height: 24px
 
 .train
-  bottom: 97px
+  bottom: 95px
   left: 445px
   position: absolute
 
@@ -1142,6 +1146,7 @@ i
     &.train-left
       background-image: url(/svgs/train_left.svg)
       width: 40px
+      height: 16px
 
       &.electric:after
         background-image: url(/svgs/electric.svg)
@@ -1152,6 +1157,7 @@ i
     &.train-right
       background-image: url(/svgs/train_right.svg)
       width: 40px
+      height: 16px
 
       &.electric:after
         background-image: url(/svgs/electric.svg)
@@ -1167,16 +1173,15 @@ i
 
       &.is-active
         width: 34px
+        height: 18px
         margin: 0 4px 0 0
         @include transition(opacity .2s .2s, width .2s, margin .2s)
 
-/* === Thermometer === */
-
 .thermometer
-  bottom: 146px
-  left: 905px
+  bottom: 140px
+  left: 732px
   width: 12px
-  height: 40px
+  height: 38px
 
   &[data-value="1"]
     background-image: url(/svgs/thermometer_3.svg)
@@ -1193,8 +1198,6 @@ i
   &[data-value="5"]
     background-image: url(/svgs/thermometer_2.svg)
 
-/* === Windfarms === */
-
 .windfarm
   position: absolute
   height: 22px
@@ -1204,31 +1207,25 @@ i
     position: relative
 
   &.land
-    top: -2px
-    left: 1080px
+    top: -8px
+    left: 1095px
 
     .turbine
       background-image: url(/svgs/turbine_land.svg)
-      width: 12px
+      width: 14px
       height: 22px
 
   &.sea
-    top: 32px
-    left: 665px
+    top: 20px
+    left: 501px
 
     .turbine
       background-image: url(/svgs/turbine_sea.svg)
       width: 12px
       height: 22px
 
-/* === IE Fixes === */
+// ie fixes
 
-.ie #landscape-layer-2,
-.ie #landscape-layer-2:before
-  background-position: 108% -23px
-
-/*.ie #landscape-layer-2:after
-  background-position: -396px -*/
 .ie9
   .cow
     // no black outlines please
@@ -1264,6 +1261,3 @@ i
   .commercial-meter
     bottom: 90px
     left: 170px
-
-i
-  opacity: 1!important

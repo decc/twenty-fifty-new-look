@@ -54,7 +54,10 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
       '/svgs/field_solar.svg',
       '/svgs/gas.svg',
       '/svgs/gas_white.svg',
-      '/svgs/geothermal.svg'
+      '/svgs/geothermal.svg',
+      '/svgs/turbine_land.svg',
+      '/svgs/turbine_sea.svg',
+      '/svgs/turbine_grey.svg'
     ];
 
     self.componentsLoaded = ko.observable(false);
