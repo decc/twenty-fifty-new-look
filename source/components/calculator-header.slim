@@ -11,7 +11,7 @@ header.calculator-header
       .goal= t('target')
 
     .spacer
-      .target-reached-tooltip.tooltip data-bind="visible: targetReachedVisible"
+      .target-reached-tooltip.tooltip data-bind="visible: targetReachedVisible, css: { 'is-open': cityscapeVisible }"
         .arrow
         .close data-bind="click: closeTargetReached" &times;
         span = I18n.t('calculator.header.target_reached')
