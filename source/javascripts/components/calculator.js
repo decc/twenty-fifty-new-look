@@ -1,5 +1,5 @@
-define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers', 'hasher', 'utils'],
-  function(ko, html, Pathway, Helpers, hasher, Utils) {
+define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers', 'utils', 'sizeChecker'],
+  function(ko, html, Pathway, Helpers, Utils, SizeChecker) {
 
   'use strict';
 
@@ -9,6 +9,8 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
    */
   var ViewModel = function(params) {
     var params = params || {};
+
+    SizeChecker.init();
 
     var self = this;
 
@@ -66,32 +68,6 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
     self.hasLoaded = ko.computed(function() {
       return (self.assetsLoaded() && self.componentsLoaded());
     });
-
-
-    // check screen is big enough
-    var timer;
-
-    self.handleResize = function() {
-      var remove = false;
-
-      timer = setTimeout(function() {
-        if(Utils.tooSmall()) {
-          hasher.replaceHash('too-small');
-          remove = true;
-        } else if(Utils.shouldRotate()) {
-          hasher.replaceHash('rotate');
-          remove = true;
-        }
-
-        if(remove) {
-          window.removeEventListener('resize', self.handleResize);
-        }
-      }, 500);
-    };
-
-    window.addEventListener('resize', self.handleResize);
-
-    self.handleResize();
 
     self.pathway = params.pathway
 
