@@ -1,7 +1,7 @@
 .calculator-header
   position: relative
   height: $header-height
-  z-index: 12
+  z-index: 14
   min-height: 65px
   @include row
   background: $color-background-dark
@@ -97,6 +97,7 @@
     top: 0
     width: 100%
     height: 100%
+    // margin-top: -69px
     @include transform(translateY(-100%))
     position: relative
 
@@ -120,19 +121,47 @@
     width: 100%
 
   .target-reached-tooltip
-    position: absolute
-    right: 20px
-    top: 100%
-    margin-top: 20px
     padding: 20px 20px 20px
-    background-color: rgba(45, 49, 60, 0.95)
     min-width: 250px
     width: 33%
+    z-index: 14
+    position: fixed
+    top: 0
+    margin-top: 89px
+    right: 16%
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3)
+    background-color: $color-background-light
+    color: $color-background-dark
+    @include transition(background .3s ease-in-out, color .3s ease-in-out)
+
+    &.is-open
+      background-color: $color-background-dark
+      color: $color-background-light
+
+      .arrow
+        border-color: $color-background-dark transparent
+
+    @include media ('(min-width: 800px)')
+      right: 15%
+    @include media ('(min-width: 860px)')
+      right: 9%
+    @include media ('(min-width: 1000px)')
+      right: 21%
+    @include media ('(min-width: 1070px)')
+      right: 19%
+    @include media ('(min-width: 1200px)')
+      right: 17%
+    @include media($media-big)
+      right: 20px
+      top: 100%
+      position: absolute
+      margin-top: -49px
 
     .arrow
       left: 42%
       margin-left: 2px
-      border-color: rgba(45, 49, 60, 0.95) transparent
+      border-color: $color-background-light transparent
+
 
     .close
       position: absolute
