@@ -59,13 +59,20 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     var bars = self.svg.selectAll(".bar")
         .data([data])
 
+    // arrow
     bars.enter().append("polygon")
         .attr("class", "bar")
         .attr('fill', 'url(#arrow-gradient)')
-        .attr("points", function(d) { return [x(0)+" 0", x(d)+" 0", (x(d)+20)+" "+(self.height/2), x(d)+" "+self.height, x(0)+" "+self.height].join(", ") })
+        .attr("points", function(d) {
+          var base = x(d-2);
+          return [x(0)+" 0", base+" 0", (x(d))+" "+(self.height/2), base+" "+self.height, x(0)+" "+self.height].join(", ");
+        })
 
     bars.transition()
-        .attr("points", function(d) { return [x(0)+" 0", x(d)+" 0", (x(d)+20)+" "+(self.height/2), x(d)+" "+self.height, x(0)+" "+self.height].join(", ") })
+        .attr("points", function(d) {
+          var base = x(d-2);
+          return [x(0)+" 0", base +" 0", (x(d))+" "+(self.height/2), base +" "+self.height, x(0)+" "+self.height].join(", ");
+        })
 
 
     var text = self.svg.selectAll(".background-text")
@@ -90,16 +97,6 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         "stroke": "rgba(255,255,255, 0.5)",
         "stroke-dasharray": "4 3"
       });
-
-    self.svg.selectAll('.target-label').remove();
-    self.svg.append("text")
-      .attr({
-        "class": "target-label",
-        "x": x(90),
-        "y": 0,
-        "dy": "2.5em"
-      })
-      .text("\u2190\u00A0\u00A080% Target")
   };
 
   return SummaryChart;
