@@ -1,41 +1,47 @@
 $scroll-nav-width: 25px
 
+.guide
+  .info-button
+    @include media($media-medium)
+      font-size: 16px
+      width: 18px
+      height: 18px
+
 .scrollable-nav
-
   $color-scroll-nav: #95ceca
+  display: none
 
-  position: fixed
-  right: 1em
-  top: 50%
-  @include transform(translate(0, -50%))
-
-  > ul
-    list-style: none
-
-    > li
-      margin-bottom: $scroll-nav-width
-
-  a
+  @include media($media-medium)
     display: block
-    border: 3px solid $color-scroll-nav
-    border-radius: 50px
-    width: 15px
-    height: 15px
-    text-indent: 999px
-    overflow: hidden
+    position: fixed
+    right: 30px
+    top: 50%
+    @include transform(translate(0, -50%))
 
-    @include media($media-small)
+    > ul
+
+      list-style: none
+
+      > li
+        margin-bottom: $scroll-nav-width
+
+    a
+      display: block
+      border: 3px solid $color-scroll-nav
+      border-radius: 50px
       width: $scroll-nav-width
       height: $scroll-nav-width
+      text-indent: 999px
+      overflow: hidden
 
-    &.active
-      background: $color-scroll-nav
+      &.active
+        background: $color-scroll-nav
 
 .scrollable-next
   @extend %icon-button, %icon-down_arrow-before
   position: fixed
   margin: auto
-  bottom: $scroll-nav-width
+  bottom: 30px
   right: 1em
   color: #ffffff
   width: 60px
@@ -47,7 +53,7 @@ $scroll-nav-width: 25px
   @include transition(opacity .3s ease-in-out)
   @include clearfix
 
-  @include media($media-small)
+  @include media($media-medium)
     right: 50%
     @include transform(translateX(50%))
 
@@ -64,6 +70,7 @@ $scroll-nav-width: 25px
   .fixed-logo
     opacity: 0
     @include transition(opacity .3s ease-in-out)
+
     &.is-active
       opacity: 1
       @include transition(opacity .3s .3s ease-in-out)
@@ -75,46 +82,50 @@ $scroll-nav-width: 25px
       opacity: 1!important
 
   section
-    padding: 1.5em 3em 1.5em 2em
     text-align: center
     width: 100%
 
-    @include media($media-small)
-      padding: 3em
+    &:after
+      content: " "
+      clear: both
+      display: block
 
-  section:after
-    content: " "
-    clear: both
-    display: block
+  .container
+    max-width: 1200px
+    padding: 0 3em
+    margin: 0 auto
 
   article
+    line-height: 1.6em
+    height: 100vh
 
     @include media($media-big)
-      font-size: 1.5em
-
-    line-height: 1.6em
+      font-size: 1.2em
 
     h1, h2
       margin-bottom: 10px
-      font-size: 1.5em
+      font-size: 1.2em
 
     .col
       @include col(100%)
       padding: 0
       text-align: left
 
-      @include media($media-small)
+      @include media($media-medium)
         width: 50%
         padding: 0 20px
+        float: none
+        display: table-cell
+        vertical-align: middle
 
     img
-      width: 40%
+      width: 70%
       max-width: 100%
       height: auto
       margin: 1em auto
       display: block
 
-      @include media($media-small)
+      @include media($media-medium)
         width: auto
 
     a
@@ -124,14 +135,18 @@ $scroll-nav-width: 25px
       &.button
         @extend .button
 
-  #guide-1
+  .intro
     background-image: url(/images/uk-map.png)
     background-position: center
     background-repeat: no-repeat
-    background-size: auto 75%
+    background-size: auto 65%
 
-    @include media($media-small)
-      background-position: 80% 50%
+    @include media($media-medium)
+      background-position: 90% 50%
+
+      .col
+        display: block
+        width: 50%
 
 .button
   text-transform: uppercase
@@ -148,8 +163,5 @@ $scroll-nav-width: 25px
 .skip-guide
   @extend .button
   position: fixed
-  bottom: $scroll-nav-width
-  left: 1em
-
-
-
+  bottom: 30px
+  left: 30px

@@ -3,10 +3,17 @@
   height: 100%
 
 .map
-  padding: 30px
+  padding: $chart-tab-padding-small
+  @include media($media-big)
+    padding: $chart-tab-padding
 
   @media screen and (min-width: 1200px)
     display: table
+
+  h2
+    font-weight: normal
+    padding-bottom: 0
+    margin-bottom: 60px
 
   .col
     position: relative
@@ -34,7 +41,7 @@
         left: 0
         right: 0
         bottom: 0
-        margin-top: 20px
+        margin-top: 2em
 
   .map-image
     max-width: 100%
@@ -44,7 +51,7 @@
     margin: 0
 
   .chart
-    margin: 5px 10% 20px
+    margin: 1em 10% 1em
 
     svg
       position: absolute
@@ -80,9 +87,12 @@
     li
       color: #8e939f
       padding-left: 4.5em
-      margin-bottom: 1.4em
-      padding-top: 0.6em
       position: relative
+      margin: 30px 0
+      @include media($media-big)
+        margin: 60px 0
+      &:first-child
+        margin-top: 0
 
       &:before
         position: absolute

@@ -1,13 +1,13 @@
 {
   "checksum": {
-    "previous": "6d27266d35a282d9fc44489903716f2551126bd7d94e0394e22ea1f84303a271",
-    "current": "6d27266d35a282d9fc44489903716f2551126bd7d94e0394e22ea1f84303a271"
+    "previous": "a1f1cc5a450dcf818b230134b10031e86b53df29ed0fa99ca63b32d9003e090a",
+    "current": "a1f1cc5a450dcf818b230134b10031e86b53df29ed0fa99ca63b32d9003e090a"
   },
   "fonts": [
-    "source/fonts/icons_6d27266d35a282d9fc44489903716f25.ttf",
-    "source/fonts/icons_6d27266d35a282d9fc44489903716f25.svg",
-    "source/fonts/icons_6d27266d35a282d9fc44489903716f25.woff",
-    "source/fonts/icons_6d27266d35a282d9fc44489903716f25.eot"
+    "source/fonts/icons_a1f1cc5a450dcf818b230134b10031e8.ttf",
+    "source/fonts/icons_a1f1cc5a450dcf818b230134b10031e8.svg",
+    "source/fonts/icons_a1f1cc5a450dcf818b230134b10031e8.woff",
+    "source/fonts/icons_a1f1cc5a450dcf818b230134b10031e8.eot"
   ],
   "glyphs": {
     "air": {
@@ -133,6 +133,14 @@
     "power-stations-without-ccs": {
       "codepoint": 61726,
       "source": "source/icons/power-stations-without-ccs.svg"
+    },
+    "powerstation-with-css": {
+      "codepoint": 61730,
+      "source": "source/icons/powerstation-with-css.svg"
+    },
+    "powerstation-without-css": {
+      "codepoint": 61731,
+      "source": "source/icons/powerstation-without-css.svg"
     },
     "share-alt": {
       "codepoint": 61727,

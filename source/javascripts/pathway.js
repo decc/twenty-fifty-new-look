@@ -56,7 +56,9 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action', 'hasher'
     validateValues: function() {
       var values = this.values();
 
-      if(!/^[0-9a-z]+$/.test(values) || values.length !== 53) {
+      if(!/^[0-9a-zA-Z]+$/.test(values) || values.length !== 53) {
+        console.log(values);
+        console.log(values.length);
         hasher.replaceHash('not-found');
       }
     },

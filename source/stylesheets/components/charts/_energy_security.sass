@@ -1,16 +1,14 @@
 .energy-security
-  padding: 30px
-  margin-bottom: 2em
   color: #ffffff
-  // height: 100%
-  // overflow: auto
+  padding: $chart-tab-padding-small
+  @include media($media-big)
+    padding: $chart-tab-padding
 
   article
     margin-bottom: 2em
 
   %title
-    background: rgba(255,255,255,0.2)
-    font-weight: bold
+    background: $color-background-dark
 
   table
     width: 100%

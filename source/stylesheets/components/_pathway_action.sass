@@ -30,19 +30,23 @@
   > li
     list-style: none
     margin: 0
-    padding: 0
+    padding: 0 2em 0 0
     width: 100%
+    height: calc(100%)
     float: left
-    padding: 10px
-    min-height: 80px
-    border-bottom: 1px dashed #ccc
-    @extend %vertical-centered
 
     @include media($media-medium)
       width: 50%
 
     @include media($media-big)
       width: 25%
+
+    .action-wrapper
+      @extend %vertical-centered
+      padding: 10px
+      min-height: 80px
+      width: 100%
+      border-bottom: 1px dashed #ccc
 
     .key
       padding-right: 0.5em
@@ -59,4 +63,3 @@
       &.med
         background: #E394B8
         color: #fff
-

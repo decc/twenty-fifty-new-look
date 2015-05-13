@@ -5,6 +5,7 @@
   left: 0
   right: 0
   color: #fff
+  padding-bottom: 63px
 
   .copy
     display: none
@@ -19,7 +20,7 @@
     color: rgba(149, 207, 202, 1)
 
   .background
-    overflow-y: scroll
+    overflow-y: auto
     height: 100%
     padding-bottom: 63px
     background-color: #2C313B
@@ -73,16 +74,17 @@
     margin: 0
     color: #fff
     background: #28a197
+    border-top: 1px solid $color-border-dark
 
     .title
-      padding: 20px 5px 16px
+      padding: 20px 20px 16px 20px
       position: absolute
       top: 0
       left: 0
       margin: 0
       width: 250px
       font-weight: normal
-      line-height: 21px
+      line-height: 1
 
     .social-links
       padding: 0 0 0 250px
@@ -94,10 +96,9 @@
         width: percentage(1/5)
         margin: 0
         float: left
-        border-left: 1px solid #fff
 
         &:first-child
-          border-left: none
+          border-left: 1px solid $color-border-dark
 
         span
           display: none
