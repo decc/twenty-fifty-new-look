@@ -159,7 +159,13 @@ $scroll-nav-width: 25px
   margin: 1em 0 0 0
   border: 0
   padding: 1em 2em
-  font-weight: 400
+  text-rendering: optimizeLegibility
+
+  .safari &
+    font-weight: 400
+
+  .ie &
+    font-weight: 400
 
 .skip-guide
   @extend .button
