@@ -20,13 +20,6 @@
   @media #{$query}
     @content
 
-@mixin double_media($one, $two)
-  @include media($one)
-    @content
-
-  @include media($two)
-    @content
-
 @mixin tooltip-arrow($color)
   position: absolute
   top: -10px
@@ -47,4 +40,20 @@
   right: -10px
   top: 50%
   @include transform(translateY(-50%))
+
+@mixin double_media($one, $two)
+  @include media($one)
+    @content
+  @include media($two)
+    @content
+
+@mixin big-not-bigger
+  @include double_media($media-big-not-bigger, '(min-width: #{$width-bigger})')
+    @content
+
+@mixin table-columns
+  @include double_media('(min-width: #{$width-mediumbig}) and (max-width: #{$width-big})', '(min-width: 1400px)')
+    @content
+
+
 
