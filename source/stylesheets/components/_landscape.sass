@@ -328,25 +328,22 @@ i
   &.gas
     background-image: url(/svgs/gas_white.svg)
 
-/* === Buses === */
-
 .bus
   background-image: url(/svgs/bus.svg)
   bottom: 61px
   width: 44px
 
+  &:after
+    background-size: 20px 20px
+    margin-bottom: 25px
+
   &.electric
     &:after
-      background-image: url(/svgs/electric.svg)
-      background-size: 30% auto
-      margin-bottom: 2px
+      background-image: url(/svgs/vehicle-electric.svg)
 
   &.hydrogen
     &:after
-      background-image: url(/svgs/hydrogen.svg)
-      background-size: 45% auto
-      margin-bottom: 2px
-      margin-left: 1px
+      background-image: url(/svgs/vehicle-hydrogen.svg)
 
   &[data-value="1"]
     left: 452px
@@ -362,25 +359,22 @@ i
     bottom: 50px
     left: 875px
 
-/* === Cars === */
-
 .car
   background-image: url(/svgs/car.svg)
   bottom: 61px
   width: 24px
 
+  &:after
+    background-size: 20px 20px
+    margin-bottom: 15px
+
   &.electric
     &:after
-      background-image: url(/svgs/electric.svg)
-      background-size: 30% auto
-      margin-bottom: 2px
+      background-image: url(/svgs/vehicle-electricity.svg)
 
   &.hydrogen
     &:after
-      background-image: url(/svgs/hydrogen.svg)
-      background-size: 45% auto
-      margin-bottom: 2px
-      margin-left: 1px
+      background-image: url(/svgs/vehicle-hydrogen.svg)
 
   &[data-value="1"]
     left: 285px
