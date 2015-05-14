@@ -1,3 +1,6 @@
+i
+  opacity: 1!important
+
 #landscape
   background: #fff
   overflow: hidden
@@ -11,30 +14,44 @@
 
   &.one
     background-image: url('/layers/layer1.svg')
-    background-size: auto 320px
+    background-size: auto 145%
     top: 30px
-    left: 150px
+    right: 0
     height: 220px
     z-index: 1
 
     *
       z-index: 2
 
-    &:before,
+    &:before
+      left: -99%
+      background: #95CFCA
+      top: 40px
+
     &:after
       background-image: url('/layers/layer1.svg')
-      background-size: auto 320px
+      background-size: auto 145%
+      left: 92%
 
-    &:before
-      left: -920px
+    .ie &
+      height: 290px
+      background-size: auto 100%
 
-    &:after
-      right: -1231px
+      &:before,
+      &:after
+        background-size: auto 290px
+
+      &:before
+        left: -75%
+        top: 36px
+
+      &:after
+        left: 1156px
 
   &.two
     background-image: url('/layers/layer2.svg')
-    background-size: auto 260px
-    left: 130px
+    background-size: auto 82%
+    right: 2%
     top: 90px
     height: 320px
     z-index: 3
@@ -55,11 +72,22 @@
       top: 16px
       background-position: 33px -18px
 
+    .ie &
+      height: 200px
+      background-size: auto 100%
+
+      &:before
+        left: 1px
+
+      &:after
+        left: 640px
+        top: 11px
+
   &.three
     background-image: url('/layers/layer3.svg')
-    background-size: auto 328px
+    background-size: auto 127%
     top: 45px
-    left: -50px
+    right: 14%
     height: 260px
     z-index: 5
 
@@ -71,9 +99,10 @@
       background-image: url('/layers/layer3.svg')
 
     &:before
-      background-size: auto 328px
-      left: -1305px
-      top: 0px
+      background-size: auto 100%
+      right: 75.9%
+      top: 27px
+      @include transform(scale(1))
 
     &:after
       background-size: auto 230px
@@ -81,11 +110,24 @@
       right: 0
       top: 46px
 
+    .ie &
+      left: -50px
+      top: 35px
+      height: 269px
+      background-size: auto 328px
+      background-position: -95px 9px
+
+      &:after
+        left: 1228px
+        height: 269px
+        background-size: auto 328px
+        background-position: 0px -37px
+
   &.four
-    background-size: auto 250px
+    background-size: auto 125%
     background-image: url('/layers/layer4.svg')
     top: 117px
-    left: -5px
+    left: 0
     height: 200px
     z-index: 7
 
@@ -101,23 +143,40 @@
       top: 94px
 
     &:after
-      top: -24px
-      left: 630px
+      top: -22px
+      left: 32%
+      background-size: auto 124%
+
+    .ie &
+      &:before
+        left: -720px
+
+    .ie9 &
+      &:before
+        left: -491px!important
+        top: 84px
+
+      &:after
+        left: 447px
+        top: 116px
 
   &.five
     bottom: 0
     height: 330px
-    left: 400px
-    background-size: auto 410px
+    right: -19%
+    background-size: auto 124%
     background-image: url('/layers/layer5.svg')
     z-index: 9
+
+    .ie &
+      background-position: -139px 0
 
     *
       z-index: 10
 
     &:after
       background-image: url('/layers/layer5.svg')
-      background-size: auto 410px
+      background-size: auto 124%
       top: 1px
       left: 1156px
 
@@ -164,27 +223,27 @@ i
 
   &[data-value="1"]
     top: -19px
-    left: 355px
+    left: 22%
     width: 25px
 
   &[data-value="2"]
     top: -25px
-    left: 565px
+    left: 1%
     width: 20px
 
   &[data-value="3"]
-    top: -38px
-    left: 685px
+    top: -23px
+    left: 50%
     width: 19px
 
   &[data-value="4"]
     top: -10px
-    left: 175px
+    left: 31%
     width: 18px
 
   &[data-value="5"]
-    top: -4px
-    left: 500px
+    top: -3px
+    left: 42%
     width: 16px
 
 .algae
@@ -199,9 +258,11 @@ i
   &[data-value="3"]
     @include transform(scale(1.2))
 
-  &[data-value="4"],
+  &[data-value="4"]
+    @include transform(scale(1.4))
+
   &[data-value="5"]
-    @include transform(scale(1.5))
+    @include transform(scale(1.6))
 
 .bike
   background-image: url(/svgs/bike.svg)
@@ -302,6 +363,9 @@ i
     width: 47px
     height: 50px
 
+    .ie &
+      top: 24px
+
   &[data-value="4"]
     top: -10px
     left: 1245px
@@ -326,23 +390,26 @@ i
   width: 30px
   height: 30px
 
+  .ie &
+    top: 7px
+
   &.green
   /* what goes here? */
 
   &[data-value="1"]
-    left: 270px
+    left: 5%
 
   &[data-value="2"]
-    left: 310px
+    left: 8%
 
   &[data-value="3"]
-    left: 350px
+    left: 11%
 
   &[data-value="4"]
-    left: 390px
+    left: 14%
 
   &[data-value="5"]
-    left: 430px
+    left: 17%
 
 .boiler
   bottom: 153px
@@ -539,6 +606,9 @@ i
     width: 13px
     height: 20px
 
+    .ie &
+      top: 9px
+
   &[data-value="2"]
     top: -7px
     left: 184px
@@ -557,11 +627,17 @@ i
     width: 15px
     height: 22px
 
+    .ie &
+      top: 65px
+
   &[data-value="5"]
     top: 35px
     left: 228px
     width: 17px
     height: 25px
+
+    .ie &
+      top: 37px
 
   &[data-value="6"]
     top: 45px
@@ -569,28 +645,56 @@ i
     width: 16px
     height: 24px
 
+    .ie &
+      top: 47px
+
 .cow
   background-image: url(/svgs/cow.svg)
   bottom: 36px
   width: 46px
   height: 34px
 
+  .ie &
+    filter: none // no black outlines
+    -ms-filter: none
+
   &[data-value="1"]
     left: 386px
 
+    .ie &
+      bottom: 36px
+
   &[data-value="2"]
     left: 88px
+
+    .ie &
+      bottom: 36px
+
+    .ie9 &
+      bottom: 39px
 
   &[data-value="3"]
     bottom: 30px
     left: 640px
 
+    .ie &
+      bottom: 35px
+
   &[data-value="4"]
     bottom: 34px
     left: 526px
 
+    .ie &
+      bottom: 36px
+
   &[data-value="5"]
     left: 26px
+
+    .ie &
+      bottom: 35px
+
+    .ie9 &
+      bottom: 38px
 
   &[data-value="2"],
   &[data-value="4"],
@@ -602,16 +706,17 @@ i
 .dam
   background-image: url(/svgs/hydo_dam.svg)
   height: 50px
+  top: 38px
+  width: 133px
+
+  .ie &
+    top: 35px
 
   &[data-value="1"]
-    top: 38px
     left: 600px
-    width: 133px
 
   &[data-value="2"]
-    top: 38px
     left: 1200px
-    width: 133px
 
 .factory
   bottom: 34px
@@ -706,7 +811,7 @@ i
 
 .imports
   height: 20px
-  left: -320px
+  left: -10px
   position: absolute
   @include transition(all 0.3s ease-in)
 
@@ -728,8 +833,7 @@ i
 
 .electricity-imports
   background: #28A197
-  top: -18px
-  left: -160px
+  top: 8px
 
   &:before
     border-left-color: #28A197
@@ -754,8 +858,7 @@ i
 
 .bioenergy-imports
   background: #95CFCA
-  top: 9px
-  left: -160px
+  top: 35px
 
   &:before
     border-left-color: #95CFCA
@@ -793,10 +896,10 @@ i
     border-width: 10px
 
   &[data-value="3"]
-    border-width: 10px
+    border-width: 12px
 
   &[data-value="4"]
-    border-width: 10px
+    border-width: 14px
 
   &[data-value="5"]
     border-width: 16px
@@ -819,7 +922,7 @@ i
   height: 40px
   @include transition(top .2s)
 
-  .ie9 &
+  .ie &
     left: 1120px
 
   &[data-value="1"]
@@ -892,6 +995,9 @@ i
 .home-meter
   bottom: 54px
   left: 609px
+
+  .ie9 &
+    bottom: 60px
 
   &[data-value="1"]
     @include transform(rotate(180deg))
@@ -1219,12 +1325,17 @@ i
     top: 20px
     left: 501px
 
+    .ie &
+      top: 19px
+
+      .turbine
+        width: 12px
+        height: 14px
+
     .turbine
       background-image: url(/svgs/turbine_sea.svg)
       width: 12px
       height: 22px
-
-// ie fixes
 
 .ie9
   .cow
@@ -1248,10 +1359,6 @@ i
       bottom: -1px
       right: 0
 
-  .home-meter
-    bottom: 60px
-    left: 775px
-
   .home-cooker
     .hob
       &.left
@@ -1260,4 +1367,4 @@ i
 
   .commercial-meter
     bottom: 90px
-    left: 170px
+    left: 155px
