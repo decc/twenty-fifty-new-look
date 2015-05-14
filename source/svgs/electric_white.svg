@@ -1,8 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 18.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="3.04px" height="4.9px" viewBox="0 0 3.04 4.9" enable-background="new 0 0 3.04 4.9" xml:space="preserve" preserveAspectRatio="xMinYMax">
-<path fill="#FFFFFF" d="M3.03,1.99C3.01,1.97,2.98,1.95,2.94,1.96L1.97,2.18l0.3-2.09c0.01-0.04-0.02-0.07-0.05-0.08
-	C2.18-0.01,2.14,0,2.12,0.04L0.02,2.9C0,2.93,0,2.96,0.01,2.99C0.03,3.02,0.06,3.03,0.1,3.03l1.06-0.2L0.85,4.81
-	C0.84,4.85,0.87,4.88,0.9,4.9C0.91,4.9,0.92,4.9,0.93,4.9C0.96,4.9,0.98,4.89,1,4.87L3.03,2.1C3.04,2.06,3.04,2.02,3.03,1.99z"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="3.04" height="4.9" viewBox="0 0 3.04 4.9" preserveAspectRatio="xMinYMax"><path fill="#FFF" d="M3.03 1.99c-.02-.02-.05-.04-.09-.03l-.97.22.3-2.09c.01-.04-.02-.07-.05-.08-.04-.02-.08-.01-.1.03L.02 2.9c-.02.03-.02.06-.01.09.02.03.05.04.09.04l1.06-.2-.31 1.98c-.01.04.02.07.05.09h.03c.03 0 .05-.01.07-.03L3.03 2.1c.01-.04.01-.08 0-.11z"/></svg>

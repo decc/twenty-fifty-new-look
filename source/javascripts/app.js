@@ -11,8 +11,8 @@ define(['knockout', 'router', 'appViewModel', 'preloader'],
         '/images/landscape.svg',
 
         // first few images of guide
-        '/images/uk-map.png',
-        '/images/guide/screenshot.png',
+        '/images/guide/map.svg',
+        '/images/guide/screenshot.jpg',
         '/images/guide/graph.png'
       ];
 

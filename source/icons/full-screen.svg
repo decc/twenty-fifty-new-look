@@ -1,18 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Generator: Adobe Illustrator 18.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 612 612" enable-background="new 0 0 612 612" xml:space="preserve">
-<g id="Layer_1">
-</g>
-<g id="Full_Screen_Selector">
-	<g>
-		<g id="fullscreen">
-			<g>
-				<polygon fill="#FFFFFF" points="524.29,470.21 436.59,382.5 382.5,436.59 470.21,524.29 382.5,612 612,612 612,382.5     "/>
-				<polygon fill="#FFFFFF" points="229.5,0 0,0 0,229.5 87.71,141.79 174.59,228.6 228.68,174.52 141.79,87.71     "/>
-				<polygon fill="#FFFFFF" points="229.5,436.59 175.41,382.5 87.71,470.21 0,382.5 0,612 229.5,612 141.79,524.29     "/>
-				<polygon fill="#FFFFFF" points="612,0 382.5,0 470.21,87.71 383.32,174.52 437.41,228.6 524.29,141.79 612,229.5     "/>
-			</g>
-		</g>
-	</g>
-</g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612"><g fill="#FFF"><path d="M524.29 470.21l-87.7-87.71-54.09 54.09 87.71 87.7L382.5 612H612V382.5M229.5 0H0v229.5l87.71-87.71 86.88 86.81 54.09-54.08-86.89-86.81M229.5 436.59l-54.09-54.09-87.7 87.71L0 382.5V612h229.5l-87.71-87.71M612 0H382.5l87.71 87.71-86.89 86.81 54.09 54.08 86.88-86.81L612 229.5"/></g></svg>
