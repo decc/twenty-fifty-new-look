@@ -70,8 +70,11 @@ $tablet: "(max-width: 865px)"
   @include transition(transform .3s ease-in-out, opacity .3s ease-in-out)
   background: $color-background-dark
   border-top-left-radius: 2px
-  right: 0
+  right: 30px
   width: 230px
+
+  @include media($media-big)
+    right: 0
 
   &.is-active
     @include transform(translateY($cityscape-height - $cityscape-bar-height))
