@@ -663,7 +663,7 @@ define(['knockout'], function(ko) {
           },
 
           levelAction: 'Small-scale wind',
-          selector: '.small-wind'
+          selector: '.commercial-turbine'
         },
 
         // arrow in the sea

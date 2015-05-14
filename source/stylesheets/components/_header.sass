@@ -1,7 +1,7 @@
 .calculator-header
   position: relative
   height: $header-height
-  z-index: 12
+  z-index: 14
   min-height: 65px
   @include row
   background: $color-background-dark
@@ -41,6 +41,7 @@
       height: 100%
       @extend %vertical-centered
       color: #fff
+      font-size: $font-size-header
 
       @include media($media-medium)
         display: table
@@ -52,6 +53,7 @@
     padding-right: $small-controls-width
     height: 100%
     color: $color-background-dark
+    position: relative
 
     @include media($media-medium)
       padding-left: $chart-tabs-width
@@ -90,24 +92,76 @@
         border-bottom: 40px solid $color-background-dark
         border-left: 40px solid transparent
 
+  .goal-wrapper
+    z-index: 30
+    top: 0
+    width: 100%
+    height: 100%
+    // margin-top: -69px
+    @include transform(translateY(-100%))
+    position: relative
+
+    .goal
+      position: absolute
+      top: 50%
+      left: 81%
+      color: #fff
+      @include transform(translateY(-50%))
+      @extend %icon-chevron-before
+
+      @include media($media-big)
+        left: 82%
+        font-size: $font-size-header
+
+        &:before
+          padding-right: 10px
+
   .spacer
     position: relative
     width: 100%
 
   .target-reached-tooltip
-    position: absolute
-    right: 20px
-    top: 100%
-    margin-top: 20px
     padding: 20px 20px 20px
-    background-color: rgba(45, 49, 60, 0.95)
     min-width: 250px
     width: 33%
+    z-index: 14
+    position: fixed
+    top: 0
+    margin-top: 89px
+    right: 16%
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3)
+    background-color: $color-background-light
+    color: $color-background-dark
+    @include transition(background .3s ease-in-out, color .3s ease-in-out)
+
+    &.is-open
+      background-color: $color-background-dark
+      color: $color-background-light
+
+      .arrow
+        border-color: $color-background-dark transparent
+
+    @include media ('(min-width: 800px)')
+      right: 15%
+    @include media ('(min-width: 860px)')
+      right: 9%
+    @include media ('(min-width: 1000px)')
+      right: 21%
+    @include media ('(min-width: 1070px)')
+      right: 19%
+    @include media ('(min-width: 1200px)')
+      right: 17%
+    @include media($media-big)
+      right: 20px
+      top: 100%
+      position: absolute
+      margin-top: -49px
 
     .arrow
       left: 42%
       margin-left: 2px
-      border-color: rgba(45, 49, 60, 0.95) transparent
+      border-color: $color-background-light transparent
+
 
     .close
       position: absolute
@@ -158,12 +212,12 @@
 
       span
         display: none
+        font-size: $font-size-header
 
       @include media($media-mediumbig)
         span
           display: inline-block
           position: relative
-          top: -4px
 
         &:before
           content: ''
@@ -174,7 +228,7 @@
       right: 0
       width: 70px
       font-size: 2em
-      font-weight: bold
+      font-family: $font-bold
       border-left: 1px solid $color-background
       line-height: 1
 

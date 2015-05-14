@@ -3,14 +3,17 @@
   height: 100%
 
 .map
-  padding: 30px
+  padding: $chart-tab-padding-small
+  @include media($media-big)
+    padding: $chart-tab-padding
 
   @media screen and (min-width: 1200px)
     display: table
 
   h2
-    font-weight: normal
-    padding-bottom: 25px
+    font-family: $font-main
+    padding-bottom: 0
+    margin-bottom: 60px
 
   .col
     position: relative
@@ -84,9 +87,12 @@
     li
       color: #8e939f
       padding-left: 4.5em
-      margin-bottom: 1.4em
-      padding-top: 0.6em
       position: relative
+      margin: 30px 0
+      @include media($media-big)
+        margin: 60px 0
+      &:first-child
+        margin-top: 0
 
       &:before
         position: absolute

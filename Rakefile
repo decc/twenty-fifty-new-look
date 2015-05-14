@@ -10,7 +10,8 @@ end
 
 desc 'Compile webfonts'
 task :fonts do
-  `fontcustom compile`
+  # TODO: delete old before compiling
+  `bundle exec fontcustom compile`
 end
 
 desc 'deploy preview - RUN FROM master'

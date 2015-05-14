@@ -2,7 +2,7 @@ define(['knockout', 'bindings/range'], function(ko) {
   'use strict';
 
   ko.bindingHandlers.tooltip = {
-    update: function(element, value) {
+    update: function(element, value, left) {
       var val = Math.round(element.value);
 
       var parent = element.parentNode;
@@ -23,14 +23,16 @@ define(['knockout', 'bindings/range'], function(ko) {
       tooltip.className = "tooltip " + classmap[val];
 
       var endValue = 3;
-      var endPosition = 250;
-      var arrowPosition = Math.round(((element.value - 1) / endValue * endPosition) + 2);
+      var offsetMultiplier = -4;
+      var endPosition = element.rangeInstance.el.offsetWidth;
+      var value = element.value;
+      var arrowPosition = Math.round(((value - 1) / endValue * endPosition) + offsetMultiplier * value);
 
       var tooltipArrow = tooltip.querySelector('.arrow');
       var w = tooltipArrow.offsetWidth / 2;
-      var limited = Math.min(Math.max(arrowPosition, w), 255);
+      var limited = Math.min(Math.max(arrowPosition, 0), endPosition - 20);
 
-      tooltipArrow.style.left = [limited - w, "px"].join('');
+      tooltipArrow.style.left = limited + 'px';
     }
   };
 });

@@ -6,15 +6,19 @@ header.calculator-header
 
   .total-co2-reduction
     .chart.compare.top data-bind="chart: 'SummaryChart', data: pathway().chartData, params: { text: '#{I18n.t("calculator.header.reduction")}', margin: { top: 0, right: 0, bottom: 0, left: 0 } }" style="height: 100%"
+
+    .goal-wrapper
+      .goal= t('target')
+
     .spacer
-      .target-reached-tooltip.tooltip data-bind="visible: targetReachedVisible"
+      .target-reached-tooltip.tooltip data-bind="visible: targetReachedVisible, css: { 'is-open': cityscapeVisible }"
         .arrow
         .close data-bind="click: closeTargetReached" &times;
         span = I18n.t('calculator.header.target_reached')
 
   .controls
     button.finish-share data-bind="click: function() { $parent.toggleShare(); closeTargetReached() }"
-      span data-bind="visible: $parent.shareVisible()" = I18n.t('calculator.share.hide')
+      span.text data-bind="visible: $parent.shareVisible()" = I18n.t('calculator.share.hide')
       span data-bind="visible: !$parent.shareVisible()" = I18n.t('calculator.share.show')
 
     button.help data-bind="click: $parent.toggleFaq, css: $parent.buttonColor"

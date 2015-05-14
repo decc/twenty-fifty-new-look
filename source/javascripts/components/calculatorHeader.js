@@ -11,6 +11,8 @@ define(['knockout', 'text!../../components/calculator-header.html'],
     self.pathwayName = params.pathwayName;
     self.pathway = params.pathway;
 
+    self.cityscapeVisible = params.cityscapeVisible;
+
     self.targetReachedVisible = ko.observable(false);
     self.targetDismissed = false;
 

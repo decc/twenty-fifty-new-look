@@ -1,8 +1,10 @@
 .flows-chartset
   position: relative
   height: 100%
-  padding: 30px
   color: #fff
+  padding: $chart-tab-padding-small
+  @include media($media-big)
+    padding: $chart-tab-padding
 
   .chart-fullscreen-button
     cursor: pointer

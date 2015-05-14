@@ -1,26 +1,16 @@
-define(['knockout', 'text!../../components/text.html', 'utils', 'hasher'], function(ko, html, Utils, hasher){
+define(['knockout', 'text!../../components/text.html', 'utils', 'sizeChecker'],
+  function(ko, html, Utils, SizeChecker){
   'use strict';
 
   var ViewModel = function(params) {
     var lastRoute = params.lastRoute || 'home';
 
+    SizeChecker.checkBig(lastRoute);
+
     self.heading = '<%= I18n.t('small.heading') %>';
     self.content = '<%= m('small.content') %>';
     self.button = false;
 
-    var timer;
-
-    self.handleResize = function() {
-      timer = setTimeout(function() {
-        if(!Utils.tooSmall()) {
-          hasher.replaceHash(lastRoute);
-          window.removeEventListener('resize', self.handleResize);
-        }
-      }, 500);
-    };
-
-    window.addEventListener('resize', self.handleResize);
-    self.handleResize();
   };
 
   return {
