@@ -1,10 +1,6 @@
 (function(document) {
   'use strict';
 
-  var testIOS = function() {
-    return /(iPad|iPhone|iPod)/g.test( navigator.userAgent );
-  };
-
   var testClassList = function() {
     return ("document" in self) && ("classList" in document.createElement("_"));
   };
@@ -31,7 +27,7 @@
     },
 
     {
-      test: testIOS(),
+      test: Modernizr.ios,
       yep: '/javascripts/polyfills/ios.js'
     }
   ]);
