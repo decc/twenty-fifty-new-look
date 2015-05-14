@@ -1,5 +1,5 @@
-define(['knockout', 'text!../../components/pathway-sidebar.html', 'pathway', 'cookie'],
-  function(ko, html, Pathway, Cookie) {
+define(['knockout', 'text!../../components/pathway-sidebar.html', 'pathway'],
+  function(ko, html, Pathway) {
 
   'use strict';
 
@@ -24,11 +24,15 @@ define(['knockout', 'text!../../components/pathway-sidebar.html', 'pathway', 'co
     self.navVisible = ko.observable(false);
 
     var navToggled = function() {
-      Cookie.set('nav_clicked', true, 10);
+      if(window.localStorage) {
+        localStorage.setItem('nav_toggled', '1');
+      }
+
       self.navToggled(true);
     };
 
-    self.navToggled = ko.observable(!!Cookie.get('nav_clicked'));
+    self.navToggled = ko.observable(!!localStorage.getItem('nav_toggled'));
+
     self.toggleNav = function() {
       navToggled();
       self.navVisible(!self.navVisible());
