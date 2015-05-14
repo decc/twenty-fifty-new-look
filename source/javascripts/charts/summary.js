@@ -59,18 +59,21 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     var bars = self.svg.selectAll(".bar")
         .data([data])
 
+
     // arrow
+
+    var arrowBaseOffset = 15;
     bars.enter().append("polygon")
         .attr("class", "bar")
         .attr('fill', 'url(#arrow-gradient)')
         .attr("points", function(d) {
-          var base = x(d-2);
+          var base = x(d) - arrowBaseOffset;
           return [x(0)+" 0", base+" 0", (x(d))+" "+(self.height/2), base+" "+self.height, x(0)+" "+self.height].join(", ");
         })
 
     bars.transition()
         .attr("points", function(d) {
-          var base = x(d-2);
+          var base = x(d) - arrowBaseOffset;
           return [x(0)+" 0", base +" 0", (x(d))+" "+(self.height/2), base +" "+self.height, x(0)+" "+self.height].join(", ");
         })
 
