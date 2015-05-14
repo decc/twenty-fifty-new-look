@@ -23,21 +23,30 @@ define(['knockout', 'text!../../components/pathway-sidebar.html', 'pathway'],
 
     self.navVisible = ko.observable(false);
 
-    self.navToggled = ko.observable(false);
-    self.toggleNav = function() {
+    var navToggled = function() {
+      if(window.localStorage) {
+        localStorage.setItem('nav_toggled', '1');
+      }
+
       self.navToggled(true);
+    };
+
+    self.navToggled = ko.observable(!!localStorage.getItem('nav_toggled'));
+
+    self.toggleNav = function() {
+      navToggled();
       self.navVisible(!self.navVisible());
     }
 
     self.swipeNav = function(direction) {
+      navToggled()
+
       if(direction.left) {
         self.navVisible(true);
       } else if (direction.right) {
         self.navVisible(false);
       }
     }
-
-
 
     self.toggleOverview = function() {
       self.overviewVisible(!self.overviewVisible());
