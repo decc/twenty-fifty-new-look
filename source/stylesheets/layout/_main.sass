@@ -5,6 +5,10 @@ body
   max-width: $max-width
   margin: auto
 
+  // backgrounds dont tile nicely in ie9, so dont let it get big enough to do that.
+  .ie9 &
+    max-width: 2000px
+
 .centered
   display: table
   height: 100%
