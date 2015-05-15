@@ -43,7 +43,8 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
       '/svgs/carriage.svg',
       '/svgs/ccs_powerstation.svg',
       '/svgs/coal_powerstation.svg',
-      '/svgs/commercial_fan.svg',
+      '/svgs/commercial_fan_green.svg',
+      '/svgs/commercial_fan_grey.svg',
       '/svgs/commercial_solar.svg',
       '/svgs/cow.svg',
       '/svgs/dial.svg',
@@ -56,7 +57,10 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
       '/svgs/geothermal.svg',
       '/svgs/vehicle-electricity.svg',
       '/svgs/vehicle-hydrogen.svg',
-      '/svgs/heating_pipe.svg'
+      '/svgs/heating_pipe.svg',
+      '/svgs/turbine_land.svg',
+      '/svgs/turbine_sea.svg',
+      '/svgs/turbine_grey.svg'
     ];
 
     self.componentsLoaded = ko.observable(false);
