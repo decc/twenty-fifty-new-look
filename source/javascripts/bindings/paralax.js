@@ -67,6 +67,11 @@ define(['knockout'], function(ko) {
         },
         {
           el: document.getElementById('landscape-layer-4'),
+          width: (landscapeWidth > layerWidth ? landscapeWidth + 70 : layerWidth + 70),
+          yThreshold: 0.03
+        },
+        {
+          el: document.getElementById('landscape-layer-5'),
           width: (landscapeWidth > layerWidth ? landscapeWidth + 115 : layerWidth + 115),
           yThreshold: -0.01
         }

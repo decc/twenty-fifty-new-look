@@ -20,6 +20,10 @@
     return /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
   });
 
+  Modernizr.addTest('ie', function() {
+    return /(MSIE|Trident.*rv\:11)/g.test(navigator.userAgent );
+  });
+
   Modernizr.load([
     {
       test: testClassList(),

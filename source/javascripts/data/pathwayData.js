@@ -244,7 +244,7 @@ define([], function() {
          "4": "Installed in all suitable domestic and non-domestic sties; 8.9 TWh/year from 2020"
        }, pdf: "/assets/onepage/12.pdf", info: "supply/small-scale-wind" },
 
-      { name: "Electricity imports", categoryId: 2, typeId: 2, pathwayStringIndex: 15, tooltips: {
+      { name: "Electricity imports", categoryId: 2, typeId: 1, pathwayStringIndex: 15, tooltips: {
          "1": "No electricity imports, other than for balancing",
          "2": "30 TWh/yr of electricity imported from Southern Europe",
          "3": "70 TWh/yr imported from UK 10% share of international desert solar project ",
