@@ -23,21 +23,65 @@ define(['knockout', 'text!../../components/pathway-sidebar.html', 'pathway'],
 
     self.navVisible = ko.observable(false);
 
-    self.navToggled = ko.observable(false);
-    self.toggleNav = function() {
+    var navToggled = function() {
+      if(window.localStorage) {
+        localStorage.setItem('nav_toggled', '1');
+      }
+
       self.navToggled(true);
+    };
+
+    self.navToggled = ko.observable(!!localStorage.getItem('nav_toggled'));
+
+
+    self.listenForClose = function() {
+      // when i click outside of opened sidebar, close it.
+
+      var handleClick = function(e) {
+        var inSidebar = false;
+        var sideBar = document.querySelector('pathway-sidebar');
+        var parent = e.target.parentNode;
+
+        while(parent) {
+          if(parent === sideBar) {
+            inSidebar = true;
+            break;
+          }
+
+          parent = parent.parentNode;
+        }
+
+        if(!inSidebar) {
+          self.navVisible(false);
+          window.removeEventListener('click', handleClick);
+          window.removeEventListener('tauchstart', handleClick);
+        }
+      }
+
+      window.addEventListener('click', handleClick);
+      window.addEventListener('touchstart', handleClick);
+    };
+
+
+    self.toggleNav = function() {
+      navToggled();
       self.navVisible(!self.navVisible());
+
+      if (self.navVisible()) {
+        self.listenForClose()
+      }
     }
 
     self.swipeNav = function(direction) {
+      navToggled()
+
       if(direction.left) {
         self.navVisible(true);
+        self.listenForClose();
       } else if (direction.right) {
         self.navVisible(false);
       }
     }
-
-
 
     self.toggleOverview = function() {
       self.overviewVisible(!self.overviewVisible());

@@ -533,6 +533,7 @@
         this.value = this._roundAndLimit(parseFloat(this.input.value));
 
         this._getDimensions();
+        this._getPointerWidth();
         this._setValue(this.value, silent);
 
         return this;

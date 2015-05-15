@@ -8,8 +8,7 @@ define(['utils', 'hasher'], function(Utils, hasher){
       timer = setTimeout(function() {
         if(!Utils.tooSmall()) {
           hasher.replaceHash(lastRoute);
-          fn()
-          window.removeEventListener('resize', handleResize);
+          window.removeEventListener('resize', this.handleResizeUp);
         }
       }, 500);
     },
@@ -28,7 +27,7 @@ define(['utils', 'hasher'], function(Utils, hasher){
         }
 
         if(remove) {
-          window.removeEventListener('resize', handleResize);
+          window.removeEventListener('resize', this.handleResizeDown);
         }
       }, 500);
     },

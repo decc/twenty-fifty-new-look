@@ -1,13 +1,13 @@
 {
   "checksum": {
-    "previous": "a1f1cc5a450dcf818b230134b10031e86b53df29ed0fa99ca63b32d9003e090a",
-    "current": "a1f1cc5a450dcf818b230134b10031e86b53df29ed0fa99ca63b32d9003e090a"
+    "previous": "a39c0c1053f67dec60ed5bdfd01a08b44fc1348ad84d72fb7769e3d7e31b7a5b",
+    "current": "a39c0c1053f67dec60ed5bdfd01a08b44fc1348ad84d72fb7769e3d7e31b7a5b"
   },
   "fonts": [
-    "source/fonts/icons_a1f1cc5a450dcf818b230134b10031e8.ttf",
-    "source/fonts/icons_a1f1cc5a450dcf818b230134b10031e8.svg",
-    "source/fonts/icons_a1f1cc5a450dcf818b230134b10031e8.woff",
-    "source/fonts/icons_a1f1cc5a450dcf818b230134b10031e8.eot"
+    "source/fonts/icons_a39c0c1053f67dec60ed5bdfd01a08b4.ttf",
+    "source/fonts/icons_a39c0c1053f67dec60ed5bdfd01a08b4.svg",
+    "source/fonts/icons_a39c0c1053f67dec60ed5bdfd01a08b4.woff",
+    "source/fonts/icons_a39c0c1053f67dec60ed5bdfd01a08b4.eot"
   ],
   "glyphs": {
     "air": {

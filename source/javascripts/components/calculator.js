@@ -55,6 +55,9 @@ define(['knockout', 'text!../../components/calculator.html', 'pathway', 'helpers
       '/svgs/gas.svg',
       '/svgs/gas_white.svg',
       '/svgs/geothermal.svg',
+      '/svgs/vehicle-electricity.svg',
+      '/svgs/vehicle-hydrogen.svg',
+      '/svgs/heating_pipe.svg',
       '/svgs/turbine_land.svg',
       '/svgs/turbine_sea.svg',
       '/svgs/turbine_grey.svg'

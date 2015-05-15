@@ -167,7 +167,7 @@
     .ie9 &
       &:before
         left: -493px!important
-        top: 31px
+        top: 29px
         background-position: 0 -18px
         background-size: auto 210px
 
@@ -431,12 +431,10 @@ i
   left: 607px
   width: 16px
   height: 26px
+  background-image: url(/svgs/gas_white.svg)
 
   &.electric
     background-image: url(/svgs/electric_white.svg)
-
-  &.gas
-    background-image: url(/svgs/gas_white.svg)
 
 .bus
   background-image: url(/svgs/bus.svg)
@@ -444,18 +442,17 @@ i
   width: 44px
   height: 26px
 
+  &:after
+    background-size: 20px 20px
+    margin-bottom: 28px
+
   &.electric
     &:after
-      background-image: url(/svgs/electric.svg)
-      background-size: 30% auto
-      margin-bottom: 2px
+      background-image: url(/svgs/vehicle-electric.svg)
 
   &.hydrogen
     &:after
-      background-image: url(/svgs/hydrogen.svg)
-      background-size: 45% auto
-      margin-bottom: 2px
-      margin-left: 1px
+      background-image: url(/svgs/vehicle-hydrogen.svg)
 
   &[data-value="1"]
     left: 452px
@@ -477,18 +474,17 @@ i
   width: 24px
   height: 14px
 
+  &:after
+    background-size: 20px 20px
+    margin-bottom: 18px
+
   &.electric
     &:after
-      background-image: url(/svgs/electric.svg)
-      background-size: 30% auto
-      margin-bottom: 2px
+      background-image: url(/svgs/vehicle-electricity.svg)
 
   &.hydrogen
     &:after
-      background-image: url(/svgs/hydrogen.svg)
-      background-size: 45% auto
-      margin-bottom: 2px
-      margin-left: 1px
+      background-image: url(/svgs/vehicle-hydrogen.svg)
 
   &[data-value="1"]
     left: 285px
@@ -720,12 +716,12 @@ i
 
 .dam
   background-image: url(/svgs/hydo_dam.svg)
-  height: 50px
-  top: 38px
+  height: 55px
+  top: 33px
   width: 133px
 
   .ie &
-    top: 35px
+    top: 31px
 
   &[data-value="1"]
     left: 600px
@@ -1257,7 +1253,7 @@ i
 
 .train
   bottom: 95px
-  left: 445px
+  left: 448px
   position: absolute
 
   i
@@ -1382,4 +1378,4 @@ i
 
   .commercial-meter
     bottom: 90px
-    left: 155px
+    left: 160px

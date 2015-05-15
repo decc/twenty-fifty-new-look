@@ -387,6 +387,23 @@ define(['knockout'], function(ko) {
         },
 
         {
+          fn: function() {
+            // home boiler
+            var bulb = document.getElementById('boiler');
+
+            // get value
+            // if led add class led
+            var value = Helpers.getValue('Home heating electrification');
+
+            if(value > 2) {
+              bulb.classList.add('electric');
+            } else {
+              bulb.classList.remove('electric');
+            }
+          }
+        },
+
+        {
           // commercial aircon
           levels: {
             0: 2,
