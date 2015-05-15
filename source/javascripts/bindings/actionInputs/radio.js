@@ -79,7 +79,7 @@ define(['knockout', 'bindings/range'], function(ko) {
 
       var endValue = 3;
       var endPosition = 185;
-      var arrowPosition = Math.round(((value - 1) / endValue * endPosition) + 10)
+      var arrowPosition = Math.round(((value - 1) / endValue * endPosition) + 15)
       var tooltipArrow = element.parentNode.querySelector('.tooltip .arrow');
       tooltipArrow.style.left = arrowPosition + "px";
     }
