@@ -7,14 +7,12 @@
 
 .chart-component-title
   @extend %chart-topper
-  color: #fff
-  text-align: center
   border-bottom: 1px solid $color-border-dark
 
   @include media($media-big)
     display: none
 
-  h1
+  p
     position: absolute
     top: 50%
     @include transform(translateY(-50%))
