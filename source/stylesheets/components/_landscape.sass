@@ -10,6 +10,12 @@
   margin-left: -660px
   background-repeat: no-repeat
 
+  &.zero
+    position: relative
+    top: 30px
+    left: 0
+    margin-left: 0
+
   &.one
     background-image: url('/layers/layer1.svg')
     background-size: auto 145%
@@ -244,12 +250,12 @@ i
 
   &[data-value="1"]
     top: -19px
-    left: 22%
+    left: 25%
     width: 25px
 
   &[data-value="2"]
     top: -25px
-    left: 1%
+    left: 30%
     width: 20px
 
   &[data-value="3"]
@@ -355,7 +361,7 @@ i
   &[data-value="5"]
     top: -1px
     left: 840px
-    width: 1ƒ
+    width: 14px
     height: 16px
 
   &[data-value="7"]
@@ -418,19 +424,19 @@ i
   /* what goes here? */
 
   &[data-value="1"]
-    left: 5%
-
-  &[data-value="2"]
     left: 8%
 
-  &[data-value="3"]
+  &[data-value="2"]
     left: 11%
 
-  &[data-value="4"]
+  &[data-value="3"]
     left: 14%
 
-  &[data-value="5"]
+  &[data-value="4"]
     left: 17%
+
+  &[data-value="5"]
+    left: 20%
 
 .boiler
   bottom: 153px
@@ -464,6 +470,7 @@ i
   &.hydrogen
     &:after
       background-image: url(/svgs/vehicle-hydrogen.svg)
+      z-index: 8
 
   &[data-value="1"]
     left: 452px
@@ -838,7 +845,7 @@ i
 
 .imports
   height: 20px
-  left: -10px
+  left: -50px
   position: absolute
   @include transition(all 0.3s ease-in)
 
@@ -860,13 +867,14 @@ i
 
 .electricity-imports
   background: #28A197
-  top: 8px
+  top: -30px
+  min-width: 15px
 
   &:before
     border-left-color: #28A197
 
   &:after
-    background-image: url(/svgs/electric.svg)
+    background-image: url(/svgs/electric_white.svg)
 
   &[data-value="1"]
     width: 0px
@@ -885,13 +893,14 @@ i
 
 .bioenergy-imports
   background: #95CFCA
-  top: 35px
+  top: -5px
+  min-width: 15px
 
   &:before
     border-left-color: #95CFCA
 
   &:after
-    background-image: url(/svgs/bioenergy.svg)
+    background-image: url(/svgs/bioenergy_white.svg)
 
   &[data-value="1"]
     width: 0px
@@ -1275,6 +1284,7 @@ i
   bottom: 95px
   left: 448px
   position: absolute
+  z-index: 1 !important
 
   i
     display: inline-block
