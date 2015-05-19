@@ -68,6 +68,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       self.stackedAreaData = positiveLayers.concat(negativeLayers);
       self.lineData = data.chartLine;
 
+      self.forbiddenLabelZone = y(data.chartLine[data.chartLine.length-1].value);
+
       // Primary data
       self.drawStackedArea();
 

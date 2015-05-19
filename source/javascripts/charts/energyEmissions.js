@@ -68,6 +68,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       self.stackedAreaData = positiveLayers.concat(negativeLayers);
       self.lineData = data.chartLine;
 
+      self.forbiddenLabelZone = y(data.chartLine[data.chartLine.length-1].value);
+
       // Primary data
       self.drawStackedArea();
 
@@ -86,7 +88,7 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
         .attr("y2", targetEmissions)
         .attr("class", "target-line")
       self.svg.selectAll('.target-line-label').remove();
-      self.highlightedLabel((self.x(self.xMax)), targetEmissions - halfLabelLineHeight, "Target", "line-label target-line-label");
+      self.highlightedLabel((self.x(self.xMax)), targetEmissions, "Target", "line-label target-line-label");
 
       self.setupLineAxes("Date", "Greenhouse Gas Emissions (MtCO2e/yr)");
   };

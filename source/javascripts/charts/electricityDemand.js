@@ -57,6 +57,8 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
       self.stackedAreaData = stack(nest.entries(chartLayers));
       self.lineData = data.chartLine;
 
+      self.forbiddenLabelZone = y(data.chartLine[data.chartLine.length-1].value);
+
       // Primary data
       self.drawStackedArea();
 
