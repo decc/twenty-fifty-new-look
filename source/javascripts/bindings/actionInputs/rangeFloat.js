@@ -24,14 +24,14 @@ define(['knockout', 'bindings/range'], function(ko) {
         element.setAttribute('tip'+tip[0], tooltips[tip]);
       }
 
-      var datalist = document.createElement('datalist');
-      datalist.setAttribute('id', id);
-      for (var i = (min + 1); i < max; i++) {
-        var option = document.createElement('option');
-        option.innerHTML = i;
-        datalist.appendChild(option);
-      };
-      element.parentNode.appendChild(datalist);
+      // var datalist = document.createElement('datalist');
+      // datalist.setAttribute('id', id);
+      // for (var i = (min + 1); i < max; i++) {
+      //   var option = document.createElement('option');
+      //   option.innerHTML = i;
+      //   datalist.appendChild(option);
+      // };
+      // element.parentNode.appendChild(datalist);
 
       element.addEventListener('change', function(){
         value(parseFloat(element.value));
