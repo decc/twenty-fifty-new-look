@@ -16,7 +16,6 @@ define(['knockout', 'bindings/range'], function(ko) {
       var previous = element.parentNode.previousSibling;
 
       element.setAttribute('type', 'range');
-      element.setAttribute('list', id);
       element.setAttribute('min', min);
       element.setAttribute('max', max);
       element.setAttribute('step', 0.1);
