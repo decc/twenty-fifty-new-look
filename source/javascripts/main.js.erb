@@ -2,7 +2,7 @@
   'use strict';
 
   require.config({
-    urlArgs: 'bust=' + (new Date()).getTime(), // Cache busting for dev only
+    <%= "urlArgs: 'bust=' + (new Date()).getTime(), // Cache busting for dev only" unless build? %>
     paths: {
       knockout: 'vendor/knockout-3.2.0.min',
       crossroads: 'vendor/crossroads',

@@ -427,7 +427,16 @@ define(['d3'], function(d3) {
             self.boundedLabelPosition(this, end.date, labelYValue);
 
             // Hide label if layer too small at x1
-            if(Math.abs(self.y(0) - self.y(end.y)) < self.minimumHeightForLabel) {
+            var labelTooSmall = Math.abs(self.y(0) - self.y(end.y)) < self.minimumHeightForLabel;
+
+            // Hide label if it's in the forbidden realm
+            if(self.forbiddenLabelZone) {
+              var labelOverlap = Math.abs(self.forbiddenLabelZone - self.y(labelYValue)) < self.minimumHeightForLabel + 4;
+            } else {
+              labelOverlap = false;
+            }
+
+            if(labelTooSmall || labelOverlap) {
               d3.select(this)
                 .attr("data-state", "inactive");
             }
