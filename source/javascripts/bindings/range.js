@@ -3,7 +3,7 @@ define(['knockout', 'range'], function(ko, Range) {
 
   ko.bindingHandlers.range = {
     init: function(el, valueAccessor) {
-      var args = {};
+      var args = { ticks: false };
       var pointerWidth;
 
       if(pointerWidth = parseInt(el.getAttribute('data-pointer-width'))) {
