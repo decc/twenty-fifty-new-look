@@ -81,32 +81,45 @@ define(['knockout'], function(ko) {
     parallaxLandscape: function(xOffset, yOffset) {
       var layerWidth = 1200, // could set dynamically?
           landscapeWidth = landscape.clientWidth,
-          landscapeHeight = landscape.clientHeight
+          landscapeHeight = landscape.clientHeight;
+
+      /** @param {number} [number=0] - a magic number */
+      var width = function(number) {
+        number = number || 0;
+
+        var _width = landscapeWidth > layerWidth ? landscapeWidth : layerWidth;
+        return _width + number;
+      };
 
       var layers = [
         {
+          el: document.getElementById('landscape-layer-0'),
+          width: width(5),
+          yThreshold: 0.105
+        },
+        {
           el: document.getElementById('landscape-layer-1'),
-          width: (landscapeWidth > layerWidth ? landscapeWidth : layerWidth),
+          width: width(10),
           yThreshold: 0.09
         },
         {
           el: document.getElementById('landscape-layer-2'),
-          width: (landscapeWidth > layerWidth ? landscapeWidth + 20 : layerWidth + 20),
+          width: width(20),
           yThreshold: 0.07
         },
         {
           el: document.getElementById('landscape-layer-3'),
-          width: (landscapeWidth > layerWidth ? landscapeWidth + 60 : layerWidth + 60),
+          width: width(60),
           yThreshold: 0.05
         },
         {
           el: document.getElementById('landscape-layer-4'),
-          width: (landscapeWidth > layerWidth ? landscapeWidth + 70 : layerWidth + 70),
+          width: width(70),
           yThreshold: 0.03
         },
         {
           el: document.getElementById('landscape-layer-5'),
-          width: (landscapeWidth > layerWidth ? landscapeWidth + 115 : layerWidth + 115),
+          width: width(115),
           yThreshold: -0.01
         }
       ];
@@ -146,4 +159,3 @@ define(['knockout'], function(ko) {
     }
   }
 });
-
