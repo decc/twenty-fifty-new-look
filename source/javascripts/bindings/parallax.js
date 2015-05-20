@@ -20,7 +20,7 @@ define(['knockout'], function(ko) {
       window.addEventListener('mousemove', handleMouseMove);
 
       // Device orientation test
-      if(window.DeviceOrientationEvent) {
+      if(window.DeviceOrientationEvent && !Modernizr.ios) {
         window.addEventListener("deviceorientation", ko.bindingHandlers.parallax.deviceMove);
       }
 
