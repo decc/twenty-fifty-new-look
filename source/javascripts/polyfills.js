@@ -17,7 +17,7 @@
   });
 
   Modernizr.addTest('ios', function() {
-    return /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+    return /(iPad|iPhone|iPod|CriOS)/g.test(navigator.userAgent);
   });
 
   Modernizr.addTest('ie', function() {
