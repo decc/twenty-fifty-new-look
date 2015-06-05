@@ -9,9 +9,13 @@
   .chart-fullscreen-button
     cursor: pointer
     margin-bottom: 2em
+    @extend .button
+    padding: .5em 1em .5em 0!important
 
     &:before
-      padding-right: 0.5em
+      padding-right: 1em
+      margin-left: .5em
+      font-size: 1.25em
 
   .chart.flows
     position: absolute
