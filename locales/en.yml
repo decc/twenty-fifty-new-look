@@ -197,6 +197,9 @@ en:
     q5:
       question: "Where do the figures come from?"
       answer: "The data behind the calculator is rooted in scientific and engineering realities, looking at what is thought to be physically and technically possible in each sector. To do this, a broad range of experts were consulted from inside and outside government. For more background on the calculator go to: <a href=\"https://www.gov.uk/2050-pathways-analysis\" target=\"_blank\">https://www.gov.uk/2050-pathways-analysis</a>."
+    q6:
+      question: "Why do the graph views show that demand is lower than supply?"
+      answer: "Some of the energy supply creates wasted energy - or a 'loss' - when converted from one format to another (such as when generating electricity). So supply will always have to exceed the total energy demand. Take a look at the 'flow' view to see where these losses come from."
 
 
   share:
