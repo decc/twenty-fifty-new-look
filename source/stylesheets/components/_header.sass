@@ -135,11 +135,11 @@
     @include transition(background .3s ease-in-out, color .3s ease-in-out)
 
     &.is-open
-      background-color: $color-background-dark
-      color: $color-background-light
+      background-color: $color-highlight
+      color: $color-button-text
 
       .arrow
-        border-color: $color-background-dark transparent
+        border-color: $color-highlight transparent
 
     @include media ('(min-width: 800px)')
       right: 15%
@@ -161,7 +161,7 @@
       left: 42%
       margin-left: 2px
       border-color: $color-background-light transparent
-
+      @include transition(border-color .3s ease-in-out)
 
     .close
       position: absolute
