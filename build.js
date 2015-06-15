@@ -23,7 +23,7 @@
     'components/chartViews/overview',
     'components/chartViews/tabbed'
   ],
-  optimize: 'uglify2',
+  optimize: 'none',
   removeCombined: true,
   findNestedDependencies: true,
   out: 'build/javascripts/main.js'
