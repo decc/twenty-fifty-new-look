@@ -20,10 +20,10 @@ define(['knockout', 'd3', 'charts/chart'], function(ko, d3, Chart) {
     self.width = self.outerWidth - self.margin.left - self.margin.right;
     self.height = self.outerHeight - self.margin.top - self.margin.bottom;
 
+    var nTicks = 5;
     var yMin = 0;
     var yMax = 100;
 
-    var nTicks = 5;
 
     var x = d3.scale.ordinal()
         .domain(["2010", "2050 - Doesn't tackle climate change (All at level 1)", "2050 - Your pathway"])
