@@ -18,7 +18,7 @@ define(['knockout', 'ajax', 'config'], function(ko, Ajax, config) {
         setTimeout(function() {
           Ajax.request({
             method: 'GET',
-            XDomainRequest: true,
+            // XDomainRequest: true,
             url: config.siteUrl + '/components/factsheets/' + factsheet + '.html',
             onSuccess: function(data) {
               el.innerHTML = data.responseText;
