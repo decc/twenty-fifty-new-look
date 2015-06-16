@@ -54,7 +54,7 @@ define(['knockout', 'text!../../components/pathway-sidebar.html', 'pathway'],
         if(!inSidebar) {
           self.navVisible(false);
           window.removeEventListener('click', handleClick);
-          window.removeEventListener('tauchstart', handleClick);
+          window.removeEventListener('touchstart', handleClick);
         }
       }
 
