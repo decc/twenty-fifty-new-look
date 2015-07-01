@@ -9,7 +9,7 @@ require_relative './model/data_from_model'
 # If you are developing your own calculator, delete from here to the line marked STOP DELETING HERE
 class TwentyFiftyServer < Sinatra::Base
 
-  set :public_folder, File.dirname(__FILE__) + '/build'
+  set :public_folder, File.join(File.dirname(__FILE__), 'build')
 
   # This is for older versions of the calculator that used 'show' as their main view
   get '/pathways/:id/show' do |id|
