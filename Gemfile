@@ -1,6 +1,8 @@
 # If you do not have OpenSSL installed, install open ssl
 source 'https://rubygems.org'
 
+gem 'sinatra'
+
 gem "middleman", "~>3.3.7"
 gem "middleman-livereload"
 # gem 'middleman-imageoptim'
