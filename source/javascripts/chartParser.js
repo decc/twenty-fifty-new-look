@@ -1,6 +1,12 @@
 define([], function() {
   'use strict';
 
+  // The sankey data has all years
+  // this selects just the 2050 year
+  function selectSankeyYear(row) {
+    return [row[0], row[11], row[1]];
+  }
+
   var ChartParser = function(data) {
     var self = this;
     self.data = data;
@@ -40,27 +46,27 @@ define([], function() {
 
 
     energyDemandUnused: function() {
-      return ["Total Use", "Food consumption [UNUSED]"];
+      return ["Total", "Food consumption [UNUSED]"];
     },
 
     energySupplyUnused: function() {
-      return ["Total Primary Supply", "Electricity oversupply (imports)"];
+      return ["Total used in UK", "Electricity oversupply (imports)"];
     },
 
     energyEmissionsUnused: function() {
-      return ["Total", "percent_reduction_from_1990"];
+      return ["Total", "Targets"];
     },
 
     overviewDemandUnused: function() {
-      return ["Total Use", "Food consumption [UNUSED]"];
+      return ["Total", "Food consumption [UNUSED]"];
     },
 
     overviewSupplyUnused: function() {
-      return ["Total Primary Supply", "Electricity oversupply (imports)"];
+      return ["Total used in UK", "Electricity oversupply (imports)"];
     },
 
     overviewEmissionsUnused: function() {
-      return ["percent_reduction_from_1990"];
+      return ["Total", "Targets"];
     },
 
     electricityEmissionsUnused: function() {
@@ -69,7 +75,7 @@ define([], function() {
 
     // CO2 reduction overview chart
     summary: function() {
-      return this.data.ghg.percent_reduction_from_1990;
+      return Math.round(this.data.ghg_reduction_from_1990*100);
     },
 
     overview: function() {
@@ -106,10 +112,9 @@ define([], function() {
               var date = 2010 + i * 5;
               overviewYearlyData[topicName][date].push({ key: item, value: value });
             }
-          } else if (item === "percent_reduction_from_1990") {
-            overviewYearlyData[topicName].percentageReduction = topic[item]
           }
         }
+        overviewYearlyData[topicName].percentageReduction = Math.round(data.ghg_reduction_from_1990 * 100);
       }
 
       return overviewYearlyData;
@@ -151,7 +156,7 @@ define([], function() {
       var primaryData = this.data.final_energy_demand;
       var secondaryData = this.data.primary_energy_supply;
 
-      var lineData = secondaryData["Total Primary Supply"];
+      var lineData = secondaryData["Total used in UK"];
       var skipLayers = this.energyDemandUnused();
       return this.areaVsLine(primaryData, lineData, skipLayers);
     },
@@ -160,7 +165,7 @@ define([], function() {
       var primaryData = this.data.primary_energy_supply;
       var secondaryData = this.data.final_energy_demand;
 
-      var lineData = secondaryData["Total Use"];
+      var lineData = secondaryData["Total"];
       var skipLayers = this.energySupplyUnused();
       return this.areaVsLine(primaryData, lineData, skipLayers);
     },
@@ -170,7 +175,7 @@ define([], function() {
       var primaryData = this.data.electricity.demand;
       var secondaryData = this.data.electricity.supply;
 
-      var lineData = secondaryData["Total generation supplied to grid"];
+      var lineData = secondaryData["Total"];
       var skipLayers = ["Total"];
       return this.areaVsLine(primaryData, lineData, skipLayers);
     },
@@ -180,7 +185,7 @@ define([], function() {
       var secondaryData = this.data.electricity.demand;
 
       var lineData = secondaryData["Total"];
-      var skipLayers = ["Total generation supplied to grid", "Tidal [UNUSED - See III.c]"];
+      var skipLayers = ["Total"];
       return this.areaVsLine(primaryData, lineData, skipLayers);
     },
 
@@ -194,21 +199,21 @@ define([], function() {
     },
 
     electricityEmissions: function() {
-      var primaryData = this.data.electricity.emissions;
-      var secondaryData = this.data.electricity.emissions["Total"];
+      var primaryData = this.data.electricity.ghg;
+      var secondaryData = this.data.electricity.ghg["Total"];
 
       var skipLayers = this.energyEmissionsUnused();
       return this.areaVsLine(primaryData, secondaryData, skipLayers);
     },
 
     flowsBasic: function() {
-      var data = this.data.sankey;
+      var data = this.data.sankey.slice(1).map(selectSankeyYear);
 
       return data;
     },
 
     flows: function() {
-      var data = this.data.sankey;
+      var data = this.data.sankey.slice(1).map(selectSankeyYear);
 
       var nodes = {};
       var links = [];
@@ -335,8 +340,8 @@ define([], function() {
         imports: [],
         diversity: [],
         electricity: {
-          auto: Math.round(data.electricity.automatically_built),
-          peak: Math.round(data.electricity.peaking)
+          auto: Math.round(data.balancing.automatically_built),
+          peak: Math.round(data.balancing.peaking)
         }
       };
 
@@ -359,12 +364,12 @@ define([], function() {
 
     // Groups cost sensitivity data by category
     costsCompared: function() {
-      var data = this.data.cost_components;
+      var data = this.data.costs;
       return data;
     },
 
     costsSensitivity: function() {
-      var data = this.data.cost_components;
+      var data = this.data.costs;
       var flattenedData = Object.keys(data).map(function(key) { return { key: key, value: data[key] } })
 
       return flattenedData;

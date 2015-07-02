@@ -39,30 +39,103 @@ class DataFromModel
       '_id' => code, 
       'choices' => choices,
       'sankey' => excel.output_flows, # output.flows in the Excel
-      'ghg' => excel.output_ghg_by_ipcc_sector, # output.ghg.by.ipcc.sector in Excel
+      'ghg' => hash(excel.output_ghg_by_ipcc_sector), # output.ghg.by.ipcc.sector in Excel
       'ghg_reduction_from_1990' => excel.output_ghg_percentage_reduction, # output.ghg.percentage.reduction in Excel
-      'final_energy_demand' => excel.output_finalenergydemand, # output.finalenergydemand
-      'primary_energy_supply' => excel.output_primaryenergysupply, # output.primaryenergysupply
+      'final_energy_demand' => hash(excel.output_finalenergydemand), # output.finalenergydemand
+      'primary_energy_supply' => hash(excel.output_primaryenergysupply), # output.primaryenergysupply
       'electricity' => {
-        'demand' => excel.output_electricity_demand,
-        'supply' => excel.output_electricity_supply,
-        'ghg' => excel.output_electricity_ghg,
-        'capacity' => excel.output_electricity_capacity
+        'demand' => hash(excel.output_electricity_demand),
+        'supply' => hash(excel.output_electricity_supply),
+        'ghg' => hash(excel.output_electricity_ghg),
+        'capacity' => hash(excel.output_electricity_capacity)
       },
-      'heating' => excel.output_heating_mix, # output.heating.mix
-      'costs' => excel.output_costpercapita_detail,
-      'map' => excel.output_areas, # output.areas
-      'imports' => {
-        'proportion' => excel.output_imports_proportion, # output.imports.proportion
-        'quantity' => excel.output_imports_quantity # output.imports.quantity
-      },
-      'diversity' => excel.output_diversity, # output.diversity
-      'balancing' => excel.output_capacity_automaticallybuilt, # output.capacity.automaticallybuilt
-      'air_quality' => excel.output_airquality # output.airquality
+      'heating' => heating_format(excel.output_heating_mix), # output.heating.mix
+      'costs' => cost_format(excel.output_costpercapita_detail),
+      'map' => map_format(excel.output_areas), # output.areas
+      'imports' => imports_format( 
+                            excel.output_imports_proportion, # output.imports.proportion
+                            excel.output_imports_quantity # output.imports.quantity
+      ),
+      'diversity' => diversity_format(excel.output_diversity), # output.diversity
+      'balancing' => hash(excel.output_capacity_automaticallybuilt), # output.capacity.automaticallybuilt
+      'air_quality' => air_quality_format(excel.output_airquality)
     }
   end
 
+  def map_format(table)
+    hash = {}
+    table[1..-1].each do |row| # Skip the header
+      hash[row[0]] = row[-1] # Add the last value
+    end
+    hash
+  end
+
+  def heating_format(table)
+    residential = {}
+    commercial = {}
+    table[1..-1].each do |row| # Skip the header
+      name = row[0]
+      next if name =~ /Total/i
+      residential[name] = row[1]
+      commercial[name] = row[2]
+    end
+    {residential: residential, commercial: commercial}
+  end
+
+  def imports_format(proportion_table, quantity_table)
+    proportions = hash(proportion_table)
+    quantities = hash(quantity_table)
+    hash = {}
+    proportions.each do |name, proportion|
+      quantity = quantities[name]
+      hash[name] = {
+        "2007" => { quantity: quantity[0].round, proportion: "#{(proportion[0]*100).round}%" },
+        "2050" => { quantity: quantity[-1].round, proportion: "#{(proportion[-1]*100).round}%" }
+      }
+    end
+    hash
+  end
+
+  def air_quality_format(table)
+    {'low' => table[1][1], 'high' => table[0][1]}
+  end
+
+  def diversity_format(table)
+    hash = {}
+    table[1..-1].each do |row| # Skip the header
+      hash[row[0]] = { "2007" => "#{(row[1]*100).round}%", "2050" => "#{(row[-1]*100).round}%" }
+    end
+    hash
+  end
+
+  def cost_format(table)
+    hash = {}
+    table[1..-1].each do |row| # Skip the header
+      name = row[0]
+      data = {
+        low:   row[1],
+        point: row[2],
+        high:  row[3],
+        range: row[4],
+        finance_low: row[5],
+        finance_point: row[6],
+        finance_high: row[7],
+        finance_range: row[8]
+      }
+      hash[name] = data
+    end
+    hash
+  end
+
   # Data that doesn't change with user choices (more structural)
+  
+  def hash(table)
+    hash = {}
+    table[1..-1].each do |row| # [1..-1] to skip the first row, which is a header
+      hash[row[0]] = row[1..-1]
+    end
+    hash
+  end
   
   def choices
     @choices ||= generate_choices
