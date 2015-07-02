@@ -8,7 +8,7 @@ if [ "$(uname -m)" !=  'x86_64' ]; then
   exit 1
 fi
 
-GITHUB="https://github.com/decc/twenty-fifty"
+GITHUB="https://github.com/decc/twenty-fifty-new-look"
 
 # The next thing we need to do is check we are running the right version of Ubuntu
 . /etc/lsb-release # This loads variables which contain the Ubuntu version
