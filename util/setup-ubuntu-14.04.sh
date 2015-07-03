@@ -29,7 +29,7 @@ sudo apt-get install -y unzip # Dunno why?
 sudo apt-get install -y libcurl4-openssl-dev # Dunno why?
 sudo apt-get install -y libssl-dev # Dunno why?
 # Will try to remove this dependency soon
-sudo apt-get install -y nodejs # For compiling coffeescript
+sudo apt-get install -y node # For compiling coffeescript
 sudo apt-get install -y python-software-properties # For the apt-add-repository command below
 
 sudo apt-get install software-properties-common
@@ -72,7 +72,7 @@ sudo apt-get install -y nginx-extras passenger
 sudo sed --in-place "s/# passenger_root/passenger_root/g" /etc/nginx/nginx.conf
 
 # Create the server configuration file
-twentyfiftyserverroot=$(pwd)/public
+twentyfiftyserverroot=$(pwd)/build
 cat <<EndConf > ngnix-configuration.conf
 server {
   listen 80 default_server;
@@ -89,5 +89,8 @@ sudo ln -s /etc/nginx/sites-available/2050.conf /etc/nginx/sites-enabled/2050.co
 sudo unlink /etc/nginx/sites-enabled/default
 sudo nginx -t
 sudo service nginx restart
+
+# Now we need to build the source html
+bundle exec middleman build
 
 echo "The code should now be available on this computer"
