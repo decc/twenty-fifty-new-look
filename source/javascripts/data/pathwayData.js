@@ -15,7 +15,9 @@ define([], function() {
       { category: '3rd Party Pathways', name: 'Campaign to Protect Rural England', slug: 'campaign-to-protect-rural-england', values: '10h2pdppp12332130233122004414430343304102304430410231' },
       { category: '3rd Party Pathways', name: 'Mark Brinkley', slug: 'mark-brinkley', values: '20222144411341110343321003422440423404203203340420141' },
       { category: '3rd Party Pathways', name: 'National Grid', slug: 'national-grid', values: 'h0h2gg1211cj1j110322222003313230234102102203440320121' },
-      { category: '3rd Party Pathways', name: 'Atkins', slug: 'atkins-example', values: 'g0f2oj11t1rgqj1j0343111003324240244104201304430420231' }
+      { category: '3rd Party Pathways', name: 'Atkins', slug: 'atkins-example', values: 'g0f2oj11t1rgqj1j0343111003324240244104201304430420231' },
+      { category: '3rd Party Pathways', name: 'Association for Conservation of Energy', slug: 'ace-example', values: '10f2r1jop1f211110344111004113330243304202304330420141' },
+      { category: '3rd Party Pathways', name: 'Sustainable Energy Association', slug: 'sea-example', values: 'e0c1gc11112211b10344112004114330444104202304310420121' }
     ],
 
     PATHWAY_ACTIONS: [
