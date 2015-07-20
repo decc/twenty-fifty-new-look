@@ -186,7 +186,7 @@ define(['d3'], function(d3) {
           "fuel cell cars and buses": 2,
           "fuel combustion": 33,
           "gas": 25,
-          "imported gas": 25,
+          "imported gas": 26,
           "uk gas": 25,
           "geosequestration": 10,
           "geothermal": 18,
@@ -212,7 +212,7 @@ define(['d3'], function(d3) {
           "nuclear power": 7,
           "offshore wind": 15,
           "oil": 33,
-          "imported oil": 33,
+          "imported oil": 34,
           "uk oil": 33,
           "onshore wind": 28,
           //"other": 0,
@@ -294,7 +294,7 @@ define(['d3'], function(d3) {
       return d3.layout.stack()
           .offset("zero")
           .values(function(d) { return d.values; })
-          .order(self.stackOrderByEndValue)
+          //.order(self.stackOrderByEndValue)
           .x(function(d) { return d.date; })
           .y(function(d) { return d.value; });
     },
