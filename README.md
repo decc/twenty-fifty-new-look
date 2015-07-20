@@ -19,7 +19,7 @@ Front end for [DECC 2050 calculator](https://github.com/decc/twenty-fifty)
 ### Building
 
 In source/javascripts/config.js set `apiUrl`, and `siteUrl`.
-Then `midleman build`.
+Then `middleman build`.
 
 resulting code will be in `./build`. This is the code to deploy.
 
