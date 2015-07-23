@@ -128,14 +128,15 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action', 'hasher'
 
     getActionFromMagicChar: function(char, actionType) {
 
-      if(actionType === "rangeFloat") {
-        var mapping = { '0': 0.0, '1': 1.0, 'b': 1.1, 'c': 1.2, 'd': 1.3, 'e': 1.4, 'f': 1.5, 'g': 1.6, 'h': 1.7, 'i': 1.8, 'j': 1.9, '2': 2.0, 'l': 2.1, 'm': 2.2, 'n': 2.3, 'o': 2.4, 'p': 2.5, 'q': 2.6, 'r': 2.7, 's': 2.8, 't': 2.9, '3': 3.0, 'v': 3.1, 'w': 3.2, 'x': 3.3, 'y': 3.4, 'z': 3.5, 'A': 3.6, 'B': 3.7, 'C': 3.8, 'D': 3.9, '4': 4.0 };
-        var value = mapping[char];
+      var mapping = { '0': 0.0, '1': 1.0, 'b': 1.1, 'c': 1.2, 'd': 1.3, 'e': 1.4, 'f': 1.5, 'g': 1.6, 'h': 1.7, 'i': 1.8, 'j': 1.9, '2': 2.0, 'l': 2.1, 'm': 2.2, 'n': 2.3, 'o': 2.4, 'p': 2.5, 'q': 2.6, 'r': 2.7, 's': 2.8, 't': 2.9, '3': 3.0, 'v': 3.1, 'w': 3.2, 'x': 3.3, 'y': 3.4, 'z': 3.5, 'A': 3.6, 'B': 3.7, 'C': 3.8, 'D': 3.9, '4': 4.0 };
+      var value = mapping[char];
 
+      if(actionType === "rangeFloat") {
+        return value;
       } else if(actionType === "radio") {
-        var value = String.fromCharCode(parseInt(char) + 64);
+         return String.fromCharCode(Math.round(value) + 64);
       } else {
-        var value = parseInt(char);
+        return Math.round(value);
       }
       return value;
     },
