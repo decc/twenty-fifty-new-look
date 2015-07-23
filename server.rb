@@ -33,6 +33,10 @@ class TwentyFiftyServer < Sinatra::Base
     end
   end
 
+  get '/pathways/11111111111111111111111111111111111111111111111111111/primary_energy_chart' do 
+    redirect to('/')
+  end
+
   get '/pathways/:id/:action' do |id, action|
     redirect "http://old-interface.2050.org.uk/pathways/#{id}/#{action}"
   end
