@@ -48,7 +48,7 @@ define(['knockout', 'dataRequester', 'config', 'chartParser', 'action', 'hasher'
 
     // make this work... replace this.values?!?!?!?
     self.shareString = ko.computed(function() {
-      return [config.siteUrl, 'share', self.values()].join('/');
+      return [config.siteUrl, '#share', self.values()].join('/');
     });
   }
 
