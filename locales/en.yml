@@ -10,18 +10,18 @@ en:
     content: 'Rotate your device to see our lovely app.'
 
   small:
-    heading: "Thats tiny"
+    heading: "That's tiny"
     content: 'The device you are using is too small to properly display this app.
 
 
       Come back with a bigger screen.'
 
   splash:
-    heading: "2050 Energy calculator"
+    heading: "2050 Energy Calculator"
     content: "By the year 2050 we need to dramatically change the way we produce and consume energy.
 
 
-      Government targets require us to reduce emmissions to 20% of 1990 levels."
+      Government targets require us to reduce emissions to 20% of 1990 levels."
     button: "Start"
 
   guide:
