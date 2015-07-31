@@ -14,7 +14,7 @@ en:
     content: 'The device you are using is too small to properly display this app.
 
 
-      Come back with a bigger screen.'
+    The [classic version](http://classic.2050.org.uk) might work.'
 
   splash:
     heading: "2050 Energy Calculator"
@@ -39,7 +39,7 @@ en:
 
 
       The model, all its assumptions and the code for this interface are all available open source.
-      [http://github.com/decc/twenty-fifty](http://github.com/decc/twenty-fifty)
+      [https://github.com/decc/twenty-fifty-new-look](https://github.com/decc/twenty-fifty-new-look)
 
 
       For more information go to:
