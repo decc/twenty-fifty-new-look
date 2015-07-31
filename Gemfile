@@ -3,7 +3,8 @@ source 'https://rubygems.org'
 
 gem 'sinatra'
 
-gem "middleman", "~>3.3.7"
+gem "middleman"
+#gem "middleman", "~>3.3.7"
 gem "middleman-livereload"
 # gem 'middleman-imageoptim'
 
@@ -20,4 +21,3 @@ gem 'fontcustom'
 gem 'jshintrb'
 gem 'rdiscount'
 gem 'codebase4'
-gem 'pry'
