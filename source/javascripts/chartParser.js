@@ -319,7 +319,7 @@ define([], function() {
           { "key": labels["V.b"], "value": data["V.b"] }
         ],
         wave: [
-          { "key": "wave", "value": data["wave"] }
+          { "key": "wave", "value": data["III.c.Wave"] }
         ]
       };
 
