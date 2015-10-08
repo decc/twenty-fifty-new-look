@@ -14,7 +14,10 @@ Front end for [DECC 2050 calculator](https://github.com/decc/twenty-fifty)
 
 * `git clone`
 * `bundle install`
-* `middleman`
+* `middleman build`
+* `bundle exec rackup`
+
+Open your browser at <http://localhost:9292>
 
 ### Building
 
