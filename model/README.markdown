@@ -24,9 +24,9 @@ Then check that translate_excel_into_c.rb is set to keep the right bits of the e
 
 Then:
   
-    ruby translate_excel_into_ruby.rb
+    ruby translate_excel_into_c.rb
 
 This may take up to 4 hours.
 
-The next step is to check whether model_result.rb needs to be altered to 
+The next step is to check whether data_from_model.rb needs to be altered to 
 pick up the correct places in the underlying excel.
