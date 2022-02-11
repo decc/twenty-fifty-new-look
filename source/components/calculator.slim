@@ -9,6 +9,8 @@
 
     .wrapper data-bind="css: { 'with-nav': navState() > 0, 'with-subnav': navState() === 2 }"
 
+      #deprecation-warning This calculator will be withdrawn on or after 30 June 2022. The current UK 2050 calculator for Net Zero is the <a href='https://www.mackaycarboncalculator.beis.gov.uk'>MacKay Carbon Calculator</a>. It launched in December 2020. For further information or to comment, go to <a href='https://www.gov.uk/guidance/carbon-calculator'>https://www.gov.uk/guidance/carbon-calculator</a>.
+
       .content-wrapper
         calculator-header params="navState: navState, pathwayName: currentPathway().name, pathway: currentPathway, cityscapeVisible: cityscapeVisible"
 
